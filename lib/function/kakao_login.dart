@@ -36,7 +36,8 @@ class KakaoLogin {
               user.kakaoAccount?.email as String,
               name,
               phnoe,
-              fristNumber));
+              fristNumber,
+              secondNumber));
           await storage.write(key: 'LoginUser', value: val);
           return 'true';
         } catch (err) {
