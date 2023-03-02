@@ -22,29 +22,6 @@ class MyPage extends StatefulWidget {
 
 class _MyPage extends State<MyPage> {
   late HomeProvider _homeProvider;
-// class HealthPage extends StatelessWidget {
-//   HealthPage({Key? key}) : super(key: key);
-  @override
-  void initState() {
-    super.initState();
-    // 사용자 정보에 대한 provider 생성하기
-
-    // Future.microtask(() {
-    // if (_homeProvider.bloodSugarValue.isEmpty) {
-    //   Provider.of<HomeProvider>(context, listen: false).bloodSugargetData();
-    // }
-    // if (_homeProvider.bloodPressureValue.isEmpty) {
-    //   Provider.of<HomeProvider>(context, listen: false)
-    //       .bloodPressuregetData();
-    // }
-    //   if (_homeProvider.symptomValue.isEmpty) {
-    //     Provider.of<HomeProvider>(context, listen: false).symptomgetData();
-    //   }
-    //   if (_homeProvider.notesValue.isEmpty) {
-    //     Provider.of<HomeProvider>(context, listen: false).noteTextgetData();
-    //   }
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,26 +34,28 @@ class _MyPage extends State<MyPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          toolbarHeight: 48,
-          backgroundColor: Colors.white, //배경 색
+          toolbarHeight: 60,
+          backgroundColor: CommonColor.background, //배경 색
           elevation: 0.0, //그림자 효과 해제
           leading: Container(
             padding: const EdgeInsets.only(left: 10),
-            child:
-                Image.asset('assets/images/home_logo.png', color: Colors.green),
+            child: Image.asset(
+              'assets/images/home_logo.png',
+              color: Colors.green,
+            ),
           ),
-          leadingWidth: 130,
+          leadingWidth: 150,
           actions: [
             IconButton(
               icon: const Icon(Icons.notifications_none),
               color: Colors.black,
-              tooltip: 'Hi!',
+              iconSize: 25,
               onPressed: () => {},
             ),
             IconButton(
               icon: const Icon(Icons.menu),
               color: Colors.black,
-              tooltip: 'Wow',
+              iconSize: 25,
               onPressed: () => {},
             ),
             const SizedBox(
@@ -137,72 +116,6 @@ class _MyPage extends State<MyPage> {
                 child: Column(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     showDialog(
-                    //       context: context,
-                    //       barrierDismissible: false,
-                    //       builder: (BuildContext context) {
-                    //         return LogoutPopUp(_homeProvider);
-                    //       },
-                    //     );
-
-                    //     print("logout!");
-                    //   },
-                    //   child: Container(
-                    //       decoration: const BoxDecoration(color: Colors.white),
-                    //       padding: AppTheme.widgetpadding,
-                    //       height: screenHeight * 0.07,
-                    //       child: Row(children: [
-                    //         Icon(
-                    //           Icons.vpn_key_off_outlined,
-                    //           size: screenWidth * 0.06,
-                    //           color: Colors.grey,
-                    //         ),
-                    //         SizedBox(width: screenWidth * 0.03),
-                    //         const NanumText(
-                    //           text: "로그아웃",
-                    //           color: Colors.black,
-                    //           fontSize: 13,
-                    //         )
-                    //       ])),
-                    // ),
-                    // Container(
-                    //   height: 0.4,
-                    //   color: Colors.grey,
-                    // ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     showDialog(
-                    //         context: context,
-                    //         barrierDismissible: false,
-                    //         builder: (BuildContext context) {
-                    //           return const QuitPopUp();
-                    //         });
-                    //   },
-                    //   child: Container(
-                    //     decoration: const BoxDecoration(color: Colors.white),
-                    //     padding: AppTheme.widgetpadding,
-                    //     height: screenHeight * 0.07,
-                    //     child: Row(children: [
-                    //       Icon(
-                    //         Icons.close,
-                    //         size: screenWidth * 0.06,
-                    //         color: Colors.grey,
-                    //       ),
-                    //       SizedBox(width: screenWidth * 0.03),
-                    //       const NanumText(
-                    //         text: "회원탈퇴",
-                    //         color: Colors.black,
-                    //         fontSize: 13,
-                    //       )
-                    //     ]),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 0.4,
-                    //   color: Colors.grey,
-                    // ),
                     GestureDetector(
                       onTap: () {
                         webView("개인정보처리방침",
@@ -255,12 +168,10 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-
                     Container(
                       height: 0.4,
                       color: Colors.grey,
                     ),
-
                     GestureDetector(
                       onTap: () {
                         showDialog(

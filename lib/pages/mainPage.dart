@@ -6,6 +6,7 @@ import 'package:super_medic/pages/healthPage.dart';
 import 'package:super_medic/pages/HomePage.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/pages/medicinePage.dart';
+import 'package:super_medic/pages/meditalkPage.dart';
 import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 
@@ -55,6 +56,8 @@ class MainPage extends StatelessWidget {
         return const MedicinePage();
       case 2:
         return const HealthPage();
+      case 3:
+        return const MeditalkPage();
       case 4:
         return const MyPage();
     }
