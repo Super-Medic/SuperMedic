@@ -96,8 +96,8 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: Row(
-                children: const [
+              icon: const Row(
+                children: [
                   NanumTitleText(text: '최근 투약내역'),
                   Icon(
                     Icons.chevron_right,

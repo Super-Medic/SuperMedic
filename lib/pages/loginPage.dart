@@ -21,6 +21,7 @@ class LoginPage extends StatelessWidget {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
+    // ignore: no_leading_underscores_for_local_identifiers
     void _showAlert({String? title, String? message}) {
       showCupertinoDialog(
           context: context,
@@ -82,13 +83,16 @@ class LoginPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(bottom: screenWidth * 0.01),
               child: InkWell(
-                child: Image.asset(
-                  imagenaverLoginName,
-                  width: screenWidth * 0.7,
-                  height: screenHeight * 0.07,
-                ),
-                //onTap: ()
-              ),
+                  child: Image.asset(
+                    imagenaverLoginName,
+                    width: screenWidth * 0.7,
+                    height: screenHeight * 0.07,
+                  ),
+                  onTap: () async {
+                    _showAlert(
+                        title: "서비스 준비중",
+                        message: "서비스 준비중입니다.\n카카오 로그인으로 시도해주세요.");
+                  }),
             ),
             Align(
               child: Text("© Copyright 2023, 슈퍼메딕(MYPD)",

@@ -174,9 +174,10 @@ _sugardata(final timeLineValue) {
           _DeliveryProcess(name[i], messages: twoDList[name.length - i - 1]));
     }
     deliveryProcesses.add(const _DeliveryProcess.complete());
-  } else {
-    // print("여기");
   }
+  //  else {
+  //   // print("여기");
+  // }
 
   return _OrderInfo(deliveryProcesses: deliveryProcesses);
 }

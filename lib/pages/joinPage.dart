@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
@@ -70,6 +71,26 @@ class _JoinPageState extends State<JoinPage> {
   }
 
   renderButton(height) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    void _showAlert({String? title, String? message}) {
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title: Text(title!),
+              content: Text(message!),
+              actions: [
+                CupertinoDialogAction(
+                    isDefaultAction: true,
+                    child: const Text("확인"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
+    }
+
     return SizedBox(
         height: height,
         child: ElevatedButton(
@@ -91,12 +112,12 @@ class _JoinPageState extends State<JoinPage> {
                         builder: (context) => const SelectChronicDisease()));
               } else {
                 // ignore: avoid_print
-                print("예상치 못한 에러");
+                _showAlert(title: "회원가입 실패", message: "다시 시도해주세요");
               }
             }
           },
           child: const Text(
-            '저장하기!',
+            '저장하기',
             style: TextStyle(
               color: Colors.white,
             ),
