@@ -12,3 +12,11 @@ class Time {
 
   Time({required this.time, required this.medicine});
 }
+
+class Check {
+  final String medicine;
+  final String time;
+  late bool isChecked;
+
+  Check({required this.medicine, required this.time, required this.isChecked});
+}

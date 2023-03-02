@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import "package:flutter/material.dart";
 import 'package:super_medic/themes/textstyle.dart'; //폰
@@ -5,6 +7,8 @@ import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 import 'package:super_medic/pages/add_medicine.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class MedicinePage extends StatefulWidget {
   const MedicinePage({super.key});
@@ -14,24 +18,44 @@ class MedicinePage extends StatefulWidget {
 }
 
 class _MedicinePageState extends State<MedicinePage> {
+  DateTime now = DateTime.now();
+  // List<Check> checks = List.empty(growable: true);
+  List<List> checkList = List.empty(growable: true);
+
+  late String today;
   @override
   void initState() {
     super.initState();
+    today = DateFormat.E('ko_KR').format(now);
+    fetchGet();
+  }
+
+  fetchGet() async {
+    int idIdx = 1;
+    final res = await http
+        .get(Uri.parse('https://mypd.kr:5000/medicine/parse?id_idx=$idIdx'));
+    List<List> temp = List.empty(growable: true);
+
+    for (var data in json.decode(res.body)) {
+      if (data['days'].contains(today)) {
+        for (var name in data['medicine_name']) {
+          List<Check> checks = List.empty(growable: true);
+          for (var time in data['times']) {
+            checks.add(Check(medicine: name, time: time, isChecked: false));
+          }
+          temp.add(checks);
+        }
+      }
+    }
+    if (mounted) {
+      setState(() {
+        checkList = temp;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Item> items = List.empty(growable: true);
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-    items.add(Item(data: "전체동의", isChecked: false));
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -53,10 +77,10 @@ class _MedicinePageState extends State<MedicinePage> {
                       topRight: Radius.circular(20),
                     ),
                   ),
-                  child: AddMedicinePage(),
+                  child: const AddMedicinePage(),
                 );
               },
-            );
+            ).then((value) => fetchGet());
           },
         ),
         backgroundColor: Colors.white,
@@ -96,8 +120,10 @@ class _MedicinePageState extends State<MedicinePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MediCheck(items: items, medicine: '다이그린'),
-                  MediCheck(items: items, medicine: '다이그린'),
+                  for (var check in checkList)
+                    MediCheck(
+                      items: check as List<Check>,
+                    ),
                 ],
               ),
             ),

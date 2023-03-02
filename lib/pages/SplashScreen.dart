@@ -45,7 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
             // ignore: use_build_context_synchronously
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
+              MaterialPageRoute(builder: (context) => MainPage()),
+              // MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
             );
           }
         } else if (val.type == 'Naver') {}
@@ -53,7 +54,8 @@ class _SplashScreenState extends State<SplashScreen> {
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
+          MaterialPageRoute(builder: (context) => MainPage()),
+          // MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
         );
       }
     });
