@@ -10,17 +10,15 @@ class LocalNotificationService {
     const InitializationSettings initializationSettings =
         InitializationSettings(
             android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-            iOS: IOSInitializationSettings(
+            iOS: DarwinInitializationSettings(
               requestSoundPermission: false,
               requestBadgePermission: false,
               requestAlertPermission: false,
             ));
 
     _notificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String? route) async {
-      if (route != null) {
-        Navigator.of(context).pushNamed(route);
-      }
+        onDidReceiveNotificationResponse: (route) async {
+      Navigator.of(context).pushNamed(route as String);
     });
   }
 
@@ -32,11 +30,11 @@ class LocalNotificationService {
         android: AndroidNotificationDetails(
           "easyapproach",
           "easyapproach channel",
-          // "this is our channel",
+          channelDescription: "this is our channel",
           importance: Importance.max,
           priority: Priority.max,
         ),
-        iOS: IOSNotificationDetails(),
+        iOS: DarwinNotificationDetails(),
       );
 
       await _notificationsPlugin.show(
