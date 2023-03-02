@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+
+class NanumTitleText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final TextAlign textAlign;
+  final Color color;
+  final FontWeight fontWeight;
+  const NanumTitleText({
+    Key? key,
+    required this.text,
+    this.fontSize = 17,
+    this.textAlign = TextAlign.center,
+    this.color = Colors.black,
+    this.fontWeight = FontWeight.normal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: this.textAlign,
+      style: TextStyle(
+        color: this.color,
+        fontFamily: 'NanumSquareEB',
+        fontSize: this.fontSize,
+        fontWeight: this.fontWeight,
+      ),
+    );
+  }
+}
+
+class NanumBodyText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final TextAlign textAlign;
+  final Color color;
+  final FontWeight fontWeight;
+  const NanumBodyText({
+    Key? key,
+    required this.text,
+    this.fontSize = 14,
+    this.textAlign = TextAlign.center,
+    this.color = Colors.black,
+    this.fontWeight = FontWeight.normal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: this.textAlign,
+      style: TextStyle(
+        color: this.color,
+        fontFamily: 'NanumSquare_acB',
+        fontSize: fontSize,
+        fontWeight: this.fontWeight,
+      ),
+      //textAlign: textAlign,
+    );
+  }
+}
+
+class NanumText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final TextAlign textAlign;
+  final Color color;
+  final FontWeight fontWeight;
+  const NanumText({
+    Key? key,
+    required this.text,
+    this.fontSize = 12,
+    this.textAlign = TextAlign.center,
+    this.color = Colors.grey,
+    this.fontWeight = FontWeight.normal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: this.color,
+        fontFamily: 'NanumSquareB',
+        fontSize: fontSize,
+        fontWeight: this.fontWeight,
+      ),
+      textAlign: textAlign,
+      //textAlign: textAlign,
+    );
+  }
+}
