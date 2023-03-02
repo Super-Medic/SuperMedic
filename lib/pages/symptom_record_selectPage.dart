@@ -5,6 +5,8 @@ import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart';
 import 'package:super_medic/widgets/mainPage_widgets/present_time.dart';
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/home_provider.dart';
 
 // ignore: must_be_immutable
 class SymptomRecordSelect extends StatefulWidget {
@@ -15,8 +17,9 @@ class SymptomRecordSelect extends StatefulWidget {
 }
 
 class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
+  late HomeProvider _homeProvider;
   bool selected = false;
-  final Map<String, List<Map<String, dynamic>>> symptom = {
+  final Map<String, List<Map<String, dynamic>>> dailySymptom = {
     "Head": [
       {'state': '두통', 'isCheck': false},
       {'state': '편두통', 'isCheck': false},
@@ -58,6 +61,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
 
   @override
   Widget build(BuildContext context) {
+    _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     final ButtonStyle style = ElevatedButton.styleFrom(
@@ -121,7 +125,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               SizedBox(
                 height: screenHeight * 0.01,
               ),
-              SymptomButton(context, symptom["Head"]!),
+              SymptomButton(context, "Head"),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -133,7 +137,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               SizedBox(
                 height: screenHeight * 0.01,
               ),
-              SymptomButton(context, symptom["Body"]!),
+              SymptomButton(context, "Body"),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -145,7 +149,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               SizedBox(
                 height: screenHeight * 0.01,
               ),
-              SymptomButton(context, symptom["Skin"]!),
+              SymptomButton(context, "Skin"),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -157,7 +161,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               SizedBox(
                 height: screenHeight * 0.01,
               ),
-              SymptomButton(context, symptom["Stomach"]!)
+              SymptomButton(context, "Stomach")
             ],
           ),
         ),
@@ -165,9 +169,14 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
           // style: style,
           style: style,
           onPressed: selected == true
-              ? () {
-                  saveSymptoms(symptom);
-                  Navigator.pop(context);
+              ? () async {
+                  await saveSymptoms(dailySymptom);
+                  // _homeProvider.symptomgetData();
+                  Provider.of<HomeProvider>(context, listen: false)
+                      .symptomgetData();
+                  var nav = Navigator.of(context);
+                  nav.pop();
+                  // Navigator.pop(context);
                 }
               : null,
 
@@ -181,8 +190,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
     );
   }
 
-  Widget SymptomButton(
-      BuildContext context, List<Map<String, dynamic>> symptom) {
+  Widget SymptomButton(BuildContext context, String bodyPart) {
     // List<Map<String, dynamic>> symptom = symptom;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -197,16 +205,16 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
 
         alignment: WrapAlignment.spaceBetween,
         children: List.generate(
-          symptom.length,
+          dailySymptom[bodyPart]!.length,
           (index) {
-            return buildTags(context, index, symptom);
+            return buildTags(context, index, bodyPart);
           },
         ),
       ),
     );
   }
 
-  Widget buildTags(BuildContext context, index, symptom) {
+  Widget buildTags(BuildContext context, index, bodyPart) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
@@ -220,9 +228,9 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
           width: screenWidth * 0.17,
           height: screenHeight * 0.02,
           child: Text(
-            symptom[index]['state'],
+            dailySymptom[bodyPart]![index]['state'],
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: symptom[index]['isCheck']
+                color: dailySymptom[bodyPart]![index]['isCheck']
                     ? Colors.white
                     : const Color.fromRGBO(96, 96, 96, 1),
                 fontSize: 11,
@@ -230,17 +238,24 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        selected: symptom[index]['isCheck'] == true,
+        selected: dailySymptom[bodyPart]![index]['isCheck'] == true,
         selectedColor: Colors.green,
         onSelected: (value) {
           setState(() {
-            symptom[index]['isCheck'] = !symptom[index]['isCheck'];
-            for (int i = 0; i < symptom.length; i++) {
-              if (symptom[i]['isCheck'] == true) {
-                selected = true;
-                break;
+            dailySymptom[bodyPart]![index]['isCheck'] =
+                !dailySymptom[bodyPart]![index]['isCheck'];
+            List<String> dailySymptomKey = dailySymptom.keys.toList();
+            for (int i = 0; i < dailySymptomKey.length; i++) {
+              for (int j = 0;
+                  j < dailySymptom[dailySymptomKey[i]]!.length;
+                  j++) {
+                if (dailySymptom[dailySymptomKey[i]]![j]['isCheck'] == true) {
+                  selected = true;
+                  i = dailySymptomKey.length;
+                  break;
+                }
+                selected = false;
               }
-              selected = false;
             }
           });
         },
@@ -250,7 +265,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
 
 saveSymptoms(Map<String, List<Map<String, dynamic>>> symptom) async {
   DateTime now = DateTime.now();
-  final dateKey = DateFormat('yyyy년MM월dd일mm분ss초').format(DateTime.now());
+  final dateKey = DateFormat('yyyy년MM월dd일hh시mm분ss초').format(DateTime.now());
 
   const storage = FlutterSecureStorage();
 
@@ -269,13 +284,14 @@ saveSymptoms(Map<String, List<Map<String, dynamic>>> symptom) async {
 
   dynamic Symptoms = await storage.read(key: "Symptoms");
 
-  Symptoms ??= "[]"; // 저장된 Symptoms가 없을 경우
+  Symptoms ??= "{}"; // 저장된 Symptoms가 없을 경우
 
   Symptoms = jsonDecode(Symptoms as String);
-  symptomAdd[dateKey] = symptomTmp;
-  Symptoms.insert(0, symptomAdd);
+  // symptomAdd[dateKey] = symptomTmp;
+  // Symptoms.insert(0, symptomAdd);
+  Symptoms[dateKey] = symptomTmp;
 
-  storage.write(key: "Symptoms", value: jsonEncode(Symptoms));
+  await storage.write(key: "Symptoms", value: jsonEncode(Symptoms));
 }
 
 addSymptomForSave(List<Map<String, dynamic>> symptom, String state,

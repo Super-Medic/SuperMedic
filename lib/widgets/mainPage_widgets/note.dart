@@ -44,8 +44,8 @@ class Note extends StatelessWidget {
                   label: const NanumBodyText(
                     text: '',
                   ),
-                  icon: Row(
-                    children: const [
+                  icon: const Row(
+                    children: [
                       NanumTitleText(text: '노트'),
                       Icon(
                         Icons.chevron_right,
@@ -73,10 +73,10 @@ class Note extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                   padding: const EdgeInsets.symmetric(horizontal: 7),
                 ),
-                child: Row(
+                child: const Row(
                   //spaceEvenly: 요소들을 균등하게 배치하는 속성
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.add,
                       color: Colors.white,

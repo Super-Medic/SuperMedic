@@ -34,9 +34,22 @@ class _HomePageState extends State<HomePage> {
         Provider.of<HomeProvider>(context, listen: false)
             .bloodPressuregetData();
       }
-      if (_homeProvider.noteTextValue.isEmpty) {
-        Provider.of<HomeProvider>(context, listen: false).noteTextgetData();
-      }
+if (_homeProvider.symptomsValue.isEmpty) {
+Provider.of<HomeProvider>(context, listen: false).symptomgetData();
+}
+if (_homeProvider.noteTextValue.isEmpty) {
+Provider.of<HomeProvider>(context, listen: false).noteTextgetData();
+}
+
+if (_homeProvider.screeningValue == null) {
+Provider.of<HomeProvider>(context, listen: false).screeninggetData();
+}
+if (_homeProvider.medicineValue == null) {
+Provider.of<HomeProvider>(context, listen: false).medicinegetData();
+}
+if (_homeProvider.diagnosisValue == null) {
+Provider.of<HomeProvider>(context, listen: false).diagnosisgetData();
+}
     });
   }
 

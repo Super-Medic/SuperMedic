@@ -27,7 +27,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       setState(() {
         size = getSize();
       });
@@ -126,9 +126,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const AuthPage(
-                                        healthDataType: "immunization",
-                                      )));
+                                  builder: (_) => const AuthPage(healthDataType: "immunization",)));
                         },
                         icon: const Icon(
                           Icons.add,
@@ -179,8 +177,8 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: const Row(
-                children: [
+              icon: Row(
+                children: const [
                   NanumTitleText(text: '예방접종 내역'),
                   Icon(
                     Icons.chevron_right,
