@@ -6,12 +6,24 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:super_medic/provider/check_box_provider.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/pages/SplashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print('백 그라운드');
+  print(message.data.toString());
+  print(message.notification!.title);
+  print('================================================================');
+}
 
 // ignore: prefer_const_constructors
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   // await dotenv.load(fileName: 'assets/config/.env');
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+
   KakaoSdk.init(nativeAppKey: 'ceae50246b4ec07d99fed331f94acdb7');
   runApp(const MyApp());
 }

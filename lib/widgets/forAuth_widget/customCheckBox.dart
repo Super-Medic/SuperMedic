@@ -3,6 +3,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/widgets/forAuth_widget/itemClass.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomCheckBox extends StatefulWidget {
   final Item item;
@@ -63,18 +64,47 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
             title: NanumBodyText(
               text: widget.item.data,
               color: Colors.black,
+              textAlign: TextAlign.left,
             ),
             trailing: const Icon(
               Icons.navigate_next,
               color: Colors.grey,
             ),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => FirstScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => Scaffold(
+                    backgroundColor: CommonColor.background,
+                    appBar: PreferredSize(
+                      preferredSize: const Size.fromHeight(50.0),
+                      child: AppBar(
+                        backgroundColor: CommonColor.background,
+                        elevation: 0.0,
+                        title: NanumTitleText(
+                          text: widget.item.data,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        leading: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          color: const Color.fromRGBO(0, 0, 0, 1.0),
+                          icon: const Icon(Icons.arrow_back_ios_new),
+                          iconSize: 30,
+                        ),
+                      ),
+                    ),
+                    body: WebView(
+                      initialUrl: widget.item.page,
+                      javascriptMode: JavascriptMode.unrestricted,
+                      gestureNavigationEnabled: true,
+                      userAgent: "random",
+                    ),
+                  ),
+                ),
+              );
             },
           ),
         )

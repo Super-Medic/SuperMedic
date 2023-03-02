@@ -32,20 +32,20 @@ class _TOSPage extends State<TOSPage> {
         isChecked: false));
     items.add(Item(
         data: "(필수) 개인정보(민감정보) 수집 및 이용 동의",
-        page: 'assets/images/naver.png',
+        page: 'https://www.notion.so/4f6734367bf14be98688c6acccfdd6df?pvs=4',
         isChecked: false));
-    items.add(Item(
-        data: "(필수) [건강보험공단] 개인정보 이용 동의",
-        page: 'assets/images/pass.png',
-        isChecked: false));
-    items.add(Item(
-        data: "(필수) [건강보험공단] 서비스 이용약관",
-        page: 'assets/images/kb.png',
-        isChecked: false));
-    items.add(Item(
-        data: "(필수) 고유식별번호 처리 동의(본인확인)",
-        page: 'assets/images/tos.png',
-        isChecked: false));
+    // items.add(Item(
+    //     data: "(필수) [건강보험공단] 개인정보 이용 동의",
+    //     page: 'assets/images/pass.png',
+    //     isChecked: false));
+    // items.add(Item(
+    //     data: "(필수) [건강보험공단] 서비스 이용약관",
+    //     page: 'assets/images/kb.png',
+    //     isChecked: false));
+    // items.add(Item(
+    //     data: "(필수) 고유식별번호 처리 동의(본인확인)",
+    //     page: 'assets/images/tos.png',
+    //     isChecked: false));
   }
 
   @override
@@ -91,8 +91,8 @@ class _TOSPage extends State<TOSPage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
+                itemCount: 2,
+                // shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return CustomCheckBox(
                     item: items[index],
