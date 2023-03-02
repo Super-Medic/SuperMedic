@@ -12,7 +12,7 @@ class Login_verify {
       );
       return response.body;
     } catch (error) {
-      return "false";
+      return "false_err";
     }
   }
 }

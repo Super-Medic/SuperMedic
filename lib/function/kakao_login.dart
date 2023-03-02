@@ -69,13 +69,12 @@ class KakaoLogin {
             return 'false_err';
           }
         } catch (error) {
-          return "false";
+          return 'false_err';
         }
       }
     } else {
       try {
         await UserApi.instance.loginWithKakaoAccount();
-        print('카카오계정으로 로그인 성공');
         try {
           User user = await UserApi.instance.me();
           final verify =
@@ -85,8 +84,17 @@ class KakaoLogin {
           return 'false_err';
         }
       } catch (error) {
-        return "false";
+        return 'false_err';
       }
+    }
+  }
+
+  Future<String> signOutWithKakao() async {
+    try {
+      await UserApi.instance.logout();
+      return 'true';
+    } catch (err) {
+      return 'false';
     }
   }
 
