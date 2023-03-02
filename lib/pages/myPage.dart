@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -353,9 +355,34 @@ class _QuitPopUpState extends State<QuitPopUp> {
     );
   }
 
+  void _showAlert({String? title, String? message}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text(title!),
+            content: Text(message!),
+            actions: [
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: const Text("확인"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
   deleteSecureStorage() async {
-    const storage = FlutterSecureStorage();
-    await storage.deleteAll();
+    Login_verify secession = Login_verify();
+    final val = await secession.userSecession('email');
+    if (val == 'true') {
+      const storage = FlutterSecureStorage();
+      await storage.deleteAll();
+    } else {
+      _showAlert(title: "에러", message: "다시 시도해주세요");
+    }
   }
 }
 
