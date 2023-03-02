@@ -76,17 +76,20 @@ class LoginModel {
   final String type;
   final String accessToken;
   final String reflashToken;
+  final String email;
 
-  LoginModel(this.type, this.accessToken, this.reflashToken);
+  LoginModel(this.type, this.accessToken, this.reflashToken, this.email);
 
   LoginModel.fromJson(Map<String, dynamic> json)
       : type = json['type'],
         accessToken = json['accessToken'],
-        reflashToken = json['reflashToken'];
+        reflashToken = json['reflashToken'],
+        email = json['email'];
 
   Map<String, dynamic> toJson() => {
         'type': type,
         'accessToken': accessToken,
         'reflashToken': reflashToken,
+        'email': email,
       };
 }
