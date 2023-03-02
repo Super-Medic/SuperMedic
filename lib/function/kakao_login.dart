@@ -33,7 +33,10 @@ class KakaoLogin {
               'Kakao',
               token!.accessToken,
               token.refreshToken as String,
-              user.kakaoAccount?.email as String));
+              user.kakaoAccount?.email as String,
+              name,
+              phnoe,
+              fristNumber));
           await storage.write(key: 'LoginUser', value: val);
           return 'true';
         } catch (err) {
@@ -51,7 +54,6 @@ class KakaoLogin {
     if (await isKakaoTalkInstalled()) {
       try {
         await UserApi.instance.loginWithKakaoTalk();
-        print('안녕 ${await UserApi.instance.loginWithKakaoTalk()}');
         try {
           User user = await UserApi.instance.me();
           final verify =
