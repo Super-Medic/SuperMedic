@@ -7,7 +7,7 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
 
   static void initialize(BuildContext context) {
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
             android: AndroidInitializationSettings("@mipmap/ic_launcher"),
             iOS: IOSInitializationSettings(
@@ -28,11 +28,11 @@ class LocalNotificationService {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-      final NotificationDetails notificationDetails = NotificationDetails(
+      const NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
           "easyapproach",
           "easyapproach channel",
-          "this is our channel",
+          // "this is our channel",
           importance: Importance.max,
           priority: Priority.max,
         ),
