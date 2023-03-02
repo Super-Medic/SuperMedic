@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:super_medic/function/kakao_login.dart';
+import 'package:super_medic/pages/loginPage.dart';
 //스타일
 
 class MyPage extends StatefulWidget {
@@ -27,8 +29,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                   _heading("스키/보드 정보"),
                   Container(
                     color: Colors.white,
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         ListTile(
                           leading: Icon(Icons.newspaper),
                           title: Text(
@@ -52,8 +54,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                   _heading("관심 매장"),
                   Container(
                     color: Colors.white,
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         ListTile(
                           leading: Icon(Icons.timer),
                           title: Text(
@@ -77,8 +79,8 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                   _heading("이벤트"),
                   Container(
                     color: Colors.white,
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         ListTile(
                           leading: Icon(Icons.person_add),
                           title: Text(
@@ -105,7 +107,17 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            KakaoLogin kakaologin = KakaoLogin();
+                            var joinresult =
+                                await kakaologin.signOutWithKakao();
+                            if (joinresult == 'true') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
+                            } else {}
+                          },
                           child: const ListTile(
                             leading: Icon(Icons.announcement),
                             title: Text(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
 import 'package:super_medic/function/login_platform.dart';
@@ -19,6 +20,25 @@ class LoginPage extends StatelessWidget {
 
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+
+    void _showAlert({String? title, String? message}) {
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title: Text(title!),
+              content: Text(message!),
+              actions: [
+                CupertinoDialogAction(
+                    isDefaultAction: true,
+                    child: const Text("확인"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
+    }
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -55,8 +75,7 @@ class LoginPage extends StatelessWidget {
                           builder: (context) => const JoinPage()));
                   // ignore: use_build_context_synchronously
                 } else {
-                  // ignore: avoid_print
-                  print("예상치 못한 에러");
+                  _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
                 }
               },
             ),
