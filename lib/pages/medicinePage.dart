@@ -24,7 +24,7 @@ class _MedicinePageState extends State<MedicinePage> {
   // List<Check> checks = List.empty(growable: true);
   List<List> checkList = List.empty(growable: true);
   String? userEmail;
-
+  bool checkNull = true;
   late String today;
   @override
   void initState() {
@@ -42,22 +42,24 @@ class _MedicinePageState extends State<MedicinePage> {
     final res = await http
         .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
     List<List> temp = List.empty(growable: true);
-
-    for (var data in json.decode(res.body)) {
-      if (data['days'].contains(today)) {
-        for (var name in data['medicine_name']) {
-          List<Check> checks = List.empty(growable: true);
-          for (var time in data['times']) {
-            checks.add(Check(medicine: name, time: time, isChecked: false));
+    if (res.body != 'Empty') {
+      checkNull = false;
+      for (var data in json.decode(res.body)) {
+        if (data['days'].contains(today)) {
+          for (var name in data['medicine_name']) {
+            List<Check> checks = List.empty(growable: true);
+            for (var time in data['times']) {
+              checks.add(Check(medicine: name, time: time, isChecked: false));
+            }
+            temp.add(checks);
           }
-          temp.add(checks);
         }
       }
-    }
-    if (mounted) {
-      setState(() {
-        checkList = temp;
-      });
+      if (mounted) {
+        setState(() {
+          checkList = temp;
+        });
+      }
     }
   }
 
@@ -127,10 +129,11 @@ class _MedicinePageState extends State<MedicinePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (var check in checkList)
-                    MediCheck(
-                      items: check as List<Check>,
-                    ),
+                  if (checkNull != true)
+                    for (var check in checkList)
+                      MediCheck(
+                        items: check as List<Check>,
+                      ),
                 ],
               ),
             ),

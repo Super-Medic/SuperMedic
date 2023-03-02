@@ -372,38 +372,73 @@ class _AddMedicinePage extends State<AddMedicinePage> {
       ),
       builder: (context) {
         return Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 10,
+              right: 10),
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+              Container(
+                padding: const EdgeInsets.only(top: 5),
+                child: const Center(
+                  child: NanumTitleText(
+                    text: '사진업로드',
+                    fontSize: 25,
+                  ),
                 ),
-                onPressed: () {
-                  _getCameraImage();
-                  Navigator.pop(context);
-                },
-                child: const Text('카메라'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      _getCameraImage();
+                      Navigator.pop(context);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: Image.asset('assets/images/camera.png'),
+                        ),
+                        Container(
+                          child: const NanumBodyText(text: '카메라'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _getPhotoLibraryImage();
+
+                      Navigator.pop(context);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: Image.asset('assets/images/gallery.png'),
+                        ),
+                        Container(
+                          // padding: EdgeInsets.only(top: 5),
+                          child: const NanumBodyText(text: '앨범'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
-                width: 5,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
-                onPressed: () {
-                  _getPhotoLibraryImage();
-                  Navigator.pop(context);
-                },
-                child: const Text('앨범'),
-              ),
+                height: 10,
+              )
             ],
           ),
         );
