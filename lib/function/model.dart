@@ -420,9 +420,10 @@ class LoginModel {
   final String name;
   final String phone;
   final String birthday;
+  final String gender;
 
   LoginModel(this.type, this.accessToken, this.reflashToken, this.email,
-      this.name, this.phone, this.birthday);
+      this.name, this.phone, this.birthday, this.gender);
 
   LoginModel.fromJson(Map<String, dynamic> json)
       : type = json['type'],
@@ -431,7 +432,8 @@ class LoginModel {
         email = json['email'],
         name = json['name'],
         phone = json['phone'],
-        birthday = json['birthday'];
+        birthday = json['birthday'],
+        gender = json['gender'];
 
   Map<String, dynamic> toJson() => {
         'type': type,
@@ -441,5 +443,6 @@ class LoginModel {
         'name': name,
         'phone': phone,
         'birthday': birthday,
+        'gender': gender
       };
 }

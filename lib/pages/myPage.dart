@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/LoginVerify.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -246,8 +249,8 @@ class _MyPage extends State<MyPage> {
               child: AppBar(
                 backgroundColor: CommonColor.background,
                 elevation: 0.0,
-                title: const NanumTitleText(
-                  text: "개인정보처리방침",
+                title: NanumTitleText(
+                  text: title,
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
@@ -261,9 +264,8 @@ class _MyPage extends State<MyPage> {
                 ),
               ),
             ),
-            body: const WebView(
-              initialUrl:
-                  "https://ringed-rutabaga-f09.notion.site/bee487fc6fdb418292d2a5f352f32469",
+            body: WebView(
+              initialUrl: URL,
               javascriptMode: JavascriptMode.unrestricted,
               gestureNavigationEnabled: true,
               userAgent: "random",
@@ -376,7 +378,10 @@ class _QuitPopUpState extends State<QuitPopUp> {
 
   deleteSecureStorage() async {
     Login_verify secession = Login_verify();
-    final val = await secession.userSecession('email');
+    const storage = FlutterSecureStorage();
+    String? userinfoRead = await storage.read(key: "LoginUser");
+    LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
+    final val = await secession.userSecession(userInfo.email);
     if (val == 'true') {
       const storage = FlutterSecureStorage();
       await storage.deleteAll();

@@ -10,6 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:super_medic/function/model.dart';
 
 Future<String> requestHealthData(
     String loginOrgCd, String healthDataType, String step,
@@ -56,13 +57,24 @@ Future<String> _resultHealthData(
     String lastParamValue,
     String step,
     String stepData) async {
+  const storage = FlutterSecureStorage();
+
+  String? userinfoRead = await storage.read(key: "LoginUser");
+  LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
+  String birthday;
+  if (userInfo.gender == '1' || userInfo.gender == '2') {
+    birthday = '19${userInfo.birthday}';
+  } else {
+    birthday = '20${userInfo.birthday}';
+  }
+
   final response = await http.post(Uri.parse(URI), headers: <String, String>{
     'Content-Type': 'application/x-www-form-urlencoded',
   }, body: <String, String>{
     'loginOrgCd': loginOrgCd,
-    'name': '현석훈',
-    'birthday': '19980801',
-    'mobileNo': '01028670096',
+    'name': userInfo.name,
+    'birthday': birthday,
+    'mobileNo': userInfo.phone,
     lastParamKey: lastParamValue,
     'step': step,
     'step_data': stepData
