@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "585309393841",
+    "project_id": "supermedic-56c64",
+    "storage_bucket": "supermedic-56c64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585309393841:android:2940a96afa932465df6390",
+        "android_client_info": {
+          "package_name": "com.superMedic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585309393841-5t7l6i0chbjfaujei8bpn9e3omcqjjmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY1yYgwyMv_wU7P7Pq9BPwHD4kxrFQWoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585309393841-5t7l6i0chbjfaujei8bpn9e3omcqjjmu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "585309393841-1eudke7mtsgnhcn627hm3d14r9lh1blk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "123"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

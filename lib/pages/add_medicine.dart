@@ -381,7 +381,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 5),
                 child: const Center(
                   child: NanumTitleText(
                     text: '사진업로드',
@@ -436,7 +436,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               )
             ],
@@ -479,7 +479,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
 
       request.files.add(image);
     }
-    print(widget.userEmail);
     request.fields['email'] = widget.userEmail;
     request.fields['medicine'] = _textEditingController.text;
     request.fields['day'] = jsonEncode(getTrueDay());
