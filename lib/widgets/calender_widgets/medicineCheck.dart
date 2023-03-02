@@ -4,9 +4,8 @@ import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:super_medic/widgets/calender_widgets/customCheckBox.dart';
 
 class MediCheck extends StatefulWidget {
-  final List<Item> items;
-  final String medicine;
-  const MediCheck({super.key, required this.items, required this.medicine});
+  final List<Check> items;
+  const MediCheck({super.key, required this.items});
 
   @override
   State<MediCheck> createState() => _MediCheckState();
@@ -21,7 +20,7 @@ class _MediCheckState extends State<MediCheck> {
         Container(
           padding: const EdgeInsets.only(top: 25, left: 30),
           child: NanumTitleText(
-            text: widget.medicine,
+            text: widget.items[0].medicine,
             fontSize: 20,
             color: Colors.green,
             fontWeight: FontWeight.bold,

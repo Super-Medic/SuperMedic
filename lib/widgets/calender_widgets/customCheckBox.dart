@@ -5,7 +5,7 @@ import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:dotted_line/dotted_line.dart';
 
 class CustomCheckBox extends StatefulWidget {
-  final Item item;
+  final Check item;
   final bool last;
   const CustomCheckBox({
     super.key,
@@ -53,7 +53,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
             NanumText(
-              text: widget.item.data,
+              text: widget.item.time,
               fontSize: 11,
               color: widget.item.isChecked
                   ? Colors.green

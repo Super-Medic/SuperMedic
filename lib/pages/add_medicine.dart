@@ -17,6 +17,7 @@ class AddMedicinePage extends StatefulWidget {
 
 class _AddMedicinePage extends State<AddMedicinePage> {
   double _inputHeight = 50;
+  FocusNode textFocus = FocusNode();
   List<Item> items = List.empty(growable: true);
   List<Time> times = List.empty(growable: true);
   XFile? _pickedFile;
@@ -85,11 +86,14 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                 padding: const EdgeInsets.only(left: 20, right: 30, top: 10),
                 child: TextFormField(
                   controller: _textEditingController,
-                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.done,
+                  focusNode: textFocus,
                   maxLines: null,
                   textAlignVertical: TextAlignVertical.top,
                   style: const TextStyle(color: Colors.black, fontSize: 18),
                   decoration: InputDecoration(
+                    hintText: '약1, 약2, 약3 ...',
+                    hintStyle: TextStyle(fontSize: 12),
                     contentPadding: const EdgeInsets.only(left: 10, top: 10),
                     prefixIcon: _pickedFile == null
                         ? null
@@ -113,6 +117,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                         Icons.camera_alt_outlined,
                       ),
                       onTap: () {
+                        textFocus.unfocus();
                         _showBottomSheet();
                       },
                     ),
@@ -160,6 +165,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                         value: items[i].isChecked,
                         type: GFCheckboxType.circle,
                         onChanged: (value) {
+                          textFocus.unfocus();
                           setState(() {
                             items[i].isChecked = value;
                           });
@@ -202,6 +208,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                     ),
                     OutlinedButton(
                       onPressed: () {
+                        textFocus.unfocus();
                         showModalBottomSheet(
                           context: context,
                           backgroundColor: Colors.transparent,
@@ -276,15 +283,14 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                     Container(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: NanumBodyText(
-                                          text: times[index]
-                                                      .time
-                                                      .substring(0, 2) ==
-                                                  'AM'
-                                              ? '오전'
-                                              : '오후'),
+                                          text:
+                                              times[index].time.substring(5) ==
+                                                      'AM'
+                                                  ? '오전'
+                                                  : '오후'),
                                     ),
                                     NanumTitleText(
-                                      text: times[index].time.substring(4),
+                                      text: times[index].time.substring(0, 5),
                                       fontSize: 30,
                                     )
                                   ],
@@ -431,16 +437,17 @@ class _AddMedicinePage extends State<AddMedicinePage> {
 
   postRequest() async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.3.243:3000/medicine/upload'));
-    request.fields['medicine'] = _textEditingController.text;
-    request.fields['day'] = jsonEncode(getTrueDay());
-    request.fields['times'] = jsonEncode(getTruetime());
+        'POST', Uri.parse('https://mypd.kr:5000/medicine/upload'));
     if (_pickedFile != null) {
       http.MultipartFile image =
           await http.MultipartFile.fromPath('image', _pickedFile!.path);
 
       request.files.add(image);
     }
+    request.fields['medicine'] = _textEditingController.text;
+    request.fields['day'] = jsonEncode(getTrueDay());
+    request.fields['times'] = jsonEncode(getTruetime());
+
     http.Response response =
         await http.Response.fromStream(await request.send());
   }

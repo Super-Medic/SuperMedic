@@ -29,7 +29,7 @@ class _TimePickerPageState extends State<TimePickerPage> {
             children: [
               TextButton(
                 onPressed: () {
-                  final value = DateFormat('a HH:mm').format(dateTime);
+                  final value = DateFormat.jm().format(dateTime);
                   Navigator.pop(context, value);
                 },
                 child: Container(
