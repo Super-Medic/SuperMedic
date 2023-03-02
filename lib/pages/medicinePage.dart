@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰
 import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
@@ -21,6 +23,7 @@ class _MedicinePageState extends State<MedicinePage> {
   DateTime now = DateTime.now();
   // List<Check> checks = List.empty(growable: true);
   List<List> checkList = List.empty(growable: true);
+  String? userEmail;
 
   late String today;
   @override
@@ -31,9 +34,13 @@ class _MedicinePageState extends State<MedicinePage> {
   }
 
   fetchGet() async {
-    int idIdx = 1;
+    const storage = FlutterSecureStorage();
+    String? val = await storage.read(key: 'LoginUser');
+    if (val != null) {
+      userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+    }
     final res = await http
-        .get(Uri.parse('https://mypd.kr:5000/medicine/parse?id_idx=$idIdx'));
+        .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
     List<List> temp = List.empty(growable: true);
 
     for (var data in json.decode(res.body)) {
@@ -77,7 +84,7 @@ class _MedicinePageState extends State<MedicinePage> {
                       topRight: Radius.circular(20),
                     ),
                   ),
-                  child: const AddMedicinePage(),
+                  child: AddMedicinePage(userEmail: userEmail!),
                 );
               },
             ).then((value) => fetchGet());

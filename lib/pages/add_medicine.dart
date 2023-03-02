@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:getwidget/getwidget.dart';
 
 class AddMedicinePage extends StatefulWidget {
-  const AddMedicinePage({Key? key}) : super(key: key);
-
+  const AddMedicinePage({Key? key, required this.userEmail}) : super(key: key);
+  final String userEmail;
   @override
   State<AddMedicinePage> createState() => _AddMedicinePage();
 }
@@ -93,7 +93,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                   style: const TextStyle(color: Colors.black, fontSize: 18),
                   decoration: InputDecoration(
                     hintText: '약1, 약2, 약3 ...',
-                    hintStyle: TextStyle(fontSize: 12),
+                    hintStyle: const TextStyle(fontSize: 12),
                     contentPadding: const EdgeInsets.only(left: 10, top: 10),
                     prefixIcon: _pickedFile == null
                         ? null
@@ -444,10 +444,10 @@ class _AddMedicinePage extends State<AddMedicinePage> {
 
       request.files.add(image);
     }
+    request.fields['email'] = widget.userEmail;
     request.fields['medicine'] = _textEditingController.text;
     request.fields['day'] = jsonEncode(getTrueDay());
     request.fields['times'] = jsonEncode(getTruetime());
-
     http.Response response =
         await http.Response.fromStream(await request.send());
   }
