@@ -9,11 +9,19 @@ class HomeProvider extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
   List<BloodSugarModel> _bloodSugarValue = [];
   List<BloodPressureModel> _bloodPressureValue = [];
-  List<NoteModel> _noteTextValue = [];
+  List<SymptomModel> _symptomsValue = [];
+  List<NoteTextModel> _noteTextValue = [];
+  ScreeningModel? _screeningValue;
+  MedicineModel? _medicineValue;
+  DiagnosisModel? _diagnosisValue;
 
   List<BloodPressureModel> get bloodPressureValue => _bloodPressureValue;
   List<BloodSugarModel> get bloodSugarValue => _bloodSugarValue;
-  List<NoteModel> get noteTextValue => _noteTextValue;
+  List<SymptomModel> get symptomsValue => _symptomsValue;
+  List<NoteTextModel> get noteTextValue => _noteTextValue;
+  ScreeningModel? get screeningValue => _screeningValue;
+  MedicineModel? get medicineValue => _medicineValue;
+  DiagnosisModel? get diagnosisValue => _diagnosisValue;
 
   int _bloodpressureCount = -1;
   int get bloodpressureCount => _bloodpressureCount;
@@ -64,24 +72,84 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> symptomgetData() async {
+    _symptomsValue = [];
+    // try {
+    dynamic symptoms = await storage.read(key: 'Symptoms');
+
+    List<String> symptomBodyPartKeyValue = [];
+
+    if (symptoms != null) {
+      symptoms = jsonDecode(symptoms);
+      List<String> symptomsDateKeyValue = symptoms.keys.toList();
+
+      for (int i = 0; i < symptomsDateKeyValue.length; i++) {
+        dynamic symptomTmp = [];
+        symptomBodyPartKeyValue =
+            symptoms[symptomsDateKeyValue[i]].keys.toList();
+        for (int j = 0; j < symptomBodyPartKeyValue.length; j++) {
+          symptomTmp = [
+            symptomTmp,
+            symptoms[symptomsDateKeyValue[i]][symptomBodyPartKeyValue[j]]
+          ].expand((x) => x);
+          symptomTmp = symptomTmp.toList();
+
+          // symptomTmp.add(
+          //     symptoms[symptomsDateKeyValue[i]][symptomBodyPartKeyValue[j]]);
+        }
+        
+        _symptomsValue.add(SymptomModel(symptomsDateKeyValue[i], symptomTmp));
+      }
+    }
+
+    notifyListeners();
+    // } catch (e) {
+    //   rethrow;
+    // }
+  }
+
   Future<void> noteTextgetData() async {
     _noteTextValue = [];
     try {
-      String? noteTextKeyValue = await storage.read(key: 'NoteText');
-      if (noteTextKeyValue != null) {
-        final noteTextKeyList = noteTextKeyValue.split(',');
-        for (int i = 0; i < noteTextKeyList.length; i++) {
-          final val = await storage.read(key: noteTextKeyList[i]);
-          if (val != null) {
-            _noteTextValue.add(NoteModel.fromJson(jsonDecode(val)));
-          }
+      dynamic noteText = await storage.read(key: 'Notes');
+
+      if (noteText != null) {
+        noteText = jsonDecode(noteText);
+
+        List<String> noteTextKeyValue = noteText.keys.toList();
+        for (int i = 0; i < noteTextKeyValue.length; i++) {
+          _noteTextValue.add(NoteTextModel(
+              noteTextKeyValue[i], noteText[noteTextKeyValue[i]]));
         }
-        _noteTextValue = noteTextValue;
-        notifyListeners();
       }
+      notifyListeners();
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> screeninggetData() async {
+    dynamic screenings = await storage.read(key: 'Screenings');
+    if (screenings != null) {
+      _screeningValue = ScreeningModel.fromJson(jsonDecode(screenings));
+    }
+    notifyListeners();
+  }
+
+  Future<void> medicinegetData() async {
+    dynamic medicine = await storage.read(key: 'Medicine');
+    if (medicine != null) {
+      _medicineValue = MedicineModel.fromJson(jsonDecode(medicine));
+    }
+    notifyListeners();
+  }
+
+  Future<void> diagnosisgetData() async {
+    dynamic diagnosis = await storage.read(key: 'Diagnosis');
+    if (diagnosis != null) {
+      _diagnosisValue = DiagnosisModel.fromJson(jsonDecode(diagnosis));
+    }
+    notifyListeners();
   }
 
   updateCurrentPressureValue(int index) {

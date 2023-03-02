@@ -1,88 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:super_medic/themes/textstyle.dart';
-import 'package:super_medic/themes/theme.dart';
+import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
+import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/pages/selectAuth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 
 import 'package:timelines/timelines.dart';
+import 'package:super_medic/function/model.dart';
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/home_provider.dart';
 
-class Diagnosis {
-  List<DiagnosisTotalList>? diagnosisTotalList;
 
-  Diagnosis({this.diagnosisTotalList});
+// class Diagnosis {
+//   List<DiagnosisTotalList>? diagnosisTotalList;
 
-  Diagnosis.fromJson(Map<String, dynamic> json) {
-    if (json['diagnosisTotalList'] != null) {
-      diagnosisTotalList = <DiagnosisTotalList>[];
-      json['diagnosisTotalList'].forEach((v) {
-        diagnosisTotalList!.add(DiagnosisTotalList.fromJson(v));
-      });
-    }
-  }
+//   Diagnosis({this.diagnosisTotalList});
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (diagnosisTotalList != null) {
-      data['diagnosisTotalList'] =
-          diagnosisTotalList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   Diagnosis.fromJson(Map<String, dynamic> json) {
+//     if (json['diagnosisTotalList'] != null) {
+//       diagnosisTotalList = <DiagnosisTotalList>[];
+//       json['diagnosisTotalList'].forEach((v) {
+//         diagnosisTotalList!.add(DiagnosisTotalList.fromJson(v));
+//       });
+//     }
+//   }
 
-class DiagnosisTotalList {
-  List<DiagnosisList>? diagnosisList;
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (diagnosisTotalList != null) {
+//       data['diagnosisTotalList'] =
+//           diagnosisTotalList!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-  DiagnosisTotalList({this.diagnosisList});
+// class DiagnosisTotalList {
+//   List<DiagnosisList>? diagnosisList;
 
-  DiagnosisTotalList.fromJson(Map<String, dynamic> json) {
-    if (json['diagnosisList'] != null) {
-      diagnosisList = <DiagnosisList>[];
-      json['diagnosisList'].forEach((v) {
-        diagnosisList!.add(DiagnosisList.fromJson(v));
-      });
-    }
-  }
+//   DiagnosisTotalList({this.diagnosisList});
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (diagnosisList != null) {
-      data['diagnosisList'] = diagnosisList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   DiagnosisTotalList.fromJson(Map<String, dynamic> json) {
+//     if (json['diagnosisList'] != null) {
+//       diagnosisList = <DiagnosisList>[];
+//       json['diagnosisList'].forEach((v) {
+//         diagnosisList!.add(DiagnosisList.fromJson(v));
+//       });
+//     }
+//   }
 
-class DiagnosisList {
-  String? examinee;
-  String? No;
-  String? pharmNm;
-  String? diagType;
-  String? diagSdate;
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (diagnosisList != null) {
+//       data['diagnosisList'] = diagnosisList!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-  DiagnosisList(
-      {this.examinee, this.No, this.pharmNm, this.diagType, this.diagSdate});
+// class DiagnosisList {
+//   String? examinee;
+//   String? No;
+//   String? pharmNm;
+//   String? diagType;
+//   String? diagSdate;
 
-  DiagnosisList.fromJson(Map<String, dynamic> json) {
-    examinee = json['examinee'];
-    No = json['No'];
-    pharmNm = json['pharmNm'];
-    diagType = json['diagType'];
-    diagSdate = json['diagSdate'];
-  }
+//   DiagnosisList(
+//       {this.examinee, this.No, this.pharmNm, this.diagType, this.diagSdate});
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['examinee'] = examinee;
-    data['No'] = No;
-    data['pharmNm'] = pharmNm;
-    data['diagType'] = diagType;
-    data['diagSdate'] = diagSdate;
-    return data;
-  }
-}
+//   DiagnosisList.fromJson(Map<String, dynamic> json) {
+//     examinee = json['examinee'];
+//     No = json['No'];
+//     pharmNm = json['pharmNm'];
+//     diagType = json['diagType'];
+//     diagSdate = json['diagSdate'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['examinee'] = examinee;
+//     data['No'] = No;
+//     data['pharmNm'] = pharmNm;
+//     data['diagType'] = diagType;
+//     data['diagSdate'] = diagSdate;
+//     return data;
+//   }
+// }
 
 class RecentMedicalRecords extends StatefulWidget {
   const RecentMedicalRecords({Key? key}) : super(key: key);
@@ -92,17 +96,18 @@ class RecentMedicalRecords extends StatefulWidget {
 }
 
 class _RecentMedicalRecords extends State<RecentMedicalRecords> {
-  late dynamic diagnosis;
+  // late dynamic diagnosis;
 
-  dynamic _loadSecureStorage() async {
-    diagnosis = await loadSecureStorage("Diagnosis");
-    return diagnosis;
-  }
+  // dynamic _loadSecureStorage() async {
+  //   diagnosis = await loadSecureStorage("Diagnosis");
+  //   return diagnosis;
+  // }
+late HomeProvider _homeProvider;
 
   @override
   void initState() {
     super.initState();
-    diagnosis = _loadSecureStorage();
+    // diagnosis = _loadSecureStorage();
   }
 
   Widget item(text1, text2, text3) {
@@ -170,10 +175,13 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                     child: TextButton.icon(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      AuthPage(healthDataType: "Diagnosis")));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const AuthPage(
+                                          healthDataType: "Diagnosis")))
+                              .then((value) {
+                            setState(() {});
+                          });
                         },
                         icon: const Icon(
                           Icons.add,
@@ -195,7 +203,7 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
   }
 
   @override
-  Widget ExData(BuildContext context, Diagnosis diagnosis) {
+  Widget ExData(BuildContext context, DiagnosisModel diagnosis) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
 
@@ -218,12 +226,14 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                print("성공");
+              },
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: Row(
-                children: const [
+              icon: const Row(
+                children: [
                   NanumTitleText(text: '최근 진료내역'),
                   Icon(
                     Icons.chevron_right,
@@ -243,45 +253,59 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _loadSecureStorage(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData == true) {
-            if (snapshot.data == false) {
-              return NotData();
-            }
-            Diagnosis diagnosis = snapshot.data;
-            return ExData(context, diagnosis);
-          } else if (snapshot.hasError) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: const TextStyle(fontSize: 15),
-              ),
-            );
-          } else {
-            return const CircularProgressIndicator();
-          }
-        });
-  }
+    _homeProvider = context.watch<HomeProvider>();
+    if (_homeProvider.diagnosisValue != null) {
+      return ExData(context, _homeProvider.diagnosisValue!);
+    } else {
+      return NotData();
+    }
+    
+  //   FutureBuilder(
+  //       future: _loadSecureStorage(),
+  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+  //         // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+
+  //         if (snapshot.hasData == true) {
+  //           if (snapshot.data == false) {
+  //             return NotData();
+  //           }
+  //           Diagnosis diagnosis = snapshot.data;
+  //           return ExData(context, diagnosis);
+  //         }
+  //         //error가 발생하게 될 경우 반환하게 되는 부분
+  //         else if (snapshot.hasError) {
+  //           return Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Text(
+  //               'Error: ${snapshot.error}',
+  //               style: const TextStyle(fontSize: 15),
+  //             ),
+  //           );
+  //         }
+  //         //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
+  //         else {
+  //           return const CircularProgressIndicator();
+  //         }
+  //       });
+  // }
 }
 
-deleteSecureStorage() async {
-  const storage = FlutterSecureStorage();
-  await storage.deleteAll();
-}
+// deleteSecureStorage() async {
+//   const storage = FlutterSecureStorage();
+//   await storage.deleteAll();
+// }
 
-Future<dynamic> loadSecureStorage(String key) async {
-  const storage = FlutterSecureStorage();
-  String? screeningData = await storage.read(key: key);
-  if (screeningData == null) {
-    return false;
-  }
-  Diagnosis diagnosis = Diagnosis.fromJson(jsonDecode(screeningData));
+// Future<dynamic> loadSecureStorage(String key) async {
+//   const storage = FlutterSecureStorage();
+//   String? screeningData = await storage.read(key: key);
+//   if (screeningData == null) {
+//     return false;
+//   }
+//   Diagnosis diagnosis = Diagnosis.fromJson(jsonDecode(screeningData));
 
-  // Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
-  return diagnosis;
+//   // Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
+//   return diagnosis;
+// }
 }
 
 class MedicalTimeline extends StatelessWidget {
@@ -318,14 +342,20 @@ class _DeliveryProcesses extends StatelessWidget {
         color: Colors.green,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0), //timeline padding
         child: FixedTimeline.tileBuilder(
           theme: TimelineThemeData(
             nodePosition: 0.0,
             color: Colors.green,
+            //원 디자인
             indicatorTheme: const IndicatorThemeData(
-              size: 12.0,
+              // position: 0, //원 포지션
+              size: 12.0, //원 사이즈
             ),
+            //선 디자인
+            // connectorTheme: const ConnectorThemeData(
+            //   thickness: 2.5, //선 두께
+            // ),
           ),
           builder: TimelineTileBuilder.connected(
             itemCount: processes.length,
@@ -334,7 +364,7 @@ class _DeliveryProcesses extends StatelessWidget {
             contentsBuilder: (_, index) {
               if (processes[index].isCompleted) return null;
               return Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(left: 10.0), // 선과 Content 사이 간격
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -345,6 +375,7 @@ class _DeliveryProcesses extends StatelessWidget {
                         NanumBodyText(
                           text:
                               '${processes[index].time.substring(0, 4)}년 ${processes[index].time.substring(4, 6)}월 ${processes[index].time.substring(6, 8)}일',
+                          //style: DefaultTextStyle.of(context).style.copyWith(
                           fontSize: 12.0,
                           color: const Color.fromARGB(163, 0, 0, 0),
                         ),
@@ -352,11 +383,13 @@ class _DeliveryProcesses extends StatelessWidget {
                           child: Row(children: [
                             NanumTitleText(
                               text: processes[index].name.split("[")[0],
+                              //style: DefaultTextStyle.of(context).style.copyWith(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             NanumBodyText(
                               text: processes[index].type,
+                              //style: DefaultTextStyle.of(context).style.copyWith(
                               fontSize: 12.0,
                               color: const Color.fromARGB(163, 0, 0, 0),
                             ),
@@ -364,6 +397,8 @@ class _DeliveryProcesses extends StatelessWidget {
                         ),
                       ],
                     ),
+
+                    //),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 0.0),
                       child: FixedTimeline.tileBuilder(
@@ -375,7 +410,8 @@ class _DeliveryProcesses extends StatelessWidget {
                                   ),
                         ),
                         builder: TimelineTileBuilder(
-                          itemExtentBuilder: (_, index) => 30.0,
+                          itemExtentBuilder: (_, index) =>
+                              30.0, //아이템 유무에 따라 선 길이 설정
                           itemCount: 1,
                         ),
                       ),
@@ -384,10 +420,14 @@ class _DeliveryProcesses extends StatelessWidget {
                 ),
               );
             },
+
+            //원 생성
             indicatorBuilder: (_, index) {
               if (processes[index].isCompleted) return null;
               return const DotIndicator(position: 0);
             },
+
+            //선 생성
             connectorBuilder: (_, index, ___) => const SolidLineConnector(
               color: Colors.green,
             ),

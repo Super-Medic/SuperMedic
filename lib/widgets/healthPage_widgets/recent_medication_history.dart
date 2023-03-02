@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:convert';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'dart:convert';
 import 'package:timelines/timelines.dart';
 import 'package:super_medic/pages/selectAuth.dart';
+import 'package:super_medic/function/model.dart';
+
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/home_provider.dart';
 
 class RecentMedicationHistory extends StatefulWidget {
   const RecentMedicationHistory({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class RecentMedicationHistory extends StatefulWidget {
 }
 
 class _RecentMedicationHistory extends State<RecentMedicationHistory> {
+  late HomeProvider _homeProvider;
   dynamic user;
   dynamic key;
   var count = 0;
@@ -24,16 +29,39 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
   var screenHeight;
   late dynamic medicine;
 
-  dynamic _loadSecureStorage() async {
-    medicine = await loadSecureStorage("Medicine");
-    return medicine;
-  }
-
   @override
   void initState() {
     super.initState();
-    medicine = _loadSecureStorage();
   }
+
+  //   FutureBuilder(
+  //       future: _loadSecureStorage(),
+  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+  //         // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+
+  //         if (snapshot.hasData == true) {
+  //           if (snapshot.data == false) {
+  //             return NotData();
+  //           }
+  //           Medicine medicine = snapshot.data;
+  //           return ExData(medicine);
+  //         }
+  //         //error가 발생하게 될 경우 반환하게 되는 부분
+  //         else if (snapshot.hasError) {
+  //           return Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Text(
+  //               'Error: ${snapshot.error}',
+  //               style: const TextStyle(fontSize: 15),
+  //             ),
+  //           );
+  //         }
+  //         //data를 아직 받아 오지 못했을때 실행되는 부분
+  //         else {
+  //           return const CircularProgressIndicator();
+  //         }
+  //       });
+  // }
 
   Widget item(date, text2, text3) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -67,7 +95,7 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
     ]);
   }
 
-  Widget ExData(Medicine medicine) {
+  Widget ExData(MedicineModel medicine) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
 
@@ -174,153 +202,120 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _loadSecureStorage(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
-
-          if (snapshot.hasData == true) {
-            if (snapshot.data == false) {
-              return NotData();
-            }
-            Medicine medicine = snapshot.data;
-            return ExData(medicine);
-          }
-          //error가 발생하게 될 경우 반환하게 되는 부분
-          else if (snapshot.hasError) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: const TextStyle(fontSize: 15),
-              ),
-            );
-          }
-          //data를 아직 받아 오지 못했을때 실행되는 부분
-          else {
-            return const CircularProgressIndicator();
-          }
-        });
-  }
-}
-
-Future<dynamic> loadSecureStorage(String key) async {
-  const storage = FlutterSecureStorage();
-  String? medicineData = await storage.read(key: key);
-  if (medicineData == null) {
-    return false;
-  }
-  Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
-
-  // Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
-  return medicine;
-}
-
-class Medicine {
-  List<MedicineList>? medicineList;
-
-  Medicine({this.medicineList});
-
-  Medicine.fromJson(Map<String, dynamic> json) {
-    if (json['medicineList'] != null) {
-      medicineList = <MedicineList>[];
-      json['medicineList'].forEach((v) {
-        medicineList!.add(MedicineList.fromJson(v));
-      });
+    _homeProvider = context.watch<HomeProvider>();
+    if (_homeProvider.medicineValue != null) {
+      return ExData(_homeProvider.medicineValue!);
+    } else {
+      return NotData();
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (medicineList != null) {
-      data['medicineList'] = medicineList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
-class MedicineList {
-  String? No;
-  String? pharmNm;
-  String? medDate;
-  String? medType;
-  List<MedList>? medList;
+// class Medicine {
+//   List<MedicineList>? medicineList;
 
-  MedicineList(
-      {this.No, this.pharmNm, this.medDate, this.medType, this.medList});
+//   Medicine({this.medicineList});
 
-  MedicineList.fromJson(Map<String, dynamic> json) {
-    No = json['No'];
-    pharmNm = json['pharmNm'];
-    medDate = json['medDate'];
-    medType = json['medType'];
-    if (json['medList'] != null) {
-      medList = <MedList>[];
-      json['medList'].forEach((v) {
-        medList!.add(MedList.fromJson(v));
-      });
-    }
-  }
+//   Medicine.fromJson(Map<String, dynamic> json) {
+//     if (json['medicineList'] != null) {
+//       medicineList = <MedicineList>[];
+//       json['medicineList'].forEach((v) {
+//         medicineList!.add(MedicineList.fromJson(v));
+//       });
+//     }
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['No'] = No;
-    data['pharmNm'] = pharmNm;
-    data['medDate'] = medDate;
-    data['medType'] = medType;
-    if (medList != null) {
-      data['medList'] = medList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (medicineList != null) {
+//       data['medicineList'] = medicineList!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-class MedList {
-  String? medicineNm;
-  String? medicineEffect;
-  String? dosageDay;
+// class MedicineList {
+//   String? No;
+//   String? pharmNm;
+//   String? medDate;
+//   String? medType;
+//   List<MedList>? medList;
 
-  MedList({this.medicineNm, this.medicineEffect, this.dosageDay});
+//   MedicineList(
+//       {this.No, this.pharmNm, this.medDate, this.medType, this.medList});
 
-  MedList.fromJson(Map<String, dynamic> json) {
-    medicineNm = json['medicineNm'];
-    medicineEffect = json['medicineEffect'];
-    dosageDay = json['dosageDay'];
-  }
+//   MedicineList.fromJson(Map<String, dynamic> json) {
+//     No = json['No'];
+//     pharmNm = json['pharmNm'];
+//     medDate = json['medDate'];
+//     medType = json['medType'];
+//     if (json['medList'] != null) {
+//       medList = <MedList>[];
+//       json['medList'].forEach((v) {
+//         medList!.add(MedList.fromJson(v));
+//       });
+//     }
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['medicineNm'] = medicineNm;
-    data['medicineEffect'] = medicineEffect;
-    data['dosageDay'] = dosageDay;
-    return data;
-  }
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['No'] = No;
+//     data['pharmNm'] = pharmNm;
+//     data['medDate'] = medDate;
+//     data['medType'] = medType;
+//     if (medList != null) {
+//       data['medList'] = medList!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-  Widget towidget() {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      const Center(
-        child: NanumBodyText(
-          text: "",
-          fontSize: 20,
-        ),
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              NanumTitleText(text: medicineEffect!, fontSize: 15),
-              const NanumText(
-                text: "  ",
-              ),
-              NanumTitleText(text: '(${dosageDay!}정)', fontSize: 15),
-            ],
-          ),
-        ],
-      )
-    ]);
-  }
-}
+// class MedList {
+//   String? medicineNm;
+//   String? medicineEffect;
+//   String? dosageDay;
+
+//   MedList({this.medicineNm, this.medicineEffect, this.dosageDay});
+
+//   MedList.fromJson(Map<String, dynamic> json) {
+//     medicineNm = json['medicineNm'];
+//     medicineEffect = json['medicineEffect'];
+//     dosageDay = json['dosageDay'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['medicineNm'] = medicineNm;
+//     data['medicineEffect'] = medicineEffect;
+//     data['dosageDay'] = dosageDay;
+//     return data;
+//   }
+
+//   Widget towidget() {
+//     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+//       const Center(
+//         child: NanumBodyText(
+//           text: "",
+//           fontSize: 20,
+//         ),
+//       ),
+//       Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Row(
+//             children: [
+//               NanumTitleText(text: medicineEffect!, fontSize: 15),
+//               const NanumText(
+//                 text: "  ",
+//               ),
+//               NanumTitleText(text: '(${dosageDay!}정)', fontSize: 15),
+//             ],
+//           ),
+//         ],
+//       )
+//     ]);
+//   }
+// }
 
 ///////////////////////////////////////////////////////////////////////check point ////////////'/////////?///?//?//////////////////////
 

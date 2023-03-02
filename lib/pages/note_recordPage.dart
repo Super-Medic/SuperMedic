@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:super_medic/function/model.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart';
@@ -75,6 +74,8 @@ class NoteRecodePage extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   controller: NoteText,
                   decoration: const InputDecoration(
                     labelText: 'NoteText',
@@ -90,23 +91,18 @@ class NoteRecodePage extends StatelessWidget {
         bottomSheet: ElevatedButton(
           // style: style,
           style: style,
+          onPressed: NoteText.text != ""
+              ? () async {
+                  if (NoteText.text != "") {
+                    // print(NoteText.text);
+                    await secure_storage(NoteText.text);
+                    Navigator.pop(context);
+                    // null;/
+                  }
+                }
+              : null,
 
           child: const NanumTitleText(text: '저장', color: Colors.white),
-          onPressed: () async {
-            if (NoteText.text == "") {
-              null;
-            } else {
-              if (await secure_storage(DateTime.now(), NoteText.text) == true) {
-                // ignore: use_build_context_synchronously
-                Provider.of<HomeProvider>(context, listen: false)
-                    .noteTextgetData();
-                // ignore: use_build_context_synchronously
-                Navigator.pop(context);
-              } else {
-                null;
-              }
-            }
-          },
         ),
       ),
     );
@@ -114,30 +110,17 @@ class NoteRecodePage extends StatelessWidget {
 }
 
 // ignore: non_constant_identifier_names
-secure_storage(DateTime DateTime, String NoteText) async {
+secure_storage(String NoteText) async {
+  DateTime now = DateTime.now();
+  final dateKey = DateFormat('yyyy년MM월dd일hh시mm분ss초').format(DateTime.now());
+
   const storage = FlutterSecureStorage();
-  var val = jsonEncode(NoteModel(
-      DateFormat('yyyy년 M월 d일 E요일', 'ko').format(DateTime),
-      DateFormat('h:m', 'ko').format(DateTime),
-      NoteText));
-  try {
-    // 데이터 저장
-    await storage.write(
-        key: 'Note_${DateFormat('yyyy-M-d-h-m-s', 'ko').format(DateTime)}',
-        value: val);
-    String? keyValue = await storage.read(key: 'NoteText');
-    if (keyValue == null) {
-      await storage.write(
-          key: 'NoteText',
-          value: 'Note_${DateFormat('yyyy-M-d-h-m-s', 'ko').format(DateTime)}');
-    } else {
-      keyValue +=
-          // ignore: prefer_adjacent_string_concatenation
-          ',' + 'Note_${DateFormat('yyyy-M-d-h-m-s', 'ko').format(DateTime)}';
-      await storage.write(key: 'NoteText', value: keyValue);
-    }
-    return true;
-  } catch (_) {
-    return false;
-  }
+
+  dynamic Notes = await storage.read(key: "Notes");
+
+  Notes ??= "{}"; // 저장된 Notes가 없을 경우
+  Notes = jsonDecode(Notes as String);
+
+  Notes[dateKey] = NoteText;
+  storage.write(key: "Notes", value: jsonEncode(Notes));
 }
