@@ -1,150 +1,154 @@
 import 'package:flutter/material.dart';
+
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/pages/selectAuth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
+import 'package:super_medic/function/model.dart';
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/home_provider.dart';
 
-class Screenings {
-  List<ScreeningList>? screeningList;
+// class Screenings {
+//   List<ScreeningList>? screeningList;
 
-  Screenings({this.screeningList});
+//   Screenings({this.screeningList});
 
-  Screenings.fromJson(Map<String, dynamic> json) {
-    if (json['screeningList'] != null) {
-      screeningList = <ScreeningList>[];
-      json['screeningList'].forEach((v) {
-        screeningList!.add(ScreeningList.fromJson(v));
-      });
-    }
-  }
+//   Screenings.fromJson(Map<String, dynamic> json) {
+//     if (json['screeningList'] != null) {
+//       screeningList = <ScreeningList>[];
+//       json['screeningList'].forEach((v) {
+//         screeningList!.add(ScreeningList.fromJson(v));
+//       });
+//     }
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (screeningList != null) {
-      data['screeningList'] = screeningList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (screeningList != null) {
+//       data['screeningList'] = screeningList!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-class ScreeningList {
-  String? year;
-  String? result;
-  String? chkAgency;
-  String? opinion;
-  String? screeningDate;
-  String? kidney;
-  String? weight;
-  String? waist;
-  String? BMI;
-  String? vision;
-  String? hearing;
-  String? bloodPressure;
-  String? proteinuria;
-  String? hemoglobin;
-  String? FBG;
-  String? cholesterol;
-  String? HDL;
-  String? triglycerides;
-  String? LDL;
-  String? serumCreatinine;
-  String? GFR;
-  String? SGOT;
-  String? SGPT;
-  String? y_GTP;
-  String? tuberculosis;
-  String? osteoporosis;
+// class ScreeningList {
+//   String? year;
+//   String? result;
+//   String? chkAgency;
+//   String? opinion;
+//   String? screeningDate;
+//   String? kidney;
+//   String? weight;
+//   String? waist;
+//   String? BMI;
+//   String? vision;
+//   String? hearing;
+//   String? bloodPressure;
+//   String? proteinuria;
+//   String? hemoglobin;
+//   String? FBG;
+//   String? cholesterol;
+//   String? HDL;
+//   String? triglycerides;
+//   String? LDL;
+//   String? serumCreatinine;
+//   String? GFR;
+//   String? SGOT;
+//   String? SGPT;
+//   String? y_GTP;
+//   String? tuberculosis;
+//   String? osteoporosis;
 
-  ScreeningList(
-      {this.year,
-      this.result,
-      this.chkAgency,
-      this.opinion,
-      this.screeningDate,
-      this.kidney,
-      this.weight,
-      this.waist,
-      this.BMI,
-      this.vision,
-      this.hearing,
-      this.bloodPressure,
-      this.proteinuria,
-      this.hemoglobin,
-      this.FBG,
-      this.cholesterol,
-      this.HDL,
-      this.triglycerides,
-      this.LDL,
-      this.serumCreatinine,
-      this.GFR,
-      this.SGOT,
-      this.SGPT,
-      this.y_GTP,
-      this.tuberculosis,
-      this.osteoporosis});
+//   ScreeningList(
+//       {this.year,
+//       this.result,
+//       this.chkAgency,
+//       this.opinion,
+//       this.screeningDate,
+//       this.kidney,
+//       this.weight,
+//       this.waist,
+//       this.BMI,
+//       this.vision,
+//       this.hearing,
+//       this.bloodPressure,
+//       this.proteinuria,
+//       this.hemoglobin,
+//       this.FBG,
+//       this.cholesterol,
+//       this.HDL,
+//       this.triglycerides,
+//       this.LDL,
+//       this.serumCreatinine,
+//       this.GFR,
+//       this.SGOT,
+//       this.SGPT,
+//       this.y_GTP,
+//       this.tuberculosis,
+//       this.osteoporosis});
 
-  ScreeningList.fromJson(Map<String, dynamic> json) {
-    year = json['year'];
-    result = json['result'];
-    chkAgency = json['chkAgency'];
-    opinion = json['opinion'];
-    screeningDate = json['screeningDate'];
-    kidney = json['kidney'];
-    weight = json['weight'];
-    waist = json['waist'];
-    BMI = json['BMI'];
-    vision = json['vision'];
-    hearing = json['hearing'];
-    bloodPressure = json['bloodPressure'];
-    proteinuria = json['proteinuria'];
-    hemoglobin = json['hemoglobin'];
-    FBG = json['FBG'];
-    cholesterol = json['cholesterol'];
-    HDL = json['HDL'];
-    triglycerides = json['triglycerides'];
-    LDL = json['LDL'];
-    serumCreatinine = json['serumCreatinine'];
-    GFR = json['GFR'];
-    SGOT = json['SGOT'];
-    SGPT = json['SGPT'];
-    y_GTP = json['y_GTP'];
-    tuberculosis = json['tuberculosis'];
-    osteoporosis = json['osteoporosis'];
-  }
+//   ScreeningList.fromJson(Map<String, dynamic> json) {
+//     year = json['year'];
+//     result = json['result'];
+//     chkAgency = json['chkAgency'];
+//     opinion = json['opinion'];
+//     screeningDate = json['screeningDate'];
+//     kidney = json['kidney'];
+//     weight = json['weight'];
+//     waist = json['waist'];
+//     BMI = json['BMI'];
+//     vision = json['vision'];
+//     hearing = json['hearing'];
+//     bloodPressure = json['bloodPressure'];
+//     proteinuria = json['proteinuria'];
+//     hemoglobin = json['hemoglobin'];
+//     FBG = json['FBG'];
+//     cholesterol = json['cholesterol'];
+//     HDL = json['HDL'];
+//     triglycerides = json['triglycerides'];
+//     LDL = json['LDL'];
+//     serumCreatinine = json['serumCreatinine'];
+//     GFR = json['GFR'];
+//     SGOT = json['SGOT'];
+//     SGPT = json['SGPT'];
+//     y_GTP = json['y_GTP'];
+//     tuberculosis = json['tuberculosis'];
+//     osteoporosis = json['osteoporosis'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['year'] = year;
-    data['result'] = result;
-    data['chkAgency'] = chkAgency;
-    data['opinion'] = opinion;
-    data['screeningDate'] = screeningDate;
-    data['kidney'] = kidney;
-    data['weight'] = weight;
-    data['waist'] = waist;
-    data['BMI'] = BMI;
-    data['vision'] = vision;
-    data['hearing'] = hearing;
-    data['bloodPressure'] = bloodPressure;
-    data['proteinuria'] = proteinuria;
-    data['hemoglobin'] = hemoglobin;
-    data['FBG'] = FBG;
-    data['cholesterol'] = cholesterol;
-    data['HDL'] = HDL;
-    data['triglycerides'] = triglycerides;
-    data['LDL'] = LDL;
-    data['serumCreatinine'] = serumCreatinine;
-    data['GFR'] = GFR;
-    data['SGOT'] = SGOT;
-    data['SGPT'] = SGPT;
-    data['y_GTP'] = y_GTP;
-    data['tuberculosis'] = tuberculosis;
-    data['osteoporosis'] = osteoporosis;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['year'] = year;
+//     data['result'] = result;
+//     data['chkAgency'] = chkAgency;
+//     data['opinion'] = opinion;
+//     data['screeningDate'] = screeningDate;
+//     data['kidney'] = kidney;
+//     data['weight'] = weight;
+//     data['waist'] = waist;
+//     data['BMI'] = BMI;
+//     data['vision'] = vision;
+//     data['hearing'] = hearing;
+//     data['bloodPressure'] = bloodPressure;
+//     data['proteinuria'] = proteinuria;
+//     data['hemoglobin'] = hemoglobin;
+//     data['FBG'] = FBG;
+//     data['cholesterol'] = cholesterol;
+//     data['HDL'] = HDL;
+//     data['triglycerides'] = triglycerides;
+//     data['LDL'] = LDL;
+//     data['serumCreatinine'] = serumCreatinine;
+//     data['GFR'] = GFR;
+//     data['SGOT'] = SGOT;
+//     data['SGPT'] = SGPT;
+//     data['y_GTP'] = y_GTP;
+//     data['tuberculosis'] = tuberculosis;
+//     data['osteoporosis'] = osteoporosis;
+//     return data;
+//   }
+// }
 
 class HealthScreenings extends StatefulWidget {
   const HealthScreenings({Key? key}) : super(key: key);
@@ -154,17 +158,56 @@ class HealthScreenings extends StatefulWidget {
 }
 
 class _HealthScreenings extends State<HealthScreenings> {
-  late dynamic screenings;
+  late HomeProvider _homeProvider;
+  // late dynamic screenings;
 
-  dynamic _loadSecureStorage() async {
-    screenings = await loadSecureStorage("Screenings");
-    return screenings;
-  }
+  // dynamic _loadSecureStorage() async {
+  //   screenings = await loadSecureStorage("Screenings");
+  //   return screenings;
+  // }
 
   @override
   void initState() {
     super.initState();
-    screenings = _loadSecureStorage();
+    // screenings = _loadSecureStorage();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _homeProvider = context.watch<HomeProvider>();
+    if (_homeProvider.screeningValue != null) {
+      return ExData(_homeProvider.screeningValue!);
+    } else {
+      return NotData();
+    }
+
+    // return FutureBuilder(
+    //     future: _loadSecureStorage(),
+    //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //       // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+
+    //       if (snapshot.hasData == true) {
+    //         if (snapshot.data == false) {
+    //           return NotData();
+    //         }
+    //         ScreeningModel screenings = snapshot.data;
+    //         return ExData(screenings);
+    //       }
+    //       //error가 발생하게 될 경우 반환하게 되는 부분
+    //       else if (snapshot.hasError) {
+    //         return Padding(
+    //           padding: const EdgeInsets.all(8.0),
+    //           child: Text(
+    //             'Error: ${snapshot.error}',
+    //             style: const TextStyle(fontSize: 15),
+    //           ),
+    //         );
+    //       }
+    //       //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
+    //       else {
+    //         return const CircularProgressIndicator();
+    //       }
+    //     });
   }
 
   // ignore: non_constant_identifier_names
@@ -206,7 +249,7 @@ class _HealthScreenings extends State<HealthScreenings> {
   // ignore: non_constant_identifier_names
 
   // ignore: non_constant_identifier_names
-  Widget ExData(Screenings screenings) {
+  Widget ExData(ScreeningModel screenings) {
     return Container(
         padding: AppTheme.widgetpadding,
         width: double.infinity,
@@ -237,8 +280,8 @@ class _HealthScreenings extends State<HealthScreenings> {
                     label: const NanumBodyText(
                       text: '',
                     ),
-                    icon: Row(
-                      children: const [
+                    icon: const Row(
+                      children: [
                         NanumTitleText(text: '건강검진'),
                         Icon(
                           Icons.chevron_right,
@@ -480,13 +523,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                     child: TextButton.icon(
                         onPressed: () {
                           Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const AuthPage(
-                                          healthDataType: "Screenings")))
-                              .then((value) {
-                            setState(() {});
-                          });
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AuthPage(
+                                      healthDataType: "Screenings")));
 
                           // Navigator.push(
                           //     context,
@@ -513,37 +553,6 @@ class _HealthScreenings extends State<HealthScreenings> {
       ],
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _loadSecureStorage(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
-
-          if (snapshot.hasData == true) {
-            if (snapshot.data == false) {
-              return NotData();
-            }
-            Screenings screenings = snapshot.data;
-            return ExData(screenings);
-          }
-          //error가 발생하게 될 경우 반환하게 되는 부분
-          else if (snapshot.hasError) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: const TextStyle(fontSize: 15),
-              ),
-            );
-          }
-          //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
-          else {
-            return const CircularProgressIndicator();
-          }
-        });
-  }
 }
 
 deleteSecureStorage() async {
@@ -557,7 +566,8 @@ Future<dynamic> loadSecureStorage(String key) async {
   if (screeningData == null) {
     return false;
   }
-  Screenings screenings = Screenings.fromJson(jsonDecode(screeningData));
+  ScreeningModel screenings =
+      ScreeningModel.fromJson(jsonDecode(screeningData));
 
   // Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
   return screenings;
