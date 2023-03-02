@@ -36,8 +36,7 @@ class BloodPressureGraph extends StatelessWidget {
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: const Center(
-                    child:
-                        NanumTitleText(text: '데이터가 존재하지 않아요.\n데이터를 추가해주세요'))),
+                    child: NanumBodyText(text: '오늘의 혈압을 기록해보세요!'))),
       ],
     );
   }
