@@ -70,7 +70,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => AuthPage(
+                                  builder: (_) => const AuthPage(
                                         healthDataType: "linked_health",
                                       )));
                         },
@@ -119,8 +119,8 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: Row(
-                children: const [
+              icon: const Row(
+                children: [
                   NanumTitleText(text: '연동 건강데이터'),
                   Icon(
                     Icons.chevron_right,

@@ -7,20 +7,17 @@ class PresentTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10),
-      child: TimerBuilder.periodic(
-        const Duration(days: 1),
-        builder: (context) {
-          return Text(
-            DateFormat('M월 d일 E요일', 'ko').format(DateTime.now()),
-            style: const TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-            ),
-          );
-        },
-      ),
+    return TimerBuilder.periodic(
+      const Duration(days: 1),
+      builder: (context) {
+        return Text(
+          DateFormat('M월 d일 E요일', 'ko').format(DateTime.now()),
+          style: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      },
     );
   }
 }

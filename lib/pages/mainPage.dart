@@ -22,6 +22,7 @@ class MainPage extends StatelessWidget {
 
     // 결과 확인
     if (!statusStorage.isGranted || !statusCamera.isGranted) {
+      //
       // 허용이 안된 경우
       // ignore: use_build_context_synchronously
       showDialog(

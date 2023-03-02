@@ -116,7 +116,9 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()));
-                            } else {}
+                            } else {
+                              print("안녕");
+                            }
                           },
                           child: const ListTile(
                             leading: Icon(Icons.announcement),
