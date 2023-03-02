@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:getwidget/getwidget.dart';
 
 class AddMedicinePage extends StatefulWidget {
-  const AddMedicinePage({Key? key}) : super(key: key);
-
+  const AddMedicinePage({Key? key, required this.userEmail}) : super(key: key);
+  final String userEmail;
   @override
   State<AddMedicinePage> createState() => _AddMedicinePage();
 }
@@ -93,7 +93,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                   style: const TextStyle(color: Colors.black, fontSize: 18),
                   decoration: InputDecoration(
                     hintText: '약1, 약2, 약3 ...',
-                    hintStyle: TextStyle(fontSize: 12),
+                    hintStyle: const TextStyle(fontSize: 12),
                     contentPadding: const EdgeInsets.only(left: 10, top: 10),
                     prefixIcon: _pickedFile == null
                         ? null
@@ -372,38 +372,73 @@ class _AddMedicinePage extends State<AddMedicinePage> {
       ),
       builder: (context) {
         return Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 10,
+              right: 10),
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+              Container(
+                padding: EdgeInsets.only(top: 5),
+                child: const Center(
+                  child: NanumTitleText(
+                    text: '사진업로드',
+                    fontSize: 25,
+                  ),
                 ),
-                onPressed: () {
-                  _getCameraImage();
-                  Navigator.pop(context);
-                },
-                child: const Text('카메라'),
               ),
-              const SizedBox(
-                width: 5,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      _getCameraImage();
+                      Navigator.pop(context);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: Image.asset('assets/images/camera.png'),
+                        ),
+                        Container(
+                          child: const NanumBodyText(text: '카메라'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _getPhotoLibraryImage();
+
+                      Navigator.pop(context);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: Image.asset('assets/images/gallery.png'),
+                        ),
+                        Container(
+                          // padding: EdgeInsets.only(top: 5),
+                          child: const NanumBodyText(text: '앨범'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
-                onPressed: () {
-                  _getPhotoLibraryImage();
-                  Navigator.pop(context);
-                },
-                child: const Text('앨범'),
-              ),
+              SizedBox(
+                height: 10,
+              )
             ],
           ),
         );
@@ -444,10 +479,11 @@ class _AddMedicinePage extends State<AddMedicinePage> {
 
       request.files.add(image);
     }
+    print(widget.userEmail);
+    request.fields['email'] = widget.userEmail;
     request.fields['medicine'] = _textEditingController.text;
     request.fields['day'] = jsonEncode(getTrueDay());
     request.fields['times'] = jsonEncode(getTruetime());
-
     http.Response response =
         await http.Response.fromStream(await request.send());
   }

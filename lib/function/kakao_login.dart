@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-//import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
 
@@ -31,7 +30,10 @@ class KakaoLogin {
           OAuthToken? token =
               await TokenManagerProvider.instance.manager.getToken();
           var val = jsonEncode(LoginModel(
-              'Kakao', token!.accessToken, token.refreshToken as String));
+              'Kakao',
+              token!.accessToken,
+              token.refreshToken as String,
+              user.kakaoAccount?.email as String));
           await storage.write(key: 'LoginUser', value: val);
           return 'true';
         } catch (err) {
