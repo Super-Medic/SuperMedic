@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/widgets/healthPage_widgets/health_screenings.dart';
@@ -52,7 +54,9 @@ class _HealthPage extends State<HealthPage> {
               icon: const Icon(Icons.menu),
               color: Colors.black,
               iconSize: 25,
-              onPressed: () => {},
+              onPressed: () => {
+                context.read<BottomNavigationProvider>().updateCurrentPage(4)
+              },
             ),
             const SizedBox(
               width: 10,
@@ -90,16 +94,15 @@ class _HealthPage extends State<HealthPage> {
                 height: screenHeight * 0.03,
               ),
               Center(
-                child: ElevatedButton(
+                child: TextButton(
                   onPressed: () {
                     deleteSecureStorage();
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (_) => const AuthPage(healthDataType: "Screenings")));
                   },
-                  style: ElevatedButton.styleFrom(
+                  style: TextButton.styleFrom(
                     backgroundColor: CommonColor.buttoncolor,
                     minimumSize: const Size(200, 45),
-                    elevation: 1.0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                   ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -30,18 +31,14 @@ class _MyPage extends State<MyPage> {
   final storage = const FlutterSecureStorage();
   String? userName;
 
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-  
+
     // getUserName();
 
-
     _homeProvider = context.watch<HomeProvider>();
-
-    
 
     return SafeArea(
       child: Scaffold(
@@ -69,7 +66,9 @@ class _MyPage extends State<MyPage> {
               icon: const Icon(Icons.menu),
               color: Colors.black,
               iconSize: 25,
-              onPressed: () => {},
+              onPressed: () => {
+                context.read<BottomNavigationProvider>().updateCurrentPage(4)
+              },
             ),
             const SizedBox(
               width: 10,
@@ -245,8 +244,6 @@ class _MyPage extends State<MyPage> {
       ),
     );
   }
-
-
 
   webView(String title, String URL) {
     return Navigator.push(

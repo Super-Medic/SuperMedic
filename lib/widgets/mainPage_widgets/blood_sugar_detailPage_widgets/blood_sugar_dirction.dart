@@ -34,12 +34,12 @@ class _BloodSugarDirction extends State<BloodSugarDirction> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      child: Row(children: const [
+                    const SizedBox(
+                      child: Row(children: [
                         NanumTitleText(text: '혈당 추이'),
                       ]),
                     ),
-                    ElevatedButton(
+                    TextButton(
                         onPressed: () => {
                               Navigator.push(
                                   context,
@@ -47,10 +47,9 @@ class _BloodSugarDirction extends State<BloodSugarDirction> {
                                       builder: (context) =>
                                           const BloodSugarRecordPage()))
                             },
-                        style: ElevatedButton.styleFrom(
+                        style: TextButton.styleFrom(
                           backgroundColor:
-                              const Color.fromARGB(10, 158, 158, 158),
-                          elevation: 1,
+                              const Color.fromARGB(150, 158, 158, 158),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                           padding: const EdgeInsets.symmetric(horizontal: 7),

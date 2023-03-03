@@ -143,7 +143,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                         child: NanumTitleText(text: '데이터가 존재하지 않아요.'),
                       ),
                 Center(
-                  child: ElevatedButton(
+                  child: TextButton(
                       onPressed: () => {
                             Navigator.push(
                                 context,
@@ -151,9 +151,8 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                                     builder: (context) =>
                                         const BloodPressureRecordPage()))
                           },
-                      style: ElevatedButton.styleFrom(
+                      style: TextButton.styleFrom(
                         backgroundColor: CommonColor.buttoncolor,
-                        elevation: 1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                         padding: const EdgeInsets.symmetric(horizontal: 30),
