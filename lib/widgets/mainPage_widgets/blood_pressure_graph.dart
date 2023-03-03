@@ -105,7 +105,9 @@ class BloodPressureGraph extends StatelessWidget {
           double.parse((valueData[i].minValue).toString())));
     }
     int indexValue = homeProvider.bloodpressureCount == -1
-        ? count
+        ? count > 6
+            ? 6
+            : count
         : homeProvider.bloodpressureCount;
 
     final lineBarsData = [
