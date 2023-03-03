@@ -8,8 +8,6 @@ import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/loginPage.dart';
 import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
-import 'package:super_medic/widgets/notification/firebase_message.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,68 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    LocalNotificationService.initialize(context);
-    FirebaseMessaging.instance
-        .requestPermission(
-      alert: true,
-      announcement: true,
-      badge: true,
-      carPlay: true,
-      criticalAlert: true,
-      provisional: true,
-      sound: true,
-    )
-        .then((value) {
-      print('퍼미션');
-      print(value);
-    });
-    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true, // Required to display a heads up notification
-      badge: true,
-      sound: true,
-    );
-    FirebaseMessaging.instance.getToken().then((token) {
-      print('토큰');
-      print(token);
-    });
-    FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
-      print('APNS 토큰');
-      print(APNStoken);
-    });
 
-    ///gives you the message on which user taps
-    ///and it opened the app from terminated state
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if (message != null) {
-        final routeFromMessage = message.data["route"];
-
-        Navigator.of(context).pushNamed(routeFromMessage);
-      } else {
-        print('1');
-
-        print(message);
-      }
-    });
-
-    ///forground work
-    FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null) {
-        print(message.notification!.body);
-        print(message.notification!.title);
-        LocalNotificationService.display(message);
-      } else {
-        print('1');
-        print(message);
-      }
-    });
-
-    ///When the app is in background but opened and user taps
-    ///on the notification
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print("asdasd");
-      final routeFromMessage = message.data["route"];
-      Navigator.of(context).pushNamed(routeFromMessage);
-    });
     Timer(const Duration(milliseconds: 5000), () async {
       // ignore: unrelated_type_equality_checks
       dynamic val = await _loadLoginSecureStorage();
