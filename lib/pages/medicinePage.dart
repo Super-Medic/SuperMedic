@@ -48,11 +48,12 @@ class _MedicinePageState extends State<MedicinePage> {
         if (data['days'].contains(today)) {
           List<Check> checks = List.empty(growable: true);
           for (var time in data['times']) {
+            print(time['check'].runtimeType);
             checks.add(Check(
                 id: data['id'],
                 medicine: data['medicine_name'],
-                time: time,
-                isChecked: data['take'] == 0 ? false : true));
+                time: time['time'],
+                isChecked: time['check']));
           }
           temp.add(checks);
         }
