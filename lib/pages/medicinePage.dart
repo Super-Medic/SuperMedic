@@ -26,6 +26,7 @@ class _MedicinePageState extends State<MedicinePage> {
   String? userEmail;
   bool checkNull = true;
   late String today;
+
   @override
   void initState() {
     super.initState();
@@ -135,6 +136,7 @@ class _MedicinePageState extends State<MedicinePage> {
                     for (var check in checkList)
                       MediCheck(
                         items: check as List<Check>,
+                        pad: 40,
                       ),
                 ],
               ),

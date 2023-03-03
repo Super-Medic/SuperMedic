@@ -100,6 +100,17 @@ class _AuthTimer extends State<AuthTimer> {
                       },
                     );
                   }
+
+                  if (widget.healthDataType == "Screenings") {
+                    _homeProvider.screeninggetData();
+                  }
+                  if (widget.healthDataType == "Medicine") {
+                    _homeProvider.medicinegetData();
+                  }
+                  if (widget.healthDataType == "Diagnosis") {
+                    _homeProvider.diagnosisgetData();
+                  }
+
                   var nav = Navigator.of(context);
                   nav.pop();
                   nav.pop();
@@ -116,7 +127,7 @@ class _AuthTimer extends State<AuthTimer> {
                   ),
                 ),
                 child: const NanumTitleText(
-                  text: '인증 완료',
+                  text: '인증 완료 및 데이터 불러오기',
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -142,10 +153,10 @@ class PopUp extends StatelessWidget {
         Icons.error_outline,
         size: 35,
       ),
-      content: SizedBox(
+      content: const SizedBox(
         height: 50,
         child: Column(
-          children: const [
+          children: [
             NanumTitleText(
               text: '인증이 완료되지 않았어요',
               fontWeight: FontWeight.bold,
