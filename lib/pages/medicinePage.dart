@@ -46,13 +46,15 @@ class _MedicinePageState extends State<MedicinePage> {
       checkNull = false;
       for (var data in json.decode(res.body)) {
         if (data['days'].contains(today)) {
-          for (var name in data['medicine_name']) {
-            List<Check> checks = List.empty(growable: true);
-            for (var time in data['times']) {
-              checks.add(Check(medicine: name, time: time, isChecked: false));
-            }
-            temp.add(checks);
+          List<Check> checks = List.empty(growable: true);
+          for (var time in data['times']) {
+            checks.add(Check(
+                id: data['id'],
+                medicine: data['medicine_name'],
+                time: time,
+                isChecked: data['take'] == 0 ? false : true));
           }
+          temp.add(checks);
         }
       }
       if (mounted) {

@@ -28,8 +28,8 @@ class LocalNotificationService {
 
       const NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-          "easyapproach",
-          "easyapproach channel",
+          "1:585309393841:android:2940a96afa932465df6390",
+          "슈퍼메딕",
           channelDescription: "this is our channel",
           importance: Importance.max,
           priority: Priority.max,
