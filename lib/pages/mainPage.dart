@@ -76,8 +76,6 @@ class MainPageState extends State<MainPage> {
     ///forground work
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
-        print(message.notification!.body);
-        print(message.notification!.title);
         LocalNotificationService.display(message);
       }
     });
