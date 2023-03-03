@@ -14,6 +14,7 @@ class HomeProvider extends ChangeNotifier {
   ScreeningModel? _screeningValue;
   MedicineModel? _medicineValue;
   DiagnosisModel? _diagnosisValue;
+  LoginModel? _loginValue;
 
   List<BloodPressureModel> get bloodPressureValue => _bloodPressureValue;
   List<BloodSugarModel> get bloodSugarValue => _bloodSugarValue;
@@ -22,6 +23,7 @@ class HomeProvider extends ChangeNotifier {
   ScreeningModel? get screeningValue => _screeningValue;
   MedicineModel? get medicineValue => _medicineValue;
   DiagnosisModel? get diagnosisValue => _diagnosisValue;
+  LoginModel? get loginValue => _loginValue;
 
   int _bloodpressureCount = -1;
   int get bloodpressureCount => _bloodpressureCount;
@@ -97,7 +99,7 @@ class HomeProvider extends ChangeNotifier {
           // symptomTmp.add(
           //     symptoms[symptomsDateKeyValue[i]][symptomBodyPartKeyValue[j]]);
         }
-        
+
         _symptomsValue.add(SymptomModel(symptomsDateKeyValue[i], symptomTmp));
       }
     }
@@ -148,6 +150,14 @@ class HomeProvider extends ChangeNotifier {
     dynamic diagnosis = await storage.read(key: 'Diagnosis');
     if (diagnosis != null) {
       _diagnosisValue = DiagnosisModel.fromJson(jsonDecode(diagnosis));
+    }
+    notifyListeners();
+  }
+
+  Future<void> logingetData() async {
+    dynamic login = await storage.read(key: 'LoginUser');
+    if (login != null) {
+      _loginValue = LoginModel.fromJson(jsonDecode(login));
     }
     notifyListeners();
   }

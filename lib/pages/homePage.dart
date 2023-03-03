@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       sound: true,
     );
     FirebaseMessaging.instance.getToken().then((token) {
+
       print(token);
     });
     FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
@@ -92,6 +93,10 @@ class _HomePageState extends State<HomePage> {
       if (_homeProvider.diagnosisValue == null) {
         Provider.of<HomeProvider>(context, listen: false).diagnosisgetData();
       }
+
+      if (_homeProvider.loginValue == null) {
+        Provider.of<HomeProvider>(context, listen: false).logingetData();
+      } 
     });
   }
 

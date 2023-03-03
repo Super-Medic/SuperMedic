@@ -27,13 +27,21 @@ class MyPage extends StatefulWidget {
 
 class _MyPage extends State<MyPage> {
   late HomeProvider _homeProvider;
+  final storage = const FlutterSecureStorage();
+  String? userName;
+
 
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+  
+    // getUserName();
+
 
     _homeProvider = context.watch<HomeProvider>();
+
+    
 
     return SafeArea(
       child: Scaffold(
@@ -93,8 +101,8 @@ class _MyPage extends State<MyPage> {
                       color: Colors.grey,
                     ),
                     SizedBox(width: screenWidth * 0.03),
-                    const NanumText(
-                      text: "한종문",
+                    NanumText(
+                      text: _homeProvider.loginValue!.name,
                       color: Colors.black,
                       fontSize: 16,
                     )
@@ -238,6 +246,8 @@ class _MyPage extends State<MyPage> {
     );
   }
 
+
+
   webView(String title, String URL) {
     return Navigator.push(
         context,
@@ -380,7 +390,9 @@ class _QuitPopUpState extends State<QuitPopUp> {
     Login_verify secession = Login_verify();
     const storage = FlutterSecureStorage();
     String? userinfoRead = await storage.read(key: "LoginUser");
+
     LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
+
     final val = await secession.userSecession(userInfo.email);
     if (val == 'true') {
       const storage = FlutterSecureStorage();
