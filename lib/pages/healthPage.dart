@@ -10,8 +10,6 @@ import 'package:super_medic/widgets/healthPage_widgets/recent_medical_records.da
 import 'package:super_medic/widgets/healthPage_widgets/recent_medication_history.dart';
 // import 'package:super_medic/widgets/server_widgets/server_test.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 // ignore: must_be_immutable
 class HealthPage extends StatefulWidget {
   const HealthPage({Key? key}) : super(key: key);
@@ -93,6 +91,7 @@ class _HealthPage extends State<HealthPage> {
               SizedBox(
                 height: screenHeight * 0.03,
               ),
+<<<<<<< Updated upstream
               Center(
                 child: TextButton(
                   onPressed: () {
@@ -112,15 +111,12 @@ class _HealthPage extends State<HealthPage> {
               SizedBox(
                 height: screenHeight * 0.03,
               ),
+=======
+>>>>>>> Stashed changes
             ],
           ),
         )),
       ),
     );
   }
-}
-
-deleteSecureStorage() async {
-  const storage = FlutterSecureStorage();
-  await storage.deleteAll();
 }
