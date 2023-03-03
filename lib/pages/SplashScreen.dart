@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 5000), () async {
       // ignore: unrelated_type_equality_checks
       dynamic val = await _loadLoginSecureStorage();
+      bool storageBeing;
       if (val != false) {
         //Login User 인지 확인
         if (val.type == 'Kakao') {
@@ -42,20 +43,27 @@ class _SplashScreenState extends State<SplashScreen> {
                     MaterialPageRoute(
                         builder: (context) => const SelectChronicDisease()));
           } else {
+            storageBeing = true;
+            //있는데 로그인
             // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               // MaterialPageRoute(builder: (context) => MainPage()),
-              MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LoginPage(being: storageBeing)), //LoginPage
             );
           }
         } else if (val.type == 'Naver') {}
       } else {
+        storageBeing = false;
+        //없는데 로그인
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           // MaterialPageRoute(builder: (context) => MainPage()),
-          MaterialPageRoute(builder: (context) => LoginPage()), //LoginPage
+          MaterialPageRoute(
+              builder: (context) => LoginPage(being: storageBeing)), //LoginPage
         );
       }
     });

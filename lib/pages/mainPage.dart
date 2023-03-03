@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:super_medic/pages/healthPage.dart';
 import 'package:super_medic/pages/HomePage.dart';
 import 'package:provider/provider.dart';
@@ -16,49 +15,23 @@ class MainPage extends StatelessWidget {
   DateTime? currentBackPressTime; //뒤로가기 버튼 클릭 시 앱 종료 구현
   MainPage({super.key});
 
-  // 권한 요청
-  Future<bool> requestCameraPermission(BuildContext context) async {
-    PermissionStatus statusStorage = await Permission.storage.request();
-    PermissionStatus statusCamera = await Permission.camera.request();
-
-    // 결과 확인
-    if (!statusStorage.isGranted || !statusCamera.isGranted) {
-      //
-      // 허용이 안된 경우
-      // ignore: use_build_context_synchronously
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            // 권한없음을 다이얼로그로 알림
-            return AlertDialog(
-              content: const Text("권한 설정을 확인해주세요!!!"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      openAppSettings(); // 앱 설정으로 이동
-                    },
-                    child: const Text('설정하기')),
-              ],
-            );
-          });
-      return false;
-    }
-    return true;
-  }
-
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
-
     // switch를 통해 currentPage에 따라 네비게이션을 구동시킨다.
     // if(this.check){
     //   _bottomNavigationProvider.updateCurrentPage(1);
     // }
     switch (_bottomNavigationProvider.currentPage) {
-      case 0: return const HomePage();
-      case 1: return const MedicinePage();
-      case 2: return const HealthPage();
-      case 3: return const MeditalkPage();
-      case 4: return const MyPage();
+      case 0:
+        return const HomePage();
+      case 1:
+        return const MedicinePage();
+      case 2:
+        return const HealthPage();
+      case 3:
+        return const MeditalkPage();
+      case 4:
+        return const MyPage();
     }
     return Container();
   }
@@ -157,8 +130,6 @@ class MainPage extends StatelessWidget {
     // Provider를 호출해 접근
     //_bottomNavigationProvider = Provider.of<BottomNavigationProvider>(context); //옛날 방법
     _bottomNavigationProvider = context.watch<BottomNavigationProvider>();
-  
-    requestCameraPermission(context); //권한 표시
 
     //뒤로 가기 두 번 클릭 시 어플 종료
     Future<bool> onWillPop() async {
