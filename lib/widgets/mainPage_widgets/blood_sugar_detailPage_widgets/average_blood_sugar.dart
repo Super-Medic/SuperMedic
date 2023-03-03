@@ -19,7 +19,7 @@ class AverageBloodSugar extends StatefulWidget {
 class AverageBloodSugarState extends State<AverageBloodSugar> {
   final _average = ['최근 혈당', '평균 혈당'];
   String selectedAverage = '';
-  List<String> _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회', '최근 15회'];
+  List<String> _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회', '최근 15회'];
   String selectedAverageCount = '';
 
   @override
@@ -37,13 +37,13 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
     String? ttime;
     final averageValue = widget.averageValue;
     if (averageValue.length / 5 < 1) {
-      _averagecount = ['최근 5회 미만'];
+      _averagecount = ['최근 5회 이하'];
     } else if (averageValue.length / 5 >= 1 && averageValue.length / 5 < 2) {
-      _averagecount = ['최근 5회 미만', '최근 5회'];
+      _averagecount = ['최근 5회 이하', '최근 5회'];
     } else if (averageValue.length / 5 >= 2 && averageValue.length / 5 < 3) {
-      _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회'];
+      _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회'];
     } else {
-      _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회', '최근 15회'];
+      _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회', '최근 15회'];
     }
 
     if (averageValue.isNotEmpty) {
@@ -51,7 +51,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
       if (selectedAverage == "최근 혈당") {
         aver = data[0];
         ttime = averageValue[averageValue.length - 1].checkbutton;
-      } else if (selectedAverageCount == "최근 5회 미만" &&
+      } else if (selectedAverageCount == "최근 5회 이하" &&
           selectedAverage == "평균 혈당") {
         aver = data[1];
       } else if (selectedAverageCount == "최근 5회" &&
@@ -167,8 +167,9 @@ List<String> _getData(averageValue) {
   int aver = 0;
   List<String> listAver = [];
   //최근 혈당
-  listAver.add(averageValue[averageValue.length - 1].bloodsugar);
-
+  if (averageValue.isNotEmpty) {
+    listAver.add(averageValue[averageValue.length - 1].bloodsugar);
+  }
   if (averageValue.length / 5 < 1) {
     aver = 0;
     for (int i = averageValue.length - 1; i >= 0; i--) {
@@ -181,21 +182,21 @@ List<String> _getData(averageValue) {
     for (int i = averageValue.length - 1; i >= averageValue.length - 5; i--) {
       aver += int.parse(averageValue[i].bloodsugar);
     }
-    listAver.add((aver / averageValue.length).floor().toString());
+    listAver.add((aver / 5).floor().toString());
   }
   if (averageValue.length / 5 >= 2) {
     aver = 0;
     for (int i = averageValue.length - 1; i >= averageValue.length - 10; i--) {
       aver += int.parse(averageValue[i].bloodsugar);
     }
-    listAver.add((aver / averageValue.length).floor().toString());
+    listAver.add((aver / 10).floor().toString());
   }
   if (averageValue.length / 5 >= 3) {
     aver = 0;
     for (int i = averageValue.length - 1; i >= averageValue.length - 15; i--) {
       aver += int.parse(averageValue[i].bloodsugar);
     }
-    listAver.add((aver / averageValue.length).floor().toString());
+    listAver.add((aver / 15).floor().toString());
   }
 
   return listAver;

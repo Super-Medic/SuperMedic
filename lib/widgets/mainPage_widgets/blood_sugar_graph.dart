@@ -94,14 +94,16 @@ class BloodSugarGraph extends StatelessWidget {
   LineChartData mainData(homeProvider, count) {
     List<String> valueData = _getValueData(_homeProvider.bloodSugarValue);
     List<FlSpot> flspot = [];
+
     for (int i = 0; i < valueData.length; i++) {
       flspot.add(FlSpot(
           double.parse(i.toString()), double.parse(valueData[i].toString())));
     }
     int indexValue = homeProvider.bloodsugarCount == -1
-        ? count
+        ? count > 6
+            ? 6
+            : count
         : homeProvider.bloodsugarCount;
-
     final lineBarData = [
       LineChartBarData(
         showingIndicators: [indexValue],

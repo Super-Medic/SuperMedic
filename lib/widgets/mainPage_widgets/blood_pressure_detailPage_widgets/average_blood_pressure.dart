@@ -19,7 +19,7 @@ class AverageBloodPressure extends StatefulWidget {
 class AverageBloodPressureState extends State<AverageBloodPressure> {
   final _average = ['최근 혈압', '평균 혈압'];
   String selectedAverage = '';
-  List<String> _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회', '최근 15회'];
+  List<String> _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회', '최근 15회'];
   String selectedAverageCount = '';
 
   @override
@@ -38,21 +38,20 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
     final averageValue = widget.averageValue;
 
     if (averageValue.length / 5 < 1) {
-      _averagecount = ['최근 5회 미만'];
+      _averagecount = ['최근 5회 이하'];
     } else if (averageValue.length / 5 >= 1 && averageValue.length / 5 < 2) {
-      _averagecount = ['최근 5회 미만', '최근 5회'];
+      _averagecount = ['최근 5회 이하', '최근 5회'];
     } else if (averageValue.length / 5 >= 2 && averageValue.length / 5 < 3) {
-      _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회'];
+      _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회'];
     } else {
-      _averagecount = ['최근 5회 미만', '최근 5회', '최근 10회', '최근 15회'];
+      _averagecount = ['최근 5회 이하', '최근 5회', '최근 10회', '최근 15회'];
     }
-
     if (averageValue.isNotEmpty) {
       List<BloodPressureTotal> data = _getData(averageValue);
       if (selectedAverage == "최근 혈압") {
         maxBlood = data[0].maxbloodPressure;
         minBlood = data[0].minbloodPressure;
-      } else if (selectedAverageCount == "최근 5회 미만" &&
+      } else if (selectedAverageCount == "최근 5회 이하" &&
           selectedAverage == "평균 혈압") {
         maxBlood = data[1].maxbloodPressure;
         minBlood = data[1].minbloodPressure;
@@ -84,7 +83,6 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                   children: [
                     SizedBox(
                       child: Row(children: [
-                        // NanumTitleText(text: '평균 혈압'),
                         DropdownButton(
                           value: selectedAverage,
                           items: _average
@@ -176,12 +174,11 @@ List<BloodPressureTotal> _getData(averageValue) {
   List<BloodPressureTotal> listAver = [];
   //최근 혈당
 
-  if (averageValue.isEmpty) {
+  if (averageValue.isNotEmpty) {
     listAver.add(BloodPressureTotal(
         averageValue[averageValue.length - 1].maxbloodPressure,
         averageValue[averageValue.length - 1].minbloodPressure));
   }
-  print(averageValue.length);
   if (averageValue.length / 5 < 1) {
     max = 0;
     min = 0;
@@ -201,8 +198,7 @@ List<BloodPressureTotal> _getData(averageValue) {
       min += int.parse(averageValue[i].minbloodPressure);
     }
     listAver.add(BloodPressureTotal(
-        (max / averageValue.length).floor().toString(),
-        (min / averageValue.length).floor().toString()));
+        (max / 5).floor().toString(), (min / 5).floor().toString()));
   }
   if (averageValue.length / 5 >= 2) {
     max = 0;
@@ -212,8 +208,7 @@ List<BloodPressureTotal> _getData(averageValue) {
       min += int.parse(averageValue[i].minbloodPressure);
     }
     listAver.add(BloodPressureTotal(
-        (max / averageValue.length).floor().toString(),
-        (min / averageValue.length).floor().toString()));
+        (max / 10).floor().toString(), (min / 10).floor().toString()));
   }
   if (averageValue.length / 5 >= 3) {
     max = 0;
@@ -223,8 +218,7 @@ List<BloodPressureTotal> _getData(averageValue) {
       min += int.parse(averageValue[i].minbloodPressure);
     }
     listAver.add(BloodPressureTotal(
-        (max / averageValue.length).floor().toString(),
-        (min / averageValue.length).floor().toString()));
+        (max / 15).floor().toString(), (min / 15).floor().toString()));
   }
 
   return listAver;
