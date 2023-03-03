@@ -104,29 +104,32 @@ class _SymptomState extends State<Symptom> {
         ),
         _homeProvider.symptomsValue.isEmpty == false
             ? Center(
-                child: Wrap(
-                  direction: Axis.horizontal,
-                  // alignment: WrapAlignment.start,
-                  spacing: screenWidth * 0.03,
-                  runSpacing: screenHeight * 0.01,
+                child: Column(children: [
+                  Wrap(
+                    direction: Axis.horizontal,
+                    // alignment: WrapAlignment.start,
+                    spacing: screenWidth * 0.03,
+                    runSpacing: screenHeight * 0.01,
 
-                  alignment: WrapAlignment.spaceBetween,
-                  children: List.generate(
-                    _homeProvider
-                        .symptomsValue[_homeProvider.symptomsValue.length - 1]
-                        .symptom
-                        .length,
-                    (index) {
-                      return symptomList(
-                          context,
-                          index,
-                          _homeProvider
-                              .symptomsValue[
-                                  _homeProvider.symptomsValue.length - 1]
-                              .symptom);
-                    },
+                    alignment: WrapAlignment.start,
+                    children: List.generate(
+                      _homeProvider
+                          .symptomsValue[_homeProvider.symptomsValue.length - 1]
+                          .symptom
+                          .length,
+                      (index) {
+                        return symptomList(
+                            context,
+                            index,
+                            _homeProvider
+                                .symptomsValue[
+                                    _homeProvider.symptomsValue.length - 1]
+                                .symptom);
+                      },
+                    ),
                   ),
-                ),
+                  SizedBox(height: screenHeight * 0.02)
+                ]),
               )
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),

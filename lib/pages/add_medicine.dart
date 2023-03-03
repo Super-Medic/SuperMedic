@@ -283,11 +283,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                     Container(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: NanumBodyText(
-                                          text:
-                                              times[index].time.substring(5) ==
-                                                      'AM'
-                                                  ? '오전'
-                                                  : '오후'),
+                                          text: _changeTime(times[index].time)),
                                     ),
                                     NanumTitleText(
                                       text: times[index].time.substring(0, 5),
@@ -359,6 +355,16 @@ class _AddMedicinePage extends State<AddMedicinePage> {
         )
       ],
     );
+  }
+
+  _changeTime(time) {
+    if (time == '12:00 AM') {
+      return '오전';
+    } else if (time == '12:00 PM') {
+      return '오후';
+    } else {
+      return time.substring(5) == 'AM' ? '오전' : '오후';
+    }
   }
 
   _showBottomSheet() {
