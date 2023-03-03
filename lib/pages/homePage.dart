@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_pressure.dart';
 import 'package:super_medic/widgets/mainPage_widgets/medication_time.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DateTime someDateTime = DateTime.now();
+  
   late HomeProvider _homeProvider;
   @override
   void initState() {

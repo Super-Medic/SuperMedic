@@ -5,7 +5,8 @@ import 'package:super_medic/widgets/calender_widgets/customCheckBox.dart';
 
 class MediCheck extends StatefulWidget {
   final List<Check> items;
-  const MediCheck({super.key, required this.items});
+  final double pad;
+  const MediCheck({super.key, required this.items, required this.pad});
 
   @override
   State<MediCheck> createState() => _MediCheckState();
@@ -30,7 +31,7 @@ class _MediCheckState extends State<MediCheck> {
           padding: const EdgeInsets.only(top: 15, left: 10),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 40),
+            padding: EdgeInsets.only(left: widget.pad),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
