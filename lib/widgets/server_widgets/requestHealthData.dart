@@ -60,7 +60,6 @@ Future<String> _resultHealthData(
   const storage = FlutterSecureStorage();
 
   String? userinfoRead = await storage.read(key: "LoginUser");
-  print(userinfoRead);
   LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
 
   String birthday;
@@ -72,7 +71,7 @@ Future<String> _resultHealthData(
 
   final response = await http.post(Uri.parse(URI), headers: <String, String>{
     'Content-Type': 'application/x-www-form-urlencoded',
-  }, body: <String, String>{
+  }, body: <String, String>{ 
     'loginOrgCd': loginOrgCd,
     'name': userInfo.name,
     'birthday': birthday,
@@ -83,20 +82,12 @@ Future<String> _resultHealthData(
   });
 
   if ((response.statusCode == 200) && (step == 'sign')) {
-    print(response.statusCode);
-    print(utf8.decode(response.bodyBytes));
-
     saveSecureStorage(healthDataType, utf8.decode(response.bodyBytes));
     return utf8.decode(response.bodyBytes);
   } else if (step == 'init') {
-    print(response.statusCode);
-
     return utf8.decode(response.bodyBytes);
-
     // 만약 응답이 OK가 아니면, 에러 반환.
   } else {
-    print(response.statusCode);
-    print(utf8.decode(response.bodyBytes));
     throw Exception('Failed to load post');
   }
 }
