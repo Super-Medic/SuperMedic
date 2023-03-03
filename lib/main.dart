@@ -9,6 +9,7 @@ import 'package:super_medic/pages/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:super_medic/pages/medicinePage.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print('백 그라운드');
@@ -46,23 +47,28 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus(); // 키보드 닫기 이벤트
         },
         child: MaterialApp(
-            title: 'Super_medict',
-            debugShowCheckedModeBanner: false, //AppBar DEBUG 리본 없애기
-            theme: ThemeData(
-              splashColor: Colors.transparent, //버튼 클릭 시 물결 없애기
-              highlightColor: Colors.transparent, //버튼 클릭 시 물결 없애기
-            ),
-            localizationsDelegates: const [
-              //요일 구하기
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('ko', 'KR'),
-            ],
-            locale: const Locale('ko'),
-            home: const SplashScreen()),
+          title: 'Super_medict',
+          debugShowCheckedModeBanner: false, //AppBar DEBUG 리본 없애기
+          theme: ThemeData(
+            splashColor: Colors.transparent, //버튼 클릭 시 물결 없애기
+            highlightColor: Colors.transparent, //버튼 클릭 시 물결 없애기
+          ),
+          localizationsDelegates: const [
+            //요일 구하기
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ko', 'KR'),
+          ],
+          locale: const Locale('ko'),
+          home: const SplashScreen(),
+          routes: {
+            'medicine': (context) => MedicinePage(),
+            'splash': (context) => SplashScreen(),
+          },
+        ),
       ),
     );
   }

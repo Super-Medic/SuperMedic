@@ -376,7 +376,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
               bottom: MediaQuery.of(context).viewInsets.bottom,
               left: 10,
               right: 10),
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -392,6 +392,9 @@ class _AddMedicinePage extends State<AddMedicinePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  SizedBox(
+                    width: 10,
+                  ),
                   TextButton(
                     onPressed: () {
                       _getCameraImage();
@@ -402,8 +405,8 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          height: MediaQuery.of(context).size.width * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.13,
+                          height: MediaQuery.of(context).size.width * 0.13,
                           child: Image.asset('assets/images/camera.png'),
                         ),
                         Container(
@@ -423,8 +426,8 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          height: MediaQuery.of(context).size.width * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.13,
+                          height: MediaQuery.of(context).size.width * 0.13,
                           child: Image.asset('assets/images/gallery.png'),
                         ),
                         Container(
@@ -434,6 +437,9 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    width: 10,
+                  )
                 ],
               ),
               const SizedBox(

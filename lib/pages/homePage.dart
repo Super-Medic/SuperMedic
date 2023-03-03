@@ -7,7 +7,8 @@ import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
-
+import 'package:super_medic/widgets/notification/firebase_message.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:super_medic/widgets/mainPage_widgets/note.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_sugar.dart';
 import 'package:super_medic/widgets/mainPage_widgets/symptom.dart';
@@ -26,6 +27,47 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    LocalNotificationService.initialize(context);
+    FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.instance.getToken().then((token) {
+      print(token);
+    });
+    FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
+      print(APNStoken);
+    });
+
+    ///gives you the message on which user taps
+    ///and it opened the app from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        final routeFromMessage = message.data["route"];
+        Navigator.of(context).pushNamed(routeFromMessage);
+      }
+    });
+
+    ///forground work
+    FirebaseMessaging.onMessage.listen((message) {});
+
+    ///When the app is in background but opened and user taps
+    ///on the notification
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data["route"];
+      Navigator.of(context).pushNamed(routeFromMessage);
+    });
+
     Future.microtask(() {
       if (_homeProvider.bloodSugarValue.isEmpty) {
         Provider.of<HomeProvider>(context, listen: false).bloodSugargetData();
@@ -34,22 +76,22 @@ class _HomePageState extends State<HomePage> {
         Provider.of<HomeProvider>(context, listen: false)
             .bloodPressuregetData();
       }
-if (_homeProvider.symptomsValue.isEmpty) {
-Provider.of<HomeProvider>(context, listen: false).symptomgetData();
-}
-if (_homeProvider.noteTextValue.isEmpty) {
-Provider.of<HomeProvider>(context, listen: false).noteTextgetData();
-}
+      if (_homeProvider.symptomsValue.isEmpty) {
+        Provider.of<HomeProvider>(context, listen: false).symptomgetData();
+      }
+      if (_homeProvider.noteTextValue.isEmpty) {
+        Provider.of<HomeProvider>(context, listen: false).noteTextgetData();
+      }
 
-if (_homeProvider.screeningValue == null) {
-Provider.of<HomeProvider>(context, listen: false).screeninggetData();
-}
-if (_homeProvider.medicineValue == null) {
-Provider.of<HomeProvider>(context, listen: false).medicinegetData();
-}
-if (_homeProvider.diagnosisValue == null) {
-Provider.of<HomeProvider>(context, listen: false).diagnosisgetData();
-}
+      if (_homeProvider.screeningValue == null) {
+        Provider.of<HomeProvider>(context, listen: false).screeninggetData();
+      }
+      if (_homeProvider.medicineValue == null) {
+        Provider.of<HomeProvider>(context, listen: false).medicinegetData();
+      }
+      if (_homeProvider.diagnosisValue == null) {
+        Provider.of<HomeProvider>(context, listen: false).diagnosisgetData();
+      }
     });
   }
 
