@@ -121,6 +121,7 @@ class _JointosPage extends State<JointosPage> {
               child: TextButton(
                 onPressed: () async {
                   KakaoLogin kakaologin = KakaoLogin();
+                  print(widget.phone);
                   var joinresult = await kakaologin.get_user_join(
                       widget.phone,
                       widget.telecom,

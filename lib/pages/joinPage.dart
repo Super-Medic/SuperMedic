@@ -75,10 +75,7 @@ class _JoinPageState extends State<JoinPage> {
           style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              // validation 이 성공하면 true 가 리턴돼요!
-
-              // validation 이 성공하면 폼 저장하기
-
+              formKey.currentState!.save();
               // ignore: use_build_context_synchronously
               showModalBottomSheet(
                 context: context,
