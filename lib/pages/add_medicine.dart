@@ -493,11 +493,20 @@ class _AddMedicinePage extends State<AddMedicinePage> {
         await http.Response.fromStream(await request.send());
   }
 
+  Map dayToint = {
+    "일": 0,
+    "월": 1,
+    "화": 2,
+    "수": 3,
+    "목": 4,
+    "금": 5,
+    "토": 6,
+  };
   List getTrueDay() {
-    List<String> trueList = List.empty(growable: true);
+    List<int> trueList = List.empty(growable: true);
     for (var item in items) {
       if (item.isChecked) {
-        trueList.add(item.data);
+        trueList.add(dayToint[item.data]);
       }
     }
     return trueList;
