@@ -32,7 +32,8 @@ class _TOSPage extends State<TOSPage> {
         isChecked: false));
     items.add(Item(
         data: "(필수) 개인정보(민감정보) 수집 및 이용 동의",
-        page: 'https://www.notion.so/4f6734367bf14be98688c6acccfdd6df?pvs=4',
+        page:
+            'https://ringed-rutabaga-f09.notion.site/4f6734367bf14be98688c6acccfdd6df',
         isChecked: false));
     // items.add(Item(
     //     data: "(필수) [건강보험공단] 개인정보 이용 동의",

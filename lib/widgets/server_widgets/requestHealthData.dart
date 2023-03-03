@@ -60,7 +60,9 @@ Future<String> _resultHealthData(
   const storage = FlutterSecureStorage();
 
   String? userinfoRead = await storage.read(key: "LoginUser");
+  print(userinfoRead);
   LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
+
   String birthday;
   if (userInfo.gender == '1' || userInfo.gender == '2') {
     birthday = '19${userInfo.birthday}';
