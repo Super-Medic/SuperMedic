@@ -127,11 +127,11 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
               icon: const Row(
                 children: [
                   NanumTitleText(text: '최근 투약내역'),
-                  Icon(
-                    Icons.chevron_right,
-                    weight: 900,
-                    color: Colors.black,
-                  ),
+                  // Icon(
+                  //   Icons.chevron_right,
+                  //   weight: 900,
+                  //   color: Colors.black,
+                  // ),
                 ],
               ),
               style: TextButton.styleFrom(
