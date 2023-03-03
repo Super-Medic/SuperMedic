@@ -27,6 +27,7 @@ class _MedicationTimeState extends State<MedicationTime> {
   List<List> checkList = List.empty(growable: true);
   String? userEmail;
   bool checkNull = true;
+  double inputHeight = 0;
   late String today;
 
   @override
@@ -45,7 +46,7 @@ class _MedicationTimeState extends State<MedicationTime> {
     final res = await http
         .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
     List<List> temp = List.empty(growable: true);
-    if (res.body != 'Empty') {
+    if (res.body != '[]') {
       checkNull = false;
       for (var data in json.decode(res.body)) {
         if (data['days'].contains(today)) {
@@ -60,9 +61,19 @@ class _MedicationTimeState extends State<MedicationTime> {
           temp.add(checks);
         }
       }
+      double newHeight;
+
+      if (temp.isEmpty)
+        newHeight = 0;
+      else if (temp.length == 1)
+        newHeight = 0.160;
+      else
+        newHeight = 0.325;
+
       if (mounted) {
         setState(() {
           checkList = temp;
+          inputHeight = newHeight;
         });
       }
     }
@@ -72,12 +83,11 @@ class _MedicationTimeState extends State<MedicationTime> {
   Widget build(BuildContext context) {
     late CheckBoxProvider checkBoxProvider = context.watch<CheckBoxProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         Container(
           width: double.infinity,
-          height: screenHeight * 0.325,
+          height: checkNull == true ? 0 : screenHeight * inputHeight,
           decoration: BoxDecoration(
             color: CommonColor.widgetbackgroud,
             borderRadius: BorderRadius.circular(15),
@@ -99,225 +109,6 @@ class _MedicationTimeState extends State<MedicationTime> {
                     for (var check in checkList)
                       MediCheck(items: check as List<Check>, pad: 20),
                   SizedBox(height: screenHeight * 0.025),
-
-                  // Container(
-                  //   margin: AppTheme.widgetpadding,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.start,
-                  //     children: [
-                  //       const NanumTitleText(
-                  //         text: '다이그린',
-                  //         color: Colors.green,
-                  //       ),
-                  //       Container(
-                  //         padding: const EdgeInsets.only(top: 15, left: 20),
-                  //         child: Row(
-                  //           children: [
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.medicine,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set1(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오전8:00',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 50,
-                  //             ),
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.surgery,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set2(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오후12:30',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 50,
-                  //             ),
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.obstetrics,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set3(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오후5:30',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // Container(
-                  //   margin: AppTheme.widgetpadding,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.start,
-                  //     children: [
-                  //       const NanumTitleText(
-                  //         text: '다이그린',
-                  //         color: Colors.green,
-                  //       ),
-                  //       Container(
-                  //         padding: const EdgeInsets.only(top: 15, left: 20),
-                  //         child: Row(
-                  //           children: [
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.medicine,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set1(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오전8:00',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 50,
-                  //             ),
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.surgery,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set2(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오후12:30',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 50,
-                  //             ),
-                  //             Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   Transform.scale(
-                  //                       scale: 2.5,
-                  //                       child: Checkbox(
-                  //                         side:
-                  //                             MaterialStateBorderSide.resolveWith(
-                  //                                 (states) => const BorderSide(
-                  //                                     width: 1,
-                  //                                     color: Colors.grey)),
-                  //                         shape: RoundedRectangleBorder(
-                  //                             borderRadius:
-                  //                                 BorderRadius.circular(15)),
-                  //                         value: checkBoxProvider.obstetrics,
-                  //                         onChanged: (value) {
-                  //                           checkBoxProvider.set3(value!);
-                  //                         },
-                  //                         activeColor: Colors.green,
-                  //                         checkColor: Colors.white,
-                  //                       )),
-                  //                   const NanumText(
-                  //                     text: '오후5:30',
-                  //                     fontSize: 10,
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               )),
         ),
