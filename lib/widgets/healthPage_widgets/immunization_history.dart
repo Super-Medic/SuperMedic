@@ -114,12 +114,12 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                                       )));
                         },
                         icon: const Icon(
-                          Icons.add,
+                          Icons.hourglass_top_rounded,
                           size: 30,
                           weight: 900,
                         ),
                         label: const NanumBodyText(
-                          text: '나의 예방접종 내역를 불러오세요',
+                          text: '서비스 준비 중입니다.',
                         ),
                         style: TextButton.styleFrom(
                             iconColor: Colors.green,

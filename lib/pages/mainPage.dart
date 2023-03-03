@@ -91,16 +91,11 @@ class MainPageState extends State<MainPage> {
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0:
-        return const HomePage();
-      case 1:
-        return const MedicinePage();
-      case 2:
-        return const HealthPage();
-      case 3:
-        return const MeditalkPage();
-      case 4:
-        return const MyPage();
+      case 0: return const HomePage();
+      case 1: return const MedicinePage();
+      case 2: return const HealthPage();
+      case 3: return const MeditalkPage();
+      case 4: return const MyPage();
     }
     return Container();
   }
@@ -173,7 +168,7 @@ class MainPageState extends State<MainPage> {
         BottomNavigationBarItem(
             icon: Container(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: const Icon(Icons.person)),
+                child: const Icon(Icons.person_outline_rounded)),
             label: '마이페이지')
       ],
 

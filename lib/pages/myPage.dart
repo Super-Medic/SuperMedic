@@ -186,6 +186,34 @@ class _MyPage extends State<MyPage> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        webView("서비스 이용약관",
+                            "https://ringed-rutabaga-f09.notion.site/55ed2ee6c3914158a2f0b89434d1add9");
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(color: Colors.white),
+                        padding: AppTheme.widgetpadding,
+                        height: screenHeight * 0.07,
+                        child: Row(children: [
+                          Icon(
+                            Icons.assignment_outlined,
+                            size: screenWidth * 0.06,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: screenWidth * 0.03),
+                          const NanumText(
+                            text: "서비스 이용약관",
+                            color: Colors.black,
+                            fontSize: 13,
+                          )
+                        ]),
+                      ),
+                    ),
+                    Container(
+                      height: 0.4,
+                      color: Colors.grey,
+                    ),
+                    GestureDetector(
+                      onTap: () {
                         showDialog(
                             context: context,
                             barrierDismissible: false,

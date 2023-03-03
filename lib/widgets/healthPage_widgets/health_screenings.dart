@@ -4,12 +4,9 @@ import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/pages/selectAuth.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:convert';
 import 'package:super_medic/function/model.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/home_provider.dart';
-
 
 class HealthScreenings extends StatefulWidget {
   const HealthScreenings({Key? key}) : super(key: key);
@@ -20,7 +17,6 @@ class HealthScreenings extends StatefulWidget {
 
 class _HealthScreenings extends State<HealthScreenings> {
   late HomeProvider _homeProvider;
-  
 
   @override
   void initState() {
@@ -35,7 +31,6 @@ class _HealthScreenings extends State<HealthScreenings> {
     } else {
       return NotData();
     }
-
   }
 
   // ignore: non_constant_identifier_names
@@ -111,17 +106,19 @@ class _HealthScreenings extends State<HealthScreenings> {
                     icon: const Row(
                       children: [
                         NanumTitleText(text: '건강검진'),
-                        Icon(
-                          Icons.chevron_right,
-                          weight: 900,
-                          color: Colors.black,
-                        ),
+                        // Icon(
+                        //   Icons.chevron_right,
+                        //   weight: 900,
+                        //   color: Colors.black,
+                        // ),
                       ],
                     ),
                     style: TextButton.styleFrom(
                         iconColor: Colors.green,
                         foregroundColor: Colors.black)),
-                NanumBodyText(text: _homeProvider.screeningValue!.screeningList![_homeProvider.screeningValue!.screeningList!.length - 1].year as String),
+                NanumBodyText(
+                    text:
+                        "최근 건강검진 연도: ${screenings.screeningList![screenings.screeningList!.length - 1].year as String}년"),
               ],
             ),
             Row(
@@ -136,11 +133,13 @@ class _HealthScreenings extends State<HealthScreenings> {
                         const NanumBodyText(text: '종합판정'),
                         const NanumBodyText(text: '   '),
                         NanumTitleText(
-                            text: screenings.screeningList![screenings.screeningList!.length-1].result as String,
+                            text: screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .result as String,
                             color: Colors.red),
                       ],
                     )),
-               
               ],
             ),
             Row(
@@ -152,22 +151,32 @@ class _HealthScreenings extends State<HealthScreenings> {
                       children: [
                         const NanumBodyText(text: '비만'),
                         const NanumBodyText(text: '   '),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].BMI as String) >=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .BMI as String) >=
                             30)
                           State_danger(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].BMI
-                                    as String) >=
+                        if (double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .BMI as String) >=
                                 25 &&
-                            double.parse(screenings.screeningList![screenings.screeningList!.length-1].BMI
-                                    as String) <=
+                            double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .BMI as String) <=
                                 29.8)
                           State_caution(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].BMI
-                                    as String) >=
+                        if (double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .BMI as String) >=
                                 18.5 &&
-                            double.parse(screenings.screeningList![screenings.screeningList!.length-1].BMI
-                                    as String) <=
+                            double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .BMI as String) <=
                                 24.9)
                           State_normal(),
                       ],
@@ -178,19 +187,27 @@ class _HealthScreenings extends State<HealthScreenings> {
                       children: [
                         const NanumBodyText(text: '당뇨'),
                         const NanumBodyText(text: '   '),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].FBG as String) >=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .FBG as String) >=
                             126)
                           State_danger(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].FBG
-                                    as String) >=
+                        if (double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .FBG as String) >=
                                 100 &&
-                            double.parse(screenings.screeningList![screenings.screeningList!.length-1].FBG
-                                    as String) <=
+                            double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .FBG as String) <=
                                 125)
                           State_caution(),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].FBG as String) <
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .FBG as String) <
                             100)
                           State_normal(),
                       ],
@@ -201,12 +218,16 @@ class _HealthScreenings extends State<HealthScreenings> {
                       children: [
                         const NanumBodyText(text: '신장'),
                         const NanumBodyText(text: '   '),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].GFR as String) <
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .GFR as String) <
                             60)
                           State_caution(),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].GFR as String) >=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .GFR as String) >=
                             60)
                           State_normal(),
                       ],
@@ -231,17 +252,20 @@ class _HealthScreenings extends State<HealthScreenings> {
                                     ?.split("/")[1] as String) >=
                                 90)
                           State_danger(),
-                        if ((double.parse(screenings.screeningList![screenings.screeningList!.length-1].bloodPressure
+                        if ((double.parse(screenings
+                                        .screeningList![screenings.screeningList!.length -
+                                            1]
+                                        .bloodPressure
                                         ?.split("/")[0] as String) >=
                                     120 &&
-                                double.parse(screenings
-                                        .screeningList?[0].bloodPressure
-                                        ?.split("/")[0] as String) <
+                                double.parse(screenings.screeningList?[0].bloodPressure?.split("/")[0] as String) <
                                     140) ||
-                            (double.parse(screenings.screeningList![screenings.screeningList!.length-1].bloodPressure
-                                        ?.split("/")[1] as String) >=
-                                    80 &&
-                                double.parse(screenings.screeningList![screenings.screeningList!.length-1].bloodPressure?.split("/")[1] as String) < 90))
+                            (double.parse(screenings.screeningList![screenings.screeningList!.length - 1].bloodPressure?.split("/")[1] as String) >= 80 &&
+                                double.parse(screenings
+                                        .screeningList![screenings.screeningList!.length - 1]
+                                        .bloodPressure
+                                        ?.split("/")[1] as String) <
+                                    90))
                           State_caution(),
                         if (double.parse(screenings
                                     .screeningList?[0].bloodPressure
@@ -260,19 +284,27 @@ class _HealthScreenings extends State<HealthScreenings> {
                       children: [
                         const NanumBodyText(text: '빈혈'),
                         const NanumBodyText(text: '   '),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].hemoglobin
-                                as String) <
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .hemoglobin as String) <
                             12)
                           State_danger(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].hemoglobin
-                                    as String) >=
+                        if (double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .hemoglobin as String) >=
                                 12 &&
-                            double.parse(screenings.screeningList![screenings.screeningList!.length-1].hemoglobin
-                                    as String) <=
+                            double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .hemoglobin as String) <=
                                 12.9)
                           State_caution(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].hemoglobin
-                                as String) >=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .hemoglobin as String) >=
                             13)
                           State_normal(),
                       ],
@@ -283,19 +315,27 @@ class _HealthScreenings extends State<HealthScreenings> {
                       children: [
                         const NanumBodyText(text: '간'),
                         const NanumBodyText(text: '     '),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].SGOT as String) >=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .SGOT as String) >=
                             51)
                           State_danger(),
-                        if (double.parse(screenings.screeningList![screenings.screeningList!.length-1].SGOT
-                                    as String) >=
+                        if (double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .SGOT as String) >=
                                 41 &&
-                            double.parse(screenings.screeningList![screenings.screeningList!.length-1].SGOT
-                                    as String) <=
+                            double.parse(screenings
+                                    .screeningList![
+                                        screenings.screeningList!.length - 1]
+                                    .SGOT as String) <=
                                 50)
                           State_caution(),
-                        if (double.parse(
-                                screenings.screeningList![screenings.screeningList!.length-1].SGOT as String) <=
+                        if (double.parse(screenings
+                                .screeningList![
+                                    screenings.screeningList!.length - 1]
+                                .SGOT as String) <=
                             40)
                           State_normal(),
                       ],
@@ -362,22 +402,4 @@ class _HealthScreenings extends State<HealthScreenings> {
       ],
     );
   }
-}
-
-deleteSecureStorage() async {
-  const storage = FlutterSecureStorage();
-  await storage.deleteAll();
-}
-
-Future<dynamic> loadSecureStorage(String key) async {
-  const storage = FlutterSecureStorage();
-  String? screeningData = await storage.read(key: key);
-  if (screeningData == null) {
-    return false;
-  }
-  ScreeningModel screenings =
-      ScreeningModel.fromJson(jsonDecode(screeningData));
-
-  // Medicine medicine = Medicine.fromJson(jsonDecode(medicineData));
-  return screenings;
 }

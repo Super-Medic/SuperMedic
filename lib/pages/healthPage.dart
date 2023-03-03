@@ -91,28 +91,6 @@ class _HealthPage extends State<HealthPage> {
               SizedBox(
                 height: screenHeight * 0.03,
               ),
-<<<<<<< Updated upstream
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    deleteSecureStorage();
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (_) => const AuthPage(healthDataType: "Screenings")));
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: CommonColor.buttoncolor,
-                    minimumSize: const Size(200, 45),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  child: const Text('SecureStorage deleteAll'),
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
-=======
->>>>>>> Stashed changes
             ],
           ),
         )),
