@@ -10,8 +10,6 @@ import 'package:super_medic/widgets/healthPage_widgets/recent_medical_records.da
 import 'package:super_medic/widgets/healthPage_widgets/recent_medication_history.dart';
 // import 'package:super_medic/widgets/server_widgets/server_test.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 // ignore: must_be_immutable
 class HealthPage extends StatefulWidget {
   const HealthPage({Key? key}) : super(key: key);
@@ -93,34 +91,10 @@ class _HealthPage extends State<HealthPage> {
               SizedBox(
                 height: screenHeight * 0.03,
               ),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    deleteSecureStorage();
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (_) => const AuthPage(healthDataType: "Screenings")));
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: CommonColor.buttoncolor,
-                    minimumSize: const Size(200, 45),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  child: const Text('SecureStorage deleteAll'),
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
             ],
           ),
         )),
       ),
     );
   }
-}
-
-deleteSecureStorage() async {
-  const storage = FlutterSecureStorage();
-  await storage.deleteAll();
 }

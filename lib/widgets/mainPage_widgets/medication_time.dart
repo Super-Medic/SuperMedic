@@ -28,12 +28,20 @@ class _MedicationTimeState extends State<MedicationTime> {
   String? userEmail;
   bool checkNull = true;
   double inputHeight = 0;
-  late String today;
-
+  late int today;
+  Map dayToint = {
+    "일": 0,
+    "월": 1,
+    "화": 2,
+    "수": 3,
+    "목": 4,
+    "금": 5,
+    "토": 6,
+  };
   @override
   void initState() {
     super.initState();
-    today = DateFormat.E('ko_KR').format(now);
+    today = dayToint[DateFormat.E('ko_KR').format(now)];
     fetchGet();
   }
 
@@ -110,8 +118,9 @@ class _MedicationTimeState extends State<MedicationTime> {
                       MediCheck(items: check as List<Check>, pad: 20),
                   SizedBox(height: screenHeight * 0.025),
                 ],
-              )),
-        ),
+              ),
+            ),
+          ),
       ],
     );
   }

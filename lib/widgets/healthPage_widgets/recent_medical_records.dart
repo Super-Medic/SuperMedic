@@ -3,14 +3,11 @@ import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/pages/selectAuth.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:convert';
 
 import 'package:timelines/timelines.dart';
 import 'package:super_medic/function/model.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/home_provider.dart';
-
 
 // class Diagnosis {
 //   List<DiagnosisTotalList>? diagnosisTotalList;
@@ -102,7 +99,7 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
   //   diagnosis = await loadSecureStorage("Diagnosis");
   //   return diagnosis;
   // }
-late HomeProvider _homeProvider;
+  late HomeProvider _homeProvider;
 
   @override
   void initState() {
@@ -235,11 +232,11 @@ late HomeProvider _homeProvider;
               icon: const Row(
                 children: [
                   NanumTitleText(text: '최근 진료내역'),
-                  Icon(
-                    Icons.chevron_right,
-                    weight: 900,
-                    color: Colors.black,
-                  ),
+                  // Icon(
+                  //   Icons.chevron_right,
+                  //   weight: 900,
+                  //   color: Colors.black,
+                  // ),
                 ],
               ),
               style: TextButton.styleFrom(
@@ -259,36 +256,36 @@ late HomeProvider _homeProvider;
     } else {
       return NotData();
     }
-    
-  //   FutureBuilder(
-  //       future: _loadSecureStorage(),
-  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
-  //         // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
 
-  //         if (snapshot.hasData == true) {
-  //           if (snapshot.data == false) {
-  //             return NotData();
-  //           }
-  //           Diagnosis diagnosis = snapshot.data;
-  //           return ExData(context, diagnosis);
-  //         }
-  //         //error가 발생하게 될 경우 반환하게 되는 부분
-  //         else if (snapshot.hasError) {
-  //           return Padding(
-  //             padding: const EdgeInsets.all(8.0),
-  //             child: Text(
-  //               'Error: ${snapshot.error}',
-  //               style: const TextStyle(fontSize: 15),
-  //             ),
-  //           );
-  //         }
-  //         //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
-  //         else {
-  //           return const CircularProgressIndicator();
-  //         }
-  //       });
-  // }
-}
+    //   FutureBuilder(
+    //       future: _loadSecureStorage(),
+    //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //         // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+
+    //         if (snapshot.hasData == true) {
+    //           if (snapshot.data == false) {
+    //             return NotData();
+    //           }
+    //           Diagnosis diagnosis = snapshot.data;
+    //           return ExData(context, diagnosis);
+    //         }
+    //         //error가 발생하게 될 경우 반환하게 되는 부분
+    //         else if (snapshot.hasError) {
+    //           return Padding(
+    //             padding: const EdgeInsets.all(8.0),
+    //             child: Text(
+    //               'Error: ${snapshot.error}',
+    //               style: const TextStyle(fontSize: 15),
+    //             ),
+    //           );
+    //         }
+    //         //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
+    //         else {
+    //           return const CircularProgressIndicator();
+    //         }
+    //       });
+    // }
+  }
 
 // deleteSecureStorage() async {
 //   const storage = FlutterSecureStorage();

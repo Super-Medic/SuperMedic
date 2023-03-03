@@ -16,14 +16,7 @@ class Symptom extends StatefulWidget {
 
 class _SymptomState extends State<Symptom> {
   late HomeProvider _homeProvider;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // _homeProvider = context.watch<HomeProvider>();
-  //   HomeProvider().symptomgetData();
-  // }
 
-  // const Symptom({
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
@@ -64,11 +57,11 @@ class _SymptomState extends State<Symptom> {
                   icon: const Row(
                     children: [
                       NanumTitleText(text: '증상'),
-                      Icon(
-                        Icons.chevron_right,
-                        weight: 900,
-                        color: Colors.black,
-                      ),
+                      // Icon(
+                      //   Icons.chevron_right,
+                      //   weight: 900,
+                      //   color: Colors.black,
+                      // ),
                     ],
                   ),
                   style: TextButton.styleFrom(
@@ -135,8 +128,10 @@ class _SymptomState extends State<Symptom> {
                   ),
                 ),
               )
-            : const NanumBodyText(text: "오늘의 증상을 기록해보세요!"),
-        SizedBox(height: screenHeight * 0.015)
+            : Container(
+                padding: const EdgeInsets.only(bottom: 15),
+                child:
+                    const Center(child: NanumBodyText(text: '오늘의 증상을 기록해보세요!')))
       ]),
     );
   }

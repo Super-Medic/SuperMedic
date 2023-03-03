@@ -47,11 +47,11 @@ class Note extends StatelessWidget {
                   icon: const Row(
                     children: [
                       NanumTitleText(text: '노트'),
-                      Icon(
-                        Icons.chevron_right,
-                        weight: 900,
-                        color: Colors.black,
-                      ),
+                      // Icon(
+                      //   Icons.chevron_right,
+                      //   weight: 900,
+                      //   color: Colors.black,
+                      // ),
                     ],
                   ),
                   style: TextButton.styleFrom(
