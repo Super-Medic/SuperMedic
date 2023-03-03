@@ -5,10 +5,17 @@ import 'package:super_medic/pages/joinPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
 
 // ignore: must_be_immutable
-class LoginPage extends StatelessWidget {
-  KakaoLogin kakaologin = KakaoLogin();
+class LoginPage extends StatefulWidget {
   LoginPage({super.key, required this.being});
   bool being;
+
+  @override
+  State<LoginPage> createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+  KakaoLogin kakaologin = KakaoLogin();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +60,15 @@ class LoginPage extends StatelessWidget {
               width: screenWidth * 0.6,
               height: screenHeight * 0.2,
             ),
-            const Expanded(child: SizedBox()),
+            const Expanded(flex: 3, child: SizedBox()),
+            Expanded(
+                flex: 1,
+                child: isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.green,
+                      )
+                    : const SizedBox()),
+            const Expanded(flex: 4, child: SizedBox()),
             InkWell(
               child: Image.asset(
                 imagekakaoLoginName,
@@ -61,10 +76,16 @@ class LoginPage extends StatelessWidget {
                 height: screenHeight * 0.07,
               ),
               onTap: () async {
+                setState(() {
+                  isLoading = true;
+                });
                 var result = await kakaologin.signInWithKakao();
+                setState(() {
+                  isLoading = false;
+                });
                 // ignore: unrelated_type_equality_checks
                 if (result == "true") {
-                  if (!being) {
+                  if (!widget.being) {
                     KakaoLogin loginBeing = KakaoLogin();
                     bool value = await loginBeing.KakaoLoginBeing();
                     if (value) {
