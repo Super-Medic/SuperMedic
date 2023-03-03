@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:super_medic/function/model.dart';
 
 class CustomCheckBox extends StatefulWidget {
   final Check item;
@@ -18,6 +23,7 @@ class CustomCheckBox extends StatefulWidget {
 }
 
 class _CustomCheckBoxState extends State<CustomCheckBox> {
+  String? userEmail;
   @override
   Widget build(BuildContext context) {
     final dot = Container(
@@ -40,10 +46,13 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               size: 40,
               value: widget.item.isChecked,
               type: GFCheckboxType.circle,
-              onChanged: (value) {
+              onChanged: (value) async {
+                print(value);
+                print(value.runtimeType);
                 setState(() {
                   widget.item.isChecked = value;
                 });
+                await postRequest(widget.item.id, value);
               },
               activeBgColor: Colors.green,
               activeIcon: const Icon(
@@ -63,6 +72,25 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         ),
         if (widget.last == false) dot,
       ],
+    );
+  }
+
+  postRequest(id, value) async {
+    const storage = FlutterSecureStorage();
+    String? val = await storage.read(key: 'LoginUser');
+    if (val != null) {
+      userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+    }
+    http.Response response = await http.post(
+      Uri.parse('https://mypd.kr:5000/medicine/check'),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: {
+        'email': userEmail,
+        'id': '$id',
+        'take': (value == true) ? '1' : '0'
+      },
     );
   }
 }
