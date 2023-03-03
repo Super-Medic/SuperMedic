@@ -309,7 +309,7 @@ class BloodPressureGraph extends StatelessWidget {
             return TouchedSpotIndicatorData(
               FlLine(
                   color: const Color.fromARGB(142, 158, 158, 158),
-                  strokeWidth: 3,
+                  strokeWidth: 1.5,
                   dashArray: [1]),
               FlDotData(
                 show: false,

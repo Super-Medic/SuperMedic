@@ -36,7 +36,8 @@ class _JointosPage extends State<JointosPage> {
     super.initState();
     items.add(Item(
         data: "(필수) 서비스 이용약관",
-        page: 'assets/images/kakao.png',
+        page:
+            'https://ringed-rutabaga-f09.notion.site/55ed2ee6c3914158a2f0b89434d1add9',
         isChecked: false));
     items.add(Item(
         data: "(필수) 개인정보(민감정보) 수집 및 이용 동의",
@@ -121,7 +122,6 @@ class _JointosPage extends State<JointosPage> {
               child: TextButton(
                 onPressed: () async {
                   KakaoLogin kakaologin = KakaoLogin();
-                  print(widget.phone);
                   var joinresult = await kakaologin.get_user_join(
                       widget.phone,
                       widget.telecom,

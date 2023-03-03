@@ -76,7 +76,7 @@ class _SymptomState extends State<Symptom> {
             ),
             Container(
               padding: const EdgeInsets.only(right: 20),
-              child: ElevatedButton(
+              child: TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -84,9 +84,8 @@ class _SymptomState extends State<Symptom> {
                         builder: (context) => const SymptomRecordSelect()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
+                style: TextButton.styleFrom(
                   backgroundColor: CommonColor.buttoncolor,
-                  elevation: 1,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
                   padding: const EdgeInsets.symmetric(horizontal: 7),

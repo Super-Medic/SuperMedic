@@ -52,8 +52,8 @@ class BloodSugar extends StatelessWidget {
                             label: const NanumBodyText(
                               text: '',
                             ),
-                            icon: Row(
-                              children: const [
+                            icon: const Row(
+                              children: [
                                 NanumTitleText(text: '혈당'),
                                 Icon(
                                   Icons.chevron_right,
@@ -68,7 +68,7 @@ class BloodSugar extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(right: 20),
-                        child: ElevatedButton(
+                        child: TextButton(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -77,17 +77,16 @@ class BloodSugar extends StatelessWidget {
                                       const BloodSugarRecordPage()),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
+                          style: TextButton.styleFrom(
                             backgroundColor: CommonColor.buttoncolor,
-                            elevation: 1,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             padding: const EdgeInsets.symmetric(horizontal: 7),
                           ),
-                          child: Row(
+                          child: const Row(
                             //spaceEvenly: 요소들을 균등하게 배치하는 속성
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
+                            children: [
                               Icon(
                                 Icons.add,
                                 color: Colors.white,

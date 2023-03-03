@@ -136,7 +136,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                         child: NanumTitleText(text: '데이터가 존재하지 않아요.'),
                       ),
                 Center(
-                  child: ElevatedButton(
+                  child: TextButton(
                       onPressed: () => {
                             Navigator.push(
                                 context,
@@ -144,9 +144,8 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                                     builder: (context) =>
                                         const BloodSugarRecordPage()))
                           },
-                      style: ElevatedButton.styleFrom(
+                      style: TextButton.styleFrom(
                         backgroundColor: CommonColor.buttoncolor,
-                        elevation: 1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                         padding: const EdgeInsets.symmetric(horizontal: 30),
