@@ -103,9 +103,8 @@ class _AuthPage extends State<AuthPage> {
                           context,
                           MaterialPageRoute(
                               builder: (_) => TOSPage(
-                                    loginOrgCd: data,
-                                    healthDataType: widget.healthDataType
-                                  )));
+                                  loginOrgCd: data,
+                                  healthDataType: widget.healthDataType)));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: getTrue() == '' ? Colors.grey : Colors.green,

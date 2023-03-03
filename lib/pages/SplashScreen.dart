@@ -81,7 +81,6 @@ class _SplashScreenState extends State<SplashScreen> {
     ///When the app is in background but opened and user taps
     ///on the notification
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print("asdasd");
       final routeFromMessage = message.data["route"];
       Navigator.of(context).pushNamed(routeFromMessage);
     });

@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:super_medic/function/kakao_login.dart';
-import 'package:super_medic/pages/selectChronicDisease.dart';
+import 'package:super_medic/pages/jointosPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart';
@@ -71,53 +69,43 @@ class _JoinPageState extends State<JoinPage> {
   }
 
   renderButton(height) {
-    // ignore: no_leading_underscores_for_local_identifiers
-    void _showAlert({String? title, String? message}) {
-      showCupertinoDialog(
-          context: context,
-          builder: (context) {
-            return CupertinoAlertDialog(
-              title: Text(title!),
-              content: Text(message!),
-              actions: [
-                CupertinoDialogAction(
-                    isDefaultAction: true,
-                    child: const Text("확인"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    })
-              ],
-            );
-          });
-    }
-
     return SizedBox(
         height: height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-          onPressed: () async {
+          onPressed: () {
             if (formKey.currentState!.validate()) {
               // validation 이 성공하면 true 가 리턴돼요!
 
               // validation 이 성공하면 폼 저장하기
-              formKey.currentState!.save();
-              KakaoLogin kakaologin = KakaoLogin();
-              var joinresult = await kakaologin.get_user_join(
-                  phone, telecom, frist_number, second_number, name);
-              if (joinresult == 'true') {
-                // ignore: use_build_context_synchronously
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SelectChronicDisease()));
-              } else {
-                // ignore: avoid_print
-                _showAlert(title: "회원가입 실패", message: "다시 시도해주세요");
-              }
+
+              // ignore: use_build_context_synchronously
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (BuildContext context) {
+                  return Container(
+                    height: 400,
+                    decoration: const BoxDecoration(
+                      color: Colors.white, // 모달 배경색
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: JointosPage(
+                        phone: phone,
+                        telecom: telecom,
+                        frist_number: frist_number,
+                        second_number: second_number,
+                        name: name),
+                  );
+                },
+              );
             }
           },
           child: const Text(
-            '저장하기',
+            '다음',
             style: TextStyle(
               color: Colors.white,
             ),
