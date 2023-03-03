@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,6 @@ import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/pages/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:super_medic/pages/medicinePage.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
@@ -22,11 +22,10 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
-  // await dotenv.load(fileName: 'assets/config/.env');
+  await dotenv.load(fileName: "assets/config/.env");
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  print(await KakaoSdk.origin);
-  KakaoSdk.init(nativeAppKey: 'ceae50246b4ec07d99fed331f94acdb7');
+  KakaoSdk.init(nativeAppKey: dotenv.env['appKey']);
   runApp(const RestartWidget(child: MyApp()));
 }
 
@@ -65,8 +64,8 @@ class MyApp extends StatelessWidget {
           locale: const Locale('ko'),
           home: const SplashScreen(),
           routes: {
-            'medicine': (context) => MedicinePage(),
-            'splash': (context) => SplashScreen(),
+            'medicine': (context) => const MedicinePage(),
+            'splash': (context) => const SplashScreen(),
           },
         ),
       ),
