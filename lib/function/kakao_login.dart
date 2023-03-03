@@ -120,4 +120,31 @@ class KakaoLogin {
     // }
     return false;
   }
+
+  Future<bool> KakaoLoginBeing() async {
+    OAuthToken? token = await TokenManagerProvider.instance.manager.getToken();
+    User user = await UserApi.instance.me();
+    try {
+      final response = await http.post(
+        Uri.http('mypd.kr:5000', '/user/loginselect'),
+        body: {"account_email": user.kakaoAccount!.email},
+      );
+      LoginBeingModel value =
+          LoginBeingModel.fromJson(json.decode(response.body));
+      const storage = FlutterSecureStorage();
+      var val = jsonEncode(LoginModel(
+          'Kakao',
+          token!.accessToken,
+          token.refreshToken as String,
+          user.kakaoAccount?.email as String,
+          value.name,
+          value.phone_number,
+          value.birthday,
+          value.gender.toString()));
+      await storage.write(key: 'LoginUser', value: val);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

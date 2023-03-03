@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
-import 'package:super_medic/function/login_platform.dart';
 import 'package:super_medic/pages/joinPage.dart';
-import 'package:super_medic/pages/mainPage.dart';
+import 'package:super_medic/pages/selectChronicDisease.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
-  LoginPlatform loginPlatform = LoginPlatform.none;
   KakaoLogin kakaologin = KakaoLogin();
-  LoginPage({super.key});
+  LoginPage({super.key, required this.being});
+  bool being;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +64,20 @@ class LoginPage extends StatelessWidget {
                 var result = await kakaologin.signInWithKakao();
                 // ignore: unrelated_type_equality_checks
                 if (result == "true") {
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                  if (!being) {
+                    KakaoLogin loginBeing = KakaoLogin();
+                    bool value = await loginBeing.KakaoLoginBeing();
+                    if (value) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SelectChronicDisease()));
+                    } else {
+                      _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
+                    }
+                  }
                 } else if (result == "false") {
                   // ignore: use_build_context_synchronously
                   Navigator.push(

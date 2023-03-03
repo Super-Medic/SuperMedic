@@ -446,3 +446,18 @@ class LoginModel {
         'gender': gender
       };
 }
+
+class LoginBeingModel {
+  final String name;
+  final String phone_number;
+  final String birthday;
+  final int gender;
+
+  LoginBeingModel(this.name, this.phone_number, this.birthday, this.gender);
+
+  LoginBeingModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        phone_number = json['phone_number'],
+        birthday = json['birthday'],
+        gender = json['gender'];
+}
