@@ -25,12 +25,20 @@ class _MedicinePageState extends State<MedicinePage> {
   List<List> checkList = List.empty(growable: true);
   String? userEmail;
   bool checkNull = true;
-  late String today;
-
+  late int today;
+  Map dayToint = {
+    "일": 0,
+    "월": 1,
+    "화": 2,
+    "수": 3,
+    "목": 4,
+    "금": 5,
+    "토": 6,
+  };
   @override
   void initState() {
     super.initState();
-    today = DateFormat.E('ko_KR').format(now);
+    today = dayToint[DateFormat.E('ko_KR').format(now)];
     fetchGet();
   }
 
