@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'package:super_medic/function/service.dart';
 import 'package:super_medic/pages/selectAuth.dart';
 
 class ImmunizationHistory extends StatefulWidget {
@@ -27,25 +26,9 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         size = getSize();
-      });
-    });
-    Services.getInfo().then((value) {
-      setState(() {
-        user = value;
-        if (user != null) {
-          for (int i = 0; i < user["entry"].length; i++) {
-            if (user["entry"][i]["meta"]["tag"][0]["display"] == "예방접종") {
-              loading = true;
-              key = i;
-              count += 1;
-            }
-          }
-        } else {
-          loading = false;
-        }
       });
     });
   }
@@ -126,7 +109,9 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const AuthPage(healthDataType: "immunization",)));
+                                  builder: (_) => const AuthPage(
+                                        healthDataType: "immunization",
+                                      )));
                         },
                         icon: const Icon(
                           Icons.add,
@@ -177,8 +162,8 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: Row(
-                children: const [
+              icon: const Row(
+                children: [
                   NanumTitleText(text: '예방접종 내역'),
                   Icon(
                     Icons.chevron_right,

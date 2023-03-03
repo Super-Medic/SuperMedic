@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:super_medic/function/service.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
@@ -19,20 +18,6 @@ class _LinkedHealthData extends State<LinkedHealthData> {
   @override
   void initState() {
     super.initState();
-    Services.getInfo().then((value) {
-      setState(() {
-        user = value;
-        if (user != null) {
-          for (int i = 0; i < user["entry"].length; i++) {
-            if (user["entry"][i]["meta"]["tag"][0]["display"].contains("연동")) {
-              loading = true;
-            }
-          }
-        } else {
-          loading = false;
-        }
-      });
-    });
   }
 
   Widget NotData() {
@@ -70,7 +55,9 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const AuthPage(healthDataType: "linked_health",)));
+                                  builder: (_) => const AuthPage(
+                                        healthDataType: "linked_health",
+                                      )));
                         },
                         icon: const Icon(
                           Icons.add,
@@ -117,8 +104,8 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               label: const NanumBodyText(
                 text: '',
               ),
-              icon: Row(
-                children: const [
+              icon: const Row(
+                children: [
                   NanumTitleText(text: '연동 건강데이터'),
                   Icon(
                     Icons.chevron_right,

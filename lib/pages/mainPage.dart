@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/healthPage.dart';
 import 'package:super_medic/pages/HomePage.dart';
 import 'package:provider/provider.dart';
@@ -8,19 +13,79 @@ import 'package:super_medic/pages/medicinePage.dart';
 import 'package:super_medic/pages/meditalkPage.dart';
 import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
+import 'package:super_medic/widgets/notification/firebase_message.dart';
+import 'package:http/http.dart' as http;
 
-// ignore: must_be_immutable
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+  @override
+  State<MainPage> createState() => MainPageState();
+}
+
+class MainPageState extends State<MainPage> {
   late BottomNavigationProvider _bottomNavigationProvider;
   DateTime? currentBackPressTime; //뒤로가기 버튼 클릭 시 앱 종료 구현
-  MainPage({super.key});
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    LocalNotificationService.initialize(context);
+    FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.instance.getToken().then((token) async {
+      const storage = FlutterSecureStorage();
+      String? val = await storage.read(key: 'LoginUser');
+      if (val != null) {
+        userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+      }
+      http.Response response = await http.post(
+        Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {'email': userEmail, 'token': token},
+      );
+    });
+
+    FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
+      print(APNStoken);
+    });
+
+    ///gives you the message on which user taps
+    ///and it opened the app from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        final routeFromMessage = message.data["route"];
+        Navigator.of(context).pushNamed(routeFromMessage);
+      }
+    });
+
+    ///forground work
+    FirebaseMessaging.onMessage.listen((message) {});
+
+    ///When the app is in background but opened and user taps
+    ///on the notification
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data["route"];
+      Navigator.of(context).pushNamed(routeFromMessage);
+    });
+  }
 
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
-    // switch를 통해 currentPage에 따라 네비게이션을 구동시킨다.
-    // if(this.check){
-    //   _bottomNavigationProvider.updateCurrentPage(1);
-    // }
     switch (_bottomNavigationProvider.currentPage) {
       case 0:
         return const HomePage();
@@ -127,8 +192,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provider를 호출해 접근
-    //_bottomNavigationProvider = Provider.of<BottomNavigationProvider>(context); //옛날 방법
     _bottomNavigationProvider = context.watch<BottomNavigationProvider>();
 
     //뒤로 가기 두 번 클릭 시 어플 종료

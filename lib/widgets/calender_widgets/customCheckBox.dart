@@ -47,12 +47,10 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               value: widget.item.isChecked,
               type: GFCheckboxType.circle,
               onChanged: (value) async {
-                print(value);
-                print(value.runtimeType);
                 setState(() {
                   widget.item.isChecked = value;
                 });
-                await postRequest(widget.item.id, value);
+                await postRequest(widget.item.id, widget.item.time, value);
               },
               activeBgColor: Colors.green,
               activeIcon: const Icon(
@@ -75,7 +73,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     );
   }
 
-  postRequest(id, value) async {
+  postRequest(id, time, value) async {
     const storage = FlutterSecureStorage();
     String? val = await storage.read(key: 'LoginUser');
     if (val != null) {
@@ -86,11 +84,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: {
-        'email': userEmail,
-        'id': '$id',
-        'take': (value == true) ? '1' : '0'
-      },
+      body: {'email': userEmail, 'time': time, 'id': '$id', 'take': '$value'},
     );
   }
 }
