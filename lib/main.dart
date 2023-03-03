@@ -25,7 +25,7 @@ void main() async {
   await dotenv.load(fileName: "assets/config/.env");
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  KakaoSdk.init(nativeAppKey: dotenv.env['appKey']);
+  KakaoSdk.init(nativeAppKey: dotenv.env['AppKey']);
   runApp(const RestartWidget(child: MyApp()));
 }
 
