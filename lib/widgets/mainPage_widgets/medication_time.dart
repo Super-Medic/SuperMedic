@@ -45,7 +45,7 @@ class _MedicationTimeState extends State<MedicationTime> {
     final res = await http
         .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
     List<List> temp = List.empty(growable: true);
-    if (res.body != 'Empty') {
+    if (res.body != '[]') {
       checkNull = false;
       for (var data in json.decode(res.body)) {
         if (data['days'].contains(today)) {
@@ -72,12 +72,11 @@ class _MedicationTimeState extends State<MedicationTime> {
   Widget build(BuildContext context) {
     late CheckBoxProvider checkBoxProvider = context.watch<CheckBoxProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         Container(
           width: double.infinity,
-          height: screenHeight * 0.325,
+          height: checkNull == true ? 0 : screenHeight * 0.325,
           decoration: BoxDecoration(
             color: CommonColor.widgetbackgroud,
             borderRadius: BorderRadius.circular(15),

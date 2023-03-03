@@ -126,7 +126,7 @@ class KakaoLogin {
     User user = await UserApi.instance.me();
     try {
       final response = await http.post(
-        Uri.http('mypd.kr:5000', '/user/loginselect'),
+        Uri.https('mypd.kr:5000', '/user/loginselect'),
         body: {"account_email": user.kakaoAccount!.email},
       );
       LoginBeingModel value =
