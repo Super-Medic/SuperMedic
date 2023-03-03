@@ -110,8 +110,9 @@ class _MedicationTimeState extends State<MedicationTime> {
                       MediCheck(items: check as List<Check>, pad: 20),
                   SizedBox(height: screenHeight * 0.025),
                 ],
-              )),
-        ),
+              ),
+            ),
+          ),
       ],
     );
   }
