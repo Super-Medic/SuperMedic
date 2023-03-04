@@ -419,11 +419,12 @@ class LoginModel {
   final String email;
   final String name;
   final String phone;
+  final String telecom;
   final String birthday;
   final String gender;
 
   LoginModel(this.type, this.accessToken, this.reflashToken, this.email,
-      this.name, this.phone, this.birthday, this.gender);
+      this.name, this.phone, this.telecom, this.birthday, this.gender);
 
   LoginModel.fromJson(Map<String, dynamic> json)
       : type = json['type'],
@@ -432,6 +433,7 @@ class LoginModel {
         email = json['email'],
         name = json['name'],
         phone = json['phone'],
+        telecom = json['telecom'],
         birthday = json['birthday'],
         gender = json['gender'];
 
@@ -442,6 +444,7 @@ class LoginModel {
         'email': email,
         'name': name,
         'phone': phone,
+        'telecom': telecom,
         'birthday': birthday,
         'gender': gender
       };
@@ -450,14 +453,17 @@ class LoginModel {
 class LoginBeingModel {
   final String name;
   final String phone_number;
+  final String telecom;
   final String birthday;
   final int gender;
 
-  LoginBeingModel(this.name, this.phone_number, this.birthday, this.gender);
+  LoginBeingModel(
+      this.name, this.phone_number, this.telecom, this.birthday, this.gender);
 
   LoginBeingModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         phone_number = json['phone_number'],
+        telecom = json['telecom'],
         birthday = json['birthday'],
         gender = json['gender'];
 }

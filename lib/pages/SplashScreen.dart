@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 // ignore: use_build_context_synchronously
                 ? Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
+                    MaterialPageRoute(builder: (context) => const MainPage()),
                   )
                 // ignore: use_build_context_synchronously
                 : Navigator.push(

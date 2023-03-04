@@ -36,6 +36,7 @@ class KakaoLogin {
               user.kakaoAccount?.email as String,
               name,
               phnoe,
+              telecom.substring(0, 1),
               fristNumber,
               secondNumber));
           await storage.write(key: 'LoginUser', value: val);
@@ -139,6 +140,7 @@ class KakaoLogin {
           user.kakaoAccount?.email as String,
           value.name,
           value.phone_number,
+          value.telecom,
           value.birthday,
           value.gender.toString()));
       await storage.write(key: 'LoginUser', value: val);
