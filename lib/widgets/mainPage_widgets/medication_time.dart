@@ -71,12 +71,13 @@ class _MedicationTimeState extends State<MedicationTime> {
       }
       double newHeight;
 
-      if (temp.isEmpty)
+      if (temp.isEmpty) {
         newHeight = 0;
-      else if (temp.length == 1)
+      } else if (temp.length == 1) {
         newHeight = 0.160;
-      else
+      } else {
         newHeight = 0.325;
+      }
 
       if (mounted) {
         setState(() {
@@ -109,18 +110,18 @@ class _MedicationTimeState extends State<MedicationTime> {
             ],
           ),
           child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (checkNull != true)
-                    for (var check in checkList)
-                      MediCheck(items: check as List<Check>, pad: 20),
-                  SizedBox(height: screenHeight * 0.025),
-                ],
-              ),
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (checkNull != true)
+                  for (var check in checkList)
+                    MediCheck(items: check as List<Check>, pad: 20),
+                SizedBox(height: screenHeight * 0.025),
+              ],
             ),
           ),
+        ),
       ],
     );
   }
