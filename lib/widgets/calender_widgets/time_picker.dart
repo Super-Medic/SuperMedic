@@ -50,7 +50,9 @@ class _TimePickerPageState extends State<TimePickerPage> {
   Widget buildTimePicker() => SizedBox(
         height: 180,
         child: CupertinoDatePicker(
-          initialDateTime: dateTime,
+          initialDateTime: DateTime.now().add(
+            const Duration(minutes: 0),
+          ),
           mode: CupertinoDatePickerMode.time,
           minuteInterval: 1,
           //use24hFormat: true,
