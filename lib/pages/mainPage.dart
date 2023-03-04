@@ -15,6 +15,7 @@ import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/widgets/notification/firebase_message.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -76,26 +77,35 @@ class MainPageState extends State<MainPage> {
     ///forground work
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
-        LocalNotificationService.display(message);
+        if (defaultTargetPlatform == TargetPlatform.android) {
+          LocalNotificationService.display(message);
+        }
       }
     });
 
     ///When the app is in background but opened and user taps
     ///on the notification
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      final routeFromMessage = message.data["route"];
-      Navigator.of(context).pushNamed(routeFromMessage);
+      if (message.notification != null) {
+        final routeFromMessage = message.data["route"];
+        Navigator.of(context).pushNamed(routeFromMessage);
+      }
     });
   }
 
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0: return const HomePage();
-      case 1: return const MedicinePage();
-      case 2: return const HealthPage();
-      case 3: return const MeditalkPage();
-      case 4: return const MyPage();
+      case 0:
+        return const HomePage();
+      case 1:
+        return const MedicinePage();
+      case 2:
+        return const HealthPage();
+      case 3:
+        return const MeditalkPage();
+      case 4:
+        return const MyPage();
     }
     return Container();
   }
