@@ -109,11 +109,12 @@ class _AuthTimer extends State<AuthTimer> {
                     if (widget.healthDataType == "Diagnosis") {
                       _homeProvider.diagnosisgetData();
                     }
-
-                    var nav = Navigator.of(context);
-                    nav.pop();
-                    nav.pop();
-                    nav.pop();
+                    if (mounted) {
+                      var nav = Navigator.of(context);
+                      nav.pop();
+                      nav.pop();
+                      nav.pop();
+                    }
                   }
 
                   // context.read<BottomNavigationProvider>().updateCurrentPage(2);
