@@ -109,7 +109,11 @@ class _MedicationTimeState extends State<MedicationTime> {
               ),
             ],
           ),
-          child: SingleChildScrollView(
+          child:
+              // Scrollbar(
+              //   thumbVisibility: true,
+              //   child:
+              SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,6 +125,7 @@ class _MedicationTimeState extends State<MedicationTime> {
               ],
             ),
           ),
+          // ),
         ),
       ],
     );

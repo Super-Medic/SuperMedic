@@ -111,6 +111,7 @@ class _TOSPage extends State<TOSPage> {
                   //init 호출
                   String stepData = await requestHealthData(
                       key[widget.loginOrgCd]!, widget.healthDataType, 'init');
+                  print(stepData);
                   agree.isChecked == false
                       ? null
                       : Navigator.push(
@@ -126,7 +127,8 @@ class _TOSPage extends State<TOSPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       agree.isChecked == false ? Colors.grey : Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 80, 40),
+                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

@@ -26,7 +26,7 @@ class AuthTimer extends StatefulWidget {
 
 class _AuthTimer extends State<AuthTimer> {
   late HomeProvider _homeProvider;
-
+  String tmp = "500";
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
@@ -87,41 +87,42 @@ class _AuthTimer extends State<AuthTimer> {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () async {
-                  print(widget.healthDataType);
-                  String tmp = await requestHealthData(
+                  tmp = await requestHealthData(
                       widget.loginOrgCd, widget.healthDataType, widget.step,
                       step_data: widget.step_data);
-                  if (tmp == null) {
+
+                  if (tmp != "200") {
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (BuildContext context) {
+                      builder: (context) {
                         return const PopUp();
                       },
                     );
-                  }
+                  } else {
+                    if (widget.healthDataType == "Screenings") {
+                      _homeProvider.screeninggetData();
+                    }
+                    if (widget.healthDataType == "Medicine") {
+                      _homeProvider.medicinegetData();
+                    }
+                    if (widget.healthDataType == "Diagnosis") {
+                      _homeProvider.diagnosisgetData();
+                    }
 
-                  if (widget.healthDataType == "Screenings") {
-                    _homeProvider.screeninggetData();
+                    var nav = Navigator.of(context);
+                    nav.pop();
+                    nav.pop();
+                    nav.pop();
                   }
-                  if (widget.healthDataType == "Medicine") {
-                    _homeProvider.medicinegetData();
-                  }
-                  if (widget.healthDataType == "Diagnosis") {
-                    _homeProvider.diagnosisgetData();
-                  }
-
-                  var nav = Navigator.of(context);
-                  nav.pop();
-                  nav.pop();
-                  nav.pop();
 
                   // context.read<BottomNavigationProvider>().updateCurrentPage(2);
                   // sign 호출 후 데이터 저장 및 홈으로 이동 또는 팝업창
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 80, 40),
+                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -129,7 +130,8 @@ class _AuthTimer extends State<AuthTimer> {
                 child: const NanumTitleText(
                   text: '인증 완료 및 데이터 불러오기',
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+
+                  // fontWeight: FontWeight.bold,
                 ),
               ),
             )),

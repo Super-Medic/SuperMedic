@@ -34,35 +34,6 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
     super.initState();
   }
 
-  //   FutureBuilder(
-  //       future: _loadSecureStorage(),
-  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
-  //         // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
-
-  //         if (snapshot.hasData == true) {
-  //           if (snapshot.data == false) {
-  //             return NotData();
-  //           }
-  //           Medicine medicine = snapshot.data;
-  //           return ExData(medicine);
-  //         }
-  //         //error가 발생하게 될 경우 반환하게 되는 부분
-  //         else if (snapshot.hasError) {
-  //           return Padding(
-  //             padding: const EdgeInsets.all(8.0),
-  //             child: Text(
-  //               'Error: ${snapshot.error}',
-  //               style: const TextStyle(fontSize: 15),
-  //             ),
-  //           );
-  //         }
-  //         //data를 아직 받아 오지 못했을때 실행되는 부분
-  //         else {
-  //           return const CircularProgressIndicator();
-  //         }
-  //       });
-  // }
-
   Widget item(date, text2, text3) {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
@@ -98,52 +69,55 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
   Widget ExData(MedicineModel medicine) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
-
-    return Container(
-      padding: AppTheme.widgetpadding,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: CommonColor.boxshadowcolor.withOpacity(0.02),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextButton.icon(
-              onPressed: () {
-                print("성공");
-              },
-              label: const NanumBodyText(
-                text: '',
-              ),
-              icon: const Row(
-                children: [
-                  NanumTitleText(text: '최근 투약내역'),
-                  // Icon(
-                  //   Icons.chevron_right,
-                  //   weight: 900,
-                  //   color: Colors.black,
-                  // ),
-                ],
-              ),
-              style: TextButton.styleFrom(
-                  iconColor: Colors.green, foregroundColor: Colors.black)),
-          ////////////////////class로 빼기/////////////////////////
-          MedicationTimeline(timeLineValue: medicine.medicineList),
-        ],
-      ),
-    );
+    if (medicine.medicineList!.isEmpty == false) {
+      return Container(
+        padding: AppTheme.widgetpadding,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: CommonColor.widgetbackgroud,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: CommonColor.boxshadowcolor.withOpacity(0.02),
+              spreadRadius: 3,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextButton.icon(
+                onPressed: () {
+                  print("성공");
+                },
+                label: const NanumBodyText(
+                  text: '',
+                ),
+                icon: const Row(
+                  children: [
+                    NanumTitleText(text: '최근 투약내역'),
+                    // Icon(
+                    //   Icons.chevron_right,
+                    //   weight: 900,
+                    //   color: Colors.black,
+                    // ),
+                  ],
+                ),
+                style: TextButton.styleFrom(
+                    iconColor: Colors.green, foregroundColor: Colors.black)),
+            ////////////////////class로 빼기/////////////////////////
+            MedicationTimeline(timeLineValue: medicine.medicineList),
+          ],
+        ),
+      );
+    } else {
+      return NotData('최근 투약내역이 존재하지 않습니다.');
+    }
   }
 
-  Widget NotData() {
+  Widget NotData(String noMedicineDataText) {
     return Column(
       children: [
         Container(
@@ -186,8 +160,8 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                           size: 30,
                           weight: 900,
                         ),
-                        label: const NanumBodyText(
-                          text: '나의 최근 투약내역을 불러오세요',
+                        label: NanumBodyText(
+                          text: noMedicineDataText,
                         ),
                         style: TextButton.styleFrom(
                             iconColor: Colors.green,
@@ -206,120 +180,10 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
     if (_homeProvider.medicineValue != null) {
       return ExData(_homeProvider.medicineValue!);
     } else {
-      return NotData();
+      return NotData('나의 최근 투약내역을 불러오세요');
     }
   }
 }
-
-// class Medicine {
-//   List<MedicineList>? medicineList;
-
-//   Medicine({this.medicineList});
-
-//   Medicine.fromJson(Map<String, dynamic> json) {
-//     if (json['medicineList'] != null) {
-//       medicineList = <MedicineList>[];
-//       json['medicineList'].forEach((v) {
-//         medicineList!.add(MedicineList.fromJson(v));
-//       });
-//     }
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = <String, dynamic>{};
-//     if (medicineList != null) {
-//       data['medicineList'] = medicineList!.map((v) => v.toJson()).toList();
-//     }
-//     return data;
-//   }
-// }
-
-// class MedicineList {
-//   String? No;
-//   String? pharmNm;
-//   String? medDate;
-//   String? medType;
-//   List<MedList>? medList;
-
-//   MedicineList(
-//       {this.No, this.pharmNm, this.medDate, this.medType, this.medList});
-
-//   MedicineList.fromJson(Map<String, dynamic> json) {
-//     No = json['No'];
-//     pharmNm = json['pharmNm'];
-//     medDate = json['medDate'];
-//     medType = json['medType'];
-//     if (json['medList'] != null) {
-//       medList = <MedList>[];
-//       json['medList'].forEach((v) {
-//         medList!.add(MedList.fromJson(v));
-//       });
-//     }
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = <String, dynamic>{};
-//     data['No'] = No;
-//     data['pharmNm'] = pharmNm;
-//     data['medDate'] = medDate;
-//     data['medType'] = medType;
-//     if (medList != null) {
-//       data['medList'] = medList!.map((v) => v.toJson()).toList();
-//     }
-//     return data;
-//   }
-// }
-
-// class MedList {
-//   String? medicineNm;
-//   String? medicineEffect;
-//   String? dosageDay;
-
-//   MedList({this.medicineNm, this.medicineEffect, this.dosageDay});
-
-//   MedList.fromJson(Map<String, dynamic> json) {
-//     medicineNm = json['medicineNm'];
-//     medicineEffect = json['medicineEffect'];
-//     dosageDay = json['dosageDay'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = <String, dynamic>{};
-//     data['medicineNm'] = medicineNm;
-//     data['medicineEffect'] = medicineEffect;
-//     data['dosageDay'] = dosageDay;
-//     return data;
-//   }
-
-//   Widget towidget() {
-//     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-//       const Center(
-//         child: NanumBodyText(
-//           text: "",
-//           fontSize: 20,
-//         ),
-//       ),
-//       Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               NanumTitleText(text: medicineEffect!, fontSize: 15),
-//               const NanumText(
-//                 text: "  ",
-//               ),
-//               NanumTitleText(text: '(${dosageDay!}정)', fontSize: 15),
-//             ],
-//           ),
-//         ],
-//       )
-//     ]);
-//   }
-// }
-
-///////////////////////////////////////////////////////////////////////check point ////////////'/////////?///?//?//////////////////////
-
-// ignore: must_be_immutable
 
 // ignore: must_be_immutable
 class MedicationTimeline extends StatelessWidget {
@@ -391,13 +255,13 @@ class _DeliveryProcesses extends StatelessWidget {
                           text:
                               '${processes[index].time.substring(0, 4)}년 ${processes[index].time.substring(4, 6)}월 ${processes[index].time.substring(6, 8)}일',
                           //style: DefaultTextStyle.of(context).style.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 10.0,
                           color: const Color.fromARGB(163, 0, 0, 0),
                         ),
                         NanumBodyText(
                           text: processes[index].name.split("[")[0],
                           //style: DefaultTextStyle.of(context).style.copyWith(
-                          fontSize: 14.0,
+                          fontSize: 12.0,
                           color: Colors.black,
                         ),
                       ],
