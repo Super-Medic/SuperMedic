@@ -10,6 +10,8 @@ import 'package:super_medic/pages/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:super_medic/pages/medicinePage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print('백 그라운드');
@@ -26,6 +28,12 @@ void main() async {
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   KakaoSdk.init(nativeAppKey: dotenv.env['AppKey']);
+  final prefs = await SharedPreferences.getInstance();
+  if (prefs.getBool('first_run') ?? true) {
+    FlutterSecureStorage storage = FlutterSecureStorage();
+    await storage.deleteAll();
+    prefs.setBool('first_run', false);
+  }
   runApp(const RestartWidget(child: MyApp()));
 }
 
