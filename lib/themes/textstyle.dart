@@ -6,6 +6,7 @@ class NanumTitleText extends StatelessWidget {
   final TextAlign textAlign;
   final Color color;
   final FontWeight fontWeight;
+  final int maxLine;
   const NanumTitleText({
     Key? key,
     required this.text,
@@ -13,20 +14,25 @@ class NanumTitleText extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.color = Colors.black,
     this.fontWeight = FontWeight.normal,
+    this.maxLine = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: this.textAlign,
+      textAlign: textAlign,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquareEB',
-        fontSize: this.fontSize,
-        fontWeight: this.fontWeight,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        
+        
       ),
+      
     );
+    
   }
 }
 
@@ -49,12 +55,13 @@ class NanumBodyText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: this.textAlign,
+      textAlign: textAlign,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquare_acB',
         fontSize: fontSize,
-        fontWeight: this.fontWeight,
+        fontWeight: fontWeight,
+        overflow: TextOverflow.ellipsis,
       ),
       //textAlign: textAlign,
     );
@@ -81,10 +88,11 @@ class NanumText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquareB',
         fontSize: fontSize,
-        fontWeight: this.fontWeight,
+        fontWeight: fontWeight,
+        overflow: TextOverflow.ellipsis,
       ),
       textAlign: textAlign,
       //textAlign: textAlign,

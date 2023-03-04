@@ -16,13 +16,13 @@ Future<String> requestHealthData(
     String loginOrgCd, String healthDataType, String step,
     {String step_data = ''}) async {
   List<String> URIs = [
-    'https://mypd.kr:5000/health/screenings/test',
-    'https://mypd.kr:5000/health/medicine/test',
-    'https://mypd.kr:5000/health/diagnosis/test'
+    'https://mypd.kr:5000/health/screenings/',
+    'https://mypd.kr:5000/health/medicine/',
+    'https://mypd.kr:5000/health/diagnosis/'
   ];
 
-  List<String> lastParamKeys = ['mobileCo', 'subjectType', 'subjectType'];
-  List<String> lastParamValues = ['K', '00', '00'];
+  // List<String> lastParamKeys = ['mobileCo', 'subjectType', 'subjectType'];
+  // List<String> lastParamValues = ['K', '00', '00'];
   String init = '';
   int idx = 0;
   if (step == 'init') {
@@ -43,20 +43,14 @@ Future<String> requestHealthData(
       break;
   }
 
-  String a = await _resultHealthData(URIs[idx] + init, healthDataType,
-      loginOrgCd, lastParamKeys[idx], lastParamValues[idx], step, step_data);
+  String a = await _resultHealthData(
+      URIs[idx] + init, healthDataType, loginOrgCd, step, step_data);
 
   return a;
 }
 
-Future<String> _resultHealthData(
-    String URI,
-    String healthDataType,
-    String loginOrgCd,
-    String lastParamKey,
-    String lastParamValue,
-    String step,
-    String stepData) async {
+Future<String> _resultHealthData(String URI, String healthDataType,
+    String loginOrgCd, String step, String stepData) async {
   const storage = FlutterSecureStorage();
 
   String? userinfoRead = await storage.read(key: "LoginUser");
@@ -68,27 +62,27 @@ Future<String> _resultHealthData(
   } else {
     birthday = '20${userInfo.birthday}';
   }
-
   final response = await http.post(Uri.parse(URI), headers: <String, String>{
     'Content-Type': 'application/x-www-form-urlencoded',
-  }, body: <String, String>{ 
+  }, body: <String, String>{
     'loginOrgCd': loginOrgCd,
     'name': userInfo.name,
     'birthday': birthday,
     'mobileNo': userInfo.phone,
-    lastParamKey: lastParamValue,
+    'mobileCo': userInfo.telecom,
+    'subjectType': "00",
     'step': step,
     'step_data': stepData
   });
 
   if ((response.statusCode == 200) && (step == 'sign')) {
     saveSecureStorage(healthDataType, utf8.decode(response.bodyBytes));
-    return utf8.decode(response.bodyBytes);
+    return response.statusCode.toString();
   } else if (step == 'init') {
     return utf8.decode(response.bodyBytes);
     // 만약 응답이 OK가 아니면, 에러 반환.
   } else {
-    throw Exception('Failed to load post');
+    return response.statusCode.toString();
   }
 }
 

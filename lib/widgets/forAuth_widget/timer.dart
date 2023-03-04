@@ -25,7 +25,16 @@ class _OtpTimerState extends State<OtpTimer> {
       if (mounted) {
         setState(() {
           currentSeconds = timer.tick;
-          if (timer.tick >= timerMaxSeconds) timer.cancel();
+          if (timer.tick >= timerMaxSeconds) {
+            timer.cancel();
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return const PopUp();
+              },
+            );
+          }
         });
       }
     });
@@ -66,5 +75,53 @@ class _OtpTimerState extends State<OtpTimer> {
             ],
           ),
         ));
+  }
+}
+
+class PopUp extends StatelessWidget {
+  const PopUp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      icon: const Icon(
+        Icons.error_outline,
+        size: 35,
+      ),
+      content: const SizedBox(
+        height: 50,
+        child: Column(
+          children: [
+            NanumTitleText(
+              text: '인증 요청이 종료 되었습니다',
+              fontWeight: FontWeight.bold,
+            ),
+            NanumBodyText(
+              text: '다시 시도해주세요',
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        Center(
+          child: ElevatedButton(
+            onPressed: () {
+              var nav = Navigator.of(context);
+              nav.pop();
+              nav.pop();
+            },
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(MediaQuery.of(context).size.width - 180, 40),
+              backgroundColor: Colors.green,
+            ),
+            child: const NanumBodyText(
+              text: '확인',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
