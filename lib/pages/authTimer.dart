@@ -92,6 +92,7 @@ class _AuthTimer extends State<AuthTimer> {
                       step_data: widget.step_data);
 
                   if (tmp != "200") {
+                    // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,
                       barrierDismissible: false,
