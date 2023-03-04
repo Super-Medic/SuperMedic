@@ -78,7 +78,7 @@ class NoteRecodePage extends StatelessWidget {
                   maxLines: null,
                   controller: NoteText,
                   decoration: const InputDecoration(
-                    labelText: 'NoteText',
+                    labelText: '오늘 하루를 기록해보세요',
                     floatingLabelStyle: TextStyle(color: Colors.greenAccent),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.greenAccent),
