@@ -19,12 +19,12 @@ class NanumTitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: this.textAlign,
+      textAlign: textAlign,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquareEB',
-        fontSize: this.fontSize,
-        fontWeight: this.fontWeight,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
       ),
     );
   }
@@ -49,12 +49,12 @@ class NanumBodyText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: this.textAlign,
+      textAlign: textAlign,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquare_acB',
         fontSize: fontSize,
-        fontWeight: this.fontWeight,
+        fontWeight: fontWeight,
       ),
       //textAlign: textAlign,
     );
@@ -81,10 +81,10 @@ class NanumText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: this.color,
+        color: color,
         fontFamily: 'NanumSquareB',
         fontSize: fontSize,
-        fontWeight: this.fontWeight,
+        fontWeight: fontWeight,
       ),
       textAlign: textAlign,
       //textAlign: textAlign,
