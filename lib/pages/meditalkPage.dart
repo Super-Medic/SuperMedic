@@ -49,10 +49,17 @@ class MeditalkPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: 300,
+              width: 125,
               child: Image.asset('assets/images/meditalking.png'),
             ),
-            const NanumTitleText(text: '슈메톡 서비스가\n곧 찾아옵니다!'),
+            const SizedBox(
+              height: 30,
+            ),
+            const NanumTitleText(
+              text: '슈메톡 서비스가\n곧 찾아옵니다!',
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
             const SizedBox(
               height: 10,
             ),

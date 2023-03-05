@@ -6,6 +6,7 @@ class NanumTitleText extends StatelessWidget {
   final TextAlign textAlign;
   final Color color;
   final FontWeight fontWeight;
+  final int maxLine;
   const NanumTitleText({
     Key? key,
     required this.text,
@@ -13,6 +14,7 @@ class NanumTitleText extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.color = Colors.black,
     this.fontWeight = FontWeight.normal,
+    this.maxLine = 1,
   }) : super(key: key);
 
   @override

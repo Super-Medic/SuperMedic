@@ -108,16 +108,20 @@ class _TOSPage extends State<TOSPage> {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () async {
+                  print(widget.loginOrgCd);
+                  print(key[widget.loginOrgCd]);
+                  print(key['삼성패스']);
                   //init 호출
                   String stepData = await requestHealthData(
                       key[widget.loginOrgCd]!, widget.healthDataType, 'init');
+
                   agree.isChecked == false
                       ? null
                       : Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) => AuthTimer(
-                                    loginOrgCd: widget.loginOrgCd,
+                                    loginOrgCd: key[widget.loginOrgCd]!,
                                     healthDataType: widget.healthDataType,
                                     step: 'sign',
                                     step_data: stepData,
@@ -126,7 +130,8 @@ class _TOSPage extends State<TOSPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       agree.isChecked == false ? Colors.grey : Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 80, 40),
+                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -171,6 +176,6 @@ class _TOSPage extends State<TOSPage> {
     '통신사패스': 'pass',
     'KB 모바일': 'kb',
     '토스': 'toss',
-    '삼성패스': 'kica'
+    '삼성패스': 'kica',
   };
 }

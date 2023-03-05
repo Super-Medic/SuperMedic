@@ -12,18 +12,28 @@ class BloodSugarGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: <Widget>[
         _homeProvider.bloodSugarValue.isNotEmpty
-            ? AspectRatio(
-                aspectRatio: 1.5,
-                child: Padding(
+            ? SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
                   padding: const EdgeInsets.only(
                     right: 10,
                     left: 0,
                     bottom: 5,
-                    top: 50,
+                    top: 60,
                   ),
+                  width: _homeProvider.bloodSugarValue.length <= 7
+                      ? screenWidth * 0.14 * 6
+                      : _homeProvider.bloodSugarValue.length > 30
+                          ? screenWidth * 0.14 * 29
+                          : screenWidth *
+                              0.14 *
+                              (_homeProvider.bloodSugarValue.length - 1),
+                  height: screenHeight * 0.35,
                   child: Consumer<HomeProvider>(
                     builder: (context, homeProvider, child) => LineChart(
                       mainData(homeProvider,
@@ -31,6 +41,8 @@ class BloodSugarGraph extends StatelessWidget {
                     ),
                   ),
                 ),
+                // ),
+                // ),
               )
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
@@ -100,8 +112,8 @@ class BloodSugarGraph extends StatelessWidget {
           double.parse(i.toString()), double.parse(valueData[i].toString())));
     }
     int indexValue = homeProvider.bloodsugarCount == -1
-        ? count > 6
-            ? 6
+        ? count > 29
+            ? 29
             : count
         : homeProvider.bloodsugarCount;
     final lineBarData = [
@@ -187,10 +199,11 @@ class BloodSugarGraph extends StatelessWidget {
                   color: Color.fromARGB(116, 158, 158, 158), width: 0.5))),
       clipData: FlClipData.none(),
       minX: 0,
-      maxX: 6,
-      // _homeProvider.bloodSugarValue.length < 7
-      //     ? double.parse((_homeProvider.bloodSugarValue.length - 1).toString())
-      //     : 6,
+      maxX: count <= 6
+          ? 6
+          : count >= 29
+              ? 29
+              : double.parse((count).toString()),
       minY: 0,
       maxY: 180,
       lineBarsData: lineBarData,
@@ -286,28 +299,30 @@ class BloodSugarGraph extends StatelessWidget {
 
 List<String> _getDateData(dateData) {
   List<String> listData = [];
-  if (dateData.length < 7) {
+  if (dateData.length < 30) {
     for (int i = 0; i < dateData.length; i++) {
       listData.add(dateData[i].DateTime_Md);
     }
-  } else if (dateData.length >= 7) {
-    for (int i = dateData.length - 7; i < dateData.length; i++) {
+  } else if (dateData.length >= 30) {
+    for (int i = dateData.length - 30; i < dateData.length; i++) {
       listData.add(dateData[i].DateTime_Md);
     }
   }
+
   return listData;
 }
 
 List<String> _getValueData(valueData) {
   List<String> listData = [];
-  if (valueData.length < 7) {
+  if (valueData.length < 30) {
     for (int i = 0; i < valueData.length; i++) {
       listData.add(valueData[i].bloodsugar);
     }
-  } else if (valueData.length >= 7) {
-    for (int i = valueData.length - 7; i < valueData.length; i++) {
+  } else if (valueData.length >= 30) {
+    for (int i = valueData.length - 30; i < valueData.length; i++) {
       listData.add(valueData[i].bloodsugar);
     }
   }
+
   return listData;
 }

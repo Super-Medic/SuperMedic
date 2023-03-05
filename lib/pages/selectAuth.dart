@@ -57,7 +57,7 @@ class _AuthPage extends State<AuthPage> {
               height: 25.0,
             ),
             const NanumTitleText(
-              text: '인증서를 선택해주새요.',
+              text: '인증서를 선택해주세요',
               fontSize: 25.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -108,7 +108,8 @@ class _AuthPage extends State<AuthPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: getTrue() == '' ? Colors.grey : Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 80, 40),
+                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -145,7 +146,9 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0.0,
       shape: RoundedRectangleBorder(
+        // side: BorderSide.none,
         borderRadius: BorderRadius.circular(25),
       ),
       color: _item.isChecked
