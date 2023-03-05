@@ -27,12 +27,8 @@ class NanumTitleText extends StatelessWidget {
         fontFamily: 'NanumSquareEB',
         fontSize: fontSize,
         fontWeight: fontWeight,
-        
-        
       ),
-      
     );
-    
   }
 }
 
@@ -61,7 +57,6 @@ class NanumBodyText extends StatelessWidget {
         fontFamily: 'NanumSquare_acB',
         fontSize: fontSize,
         fontWeight: fontWeight,
-        overflow: TextOverflow.ellipsis,
       ),
       //textAlign: textAlign,
     );
@@ -92,7 +87,6 @@ class NanumText extends StatelessWidget {
         fontFamily: 'NanumSquareB',
         fontSize: fontSize,
         fontWeight: fontWeight,
-        overflow: TextOverflow.ellipsis,
       ),
       textAlign: textAlign,
       //textAlign: textAlign,

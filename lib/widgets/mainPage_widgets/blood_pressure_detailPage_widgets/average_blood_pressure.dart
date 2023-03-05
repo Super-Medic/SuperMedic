@@ -131,10 +131,10 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                           const SizedBox(height: 10),
                           NanumTitleText(text: '최저 ${minBlood}mmHg'),
                           const SizedBox(height: 10),
-                          const NanumText(
-                            text: '최근 혈압이 높아지고 있어요 고혈압이 의심돼요.',
-                            fontSize: 9,
-                          ),
+                          // const NanumText(
+                          //   text: '최근 혈압이 높아지고 있어요 고혈압이 의심돼요.',
+                          //   fontSize: 9,
+                          // ),
                         ],
                       ))
                     : const SizedBox(

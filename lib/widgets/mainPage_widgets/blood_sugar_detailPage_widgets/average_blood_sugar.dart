@@ -126,10 +126,10 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                               ? NanumTitleText(text: '$ttime ${aver}mg/dL')
                               : NanumTitleText(text: '${aver}mg/dL'),
                           const SizedBox(height: 10),
-                          const NanumText(
-                            text: '혈당 수치가 높아지고 있어요 주의해주세요.',
-                            fontSize: 9,
-                          ),
+                          // const NanumText(
+                          //   text: '혈당 수치가 높아지고 있어요 주의해주세요.',
+                          //   fontSize: 9,
+                          // ),
                         ],
                       ))
                     : const SizedBox(
