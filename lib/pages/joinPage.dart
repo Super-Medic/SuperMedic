@@ -3,9 +3,12 @@ import 'package:super_medic/pages/jointosPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class JoinPage extends StatefulWidget {
-  const JoinPage({super.key});
+  String platform;
+  AuthorizationCredentialAppleID? credential;
+  JoinPage({super.key, required this.platform, this.credential});
 
   @override
   _JoinPageState createState() => _JoinPageState();
@@ -91,11 +94,14 @@ class _JoinPageState extends State<JoinPage> {
                       ),
                     ),
                     child: JointosPage(
-                        phone: phone,
-                        telecom: telecom,
-                        frist_number: frist_number,
-                        second_number: second_number,
-                        name: name),
+                      phone: phone,
+                      telecom: telecom,
+                      frist_number: frist_number,
+                      second_number: second_number,
+                      name: name,
+                      paltform: widget.platform,
+                      credential: widget.credential,
+                    ),
                   );
                 },
               );

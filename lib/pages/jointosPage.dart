@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
+import 'package:super_medic/function/apple_login.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/widgets/forAuth_widget/itemClass.dart';
 import 'package:super_medic/widgets/forAuth_widget/customCheckBox.dart';
 import 'package:super_medic/widgets/forAuth_widget/customCheckBoxTitle.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class JointosPage extends StatefulWidget {
   JointosPage(
@@ -15,13 +17,18 @@ class JointosPage extends StatefulWidget {
       required this.telecom,
       required this.frist_number,
       required this.second_number,
-      required this.name})
+      required this.name,
+      required this.paltform,
+      this.credential})
       : super(key: key);
   String phone;
   String telecom;
   String frist_number;
   String second_number;
   String name;
+  String paltform;
+  AuthorizationCredentialAppleID? credential;
+
   @override
   State<JointosPage> createState() => _JointosPage();
 }
@@ -121,13 +128,26 @@ class _JointosPage extends State<JointosPage> {
               alignment: Alignment.bottomCenter,
               child: TextButton(
                 onPressed: () async {
-                  KakaoLogin kakaologin = KakaoLogin();
-                  var joinresult = await kakaologin.get_user_join(
-                      widget.phone,
-                      widget.telecom,
-                      widget.frist_number,
-                      widget.second_number,
-                      widget.name);
+                  // ignore: prefer_typing_uninitialized_variables
+                  var joinresult;
+                  if (widget.paltform == 'kakao') {
+                    KakaoLogin kakaologin = KakaoLogin();
+                    joinresult = await kakaologin.get_user_join(
+                        widget.phone,
+                        widget.telecom,
+                        widget.frist_number,
+                        widget.second_number,
+                        widget.name);
+                  } else if (widget.paltform == 'apple') {
+                    AppleLogin applelogin = AppleLogin();
+                    joinresult = await applelogin.get_user_join(
+                        widget.phone,
+                        widget.telecom,
+                        widget.frist_number,
+                        widget.second_number,
+                        widget.name,
+                        widget.credential);
+                  }
                   if (joinresult == 'true') {
                     // ignore: use_build_context_synchronously
                     Navigator.push(
