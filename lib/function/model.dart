@@ -428,8 +428,8 @@ class LoginModel {
 
   LoginModel.fromJson(Map<String, dynamic> json)
       : type = json['type'],
-        accessToken = json['accessToken'],
-        reflashToken = json['reflashToken'],
+        accessToken = json['accessToken'], // Apple Login일 경우 userId
+        reflashToken = json['reflashToken'], // Apple Login일 경우 identityToken
         email = json['email'],
         name = json['name'],
         phone = json['phone'],

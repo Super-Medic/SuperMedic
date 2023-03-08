@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
 import 'dart:async';
@@ -8,6 +9,8 @@ import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/loginPage.dart';
 import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
+import 'package:super_medic/function/apple_login.dart';
+import 'package:super_medic/function/LoginVerify.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +21,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   KakaoLogin kakaologin = KakaoLogin();
+  AppleLogin applelogin = AppleLogin();
   @override
   void initState() {
     super.initState();
@@ -54,7 +58,36 @@ class _SplashScreenState extends State<SplashScreen> {
                       LoginPage(being: storageBeing)), //LoginPage
             );
           }
-        } else if (val.type == 'Naver') {}
+        } else if (val.type == 'Naver') {
+        } else if (val.type == 'Apple') {
+          int loginValidation = await applelogin.AppleUidVerifiy(val);
+          if (loginValidation == 0) {
+            await loadDiseaseSecureStorage() == true
+                // ignore: use_build_context_synchronously
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainPage()),
+                  )
+                // ignore: use_build_context_synchronously
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SelectChronicDisease()));
+          } else {
+            // 자동 로그아웃 후 다시 로그인 페이지
+            await deleteSecureStorage();
+            storageBeing = false;
+            //없는데 로그인
+            // ignore: use_build_context_synchronously
+            Navigator.push(
+              context,
+              // MaterialPageRoute(builder: (context) => MainPage()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LoginPage(being: storageBeing)), //LoginPage
+            );
+          }
+        }
       } else {
         storageBeing = false;
         //없는데 로그인
@@ -108,6 +141,41 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  void _showAlert({String? title, String? message}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text(title!),
+            content: Text(message!),
+            actions: [
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: const Text("확인"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
+  deleteSecureStorage() async {
+    Login_verify secession = Login_verify();
+    const storage = FlutterSecureStorage();
+    String? userinfoRead = await storage.read(key: "LoginUser");
+
+    LoginModel userInfo = LoginModel.fromJson(jsonDecode(userinfoRead!));
+
+    final val = await secession.userSecession(userInfo.email);
+    if (val == 'true') {
+      const storage = FlutterSecureStorage();
+      await storage.deleteAll();
+    } else {
+      _showAlert(title: "에러", message: "다시 시도해주세요");
+    }
   }
 }
 

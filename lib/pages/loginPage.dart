@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:super_medic/function/kakao_login.dart';
+import 'package:super_medic/function/apple_login.dart';
 import 'package:super_medic/pages/joinPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
@@ -15,6 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   KakaoLogin kakaologin = KakaoLogin();
+  AppleLogin applelogin = AppleLogin();
   bool isLoading = false;
 
   @override
@@ -23,6 +28,7 @@ class LoginPageState extends State<LoginPage> {
     const String imagekakaoLoginName =
         'assets/images/kakao_login_large_wide.png';
     const String imagenaverLoginName = 'assets/images/naver_login.png';
+    const String imageAppleLoginName = 'assets/images/apple_login.png';
 
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -104,7 +110,9 @@ class LoginPageState extends State<LoginPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const JoinPage()));
+                          builder: (context) => JoinPage(
+                                platform: 'kakao',
+                              )));
                   // ignore: use_build_context_synchronously
                 } else {
                   _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
@@ -125,6 +133,38 @@ class LoginPageState extends State<LoginPage> {
                         message: "서비스 준비중입니다.\n카카오 로그인으로 시도해주세요.");
                   }),
             ),
+            if (defaultTargetPlatform == TargetPlatform.iOS)
+              InkWell(
+                child: Image.asset(
+                  imageAppleLoginName,
+                  width: screenWidth * 0.7,
+                  height: screenHeight * 0.07,
+                ),
+                onTap: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  var result = await applelogin.signInWithApple();
+                  setState(() {
+                    isLoading = false;
+                  });
+                  // ignore: unrelated_type_equality_checks
+                  if (await applelogin.AppleUidVerifiy2(result) == 0) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => JoinPage(
+                          platform: 'apple',
+                          credential: result,
+                        ),
+                      ),
+                    );
+                  } else {
+                    _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
+                  }
+                },
+              ),
             Align(
               child: Text("© Copyright 2023, 슈퍼메딕(MYPD)",
                   style: TextStyle(

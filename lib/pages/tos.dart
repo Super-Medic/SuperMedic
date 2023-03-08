@@ -6,6 +6,7 @@ import 'package:super_medic/widgets/forAuth_widget/itemClass.dart';
 import 'package:super_medic/widgets/forAuth_widget/customCheckBox.dart';
 import 'package:super_medic/widgets/forAuth_widget/customCheckBoxTitle.dart';
 import 'package:super_medic/widgets/server_widgets/requestHealthData.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class TOSPage extends StatefulWidget {
   final String loginOrgCd;
@@ -22,6 +23,7 @@ class _TOSPage extends State<TOSPage> {
   List<Item> items = List.empty(growable: true);
   final Item agree =
       Item(data: "전체동의", page: 'assets/images/tos.png', isChecked: false);
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -36,18 +38,6 @@ class _TOSPage extends State<TOSPage> {
         page:
             'https://ringed-rutabaga-f09.notion.site/4f6734367bf14be98688c6acccfdd6df',
         isChecked: false));
-    // items.add(Item(
-    //     data: "(필수) [건강보험공단] 개인정보 이용 동의",
-    //     page: 'assets/images/pass.png',
-    //     isChecked: false));
-    // items.add(Item(
-    //     data: "(필수) [건강보험공단] 서비스 이용약관",
-    //     page: 'assets/images/kb.png',
-    //     isChecked: false));
-    // items.add(Item(
-    //     data: "(필수) 고유식별번호 처리 동의(본인확인)",
-    //     page: 'assets/images/tos.png',
-    //     isChecked: false));
   }
 
   @override
@@ -69,85 +59,119 @@ class _TOSPage extends State<TOSPage> {
             ),
           )),
       // ignore: prefer_const_constructors
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25.0,
-            ),
-            const NanumTitleText(
-              text: '약관 내용에 동의해주세요',
-              fontSize: 25.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            const SizedBox(
-              height: 60.0,
-            ),
-            CustomCheckBoxTitle(
-              item: agree,
-              func: itemChange,
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 2,
-                // shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return CustomCheckBox(
-                    item: items[index],
-                    func: checkAll,
-                  );
-                },
-              ),
-            ),
-            SafeArea(
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                onPressed: () async {
-                  print(widget.loginOrgCd);
-                  print(key[widget.loginOrgCd]);
-                  print(key['삼성패스']);
-                  //init 호출
-                  String stepData = await requestHealthData(
-                      key[widget.loginOrgCd]!, widget.healthDataType, 'init');
-
-                  agree.isChecked == false
-                      ? null
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => AuthTimer(
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 25.0,
+                ),
+                const NanumTitleText(
+                  text: '약관 내용에 동의해주세요',
+                  fontSize: 25.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(
+                  height: 60.0,
+                ),
+                CustomCheckBoxTitle(
+                  item: agree,
+                  func: itemChange,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 2,
+                    // shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CustomCheckBox(
+                        item: items[index],
+                        func: checkAll,
+                      );
+                    },
+                  ),
+                ),
+                SafeArea(
+                    child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      //init 호출
+                      String stepData = await requestHealthData(
+                          key[widget.loginOrgCd]!,
+                          widget.healthDataType,
+                          'init');
+                      if (mounted) {
+                        agree.isChecked == false
+                            ? null
+                            // ignore: use_build_context_synchronously
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => AuthTimer(
                                     loginOrgCd: key[widget.loginOrgCd]!,
                                     healthDataType: widget.healthDataType,
                                     step: 'sign',
                                     step_data: stepData,
-                                  )));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      agree.isChecked == false ? Colors.grey : Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              );
+                      }
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          agree.isChecked == false ? Colors.grey : Colors.green,
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width - 30, 50),
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const NanumTitleText(
+                      text: '다음',
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                child: const NanumTitleText(
-                  text: '다음',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )),
-            const Padding(
-              padding: EdgeInsets.all(10),
-            )
-          ],
-        ),
+                )),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                )
+              ],
+            ),
+          ),
+          Stack(children: <Widget>[
+            Opacity(
+              opacity: 0.5, //0.5만큼~
+              child: isLoading
+                  ? ModalBarrier(dismissible: false, color: Colors.black)
+                  : null, //클릭 못하게~
+            ),
+            Center(
+              child: isLoading
+                  ? SpinKitSpinningCircle(
+                      itemBuilder: (context, index) {
+                        return Center(
+                            child: Image.asset(
+                          'assets/images/loading.png',
+                        ));
+                      },
+                    )
+                  : null, //무지성 돌돌이~
+            ),
+          ]),
+        ],
       ),
     );
   }
