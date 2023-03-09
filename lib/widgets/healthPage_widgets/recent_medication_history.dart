@@ -97,7 +97,9 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                 ),
                 icon: const Row(
                   children: [
-                    NanumTitleText(text: '최근 투약내역'),
+                    NanumTitleText(
+                      text: '최근 투약내역',
+                    ),
                     // Icon(
                     //   Icons.chevron_right,
                     //   weight: 900,
@@ -121,10 +123,11 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
     return Column(
       children: [
         Container(
+            padding: EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -142,6 +145,8 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '최근 투약내역',
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(

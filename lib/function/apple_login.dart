@@ -10,6 +10,7 @@ class AppleLogin {
   //ignore: non_constant_identifier_names
   Future<String> get_user_join(
       phnoe, telecom, fristNumber, secondNumber, name, credential) async {
+    print(credential);
     try {
       final response = await http.post(
         Uri.https('mypd.kr:5000', '/user/join'),

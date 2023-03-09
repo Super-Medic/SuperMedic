@@ -81,7 +81,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -95,10 +95,12 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: EdgeInsets.only(left: 15, top: 23),
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '예방접종 내역',
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(
@@ -115,7 +117,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                         },
                         icon: const Icon(
                           Icons.hourglass_top_rounded,
-                          size: 30,
+                          size: 23,
                           weight: 900,
                         ),
                         label: const NanumBodyText(
@@ -164,7 +166,9 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(text: '예방접종 내역'),
+                  NanumTitleText(
+                    text: '예방접종 내역',
+                  ),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,

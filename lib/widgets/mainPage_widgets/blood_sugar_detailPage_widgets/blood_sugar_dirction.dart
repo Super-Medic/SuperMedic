@@ -41,11 +41,11 @@ class _BloodSugarDirction extends State<BloodSugarDirction> {
                     ),
                     TextButton(
                         onPressed: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BloodSugarRecordPage()))
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const BloodSugarRecordPage()))
                             },
                         style: TextButton.styleFrom(
                           backgroundColor:

@@ -109,7 +109,7 @@ class _MedicinePageState extends State<MedicinePage> {
           backgroundColor: Colors.white,
           elevation: 0.0,
           title: const NanumTitleText(
-            text: "복약 알림",
+            text: "복약 관리",
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -126,7 +126,7 @@ class _MedicinePageState extends State<MedicinePage> {
               unselectedLabelColor: Colors.grey[700]),
           tabs: const [
             NanumBodyText(
-              text: '복약알림',
+              text: '복약등록',
               fontWeight: FontWeight.bold,
             ),
             NanumBodyText(
