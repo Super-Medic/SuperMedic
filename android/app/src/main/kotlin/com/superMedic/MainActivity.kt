@@ -1,4 +1,4 @@
-package com.example.super_medic
+package com.superMedic
 
 import io.flutter.embedding.android.FlutterActivity
 

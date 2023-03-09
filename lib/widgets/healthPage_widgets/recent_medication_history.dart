@@ -145,8 +145,8 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '최근 투약내역',
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                                fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(

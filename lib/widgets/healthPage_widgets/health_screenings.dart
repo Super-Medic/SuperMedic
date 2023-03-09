@@ -69,6 +69,38 @@ class _HealthScreenings extends State<HealthScreenings> {
     );
   }
 
+  Widget Get_health_Grade(String type, double value) {
+    double score = double.parse(value as String);
+    switch (type) {
+      case "BMI":
+        if (score >= 30) {
+          State_danger();
+        } else if (score >= 25 && score <= 29.8) {
+          State_caution();
+        } else if (score >= 18.5 && score <= 24.9) {
+          State_normal();
+        }
+        break;
+      case "FBG":
+        if (score >= 126) {
+          State_danger();
+        } else if (score >= 100 && score <= 125) {
+          State_caution();
+        } else if (score < 100) {
+          State_normal();
+        }
+        break;
+      case "GFR":
+        if (score < 60) {
+          State_caution();
+        } else if (score >= 60) {
+          State_normal();
+        }
+        break;
+    }
+    return State_danger();
+  }
+
   // ignore: non_constant_identifier_names
 
   // ignore: non_constant_identifier_names
@@ -356,7 +388,7 @@ class _HealthScreenings extends State<HealthScreenings> {
     return Column(
       children: [
         Container(
-            padding: EdgeInsets.only(left: 15, top: 8),
+            padding: const EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
@@ -378,8 +410,8 @@ class _HealthScreenings extends State<HealthScreenings> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '건강검진',
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(

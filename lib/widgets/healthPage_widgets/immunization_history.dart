@@ -95,12 +95,12 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.only(left: 15, top: 23),
+                  padding: const EdgeInsets.only(left: 15, top: 23),
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '예방접종 내역',
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(
@@ -108,12 +108,12 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                     width: double.infinity,
                     child: TextButton.icon(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const AuthPage(
-                                        healthDataType: "immunization",
-                                      )));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) => const AuthPage(
+                          //               healthDataType: "immunization",
+                          //             )));
                         },
                         icon: const Icon(
                           Icons.hourglass_top_rounded,

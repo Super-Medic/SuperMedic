@@ -18,8 +18,9 @@ class SymptomRecordSelect extends StatefulWidget {
 
 class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
   late HomeProvider _homeProvider;
+
   bool selected = false;
-  final Map<String, List<Map<String, dynamic>>> dailySymptom = {
+  late Map<String, List<Map<String, dynamic>>> dailySymptom = {
     "Head": [
       {'state': '두통', 'isCheck': false},
       {'state': '편두통', 'isCheck': false},
@@ -59,11 +60,52 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
     ]
   };
 
+// 오늘 기록된 증상이 존재할 경우 해당 증상은 체크
+  todaySymptomCheck(dynamic todaySymptom) async {
+    DateTime now = DateTime.now();
+    final dateKey = DateFormat('yyyy년MM월dd일').format(DateTime.now());
+    if (todaySymptom.isEmpty == false) {
+      for (int i = 0; i < todaySymptom.length; i++) {
+        if (todaySymptom[i].DateTime == dateKey) {
+          for (int j = 0; j < todaySymptom[i].symptom.length; j++) {
+            for (int k = 0; k < dailySymptom.keys.length; k++) {
+              for (int l = 0;
+                  l < dailySymptom[dailySymptom.keys.toList()[k]]!.length;
+                  l++) {
+                if (dailySymptom[dailySymptom.keys.toList()[k]]![l]['state'] ==
+                    todaySymptom[i].symptom[j]) {
+                  dailySymptom[dailySymptom.keys.toList()[k]]![l]['isCheck'] =
+                      true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      dynamic todaySymptom =
+          Provider.of<HomeProvider>(context, listen: false).symptomsValue;
+      todaySymptomCheck(todaySymptom).then((result) {
+        setState(() {});
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
+
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+
     final ButtonStyle style = TextButton.styleFrom(
       shape: RoundedRectangleBorder(
           //모서리를 둥글게
@@ -174,7 +216,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
             style: style,
             onPressed: selected == true
                 ? () async {
-                    await saveSymptoms(dailySymptom);
+                    await saveSymptoms(dailySymptom, context);
                     // _homeProvider.symptomgetData();
                     Provider.of<HomeProvider>(context, listen: false)
                         .symptomgetData();
@@ -268,9 +310,11 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
   }
 }
 
-saveSymptoms(Map<String, List<Map<String, dynamic>>> symptom) async {
+saveSymptoms(Map<String, List<Map<String, dynamic>>> symptom,
+    BuildContext context) async {
+  late HomeProvider homeProvider = context.watch<HomeProvider>();
   DateTime now = DateTime.now();
-  final dateKey = DateFormat('yyyy년MM월dd일hh시mm분ss초').format(DateTime.now());
+  final dateKey = DateFormat('yyyy년MM월dd일').format(DateTime.now());
 
   const storage = FlutterSecureStorage();
 
