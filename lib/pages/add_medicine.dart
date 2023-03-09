@@ -103,7 +103,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                             const TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                           hintText: '약1, 약2, 약3 ...',
-                          hintStyle: const TextStyle(fontSize: 12),
+                          hintStyle: const TextStyle(fontSize: 14),
                           contentPadding:
                               const EdgeInsets.only(left: 10, top: 10),
                           prefixIcon: _pickedFile == null
@@ -183,6 +183,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                   items[i].isChecked = value;
                                 });
                               },
+                              inactiveBgColor: Colors.transparent,
                               activeBgColor: Colors.green,
                               inactiveBorderColor: Colors.grey,
                               inactiveIcon: Align(
@@ -250,8 +251,8 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                               });
                             },
                             style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              side: const BorderSide(color: Colors.white),
+                              backgroundColor: Colors.transparent,
+                              side: const BorderSide(color: Colors.transparent),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -317,9 +318,9 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                           });
                                         },
                                         style: OutlinedButton.styleFrom(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: Colors.transparent,
                                           side: const BorderSide(
-                                              color: Colors.white),
+                                              color: Colors.transparent),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),

@@ -599,19 +599,12 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "슈퍼메딕";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-<<<<<<< HEAD
-=======
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 1.0;
-=======
 				MARKETING_VERSION = 0.0.1;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				PRODUCT_BUNDLE_IDENTIFIER = com.superMedic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -895,19 +888,12 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "슈퍼메딕";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-<<<<<<< HEAD
-=======
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 1.0;
-=======
 				MARKETING_VERSION = 0.0.1;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				"OTHER_CFLAGS[arch=*]" = "-fstack-protector-all";
 				PRODUCT_BUNDLE_IDENTIFIER = com.superMedic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -931,19 +917,12 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "슈퍼메딕";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-<<<<<<< HEAD
-=======
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 1.0;
-=======
 				MARKETING_VERSION = 0.0.1;
->>>>>>> f264328011bb04b2fa2d7f7e759ac7604db444cf
 				PRODUCT_BUNDLE_IDENTIFIER = com.superMedic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
