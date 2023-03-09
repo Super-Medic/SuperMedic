@@ -46,7 +46,7 @@ class _JoinPageState extends State<JoinPage> {
               label,
               style: const TextStyle(
                 fontSize: 12.0,
-                fontWeight: FontWeight.w700,
+                // fontWeight: FontWeight.w700,
               ),
             ),
           ],
@@ -192,7 +192,7 @@ class _JoinPageState extends State<JoinPage> {
                         '통신사',
                         style: TextStyle(
                           fontSize: 12.0,
-                          fontWeight: FontWeight.w700,
+                          // fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],

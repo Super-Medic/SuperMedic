@@ -55,8 +55,8 @@ class _SymptomState extends State<Symptom> {
                     children: [
                       NanumTitleText(
                         text: '증상',
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
                       ),
                       // Icon(
                       //   Icons.chevron_right,
@@ -103,34 +103,39 @@ class _SymptomState extends State<Symptom> {
           ],
         ),
         _homeProvider.symptomsValue.isEmpty == false
-            ? Center(
+            ? Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.075,
+                    vertical: screenHeight * 0.02),
                 child: Column(children: [
-                  Wrap(
-                    direction: Axis.horizontal,
-                    // alignment: WrapAlignment.start,
-                    spacing: screenWidth * 0.03,
-                    runSpacing: screenHeight * 0.01,
-
-                    alignment: WrapAlignment.start,
-                    children: List.generate(
-                      _homeProvider
-                          .symptomsValue[_homeProvider.symptomsValue.length - 1]
-                          .symptom
-                          .length,
-                      (index) {
-                        return symptomList(
-                            context,
-                            index,
-                            _homeProvider
-                                .symptomsValue[
-                                    _homeProvider.symptomsValue.length - 1]
-                                .symptom);
-                      },
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Wrap(
+                      alignment: WrapAlignment.start,
+                      direction: Axis.horizontal,
+                      // alignment: WrapAlignment.start,
+                      spacing: screenWidth * 0.03,
+                      runSpacing: screenHeight * 0.01,
+                      children: List.generate(
+                        _homeProvider
+                            .symptomsValue[
+                                _homeProvider.symptomsValue.length - 1]
+                            .symptom
+                            .length,
+                        (index) {
+                          return symptomList(
+                              context,
+                              index,
+                              _homeProvider
+                                  .symptomsValue[
+                                      _homeProvider.symptomsValue.length - 1]
+                                  .symptom);
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02)
-                ]),
-              )
+                  // SizedBox(height: screenHeight * 0.02)
+                ]))
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child:

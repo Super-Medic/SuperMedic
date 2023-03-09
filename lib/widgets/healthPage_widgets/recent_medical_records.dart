@@ -50,8 +50,8 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '최근 진료내역',
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                                fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(
