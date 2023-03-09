@@ -21,6 +21,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
   List<Item> items = List.empty(growable: true);
   List<Time> times = List.empty(growable: true);
   XFile? _pickedFile;
+
   final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -53,307 +54,323 @@ class _AddMedicinePage extends State<AddMedicinePage> {
   @override
   Widget build(BuildContext context) {
     final imageSize = MediaQuery.of(context).size.width / 4;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 25.0,
-        ),
-        const Center(
-          child: NanumTitleText(
-            text: '약 등록',
-            fontSize: 25.0,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(
-          height: 20.0,
-        ),
-        Expanded(
-          child: Column(
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: checkValidate() ? Colors.green : Colors.grey,
+      body: SafeArea(
+        top: false,
+        child: Scaffold(
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(top: 25, left: 20),
-                child: const NanumTitleText(
-                  text: '약 이름을 입력해주세요',
-                  fontSize: 15,
+              const SizedBox(
+                height: 25.0,
+              ),
+              const Center(
+                child: NanumTitleText(
+                  text: '약 등록',
+                  fontSize: 25.0,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 30, top: 10),
-                child: TextFormField(
-                  controller: _textEditingController,
-                  textInputAction: TextInputAction.done,
-                  focusNode: textFocus,
-                  maxLines: null,
-                  textAlignVertical: TextAlignVertical.top,
-                  style: const TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
-                    hintText: '약1, 약2, 약3 ...',
-                    hintStyle: const TextStyle(fontSize: 12),
-                    contentPadding: const EdgeInsets.only(left: 10, top: 10),
-                    prefixIcon: _pickedFile == null
-                        ? null
-                        : Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              width: imageSize,
-                              height: imageSize,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10.0),
-                                ),
-                                image: DecorationImage(
-                                    image: FileImage(File(_pickedFile!.path)),
-                                    fit: BoxFit.cover),
-                              ),
-                            )),
-                    suffixIcon: GestureDetector(
-                      child: const Icon(
-                        Icons.camera_alt_outlined,
-                      ),
-                      onTap: () {
-                        textFocus.unfocus();
-                        _showBottomSheet();
-                      },
-                    ),
-                    suffixIconColor: MaterialStateColor.resolveWith((states) =>
-                        states.contains(MaterialState.focused)
-                            ? Colors.green
-                            : Colors.grey),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
+              const SizedBox(
+                height: 20.0,
               ),
-              Container(
-                padding: const EdgeInsets.only(top: 25, left: 20),
-                child: const NanumTitleText(
-                  text: '복용 요일을 선택하세요',
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    for (var i = 0; i < items.length; i++)
-                      GFCheckbox(
-                        size: 40,
-                        value: items[i].isChecked,
-                        type: GFCheckboxType.circle,
-                        onChanged: (value) {
-                          textFocus.unfocus();
-                          setState(() {
-                            items[i].isChecked = value;
-                          });
-                        },
-                        activeBgColor: Colors.green,
-                        inactiveBorderColor: Colors.grey,
-                        inactiveIcon: Align(
-                          alignment: Alignment.center,
-                          child: NanumBodyText(
-                            text: items[i].data,
-                            fontSize: 17,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        activeIcon: Align(
-                          alignment: Alignment.center,
-                          child: NanumBodyText(
-                            text: items[i].data,
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(top: 25, left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const NanumTitleText(
-                      text: '복용 시간을 추가하세요',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    OutlinedButton(
-                      onPressed: () {
-                        textFocus.unfocus();
-                        showModalBottomSheet(
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          builder: (BuildContext context) {
-                            return Container(
-                                height: 250,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white, // 모달 배경색
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
-                                ),
-                                child: TimePickerPage());
-                          },
-                        ).then((value) {
-                          setState(() {
-                            if (value != null) {
-                              times.add(
-                                Time(
-                                    time: value,
-                                    medicine: _textEditingController.text),
-                              );
-                            }
-                          });
-                        });
-                      },
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.green,
-                        size: 40,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const Divider(thickness: 1, color: Colors.grey),
               Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-                  itemCount: times.length,
-                  itemBuilder: (context, index) {
-                    // return MedicineTime(times: times, index: index);
-                    return Dismissible(
-                      // 삭제 버튼 및 기능 추가
-                      key: Key(times[index].time),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 0.5,
-                              ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 25, left: 20),
+                      child: const NanumTitleText(
+                        text: '약 이름을 입력해주세요',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 30, top: 10),
+                      child: TextFormField(
+                        controller: _textEditingController,
+                        textInputAction: TextInputAction.done,
+                        focusNode: textFocus,
+                        maxLines: null,
+                        textAlignVertical: TextAlignVertical.top,
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18),
+                        decoration: InputDecoration(
+                          hintText: '약1, 약2, 약3 ...',
+                          hintStyle: const TextStyle(fontSize: 12),
+                          contentPadding:
+                              const EdgeInsets.only(left: 10, top: 10),
+                          prefixIcon: _pickedFile == null
+                              ? null
+                              : Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    width: imageSize,
+                                    height: imageSize,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10.0),
+                                      ),
+                                      image: DecorationImage(
+                                          image: FileImage(
+                                              File(_pickedFile!.path)),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  )),
+                          suffixIcon: GestureDetector(
+                            child: const Icon(
+                              Icons.camera_alt_outlined,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: NanumBodyText(
-                                          text: _changeTime(times[index].time)),
-                                    ),
-                                    NanumTitleText(
-                                      text: times[index].time.substring(0, 5),
-                                      fontSize: 30,
-                                    )
-                                  ],
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      times.removeAt(index);
-                                    });
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    side: const BorderSide(color: Colors.white),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  child: const Icon(
-                                    Icons.remove,
-                                    color: Colors.green,
-                                    size: 40,
-                                  ),
-                                ),
-                              ],
+                            onTap: () {
+                              textFocus.unfocus();
+                              _showBottomSheet();
+                            },
+                          ),
+                          suffixIconColor: MaterialStateColor.resolveWith(
+                              (states) => states.contains(MaterialState.focused)
+                                  ? Colors.green
+                                  : Colors.grey),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.only(bottom: 15))
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 25, left: 20),
+                      child: const NanumTitleText(
+                        text: '복용 요일을 선택하세요',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (var i = 0; i < items.length; i++)
+                            GFCheckbox(
+                              size: 40,
+                              value: items[i].isChecked,
+                              type: GFCheckboxType.circle,
+                              onChanged: (value) {
+                                textFocus.unfocus();
+                                setState(() {
+                                  items[i].isChecked = value;
+                                });
+                              },
+                              activeBgColor: Colors.green,
+                              inactiveBorderColor: Colors.grey,
+                              inactiveIcon: Align(
+                                alignment: Alignment.center,
+                                child: NanumText(
+                                  text: items[i].data,
+                                  fontSize: 17,
+                                  color: Colors.grey,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              activeIcon: Align(
+                                alignment: Alignment.center,
+                                child: NanumText(
+                                  text: items[i].data,
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
-                    );
-                  },
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(top: 25, left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const NanumTitleText(
+                            text: '복용 시간을 추가하세요',
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              textFocus.unfocus();
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                      height: 250,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white, // 모달 배경색
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20),
+                                        ),
+                                      ),
+                                      child: TimePickerPage());
+                                },
+                              ).then((value) {
+                                setState(() {
+                                  if (value != null) {
+                                    times.add(
+                                      Time(
+                                          time: value,
+                                          medicine:
+                                              _textEditingController.text),
+                                    );
+                                  }
+                                });
+                              });
+                            },
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              side: const BorderSide(color: Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.green,
+                              size: 40,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Divider(thickness: 1, color: Colors.grey),
+                    Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 20, right: 20),
+                        itemCount: times.length,
+                        itemBuilder: (context, index) {
+                          // return MedicineTime(times: times, index: index);
+                          return Dismissible(
+                            // 삭제 버튼 및 기능 추가
+                            key: Key(times[index].time),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding:
+                                                const EdgeInsets.only(top: 10),
+                                            child: NanumBodyText(
+                                                text: _changeTime(
+                                                    times[index].time)),
+                                          ),
+                                          NanumTitleText(
+                                            text: times[index]
+                                                .time
+                                                .substring(0, 5),
+                                            fontSize: 30,
+                                          )
+                                        ],
+                                      ),
+                                      OutlinedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            times.removeAt(index);
+                                          });
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          side: const BorderSide(
+                                              color: Colors.white),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.remove,
+                                          color: Colors.green,
+                                          size: 40,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Padding(
+                                    padding: EdgeInsets.only(bottom: 15))
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ),
-        SafeArea(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              onPressed: () async {
-                if (checkValidate() == false) {
-                  null;
-                } else {
-                  await postRequest();
-                  Navigator.pop(context);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: checkValidate() ? Colors.green : Colors.grey,
-                minimumSize: Size(MediaQuery.of(context).size.width - 80, 40),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: const NanumTitleText(
-                text: '다음',
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+          bottomSheet: TextButton(
+            onPressed: () async {
+              if (checkValidate() == false) {
+                null;
+              } else {
+                await postRequest();
+                Navigator.pop(context);
+              }
+            },
+            style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  //모서리를 둥글게
+                  borderRadius: BorderRadius.circular(0)),
+              minimumSize: Size(screenWidth, screenHeight * 0.07),
+              backgroundColor: checkValidate() ? Colors.green : Colors.grey,
+            ),
+            child: const NanumTitleText(
+              text: '다음',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(10),
-        )
-      ],
+      ),
     );
   }
 

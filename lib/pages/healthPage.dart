@@ -68,28 +68,28 @@ class _HealthPage extends State<HealthPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               // ignore: unrelated_type_equality_checks
               const HealthScreenings(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const RecentMedicationHistory(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const RecentMedicalRecords(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const ImmunizationHistory(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const LinkedHealthData(),
               SizedBox(
-                height: screenHeight * 0.03,
+                height: screenHeight * 0.13,
               ),
             ],
           ),

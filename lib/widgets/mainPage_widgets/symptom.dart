@@ -27,7 +27,7 @@ class _SymptomState extends State<Symptom> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
             color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -44,19 +44,20 @@ class _SymptomState extends State<Symptom> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: AppTheme.widgetpadding,
-              child: TextButton.icon(
-                  onPressed: () async {
+                margin: AppTheme.widgetpadding,
+                padding: const EdgeInsets.only(left: 15, top: 8),
+                child: InkWell(
+                  onTap: () async {
                     const storage = FlutterSecureStorage();
                     dynamic Symptoms = await storage.read(key: "Symptoms");
-                    // print(Symptoms);
                   },
-                  label: const NanumBodyText(
-                    text: '',
-                  ),
-                  icon: const Row(
+                  child: const Row(
                     children: [
-                      NanumTitleText(text: '증상'),
+                      NanumTitleText(
+                        text: '증상',
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                      ),
                       // Icon(
                       //   Icons.chevron_right,
                       //   weight: 900,
@@ -64,9 +65,7 @@ class _SymptomState extends State<Symptom> {
                       // ),
                     ],
                   ),
-                  style: TextButton.styleFrom(
-                      iconColor: Colors.green, foregroundColor: Colors.black)),
-            ),
+                )),
             Container(
               padding: const EdgeInsets.only(right: 20),
               child: TextButton(
@@ -80,7 +79,7 @@ class _SymptomState extends State<Symptom> {
                 style: TextButton.styleFrom(
                   backgroundColor: CommonColor.buttoncolor,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(25)),
                   padding: const EdgeInsets.symmetric(horizontal: 7),
                 ),
                 child: const Row(
@@ -90,9 +89,10 @@ class _SymptomState extends State<Symptom> {
                     Icon(
                       Icons.add,
                       color: Colors.white,
+                      size: 18,
                     ),
                     NanumTitleText(
-                      text: '오늘기록',
+                      text: '오늘기록  ',
                       fontSize: 12,
                       color: Colors.white,
                     ),

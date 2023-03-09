@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:super_medic/provider/home_provider.dart';
+import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_pressure.dart';
 import 'package:super_medic/widgets/mainPage_widgets/medication_time.dart';
 import 'package:super_medic/widgets/mainPage_widgets/present_time.dart';
@@ -61,10 +64,10 @@ class _HomePageState extends State<HomePage> {
     var screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: CommonColor.background,
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           toolbarHeight: 60,
-          backgroundColor: CommonColor.background, //배경 색
+          backgroundColor: Colors.transparent, //배경 색
           elevation: 0.0, //그림자 효과 해제
           leading: Container(
             padding: const EdgeInsets.only(left: 10),
@@ -93,6 +96,14 @@ class _HomePageState extends State<HomePage> {
               width: 10,
             ),
           ],
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 35),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
             child: Container(
@@ -101,44 +112,47 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const PresentTime(), //날짜
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const MedicationTime(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const BloodSugar(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const BloodPressure(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const Symptom(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
               const Note(),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.013,
               ),
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   context.read<BottomNavigationProvider>().updateCurrentPage(2);
                 },
-                style: ElevatedButton.styleFrom(
+                style: TextButton.styleFrom(
                   backgroundColor: CommonColor.buttoncolor,
                   minimumSize: const Size.fromHeight(45),
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                child: const Text('나의 건강기록 보기'),
+                child: Text(
+                  '나의 건강기록 보기',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.01,

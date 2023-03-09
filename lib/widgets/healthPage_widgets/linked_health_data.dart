@@ -24,10 +24,11 @@ class _LinkedHealthData extends State<LinkedHealthData> {
     return Column(
       children: [
         Container(
+            padding: EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -45,6 +46,8 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '연동 건강데이터',
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(
@@ -61,7 +64,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                         },
                         icon: const Icon(
                           Icons.hourglass_top_rounded,
-                          size: 30,
+                          size: 23,
                           weight: 900,
                         ),
                         label: const NanumBodyText(

@@ -19,7 +19,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle style = TextButton.styleFrom(
       shape: RoundedRectangleBorder(
           //모서리를 둥글게
           borderRadius: BorderRadius.circular(0)),
@@ -77,7 +77,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
             SizedBox(
               height: screenHeight * 0.2,
             ),
-            ElevatedButton(
+            TextButton(
               style: style,
               onPressed: selected == true
                   ? () {

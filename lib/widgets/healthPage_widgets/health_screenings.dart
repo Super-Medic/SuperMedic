@@ -104,7 +104,9 @@ class _HealthScreenings extends State<HealthScreenings> {
                       ),
                       icon: const Row(
                         children: [
-                          NanumTitleText(text: '건강검진'),
+                          NanumTitleText(
+                            text: '건강검진',
+                          ),
                           // Icon(
                           //   Icons.chevron_right,
                           //   weight: 900,
@@ -240,7 +242,9 @@ class _HealthScreenings extends State<HealthScreenings> {
                       padding: const EdgeInsets.only(top: 10, bottom: 20),
                       child: Row(
                         children: [
-                          const NanumBodyText(text: '혈압'),
+                          const NanumBodyText(
+                            text: '혈압',
+                          ),
                           const NanumBodyText(text: '   '),
                           if (double.parse(screenings
                                       .screeningList?[0].bloodPressure
@@ -352,10 +356,11 @@ class _HealthScreenings extends State<HealthScreenings> {
     return Column(
       children: [
         Container(
+            padding: EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -373,6 +378,8 @@ class _HealthScreenings extends State<HealthScreenings> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '건강검진',
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(
