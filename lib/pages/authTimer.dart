@@ -156,7 +156,7 @@ class _AuthTimer extends State<AuthTimer> {
           ),
           Stack(children: <Widget>[
             Opacity(
-              opacity: 0.5, //0.5만큼~
+              opacity: 0.5,
               child: isLoading
                   ? ModalBarrier(dismissible: false, color: Colors.black)
                   : null, //클릭 못하게~
@@ -171,7 +171,7 @@ class _AuthTimer extends State<AuthTimer> {
                         ));
                       },
                     )
-                  : null, //무지성 돌돌이~
+                  : null,
             ),
           ]),
         ],

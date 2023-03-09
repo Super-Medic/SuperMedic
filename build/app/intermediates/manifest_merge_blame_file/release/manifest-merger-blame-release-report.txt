@@ -1,0 +1,506 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.superMedic"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml
+10    <!-- 개별 권한 요청 -->
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:4:5-80
+11-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:4:22-77
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:5:5-81
+12-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:5:22-78
+13    <!-- 그룹 권한 요청 -->
+14    <uses-permission android:name="android.permission-group.STORAGE" />
+14-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:7:5-72
+14-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:7:22-69
+15    <!-- 카메라 권한 요청 -->
+16    <uses-permission android:name="android.permission.CAMERA" />
+16-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:9:5-64
+16-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:9:22-62
+17    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+17-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:10:5-76
+17-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:10:22-74
+18    <uses-permission android:name="android.permission.INTERNET" />
+18-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+18-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-64
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-68
+19-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-65
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
+20-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:22-76
+21    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+21-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-81
+21-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-78
+22    <uses-permission android:name="android.permission.VIBRATE" />
+22-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-66
+22-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-63
+23    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+23-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-81
+23-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:11:22-78
+24    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+24-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:12:5-79
+24-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:12:22-76
+25
+26    <queries>
+26-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-24:15
+27        <package android:name="com.kakao.talk" />
+27-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-50
+27-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:10:18-47
+28        <package android:name="com.kakao.talk.alpha" />
+28-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:11:9-56
+28-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:11:18-53
+29        <package android:name="com.kakao.talk.sandbox" />
+29-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:12:9-58
+29-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:12:18-55
+30        <package android:name="com.kakao.onetalk" />
+30-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:13:9-53
+30-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:13:18-50
+31        <package android:name="com.locnall.KimGiSa" />
+31-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-55
+31-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:14:18-52
+32        <package android:name="com.lguplus.navi" />
+32-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-52
+32-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:15:18-49
+33
+34        <intent>
+34-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:17:9-23:18
+35            <action android:name="android.intent.action.VIEW" />
+35-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:41:17-69
+35-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:41:25-66
+36
+37            <category android:name="android.intent.category.BROWSABLE" />
+37-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:43:17-78
+37-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:43:27-75
+38
+39            <data android:scheme="https" />
+39-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:46:17-100
+39-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:46:23-77
+40        </intent>
+41    </queries> <!-- Required by older versions of Google Play services to create IID tokens -->
+42    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+42-->[com.google.firebase:firebase-iid:21.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/7a3c4ebf2397b283885d676a98badbb2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+42-->[com.google.firebase:firebase-iid:21.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/7a3c4ebf2397b283885d676a98badbb2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
+43    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+43-->[com.google.android.gms:play-services-measurement-api:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/b0fc1b2918219c9a7b28afa3f6cbabc5/transformed/jetified-play-services-measurement-api-21.2.0/AndroidManifest.xml:25:5-79
+43-->[com.google.android.gms:play-services-measurement-api:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/b0fc1b2918219c9a7b28afa3f6cbabc5/transformed/jetified-play-services-measurement-api-21.2.0/AndroidManifest.xml:25:22-76
+44    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+44-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:26:5-110
+44-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:26:22-107
+45
+46    <application
+47        android:name="android.app.Application"
+47-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:13:9-42
+48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+48-->[androidx.core:core:1.8.0] /Users/hyeon-stone/.gradle/caches/transforms-3/08a71c84c177d944c3ca1ffed95eb09f/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+49        android:icon="@mipmap/ic_launcher"
+49-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:14:9-43
+50        android:label="슈퍼메딕" >
+50-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:12:9-29
+51        <activity
+51-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:15:9-36:20
+52            android:name="com.example.super_medic.MainActivity"
+52-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:16:13-41
+53            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+53-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:20:13-163
+54            android:exported="true"
+54-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:17:13-36
+55            android:hardwareAccelerated="true"
+55-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:21:13-47
+56            android:launchMode="singleTop"
+56-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:18:13-43
+57            android:theme="@style/LaunchTheme"
+57-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:19:13-47
+58            android:windowSoftInputMode="adjustResize" >
+58-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:22:13-55
+59
+60            <!--
+61                 Specifies an Android theme to apply to this Activity as soon as
+62                 the Android process has started. This theme is visible to the user
+63                 while the Flutter UI initializes. After that, this theme continues
+64                 to determine the Window background behind the Flutter UI.
+65            -->
+66            <meta-data
+66-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:28:13-31:17
+67                android:name="io.flutter.embedding.android.NormalTheme"
+67-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:29:15-70
+68                android:resource="@style/NormalTheme" />
+68-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:30:15-52
+69
+70            <intent-filter>
+70-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:32:13-35:29
+71                <action android:name="android.intent.action.MAIN" />
+71-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:33:17-68
+71-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:33:25-66
+72
+73                <category android:name="android.intent.category.LAUNCHER" />
+73-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:34:17-76
+73-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:34:27-74
+74            </intent-filter>
+75        </activity>
+76        <activity
+76-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:37:9-48:20
+77            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+77-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:38:13-76
+78            android:exported="true"
+78-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:39:13-36
+79            android:launchMode="singleTask"
+79-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:36:13-44
+80            android:theme="@style/TransparentCompat" >
+80-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:37:13-53
+81            <intent-filter android:label="flutter_web_auth" >
+81-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:40:13-47:29
+81-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:40:28-60
+82                <action android:name="android.intent.action.VIEW" />
+82-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:41:17-69
+82-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:41:25-66
+83
+84                <category android:name="android.intent.category.DEFAULT" />
+84-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:42:17-76
+84-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:42:27-73
+85                <category android:name="android.intent.category.BROWSABLE" />
+85-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:43:17-78
+85-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:43:27-75
+86
+87                <data
+87-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:46:17-100
+88                    android:host="oauth"
+88-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:46:78-98
+89                    android:scheme="kakaoceae50246b4ec07d99fed331f94acdb7" />
+89-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:46:23-77
+90            </intent-filter>
+91        </activity>
+92        <!--
+93             Don't delete the meta-data below.
+94             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+95        -->
+96        <meta-data
+96-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:51:9-53:33
+97            android:name="flutterEmbedding"
+97-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:52:13-44
+98            android:value="2" />
+98-->/Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/android/app/src/main/AndroidManifest.xml:53:13-30
+99
+100        <service
+100-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:16:9-19:72
+101            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+101-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-107
+102            android:exported="false"
+102-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+103            android:permission="android.permission.BIND_JOB_SERVICE" />
+103-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-69
+104        <service
+104-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:20:9-26:19
+105            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+105-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:21:13-97
+106            android:exported="false" >
+106-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:13-37
+107            <intent-filter>
+107-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:23:13-25:29
+108                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+108-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:17-78
+108-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:25-75
+109            </intent-filter>
+110        </service>
+111
+112        <receiver
+112-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-35:20
+113            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+113-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-98
+114            android:exported="true"
+114-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-36
+115            android:permission="com.google.android.c2dm.permission.SEND" >
+115-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-73
+116            <intent-filter>
+116-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:32:13-34:29
+117                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+117-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:17-81
+117-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:25-78
+118            </intent-filter>
+119        </receiver>
+120
+121        <service
+121-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:37:9-41:19
+122            android:name="com.google.firebase.components.ComponentDiscoveryService"
+122-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:37:18-89
+123            android:directBootAware="true"
+123-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:34:13-43
+124            android:exported="false" >
+124-->[com.google.firebase:firebase-analytics-ktx:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/156c632989a91ffdce3e66f1244b7419/transformed/jetified-firebase-analytics-ktx-21.2.0/AndroidManifest.xml:10:13-37
+125            <meta-data
+125-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:38:13-40:85
+126                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+126-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:39:17-128
+127                android:value="com.google.firebase.components.ComponentRegistrar" />
+127-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:40:17-82
+128            <meta-data
+128-->[:firebase_core] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:85
+129                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+129-->[:firebase_core] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-124
+130                android:value="com.google.firebase.components.ComponentRegistrar" />
+130-->[:firebase_core] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:13:17-82
+131            <meta-data
+131-->[com.google.firebase:firebase-analytics-ktx:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/156c632989a91ffdce3e66f1244b7419/transformed/jetified-firebase-analytics-ktx-21.2.0/AndroidManifest.xml:11:13-13:85
+132                android:name="com.google.firebase.components:com.google.firebase.analytics.ktx.FirebaseAnalyticsKtxRegistrar"
+132-->[com.google.firebase:firebase-analytics-ktx:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/156c632989a91ffdce3e66f1244b7419/transformed/jetified-firebase-analytics-ktx-21.2.0/AndroidManifest.xml:12:17-126
+133                android:value="com.google.firebase.components.ComponentRegistrar" />
+133-->[com.google.firebase:firebase-analytics-ktx:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/156c632989a91ffdce3e66f1244b7419/transformed/jetified-firebase-analytics-ktx-21.2.0/AndroidManifest.xml:13:17-82
+134            <meta-data
+134-->[com.google.firebase:firebase-common-ktx:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/8f79e96d06c211bc58793c6e03d69358/transformed/jetified-firebase-common-ktx-20.3.0/AndroidManifest.xml:14:13-16:85
+135                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar"
+135-->[com.google.firebase:firebase-common-ktx:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/8f79e96d06c211bc58793c6e03d69358/transformed/jetified-firebase-common-ktx-20.3.0/AndroidManifest.xml:15:17-113
+136                android:value="com.google.firebase.components.ComponentRegistrar" />
+136-->[com.google.firebase:firebase-common-ktx:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/8f79e96d06c211bc58793c6e03d69358/transformed/jetified-firebase-common-ktx-20.3.0/AndroidManifest.xml:16:17-82
+137            <meta-data
+137-->[com.google.firebase:firebase-iid:21.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/7a3c4ebf2397b283885d676a98badbb2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+138                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+138-->[com.google.firebase:firebase-iid:21.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/7a3c4ebf2397b283885d676a98badbb2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+139                android:value="com.google.firebase.components.ComponentRegistrar" />
+139-->[com.google.firebase:firebase-iid:21.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/7a3c4ebf2397b283885d676a98badbb2/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+140            <meta-data
+140-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:55:13-57:85
+141                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+141-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:56:17-119
+142                android:value="com.google.firebase.components.ComponentRegistrar" />
+142-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:57:17-82
+143            <meta-data
+143-->[com.google.android.gms:play-services-measurement-api:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/b0fc1b2918219c9a7b28afa3f6cbabc5/transformed/jetified-play-services-measurement-api-21.2.0/AndroidManifest.xml:31:13-33:85
+144                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+144-->[com.google.android.gms:play-services-measurement-api:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/b0fc1b2918219c9a7b28afa3f6cbabc5/transformed/jetified-play-services-measurement-api-21.2.0/AndroidManifest.xml:32:17-139
+145                android:value="com.google.firebase.components.ComponentRegistrar" />
+145-->[com.google.android.gms:play-services-measurement-api:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/b0fc1b2918219c9a7b28afa3f6cbabc5/transformed/jetified-play-services-measurement-api-21.2.0/AndroidManifest.xml:33:17-82
+146            <meta-data
+146-->[com.google.firebase:firebase-installations:17.1.2] /Users/hyeon-stone/.gradle/caches/transforms-3/f504eee6e9424a0e52d94395894bc828/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:17:13-19:85
+147                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+147-->[com.google.firebase:firebase-installations:17.1.2] /Users/hyeon-stone/.gradle/caches/transforms-3/f504eee6e9424a0e52d94395894bc828/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:18:17-127
+148                android:value="com.google.firebase.components.ComponentRegistrar" />
+148-->[com.google.firebase:firebase-installations:17.1.2] /Users/hyeon-stone/.gradle/caches/transforms-3/f504eee6e9424a0e52d94395894bc828/transformed/jetified-firebase-installations-17.1.2/AndroidManifest.xml:19:17-82
+149            <meta-data
+149-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/hyeon-stone/.gradle/caches/transforms-3/b7e8a2b8dfcc6e63342ab44b2dbe8c44/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+150                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+150-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/hyeon-stone/.gradle/caches/transforms-3/b7e8a2b8dfcc6e63342ab44b2dbe8c44/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+151                android:value="com.google.firebase.components.ComponentRegistrar" />
+151-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/hyeon-stone/.gradle/caches/transforms-3/b7e8a2b8dfcc6e63342ab44b2dbe8c44/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+152        </service>
+153
+154        <provider
+154-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:43:9-47:38
+155            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+155-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:44:13-102
+156            android:authorities="com.superMedic.flutterfirebasemessaginginitprovider"
+156-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:45:13-88
+157            android:exported="false"
+157-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:46:13-37
+158            android:initOrder="99" />
+158-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:47:13-35
+159        <provider
+159-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+160            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+160-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+161            android:authorities="com.superMedic.flutter.image_provider"
+161-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+162            android:exported="false"
+162-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+163            android:grantUriPermissions="true" >
+163-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+164            <meta-data
+164-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+165                android:name="android.support.FILE_PROVIDER_PATHS"
+165-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+166                android:resource="@xml/flutter_image_picker_file_paths" />
+166-->[:image_picker_android] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+167        </provider>
+168
+169        <receiver
+169-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:16:9-18:40
+170            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+170-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-91
+171            android:exported="false" />
+171-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+172        <receiver
+172-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:19:9-21:40
+173            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+173-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-97
+174            android:exported="false" />
+174-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:21:13-37
+175        <receiver
+175-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:22:9-31:20
+176            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+176-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:23:13-101
+177            android:exported="false" >
+177-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:24:13-37
+178            <intent-filter>
+178-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:25:13-30:29
+179                <action android:name="android.intent.action.BOOT_COMPLETED" />
+179-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:26:17-79
+179-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:26:25-76
+180                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+180-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:27:17-84
+180-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:27:25-81
+181                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+181-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:28:17-82
+181-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:28:25-79
+182                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+182-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:29:17-82
+182-->[:flutter_local_notifications] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:29:25-79
+183            </intent-filter>
+184        </receiver>
+185
+186        <activity
+186-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:27:9-32:56
+187            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
+187-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-70
+188            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+188-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-81
+189            android:exported="false"
+189-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-37
+190            android:launchMode="singleTask"
+190-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-44
+191            android:theme="@style/TransparentCompat" />
+191-->[:kakao_flutter_sdk_common] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_manifest/release/AndroidManifest.xml:32:13-53
+192
+193        <receiver
+193-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:31:9-38:20
+194            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+194-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:32:13-78
+195            android:exported="true"
+195-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:33:13-36
+196            android:permission="com.google.android.c2dm.permission.SEND" >
+196-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:34:13-73
+197            <intent-filter>
+197-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:32:13-34:29
+198                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+198-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:17-81
+198-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:25-78
+199            </intent-filter>
+200        </receiver>
+201        <!--
+202             FirebaseMessagingService performs security checks at runtime,
+203             but set to not exported to explicitly avoid allowing another app to call it.
+204        -->
+205        <service
+205-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:44:9-51:19
+206            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+206-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:45:13-82
+207            android:directBootAware="true"
+207-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:46:13-43
+208            android:exported="false" >
+208-->[com.google.firebase:firebase-messaging:23.1.1] /Users/hyeon-stone/.gradle/caches/transforms-3/6351b3a575f032c5abf9171b2955ce82/transformed/jetified-firebase-messaging-23.1.1/AndroidManifest.xml:47:13-37
+209            <intent-filter android:priority="-500" >
+209-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:23:13-25:29
+210                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+210-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:17-78
+210-->[:firebase_messaging] /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:25-75
+211            </intent-filter>
+212        </service>
+213
+214        <provider
+214-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:25:9-30:39
+215            android:name="com.google.firebase.provider.FirebaseInitProvider"
+215-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:26:13-77
+216            android:authorities="com.superMedic.firebaseinitprovider"
+216-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:27:13-72
+217            android:directBootAware="true"
+217-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:28:13-43
+218            android:exported="false"
+218-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:29:13-37
+219            android:initOrder="100" />
+219-->[com.google.firebase:firebase-common:20.3.0] /Users/hyeon-stone/.gradle/caches/transforms-3/bb92d2c180efcd30caa7341087f41a55/transformed/jetified-firebase-common-20.3.0/AndroidManifest.xml:30:13-36
+220
+221        <activity
+221-->[com.google.android.gms:play-services-base:18.0.1] /Users/hyeon-stone/.gradle/caches/transforms-3/f253648b0be692c533908993735bbd2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+222            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+222-->[com.google.android.gms:play-services-base:18.0.1] /Users/hyeon-stone/.gradle/caches/transforms-3/f253648b0be692c533908993735bbd2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+223            android:exported="false"
+223-->[com.google.android.gms:play-services-base:18.0.1] /Users/hyeon-stone/.gradle/caches/transforms-3/f253648b0be692c533908993735bbd2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+224            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+224-->[com.google.android.gms:play-services-base:18.0.1] /Users/hyeon-stone/.gradle/caches/transforms-3/f253648b0be692c533908993735bbd2e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+225
+226        <receiver
+226-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:29:9-33:20
+227            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+227-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:30:13-85
+228            android:enabled="true"
+228-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:31:13-35
+229            android:exported="false" >
+229-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:32:13-37
+230        </receiver>
+231
+232        <service
+232-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:35:9-38:40
+233            android:name="com.google.android.gms.measurement.AppMeasurementService"
+233-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:36:13-84
+234            android:enabled="true"
+234-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:37:13-35
+235            android:exported="false" />
+235-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:38:13-37
+236        <service
+236-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:39:9-43:72
+237            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+237-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:40:13-87
+238            android:enabled="true"
+238-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:41:13-35
+239            android:exported="false"
+239-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:42:13-37
+240            android:permission="android.permission.BIND_JOB_SERVICE" />
+240-->[com.google.android.gms:play-services-measurement:21.2.0] /Users/hyeon-stone/.gradle/caches/transforms-3/361af9f73dc31467435c2fd02177f48b/transformed/jetified-play-services-measurement-21.2.0/AndroidManifest.xml:43:13-69
+241
+242        <meta-data
+242-->[com.google.android.gms:play-services-basement:18.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/5eaba1f028ac62aaabee71faac8d9308/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+243            android:name="com.google.android.gms.version"
+243-->[com.google.android.gms:play-services-basement:18.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/5eaba1f028ac62aaabee71faac8d9308/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+244            android:value="@integer/google_play_services_version" />
+244-->[com.google.android.gms:play-services-basement:18.1.0] /Users/hyeon-stone/.gradle/caches/transforms-3/5eaba1f028ac62aaabee71faac8d9308/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+245
+246        <uses-library
+246-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+247            android:name="androidx.window.extensions"
+247-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+248            android:required="false" />
+248-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+249        <uses-library
+249-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+250            android:name="androidx.window.sidecar"
+250-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+251            android:required="false" />
+251-->[androidx.window:window:1.0.0-beta04] /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+252
+253        <service
+253-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+254            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+254-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+255            android:exported="false" >
+255-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+256            <meta-data
+256-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+257                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+257-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+258                android:value="cct" />
+258-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/caef097eb0c2cd1082e8114d49c41ec0/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+259        </service>
+260        <service
+260-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+261            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+261-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+262            android:exported="false"
+262-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+263            android:permission="android.permission.BIND_JOB_SERVICE" >
+263-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+264        </service>
+265
+266        <receiver
+266-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+267            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+267-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+268            android:exported="false" />
+268-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/hyeon-stone/.gradle/caches/transforms-3/d97736817588d35e875979bb74338a17/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+269    </application>
+270
+271</manifest>

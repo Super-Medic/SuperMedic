@@ -133,7 +133,8 @@ class LoginPageState extends State<LoginPage> {
                         message: "서비스 준비중입니다.\n카카오 로그인으로 시도해주세요.");
                   }),
             ),
-            if (defaultTargetPlatform == TargetPlatform.iOS)
+            // ignore: unrelated_type_equality_checks
+            if (SignInWithApple.isAvailable() != 'false')
               InkWell(
                 child: Image.asset(
                   imageAppleLoginName,
@@ -149,18 +150,22 @@ class LoginPageState extends State<LoginPage> {
                     isLoading = false;
                   });
                   // ignore: unrelated_type_equality_checks
-                  if (await applelogin.AppleUidVerifiy2(result) == 0) {
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => JoinPage(
-                          platform: 'apple',
-                          credential: result,
+                  try {
+                    if (await applelogin.AppleUidVerifiy2(result) == 0) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => JoinPage(
+                            platform: 'apple',
+                            credential: result,
+                          ),
                         ),
-                      ),
-                    );
-                  } else {
+                      );
+                    } else {
+                      _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
+                    }
+                  } catch (context) {
                     _showAlert(title: "로그인 실패", message: "다시 시도해주세요");
                   }
                 },

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">585309393841-5t7l6i0chbjfaujei8bpn9e3omcqjjmu.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">585309393841</string>
+    <string name="google_api_key" translatable="false">AIzaSyDY1yYgwyMv_wU7P7Pq9BPwHD4kxrFQWoI</string>
+    <string name="google_app_id" translatable="false">1:585309393841:android:2940a96afa932465df6390</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDY1yYgwyMv_wU7P7Pq9BPwHD4kxrFQWoI</string>
+    <string name="google_storage_bucket" translatable="false">supermedic-56c64.appspot.com</string>
+    <string name="project_id" translatable="false">supermedic-56c64</string>
+</resources>

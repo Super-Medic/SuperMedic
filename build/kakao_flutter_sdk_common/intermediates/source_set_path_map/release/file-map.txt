@@ -1,0 +1,16 @@
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-jetified-window-1.0.0-beta04-0 /Users/hyeon-stone/.gradle/caches/transforms-3/003a22a5515e1f77f89701a46efbc2ec/transformed/jetified-window-1.0.0-beta04/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-constraintlayout-1.1.3-1 /Users/hyeon-stone/.gradle/caches/transforms-3/074dd873c8c5552c87bf348deb4a6da4/transformed/constraintlayout-1.1.3/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-jetified-window-java-1.0.0-beta04-2 /Users/hyeon-stone/.gradle/caches/transforms-3/3c0e35d493ccd3f2bb8b07f96b013b9c/transformed/jetified-window-java-1.0.0-beta04/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-jetified-annotation-experimental-1.1.0-3 /Users/hyeon-stone/.gradle/caches/transforms-3/717758e51a3aff0b90b2556f8994e808/transformed/jetified-annotation-experimental-1.1.0/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-appcompat-1.0.2-4 /Users/hyeon-stone/.gradle/caches/transforms-3/b7a839848ea439233c4ca440816ab399/transformed/appcompat-1.0.2/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-core-1.6.0-5 /Users/hyeon-stone/.gradle/caches/transforms-3/cf72013d765e0f69e97cd3b9cbb09800/transformed/core-1.6.0/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-coordinatorlayout-1.0.0-6 /Users/hyeon-stone/.gradle/caches/transforms-3/daf3dffc0e005e5234f8ec4fc9f09fb6/transformed/coordinatorlayout-1.0.0/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-browser-1.0.0-7 /Users/hyeon-stone/.gradle/caches/transforms-3/fb3f8d8a4e4b05f75fa56df6694ccfc1/transformed/browser-1.0.0/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-main-8 /Users/hyeon-stone/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.4.1/android/src/main/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-release-9 /Users/hyeon-stone/.pub-cache/hosted/pub.dev/kakao_flutter_sdk_common-1.4.1/android/src/release/res
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-pngs-10 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/generated/res/pngs/release
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-resValues-11 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/generated/res/resValues/release
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-rs-12 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/generated/res/rs/release
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-mergeReleaseResources-13 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-mergeReleaseResources-14 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.kakao.sdk.flutter.kakao_flutter_sdk_common-merged_res-15 /Users/hyeon-stone/BOB/Project/GrandPrix/new/SuperMedic/build/kakao_flutter_sdk_common/intermediates/merged_res/release

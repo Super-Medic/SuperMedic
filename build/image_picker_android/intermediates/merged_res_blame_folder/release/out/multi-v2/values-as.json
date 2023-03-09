@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "io.flutter.plugins.imagepicker.image_picker_android-merged_res-17:/values-as/values-as.xml",
+            "map": [
+                {
+                    "source": "/Users/hyeon-stone/.gradle/caches/transforms-3/08a71c84c177d944c3ca1ffed95eb09f/transformed/core-1.8.0/res/values-as/values-as.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "io.flutter.plugins.imagepicker.image_picker_android-mergeReleaseResources-15:/values-as/values-as.xml",
+            "map": [
+                {
+                    "source": "/Users/hyeon-stone/.gradle/caches/transforms-3/08a71c84c177d944c3ca1ffed95eb09f/transformed/core-1.8.0/res/values-as/values-as.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}
