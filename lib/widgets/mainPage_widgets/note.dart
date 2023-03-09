@@ -16,7 +16,7 @@ class Note extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: CommonColor.widgetbackgroud,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
               color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -32,30 +32,23 @@ class Note extends StatelessWidget {
           children: [
             Container(
               margin: AppTheme.widgetpadding,
-              child: TextButton.icon(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           const BloodPressuredetailPage()),
-                    // );
-                  },
-                  label: const NanumBodyText(
-                    text: '',
-                  ),
-                  icon: const Row(
-                    children: [
-                      NanumTitleText(text: '노트'),
-                      // Icon(
-                      //   Icons.chevron_right,
-                      //   weight: 900,
-                      //   color: Colors.black,
-                      // ),
-                    ],
-                  ),
-                  style: TextButton.styleFrom(
-                      iconColor: Colors.green, foregroundColor: Colors.black)),
+              padding: const EdgeInsets.only(left: 15, top: 8),
+              child: const InkWell(
+                child: Row(
+                  children: [
+                    NanumTitleText(
+                      text: '노트',
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    // Icon(
+                    //   Icons.chevron_right,
+                    //   weight: 900,
+                    //   color: Colors.black,
+                    // ),
+                  ],
+                ),
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(right: 20),
@@ -69,7 +62,7 @@ class Note extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: CommonColor.buttoncolor,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(25)),
                   padding: const EdgeInsets.symmetric(horizontal: 7),
                 ),
                 child: const Row(
@@ -79,9 +72,10 @@ class Note extends StatelessWidget {
                     Icon(
                       Icons.add,
                       color: Colors.white,
+                      size: 18,
                     ),
                     NanumTitleText(
-                      text: '오늘기록',
+                      text: '오늘기록  ',
                       fontSize: 12,
                       color: Colors.white,
                     ),

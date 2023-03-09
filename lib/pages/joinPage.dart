@@ -74,8 +74,8 @@ class _JoinPageState extends State<JoinPage> {
   renderButton(height) {
     return SizedBox(
         height: height,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+        child: TextButton(
+          style: TextButton.styleFrom(backgroundColor: Colors.green),
           onPressed: () {
             if (formKey.currentState!.validate()) {
               formKey.currentState!.save();

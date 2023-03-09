@@ -50,7 +50,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle style = TextButton.styleFrom(
       shape: RoundedRectangleBorder(
           //모서리를 둥글게
           borderRadius: BorderRadius.circular(0)),
@@ -67,165 +67,181 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
       // foregroundColor: Colors.greenAccent,
     );
 
-    return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-          //replace with our own icon data.
-        ),
-        toolbarHeight: 48,
-        backgroundColor: Colors.white, //배경 색
-        elevation: 0.0, //
-      ),
-      body: Container(
-        padding: AppTheme.totalpadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
-            const Center(
-              child: NanumTitleText(
-                text: "혈당 기록하기",
-                fontSize: 25,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.03,
-            ),
-            const PresentTime(),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            const NanumTitleText(
-              text: "측정시기",
-              fontSize: 15,
-            ),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
-            //Radio Button
-            SizedBox(
-              height: screenHeight * 0.07,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: sampleData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    children: [
-                      InkWell(
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            // ignore: avoid_function_literals_in_foreach_calls
-                            sampleData.forEach(
-                                (element) => element.isSelected = false);
-                            sampleData[index].isSelected = true;
-                            thischeckindex = index + 1;
-                          });
-                        },
-                        child: RadioItem(sampleData[index]),
-                      ),
-                    ],
-                  );
+    return Scaffold(
+      backgroundColor: (sampleData[0].isSelected == false &&
+                  sampleData[1].isSelected == false &&
+                  sampleData[2].isSelected == false &&
+                  sampleData[3].isSelected == false) ||
+              bloodsugar == "0"
+          ? Colors.grey
+          : Colors.green,
+      body: SafeArea(
+          top: false,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
                 },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                ),
+                //replace with our own icon data.
               ),
+              toolbarHeight: 48,
+              backgroundColor: Colors.white, //배경 색
+              elevation: 0.0, //
             ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            const NanumTitleText(
-              text: "혈당",
-              fontSize: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
+            body: Container(
+              padding: AppTheme.totalpadding,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(bloodsugar,
-                            style: const TextStyle(
-                                color: Colors.green, fontSize: 32)),
-                        const NanumText(text: "mg/dL")
-                      ],
+                  SizedBox(
+                    height: screenHeight * 0.01,
+                  ),
+                  const Center(
+                    child: NanumTitleText(
+                      text: "혈당 기록하기",
+                      fontSize: 25,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    width: screenWidth * 0.8,
-                    height: screenHeight * 0.25,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.transparent),
-                    child: CupertinoPicker(
-                        itemExtent: 55,
-                        scrollController: controller,
-                        onSelectedItemChanged: (i) {
-                          setState(() {
-                            bloodsugar = bloodsugarItem[i];
-                          });
-                        },
-                        children: [
-                          ...bloodsugarItem.map((e) => Text(
-                                e,
-                                style: const TextStyle(
-                                    color: Colors.grey, fontSize: 32),
-                              ))
-                        ]),
+                  SizedBox(
+                    height: screenHeight * 0.03,
+                  ),
+                  const PresentTime(),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                  const NanumTitleText(
+                    text: "측정시기",
+                    fontSize: 15,
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.01,
+                  ),
+                  //Radio Button
+                  SizedBox(
+                    height: screenHeight * 0.07,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: sampleData.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            InkWell(
+                              highlightColor: Colors.transparent,
+                              onTap: () {
+                                setState(() {
+                                  // ignore: avoid_function_literals_in_foreach_calls
+                                  sampleData.forEach(
+                                      (element) => element.isSelected = false);
+                                  sampleData[index].isSelected = true;
+                                  thischeckindex = index + 1;
+                                });
+                              },
+                              child: RadioItem(sampleData[index]),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                  const NanumTitleText(
+                    text: "혈당",
+                    fontSize: 15,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(bloodsugar,
+                                  style: const TextStyle(
+                                      color: Colors.green, fontSize: 32)),
+                              const NanumText(text: "mg/dL")
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.25,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.transparent),
+                          child: CupertinoPicker(
+                              itemExtent: 55,
+                              scrollController: controller,
+                              onSelectedItemChanged: (i) {
+                                setState(() {
+                                  bloodsugar = bloodsugarItem[i];
+                                });
+                              },
+                              children: [
+                                ...bloodsugarItem.map((e) => Text(
+                                      e,
+                                      style: const TextStyle(
+                                          color: Colors.grey, fontSize: 32),
+                                    ))
+                              ]),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      bottomSheet: ElevatedButton(
-        // style: style,
-        style: style,
+            bottomSheet: TextButton(
+              // style: style,
+              style: style,
 
-        child: const NanumTitleText(text: '저장', color: Colors.white),
-        onPressed: () async {
-          if (thischeckindex == 0 || int.parse(bloodsugar) == 0) {
-            null;
-          } else {
-            if (await secure_storage(DateTime.now(),
-                    sampleData[thischeckindex - 1].buttonText, bloodsugar) ==
-                true) {
-              try {
-                // ignore: use_build_context_synchronously
-                Provider.of<HomeProvider>(context, listen: false)
-                    .bloodSugargetData();
-                // ignore: use_build_context_synchronously
-                Navigator.pop(context);
-              } catch (_) {
-                //팝업창 띄워줄 곳
-                // ignore: use_build_context_synchronously
-                Navigator.pop(context);
-              }
-            } else {
-              null;
-            }
-          }
-          //
-        },
-      ),
-    ));
+              child: const NanumTitleText(
+                text: '저장',
+                color: Colors.white,
+                fontSize: 22,
+              ),
+              onPressed: () async {
+                if (thischeckindex == 0 || int.parse(bloodsugar) == 0) {
+                  null;
+                } else {
+                  if (await secure_storage(
+                          DateTime.now(),
+                          sampleData[thischeckindex - 1].buttonText,
+                          bloodsugar) ==
+                      true) {
+                    try {
+                      // ignore: use_build_context_synchronously
+                      Provider.of<HomeProvider>(context, listen: false)
+                          .bloodSugargetData();
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    } catch (_) {
+                      //팝업창 띄워줄 곳
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    null;
+                  }
+                }
+                //
+              },
+            ),
+          )),
+    );
   }
 }
 

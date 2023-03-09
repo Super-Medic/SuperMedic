@@ -90,7 +90,7 @@ class _AuthTimer extends State<AuthTimer> {
                 SafeArea(
                     child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
+                  child: TextButton(
                     onPressed: () async {
                       setState(() {
                         isLoading = true;
@@ -131,7 +131,7 @@ class _AuthTimer extends State<AuthTimer> {
                       // context.read<BottomNavigationProvider>().updateCurrentPage(2);
                       // sign 호출 후 데이터 저장 및 홈으로 이동 또는 팝업창
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: TextButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize:
                           Size(MediaQuery.of(context).size.width - 30, 50),
@@ -206,11 +206,11 @@ class PopUp extends StatelessWidget {
       ),
       actions: [
         Center(
-          child: ElevatedButton(
+          child: TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(MediaQuery.of(context).size.width - 180, 40),
               backgroundColor: Colors.green,
             ),

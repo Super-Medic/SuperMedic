@@ -98,7 +98,7 @@ class _TOSPage extends State<TOSPage> {
                 SafeArea(
                     child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
+                  child: TextButton(
                     onPressed: () async {
                       setState(() {
                         isLoading = true;
@@ -128,7 +128,7 @@ class _TOSPage extends State<TOSPage> {
                         isLoading = false;
                       });
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: TextButton.styleFrom(
                       backgroundColor:
                           agree.isChecked == false ? Colors.grey : Colors.green,
                       minimumSize:

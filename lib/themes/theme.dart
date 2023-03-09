@@ -12,7 +12,7 @@ class AppTheme {
 
 
 // class StyleTheme {
-//   static ButtonStyle style = ElevatedButton.styleFrom(
+//   static ButtonStyle style = TextButton.styleFrom(
 //       shape: RoundedRectangleBorder(
 //           //모서리를 둥글게
 //           borderRadius: BorderRadius.circular(0)),

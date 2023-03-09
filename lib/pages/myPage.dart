@@ -357,12 +357,12 @@ class _QuitPopUpState extends State<QuitPopUp> {
       actions: [
         Center(
             child: Row(children: [
-          ElevatedButton(
+          TextButton(
             onPressed: () async {
               await deleteSecureStorage();
               RestartWidget.restartApp(context);
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
               backgroundColor: Colors.green,
             ),
@@ -373,11 +373,11 @@ class _QuitPopUpState extends State<QuitPopUp> {
             ),
           ),
           SizedBox(width: screenWidth * 0.01),
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
               backgroundColor: Colors.green,
             ),
@@ -458,11 +458,11 @@ class LogoutPopUp extends StatelessWidget {
       actions: [
         Center(
             child: Row(children: [
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Restart.restartApp();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
               backgroundColor: Colors.green,
             ),
@@ -473,11 +473,11 @@ class LogoutPopUp extends StatelessWidget {
             ),
           ),
           SizedBox(width: screenWidth * 0.01),
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
               backgroundColor: Colors.green,
             ),

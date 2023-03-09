@@ -104,13 +104,13 @@ class PopUp extends StatelessWidget {
       ),
       actions: [
         Center(
-          child: ElevatedButton(
+          child: TextButton(
             onPressed: () {
               var nav = Navigator.of(context);
               nav.pop();
               nav.pop();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(MediaQuery.of(context).size.width - 180, 40),
               backgroundColor: Colors.green,
             ),
