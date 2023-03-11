@@ -24,6 +24,7 @@ class _MedicinePageState extends State<MedicinePage> {
   // List<Check> checks = List.empty(growable: true);
   List<List> checkList = List.empty(growable: true);
   String? userEmail;
+  bool isAppPage = true;
   bool checkNull = true;
   late int today;
   Map dayToint = {
@@ -79,30 +80,32 @@ class _MedicinePageState extends State<MedicinePage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
-          child: const Icon(Icons.add, color: Colors.white),
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              backgroundColor: Colors.transparent,
-              isScrollControlled: true,
-              builder: (BuildContext context) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  decoration: const BoxDecoration(
-                    color: Colors.white, // 모달 배경색
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: AddMedicinePage(userEmail: userEmail!),
-                );
-              },
-            ).then((value) => fetchGet());
-          },
-        ),
+        floatingActionButton: isAppPage
+            ? FloatingActionButton(
+                backgroundColor: Colors.green,
+                child: const Icon(Icons.add, color: Colors.white),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        decoration: const BoxDecoration(
+                          color: Colors.white, // 모달 배경색
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: AddMedicinePage(userEmail: userEmail!),
+                      );
+                    },
+                  ).then((value) => fetchGet());
+                },
+              )
+            : null,
         backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 65,
@@ -151,6 +154,11 @@ class _MedicinePageState extends State<MedicinePage> {
             ),
             TableEventsExample()
           ],
+          onChange: (p0) {
+            setState(() {
+              isAppPage = p0 == 0 ? true : false;
+            });
+          },
         ),
       ),
     );
