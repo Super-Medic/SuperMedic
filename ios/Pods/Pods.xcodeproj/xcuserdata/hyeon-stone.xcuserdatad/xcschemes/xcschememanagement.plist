@@ -74,6 +74,16 @@
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+		<key>GoogleUtilities-00567490.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>33</integer>
+		</dict>
+		<key>GoogleUtilities-54e75ca4.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 		<key>GoogleUtilities.xcscheme</key>
 		<dict>
 			<key>isShown</key>
