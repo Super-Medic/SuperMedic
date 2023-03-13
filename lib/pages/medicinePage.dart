@@ -4,6 +4,7 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰
 import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
@@ -24,7 +25,6 @@ class _MedicinePageState extends State<MedicinePage> {
   // List<Check> checks = List.empty(growable: true);
   List<List> checkList = List.empty(growable: true);
   String? userEmail;
-  bool isAppPage = true;
   bool checkNull = true;
   late int today;
   Map dayToint = {
@@ -80,39 +80,14 @@ class _MedicinePageState extends State<MedicinePage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButton: isAppPage
-            ? FloatingActionButton(
-                backgroundColor: Colors.green,
-                child: const Icon(Icons.add, color: Colors.white),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    isScrollControlled: true,
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.9,
-                        decoration: const BoxDecoration(
-                          color: Colors.white, // 모달 배경색
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: AddMedicinePage(userEmail: userEmail!),
-                      );
-                    },
-                  ).then((value) => fetchGet());
-                },
-              )
-            : null,
-        backgroundColor: Colors.white,
+        backgroundColor: CommonColor.background,
         appBar: AppBar(
+          leading: Container(),
           toolbarHeight: 65,
-          backgroundColor: Colors.white,
+          backgroundColor: CommonColor.background,
           elevation: 0.0,
           title: const NanumTitleText(
-            text: "복약 관리",
+            text: "복용약",
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -149,16 +124,47 @@ class _MedicinePageState extends State<MedicinePage> {
                         items: check as List<Check>,
                         pad: 40,
                       ),
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.9,
+                            decoration: const BoxDecoration(
+                              color: Colors.white, // 모달 배경색
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: AddMedicinePage(userEmail: userEmail!),
+                          );
+                        },
+                      ).then((value) => fetchGet());
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(15),
+                      width: MediaQuery.of(context).size.width,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white,
+                          border: Border.all(color: Colors.green)),
+                      child: Center(
+                          child: Image.asset(
+                        'assets/images/plus.png',
+                        width: 60,
+                      )),
+                    ),
+                  ),
                 ],
               ),
             ),
             TableEventsExample()
           ],
-          onChange: (p0) {
-            setState(() {
-              isAppPage = p0 == 0 ? true : false;
-            });
-          },
         ),
       ),
     );

@@ -93,11 +93,11 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             locale: 'ko_KR',
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: DateTime.now(),
+            focusedDay: _focusedDay,
             headerStyle: HeaderStyle(
                 headerMargin: EdgeInsets.only(left: 20, top: 5),
                 titleTextFormatter: (date, locale) =>
-                    DateFormat.M('ko_KR').format(DateTime.now()),
+                    DateFormat('y년 M월', locale).format(date),
                 titleCentered: false,
                 leftChevronVisible: false,
                 rightChevronVisible: false,
@@ -115,6 +115,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             startingDayOfWeek: StartingDayOfWeek.sunday,
             rowHeight: 60, // 체크 박스 키우기
             daysOfWeekHeight: 40,
+            pageJumpingEnabled: true,
             weekendDays: const [DateTime.sunday],
             daysOfWeekStyle: const DaysOfWeekStyle(
               decoration: BoxDecoration(
@@ -168,8 +169,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             calendarBuilders: CalendarBuilders(
               markerBuilder: (context, day, events) => events.isNotEmpty
                   ? Container(
-                      padding:
-                          EdgeInsets.only(bottom: 5), // marker buttom padding
+                      padding: const EdgeInsets.only(
+                          bottom: 5), // marker buttom padding
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         width: 24,
