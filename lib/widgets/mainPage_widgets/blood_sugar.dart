@@ -55,7 +55,7 @@ class BloodSugar extends StatelessWidget {
                               NanumTitleText(
                                 text: '혈당',
                                 fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                               ),
                               Icon(
                                 Icons.chevron_right,

@@ -75,17 +75,17 @@ class SymptomModel {
 
 class NoteTextModel {
   final String DateTime;
-  final String Note;
+  final String note;
 
-  NoteTextModel(this.DateTime, this.Note);
+  NoteTextModel(this.DateTime, this.note);
 
   NoteTextModel.fromJson(Map<String, dynamic> json)
       : DateTime = json['DateTime'],
-        Note = json['Note'];
+        note = json['note'];
 
   Map<String, dynamic> toJson() => {
         'DateTime': DateTime,
-        'Note': Note,
+        'note': note,
       };
 }
 

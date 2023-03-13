@@ -100,6 +100,7 @@ class NoteRecodePage extends StatelessWidget {
                     if (NoteText.text != "") {
                       // print(NoteText.text);
                       await secure_storage(NoteText.text);
+                      _homeProvider.noteTextgetData();
                       Navigator.pop(context);
                       // null;/
                     }
@@ -117,7 +118,7 @@ class NoteRecodePage extends StatelessWidget {
 // ignore: non_constant_identifier_names
 secure_storage(String NoteText) async {
   DateTime now = DateTime.now();
-  final dateKey = DateFormat('yyyy년MM월dd일hh시mm분ss초').format(DateTime.now());
+  final dateKey = DateFormat('yyyy년MM월dd일').format(DateTime.now());
 
   const storage = FlutterSecureStorage();
 

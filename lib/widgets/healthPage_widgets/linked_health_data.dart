@@ -86,7 +86,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
             color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -108,7 +108,9 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(text: '연동 건강데이터'),
+                  NanumTitleText(                    text: '연동 건강데이터',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,
