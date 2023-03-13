@@ -111,7 +111,7 @@ class _HealthScreenings extends State<HealthScreenings> {
           width: double.infinity,
           decoration: BoxDecoration(
             color: CommonColor.widgetbackgroud,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
                 color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -138,6 +138,8 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           NanumTitleText(
                             text: '건강검진',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
                           ),
                           // Icon(
                           //   Icons.chevron_right,

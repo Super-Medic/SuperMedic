@@ -55,7 +55,7 @@ class BloodPressure extends StatelessWidget {
                               NanumTitleText(
                                 text: '혈압',
                                 fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                               ),
                               Icon(
                                 Icons.chevron_right,

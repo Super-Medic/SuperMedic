@@ -144,7 +144,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
             color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -167,7 +167,9 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               icon: const Row(
                 children: [
                   NanumTitleText(
-                    text: '예방접종 내역',
+                                 text: '예방접종 내역',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                   Icon(
                     Icons.chevron_right,
