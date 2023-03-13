@@ -184,7 +184,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                 });
                               },
                               inactiveBgColor: Colors.transparent,
-                              activeBgColor: Colors.green,
                               inactiveBorderColor: Colors.grey,
                               inactiveIcon: Align(
                                 alignment: Alignment.center,
@@ -195,6 +194,8 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
+                              activeBgColor: Colors.green,
+                              activeBorderColor: Colors.green,
                               activeIcon: Align(
                                 alignment: Alignment.center,
                                 child: NanumText(
