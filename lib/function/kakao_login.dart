@@ -53,6 +53,7 @@ class KakaoLogin {
   }
 
   Future<String> signInWithKakao() async {
+    print(await KakaoSdk.origin);
     if (await isKakaoTalkInstalled()) {
       try {
         await UserApi.instance.loginWithKakaoTalk();

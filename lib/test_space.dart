@@ -68,7 +68,7 @@ class _MultiBoardListExampleState extends State<MultiBoardListExample> {
           }
           return Container(
             key: ValueKey(groupItem.id),
-            child: choise,
+            child: _buildCard(groupItem),
           );
         },
         boardScrollController: boardController,
@@ -83,27 +83,6 @@ class _MultiBoardListExampleState extends State<MultiBoardListExample> {
             },
           );
         },
-        // headerBuilder: (context, columnData) {
-        //   return AppFlowyGroupHeader(
-        //     icon: const Icon(Icons.lightbulb_circle),
-        //     title: SizedBox(
-        //       width: 60,
-        //       child: TextField(
-        //         controller: TextEditingController()
-        //           ..text = columnData.headerData.groupName,
-        //         onSubmitted: (val) {
-        //           controller
-        //               .getGroupController(columnData.headerData.groupId)!
-        //               .updateGroupName(val);
-        //         },
-        //       ),
-        //     ),
-        //     addIcon: const Icon(Icons.add, size: 20),
-        //     moreIcon: const Icon(Icons.more_horiz, size: 20),
-        //     height: 50,
-        //     margin: config.groupItemPadding,
-        //   );
-        // },
         groupConstraints:
             const BoxConstraints.tightFor(width: 240, height: 500),
         config: config);
