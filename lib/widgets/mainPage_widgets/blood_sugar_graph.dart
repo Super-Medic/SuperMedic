@@ -14,36 +14,79 @@ class BloodSugarGraph extends StatelessWidget {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+    const style = TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.bold,
+      fontSize: 10,
+    );
     return Stack(
       children: <Widget>[
         _homeProvider.bloodSugarValue.isNotEmpty
-            ? SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    right: 10,
-                    left: 0,
-                    bottom: 5,
-                    top: 60,
-                  ),
-                  width: _homeProvider.bloodSugarValue.length <= 7
-                      ? screenWidth * 0.14 * 6
-                      : _homeProvider.bloodSugarValue.length > 30
-                          ? screenWidth * 0.14 * 29
-                          : screenWidth *
-                              0.14 *
-                              (_homeProvider.bloodSugarValue.length - 1),
-                  height: screenHeight * 0.35,
-                  child: Consumer<HomeProvider>(
-                    builder: (context, homeProvider, child) => LineChart(
-                      mainData(homeProvider,
-                          _homeProvider.bloodSugarValue.length - 1),
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.ideographic,
+                children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                        right: 0,
+                        left: 0,
+                        bottom: 44,
+                        top: 54,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('180',
+                              style: style, textAlign: TextAlign.left),
+                          SizedBox(
+                            height: screenHeight * 0.0558,
+                          ),
+                          const Text('120',
+                              style: style, textAlign: TextAlign.left),
+                          SizedBox(
+                            height: screenHeight * 0.0558,
+                          ),
+                          const Text('60',
+                              style: style, textAlign: TextAlign.left),
+                          SizedBox(
+                            height: screenHeight * 0.0558,
+                          ),
+                          const Text('0',
+                              style: style, textAlign: TextAlign.left),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-                // ),
-                // ),
-              )
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                            right: 10,
+                            left: 12,
+                            bottom: 5,
+                            top: 60,
+                          ),
+                          width: _homeProvider.bloodSugarValue.length <= 7
+                              ? screenWidth * 0.145 * 6
+                              : _homeProvider.bloodSugarValue.length > 30
+                                  ? screenWidth * 0.145 * 29
+                                  : screenWidth *
+                                      0.145 *
+                                      (_homeProvider.bloodSugarValue.length -
+                                          1),
+                          height: screenHeight * 0.33,
+                          child: Consumer<HomeProvider>(
+                            builder: (context, homeProvider, child) =>
+                                LineChart(
+                              mainData(homeProvider,
+                                  _homeProvider.bloodSugarValue.length - 1),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // ),
+                    )
+                  ])
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: const Center(
@@ -57,7 +100,7 @@ class BloodSugarGraph extends StatelessWidget {
     const style = TextStyle(
       color: Colors.grey,
       fontWeight: FontWeight.bold,
-      fontSize: 12,
+      fontSize: 10,
     );
     Widget? text;
     if (dateData.isNotEmpty) {
@@ -81,7 +124,7 @@ class BloodSugarGraph extends StatelessWidget {
     const style = TextStyle(
       color: Colors.grey,
       fontWeight: FontWeight.bold,
-      fontSize: 12,
+      fontSize: 10,
     );
     String text;
     switch (value.toInt()) {
@@ -183,7 +226,7 @@ class BloodSugarGraph extends StatelessWidget {
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
+            showTitles: false,
             interval: 1,
             getTitlesWidget: leftTitleWidgets,
             reservedSize: 30,

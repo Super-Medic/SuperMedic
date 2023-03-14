@@ -15,34 +15,88 @@ class BloodPressureGraph extends StatelessWidget {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+    const style = TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.bold,
+      fontSize: 10,
+    );
     return Stack(
       children: <Widget>[
         _homeProvider.bloodPressureValue.isNotEmpty
-            ? SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    right: 10,
-                    left: 0,
-                    bottom: 5,
-                    top: 60,
-                  ),
-                  width: _homeProvider.bloodPressureValue.length <= 7
-                      ? screenWidth * 0.14 * 6
-                      : _homeProvider.bloodPressureValue.length > 30
-                          ? screenWidth * 0.14 * 29
-                          : screenWidth *
-                              0.14 *
-                              (_homeProvider.bloodPressureValue.length - 1),
-                  height: screenHeight * 0.35,
-                  child: Consumer<HomeProvider>(
-                    builder: (context, homeProvider, child) => LineChart(
-                      mainData(homeProvider,
-                          _homeProvider.bloodPressureValue.length - 1),
+            ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.ideographic,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          right: 0,
+                          left: 0,
+                          bottom: 44,
+                          top: 54,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('300',
+                                style: style, textAlign: TextAlign.left),
+                            SizedBox(
+                              height: screenHeight * 0.0558,
+                            ),
+                            const Text('200',
+                                style: style, textAlign: TextAlign.left),
+                            SizedBox(
+                              height: screenHeight * 0.0558,
+                            ),
+                            const Text('100',
+                                style: style, textAlign: TextAlign.left),
+                            SizedBox(
+                              height: screenHeight * 0.0558,
+                            ),
+                            const Text('0',
+                                style: style, textAlign: TextAlign.left),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                          child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                            right: 10,
+                            left: 12,
+                            bottom: 5,
+                            top: 60,
+                          ),
+                          width: _homeProvider.bloodPressureValue.length <= 7
+                              ? screenWidth * 0.145 * 6
+                              : _homeProvider.bloodPressureValue.length > 30
+                                  ? screenWidth * 0.145 * 29
+                                  : screenWidth *
+                                      0.145 *
+                                      (_homeProvider.bloodPressureValue.length -
+                                          1),
+                          height: screenHeight * 0.35,
+                          child: Consumer<HomeProvider>(
+                            builder: (context, homeProvider, child) =>
+                                LineChart(
+                              mainData(homeProvider,
+                                  _homeProvider.bloodPressureValue.length - 1),
+                            ),
+                          ),
+                        ),
+                      ))
+                    ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Image.asset(
+                      'assets/images/test.png',
+                      width: 70,
                     ),
-                  ),
-                ),
-              )
+                  ],
+                )
+              ])
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: const Center(
@@ -56,7 +110,7 @@ class BloodPressureGraph extends StatelessWidget {
     const style = TextStyle(
       color: Colors.grey,
       fontWeight: FontWeight.bold,
-      fontSize: 12,
+      fontSize: 10,
     );
     Widget? text;
     if (dateData.isNotEmpty) {
@@ -78,11 +132,6 @@ class BloodPressureGraph extends StatelessWidget {
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Colors.grey,
-      fontWeight: FontWeight.bold,
-      fontSize: 12,
-    );
     String text;
     switch (value.toInt()) {
       case 0:
@@ -100,7 +149,7 @@ class BloodPressureGraph extends StatelessWidget {
       default:
         return Container();
     }
-    return Text(text, style: style, textAlign: TextAlign.left);
+    return Text(text);
   }
 
   LineChartData mainData(homeProvider, count) {
@@ -204,12 +253,6 @@ class BloodPressureGraph extends StatelessWidget {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
-          axisNameWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image.asset('assets/images/test.png'),
-            ],
-          ),
           sideTitles: SideTitles(
             showTitles: true,
             interval: 1,
@@ -219,7 +262,7 @@ class BloodPressureGraph extends StatelessWidget {
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
+            showTitles: false,
             interval: 1,
             getTitlesWidget: leftTitleWidgets,
             reservedSize: 30,

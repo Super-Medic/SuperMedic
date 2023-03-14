@@ -26,56 +26,55 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: CommonColor.background,
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-              //replace with our own icon data.
-            ),
-            toolbarHeight: 48,
-            backgroundColor: Colors.white, //배경 색
-            elevation: 0.0, //
+    return Scaffold(
+      backgroundColor: CommonColor.background,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // ignore: unrelated_type_equality_checks
-                AverageBloodSugar(averageValue: _homeProvider.bloodSugarValue),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                const BloodSugarDirction(),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                Container(
-                  padding: AppTheme.detailpadding,
-                  width: double.infinity,
-                  decoration:
-                      const BoxDecoration(color: CommonColor.widgetbackgroud),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: const NanumTitleText(text: '혈당 추이'),
-                        ),
-                      ]),
-                ),
-                BloodSugarTimeline(
-                    timeLineValue: _homeProvider.bloodSugarValue),
-              ],
+          //replace with our own icon data.
+        ),
+        toolbarHeight: 48,
+        backgroundColor: Colors.white, //배경 색
+        elevation: 0.0, //
+      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // ignore: unrelated_type_equality_checks
+            AverageBloodSugar(averageValue: _homeProvider.bloodSugarValue),
+            SizedBox(
+              height: screenHeight * 0.01,
             ),
-          )),
+            const BloodSugarDirction(),
+            SizedBox(
+              height: screenHeight * 0.01,
+            ),
+            Container(
+              padding: AppTheme.detailpadding,
+              width: double.infinity,
+              decoration:
+                  const BoxDecoration(color: CommonColor.widgetbackgroud),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: const NanumTitleText(text: '혈당 추이'),
+                    ),
+                  ]),
+            ),
+            BloodSugarTimeline(timeLineValue: _homeProvider.bloodSugarValue),
+          ],
+        ),
+      )),
     );
   }
 }
