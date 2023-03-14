@@ -12,6 +12,7 @@ class BloodSugarGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
+    print(_homeProvider.bloodSugarValue.runtimeType);
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     const style = TextStyle(
