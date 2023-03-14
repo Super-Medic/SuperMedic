@@ -25,57 +25,57 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: CommonColor.background,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: CommonColor.background,
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              //replace with our own icon data.
+            ),
+            toolbarHeight: 48,
+            backgroundColor: Colors.white, //배경 색
+            elevation: 0.0, //
           ),
-          //replace with our own icon data.
-        ),
-        toolbarHeight: 48,
-        backgroundColor: Colors.white, //배경 색
-        elevation: 0.0, //
-      ),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // ignore: unrelated_type_equality_checks
-            AverageBloodPressure(
-                averageValue: _homeProvider.bloodPressureValue),
-            SizedBox(
-              height: screenHeight * 0.01,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // ignore: unrelated_type_equality_checks
+                AverageBloodPressure(
+                    averageValue: _homeProvider.bloodPressureValue),
+                SizedBox(
+                  height: screenHeight * 0.01,
+                ),
+                const BloodPressureDirction(),
+                SizedBox(
+                  height: screenHeight * 0.01,
+                ),
+                Container(
+                  padding: AppTheme.detailpadding,
+                  width: double.infinity,
+                  decoration:
+                      const BoxDecoration(color: CommonColor.widgetbackgroud),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: const NanumTitleText(text: '혈압 추이'),
+                        ),
+                      ]),
+                ),
+                BloodPressureTimeline(
+                    timeLineValue: _homeProvider.bloodPressureValue),
+              ],
             ),
-            const BloodPressureDirction(),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
-            Container(
-              padding: AppTheme.detailpadding,
-              width: double.infinity,
-              decoration:
-                  const BoxDecoration(color: CommonColor.widgetbackgroud),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: const NanumTitleText(text: '혈압 추이'),
-                    ),
-                  ]),
-            ),
-            BloodPressureTimeline(
-                timeLineValue: _homeProvider.bloodPressureValue),
-          ],
-        ),
-      )),
+          )),
     );
   }
 }

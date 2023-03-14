@@ -69,11 +69,11 @@ class BloodPressureGraph extends StatelessWidget {
                             top: 60,
                           ),
                           width: _homeProvider.bloodPressureValue.length <= 7
-                              ? screenWidth * 0.145 * 6
+                              ? screenWidth * 0.138 * 6
                               : _homeProvider.bloodPressureValue.length > 30
-                                  ? screenWidth * 0.145 * 29
+                                  ? screenWidth * 0.138 * 29
                                   : screenWidth *
-                                      0.145 *
+                                      0.138 *
                                       (_homeProvider.bloodPressureValue.length -
                                           1),
                           height: screenHeight * 0.33,
@@ -115,9 +115,9 @@ class BloodPressureGraph extends StatelessWidget {
     Widget? text;
     if (dateData.isNotEmpty) {
       for (int i = 0; i < dateData.length; i++) {
-        if (value.toInt() <= i) {
+        if (value.toInt() == i) {
           text = Text(dateData[i], style: style);
-        } else {
+        } else if (value.toInt() > i) {
           text = const Text('', style: style);
         }
       }
@@ -392,6 +392,7 @@ List<String> _getDateData(dateData) {
       listData.add(dateData[i].DateTime_Md);
     }
   }
+  // print(listData);
   return listData;
 }
 
