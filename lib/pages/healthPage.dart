@@ -26,41 +26,42 @@ class _HealthPage extends State<HealthPage> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      backgroundColor: CommonColor.background,
-      appBar: AppBar(
-        toolbarHeight: 60,
-        backgroundColor: CommonColor.background, //배경 색
-        elevation: 0.0, //그림자 효과 해제
-        leading: Container(
-          padding: const EdgeInsets.only(left: 10),
-          child: Image.asset(
-            'assets/images/home_logo.png',
-            color: Colors.green,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: CommonColor.background,
+        appBar: AppBar(
+          toolbarHeight: 60,
+          backgroundColor: CommonColor.background, //배경 색
+          elevation: 0.0, //그림자 효과 해제
+          leading: Container(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset(
+              'assets/images/home_logo.png',
+              color: Colors.green,
+            ),
           ),
+          leadingWidth: 150,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.notifications_none),
+              color: Colors.black,
+              iconSize: 25,
+              onPressed: () => {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.menu),
+              color: Colors.black,
+              iconSize: 25,
+              onPressed: () => {
+                context.read<BottomNavigationProvider>().updateCurrentPage(4)
+              },
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
         ),
-        leadingWidth: 150,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            color: Colors.black,
-            iconSize: 25,
-            onPressed: () => {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            color: Colors.black,
-            iconSize: 25,
-            onPressed: () =>
-                {context.read<BottomNavigationProvider>().updateCurrentPage(4)},
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Container(
           padding: AppTheme.totalpadding,
           child: Column(

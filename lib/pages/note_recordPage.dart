@@ -33,11 +33,11 @@ class NoteRecodePage extends StatelessWidget {
       elevation: 0.0,
     );
 
-    return Scaffold(
-      backgroundColor: NoteText.text != "" ? Colors.green : Colors.grey,
-      body: SafeArea(
-        top: false,
-        child: Scaffold(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: NoteText.text != "" ? Colors.green : Colors.grey,
+        body: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             leading: IconButton(

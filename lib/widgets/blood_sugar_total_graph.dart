@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_sugar_graph.dart';
 
-class NestedTabBar extends StatefulWidget {
-  const NestedTabBar({super.key});
+class BloodSugarTotalGraph extends StatefulWidget {
+  const BloodSugarTotalGraph({super.key});
 
   @override
-  _NestedTabBarState createState() => _NestedTabBarState();
+  _BloodSugarTotalGraphState createState() => _BloodSugarTotalGraphState();
 }
 
-class _NestedTabBarState extends State<NestedTabBar>
+class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
     with TickerProviderStateMixin {
   late TabController _nestedTabController;
+  late HomeProvider _homeProvider;
 
   @override
   void initState() {
@@ -26,6 +29,7 @@ class _NestedTabBarState extends State<NestedTabBar>
 
   @override
   Widget build(BuildContext context) {
+    _homeProvider = context.watch<HomeProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -50,16 +54,14 @@ class _NestedTabBarState extends State<NestedTabBar>
           ],
         ),
         Expanded(
-          child: SizedBox(
-            child: TabBarView(
-              controller: _nestedTabController,
-              children: <Widget>[
-                BloodSugarGraph(),
-                BloodSugarGraph(),
-              ],
-            ),
+          child: TabBarView(
+            controller: _nestedTabController,
+            children: <Widget>[
+              BloodSugarGraph(),
+              BloodSugarGraph(),
+            ],
           ),
-        )
+        ),
       ],
     );
   }

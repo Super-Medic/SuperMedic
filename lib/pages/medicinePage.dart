@@ -224,7 +224,7 @@ class _MedicinePageState extends State<MedicinePage> {
           Opacity(
             opacity: 0.5, //0.5만큼~
             child: isLoading
-                ? ModalBarrier(dismissible: false, color: Colors.black)
+                ? const ModalBarrier(dismissible: false, color: Colors.black)
                 : null, //클릭 못하게~
           ),
           Center(
