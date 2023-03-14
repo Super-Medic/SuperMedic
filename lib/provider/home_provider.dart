@@ -55,12 +55,18 @@ class HomeProvider extends ChangeNotifier {
             .split(', ');
         _homeItems = List.generate(homeIndex.length, (i) {
           switch (homeIndex[i]) {
-            case 'MedicationTime': return const MedicationTime();
-            case 'BloodSugar': return const BloodSugar();
-            case 'BloodPressure': return const BloodPressure();
-            case 'Symptom': return const Symptom();
-            case 'Note': return const Note();
-            default: return Container();
+            case 'MedicationTime':
+              return const MedicationTime();
+            case 'BloodSugar':
+              return const BloodSugar();
+            case 'BloodPressure':
+              return const BloodPressure();
+            case 'Symptom':
+              return const Symptom();
+            case 'Note':
+              return const Note();
+            default:
+              return Container();
           }
         });
         _homeItems = homeItems;
