@@ -97,16 +97,11 @@ class MainPageState extends State<MainPage> {
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0:
-        return const HomePage();
-      case 1:
-        return const MedicinePage();
-      case 2:
-        return const HealthPage();
-      case 3:
-        return const MeditalkPage();
-      case 4:
-        return const MyPage();
+      case 0: return const HomePage();
+      case 1: return const MedicinePage();
+      case 2: return const HealthPage();
+      case 3: return const MeditalkPage();
+      case 4: return const MyPage();
     }
     return Container();
   }
@@ -181,7 +176,7 @@ class MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.only(bottom: 5),
                 child: const Icon(
                   Icons.person_outline_rounded,
-                  color: const Color.fromARGB(160, 158, 158, 158),
+                  color: Color.fromARGB(160, 158, 158, 158),
                 )),
             label: '마이페이지')
       ],
@@ -228,9 +223,7 @@ class MainPageState extends State<MainPage> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: onWillPop,
-        child: SafeArea(
-          child: _navigationBody(),
-        ),
+        child: _navigationBody(),
       ),
       bottomNavigationBar: _bottomNavigationBarWidget(),
     );

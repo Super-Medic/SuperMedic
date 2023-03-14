@@ -77,22 +77,22 @@ class _MedicinePageState extends State<MedicinePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: CommonColor.background,
+      appBar: AppBar(
+        leading: Container(),
+        toolbarHeight: 65,
         backgroundColor: CommonColor.background,
-        appBar: AppBar(
-          leading: Container(),
-          toolbarHeight: 65,
-          backgroundColor: CommonColor.background,
-          elevation: 0.0,
-          title: const NanumTitleText(
-            text: "복용약",
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+        elevation: 0.0,
+        title: const NanumTitleText(
+          text: "복용약",
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        body: ContainedTabBarView(
+      ),
+      body: SafeArea(
+        child: ContainedTabBarView(
           tabBarProperties: TabBarProperties(
               width: 180,
               height: 42,

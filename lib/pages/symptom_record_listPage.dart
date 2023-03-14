@@ -66,25 +66,25 @@ class _SymptomRecordListState extends State<SymptomRecordList> {
       // foregroundColor: Colors.greenAccent,
     );
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-            //replace with our own icon data.
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
           ),
-          toolbarHeight: 48,
-          backgroundColor: Colors.white, //배경 색
-          elevation: 0.0, //
+          //replace with our own icon data.
         ),
-        body: Container(
+        toolbarHeight: 48,
+        backgroundColor: Colors.white, //배경 색
+        elevation: 0.0, //
+      ),
+      body: SafeArea(
+        child: Container(
           padding: AppTheme.totalpadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,19 +156,19 @@ class _SymptomRecordListState extends State<SymptomRecordList> {
             ],
           ),
         ),
-        bottomSheet: ElevatedButton(
-          // style: style,
-          style: style,
+      ),
+      bottomSheet: ElevatedButton(
+        // style: style,
+        style: style,
 
-          child: const NanumTitleText(
-            text: '저장',
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        child: const NanumTitleText(
+          text: '저장',
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
