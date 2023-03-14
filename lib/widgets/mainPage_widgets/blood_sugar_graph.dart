@@ -30,7 +30,7 @@ class BloodSugarGraph extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         right: 0,
                         left: 0,
-                        bottom: 44,
+                        bottom: 0,
                         top: 54,
                       ),
                       child: Column(

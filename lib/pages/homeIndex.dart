@@ -78,8 +78,17 @@ class _HomeIndexState extends State<HomeIndex> {
                 tileColor: const Color.fromARGB(0, 255, 255, 255),
                 minVerticalPadding: 20,
                 visualDensity: const VisualDensity(vertical: -4),
-                title: Text('${homeItemsOder[index]}'),
-                trailing: const Icon(Icons.drag_handle),
+                title: '${homeItemsOder[index]}' == 'MedicationTime'
+                    ? const Text('복약 관리')
+                    : '${homeItemsOder[index]}' == 'BloodPressure'
+                        ? const Text('혈압 관리')
+                        : '${homeItemsOder[index]}' == 'BloodSugar'
+                            ? const Text('혈당 관리')
+                            : '${homeItemsOder[index]}' == 'Symptom'
+                                ? const Text('증상 관리')
+                                : const Text('노트'),
+                trailing: ReorderableDragStartListener(
+                    index: index, child: const Icon(Icons.drag_handle)),
               ),
               const Divider(thickness: 1),
             ])

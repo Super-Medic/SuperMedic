@@ -32,7 +32,7 @@ class BloodPressureGraph extends StatelessWidget {
                         padding: const EdgeInsets.only(
                           right: 0,
                           left: 0,
-                          bottom: 44,
+                          bottom: 0,
                           top: 54,
                         ),
                         child: Column(
@@ -76,7 +76,7 @@ class BloodPressureGraph extends StatelessWidget {
                                       0.145 *
                                       (_homeProvider.bloodPressureValue.length -
                                           1),
-                          height: screenHeight * 0.35,
+                          height: screenHeight * 0.33,
                           child: Consumer<HomeProvider>(
                             builder: (context, homeProvider, child) =>
                                 LineChart(
