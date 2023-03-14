@@ -36,14 +36,14 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           lineThickness: 2,
           dashColor: widget.item.isChecked
               ? Colors.green
-              : Color.fromARGB(255, 110, 110, 110),
+              : Colors.grey.withOpacity(0.7),
         ));
     return Row(
       children: [
         Column(
           children: [
             GFCheckbox(
-              size: 40,
+              size: GFSize.LARGE,
               value: widget.item.isChecked,
               type: GFCheckboxType.circle,
               onChanged: (value) async {
@@ -57,10 +57,21 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                 Icons.check,
                 color: Colors.white,
               ),
+              activeBorderColor: Colors.green,
+              inactiveBorderColor: Colors.grey.withOpacity(0.7),
+              inactiveIcon: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Colors.grey.withOpacity(0.7)),
+                  color: Colors.white,
+                ),
+              ),
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
             NanumText(
-              text: widget.item.time,
+              text: _changeTime(widget.item.time) +
+                  " " +
+                  widget.item.time.substring(0, 5),
               fontSize: 11,
               color: widget.item.isChecked
                   ? Colors.green
@@ -71,6 +82,16 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         if (widget.last == false) dot,
       ],
     );
+  }
+
+  _changeTime(time) {
+    if (time == '12:00 AM') {
+      return '오전';
+    } else if (time == '12:00 PM') {
+      return '오후';
+    } else {
+      return time.substring(5) == 'AM' ? '오전' : '오후';
+    }
   }
 
   postRequest(id, time, value) async {

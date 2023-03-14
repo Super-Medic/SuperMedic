@@ -64,6 +64,6 @@ class _TimePickerPageState extends State<TimePickerPage> {
   DateTime getDateTime() {
     final now = DateTime.now();
 
-    return DateTime(now.year, now.month, now.day, now.hour, 0);
+    return DateTime(now.year, now.month, now.day, now.hour, now.minute);
   }
 }

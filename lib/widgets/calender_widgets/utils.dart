@@ -2,13 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'dart:collection';
+import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:super_medic/widgets/calender_widgets/calenderCheckBox.dart';
+import 'package:http/http.dart' as http;
+// import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 
 /// Example event class.
 class Event {
   final String title;
-
+  // final CalCustomCheckBox checkBoxList;
+  // const Event(this.title, this.checkBoxList);
   const Event(this.title);
 
   @override
@@ -49,4 +56,19 @@ List<DateTime> daysInRange(DateTime first, DateTime last) {
 
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
-final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+final kLastDay = DateTime(kToday.year, kToday.month, kToday.day);
+
+getData() async {
+  String? userEmail;
+  const storage = FlutterSecureStorage();
+  String? val = await storage.read(key: 'LoginUser');
+  if (val != null) {
+    userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+  }
+  final res = await http
+      .get(Uri.parse('https://mypd.kr:5000/medicine/take?email=$userEmail'));
+  List<List> temp = List.empty(growable: true);
+  if (res.body != 'Empty') {
+    // for (var data in json.decode(res.body)) {}
+  }
+}
