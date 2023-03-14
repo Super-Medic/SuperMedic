@@ -10,16 +10,17 @@ import 'package:super_medic/widgets/calender_widgets/customCheckBox.dart';
 import 'package:http/http.dart' as http;
 import 'package:super_medic/pages/medicinePage.dart';
 
-class MediCheck extends StatefulWidget {
+class MediCheckForNotToday extends StatefulWidget {
   final Map<bool, List<Check>> items;
   final double pad;
-  const MediCheck({super.key, required this.items, required this.pad});
+  const MediCheckForNotToday(
+      {super.key, required this.items, required this.pad});
 
   @override
-  State<MediCheck> createState() => _MediCheckState();
+  State<MediCheckForNotToday> createState() => _MediCheckForNotTodayState();
 }
 
-class _MediCheckState extends State<MediCheck> {
+class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
   @override
   Widget build(BuildContext context) {
     return widget.items.containsKey(true) == true
@@ -83,20 +84,9 @@ class _MediCheckState extends State<MediCheck> {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(left: widget.pad),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        for (var i = 0; i < widget.items[true]!.length; i++)
-                          CustomCheckBox(
-                            item: widget.items[true]![i],
-                            last: widget.items[true]!.length - 1 == i
-                                ? true
-                                : false,
-                          ),
-                      ],
+                  child: const Center(
+                    child: NanumBodyText(
+                      text: "오늘은 복용요일이 아닙니다",
                     ),
                   ),
                 ),

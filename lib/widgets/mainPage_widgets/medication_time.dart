@@ -24,7 +24,7 @@ class MedicationTime extends StatefulWidget {
 
 class _MedicationTimeState extends State<MedicationTime> {
   DateTime now = DateTime.now();
-  List<List> checkList = List.empty(growable: true);
+  List<Map> checkList = List.empty(growable: true);
   String? userEmail;
   bool checkNull = true;
   double inputHeight = 0;
@@ -45,20 +45,22 @@ class _MedicationTimeState extends State<MedicationTime> {
     fetchGet();
   }
 
-  fetchGet() async {
+  Future<void> fetchGet() async {
     const storage = FlutterSecureStorage();
+    String? userEmail;
     String? val = await storage.read(key: 'LoginUser');
     if (val != null) {
       userEmail = LoginModel.fromJson(jsonDecode(val)).email;
     }
-    final res = await http
-        .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
+    final res = await http.get(Uri.parse(
+        'https://mypd.kr:5000/medicine/parse/current?email=$userEmail'));
 
-    List<List> temp = List.empty(growable: true);
-    if (res.body != '[]') {
+    List<Map> temp = List.empty(growable: true);
+    if (res.body != 'Empty') {
       checkNull = false;
       for (var data in json.decode(res.body)) {
         if (data['days'].contains(today)) {
+          Map<bool, List<Check>> checkMap = <bool, List<Check>>{};
           List<Check> checks = List.empty(growable: true);
           for (var time in data['times']) {
             checks.add(Check(
@@ -67,7 +69,8 @@ class _MedicationTimeState extends State<MedicationTime> {
                 time: time['time'],
                 isChecked: time['check']));
           }
-          temp.add(checks);
+          checkMap[true] = checks;
+          temp.add(checkMap);
         }
       }
       double newHeight;
@@ -80,12 +83,10 @@ class _MedicationTimeState extends State<MedicationTime> {
         newHeight = 0.325;
       }
 
-      if (mounted) {
-        setState(() {
-          checkList = temp;
-          inputHeight = newHeight;
-        });
-      }
+      setState(() {
+        checkList = temp;
+        inputHeight = newHeight;
+      });
     }
   }
 
@@ -121,7 +122,7 @@ class _MedicationTimeState extends State<MedicationTime> {
               children: [
                 if (checkNull != true)
                   for (var check in checkList)
-                    MediCheck(items: check as List<Check>, pad: 20),
+                    MediCheck(items: check as Map<bool, List<Check>>, pad: 20),
                 SizedBox(height: screenHeight * 0.025),
               ],
             ),

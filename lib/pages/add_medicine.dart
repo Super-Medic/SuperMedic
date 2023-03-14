@@ -283,7 +283,8 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                             child: Column(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.only(left: 20),
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 8, bottom: 8),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
@@ -360,7 +361,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
             },
             style: TextButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  //모서리를 둥글게
                   borderRadius: BorderRadius.circular(0)),
               minimumSize: Size(screenWidth, screenHeight * 0.07),
               backgroundColor: checkValidate() ? Colors.green : Colors.grey,
