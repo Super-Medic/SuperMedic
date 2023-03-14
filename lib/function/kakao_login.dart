@@ -5,6 +5,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
 
+
 class KakaoLogin {
   Login_verify loginverify = Login_verify();
   // ignore: non_constant_identifier_names

@@ -22,87 +22,93 @@ class NoteRecodePage extends StatelessWidget {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle style = TextButton.styleFrom(
       shape: RoundedRectangleBorder(
           //모서리를 둥글게
           borderRadius: BorderRadius.circular(0)),
       minimumSize: Size(screenWidth, screenHeight * 0.07),
       backgroundColor: Colors.green,
+      disabledBackgroundColor: Colors.grey,
       foregroundColor: Colors.green[900],
       elevation: 0.0,
     );
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+    return Scaffold(
+      backgroundColor: NoteText.text != "" ? Colors.green : Colors.grey,
+      body: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              //replace with our own icon data.
             ),
-            //replace with our own icon data.
+            toolbarHeight: 48,
+            backgroundColor: Colors.white, //배경 색
+            elevation: 0.0, //
           ),
-          toolbarHeight: 48,
-          backgroundColor: Colors.white, //배경 색
-          elevation: 0.0, //
-        ),
-        body: Container(
-          padding: AppTheme.totalpadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              SizedBox(
-                height: screenHeight * 0.01,
-              ),
-              const Center(
-                child: NanumTitleText(
-                  text: '노트 기록하기',
-                  fontSize: 25,
-                  textAlign: TextAlign.center,
+          body: Container(
+            padding: AppTheme.totalpadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                SizedBox(
+                  height: screenHeight * 0.01,
                 ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
-              const PresentTime(),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  controller: NoteText,
-                  decoration: const InputDecoration(
-                    labelText: '오늘 하루를 기록해보세요',
-                    floatingLabelStyle: TextStyle(color: Colors.greenAccent),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.greenAccent),
-                    ),
+                const Center(
+                  child: NanumTitleText(
+                    text: '노트 기록하기',
+                    fontSize: 25,
+                    textAlign: TextAlign.center,
                   ),
-                  strutStyle: const StrutStyle())
-            ],
+                ),
+                SizedBox(
+                  height: screenHeight * 0.03,
+                ),
+                const PresentTime(),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    controller: NoteText,
+                    decoration: const InputDecoration(
+                      labelText: '오늘 하루를 기록해보세요',
+                      floatingLabelStyle: TextStyle(color: Colors.greenAccent),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.greenAccent),
+                      ),
+                    ),
+                    strutStyle: const StrutStyle())
+              ],
+            ),
           ),
-        ),
-        bottomSheet: ElevatedButton(
-          // style: style,
-          style: style,
-          onPressed: NoteText.text != ""
-              ? () async {
-                  if (NoteText.text != "") {
-                    // print(NoteText.text);
-                    await secure_storage(NoteText.text);
-                    Navigator.pop(context);
-                    // null;/
+          bottomSheet: TextButton(
+            // style: style,
+            style: style,
+            onPressed: NoteText.text != ""
+                ? () async {
+                    if (NoteText.text != "") {
+                      // print(NoteText.text);
+                      await secure_storage(NoteText.text);
+                      _homeProvider.noteTextgetData();
+                      Navigator.pop(context);
+                      // null;/
+                    }
                   }
-                }
-              : null,
+                : null,
 
-          child: const NanumTitleText(text: '저장', color: Colors.white),
+            child: const NanumTitleText(text: '저장', color: Colors.white),
+          ),
         ),
       ),
     );
@@ -112,7 +118,7 @@ class NoteRecodePage extends StatelessWidget {
 // ignore: non_constant_identifier_names
 secure_storage(String NoteText) async {
   DateTime now = DateTime.now();
-  final dateKey = DateFormat('yyyy년MM월dd일hh시mm분ss초').format(DateTime.now());
+  final dateKey = DateFormat('yyyy년MM월dd일').format(DateTime.now());
 
   const storage = FlutterSecureStorage();
 

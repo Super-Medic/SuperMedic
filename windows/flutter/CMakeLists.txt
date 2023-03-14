@@ -102,3 +102,11 @@ add_custom_target(flutter_assemble DEPENDS
   ${CPP_WRAPPER_SOURCES_PLUGIN}
   ${CPP_WRAPPER_SOURCES_APP}
 )
+
+add_library(mylibrary SHARED ${mylibrary_src})
+
+target_compile_options(mylibrary PRIVATE
+  -Wall
+  -fstack-protector-all
+  -O3
+)

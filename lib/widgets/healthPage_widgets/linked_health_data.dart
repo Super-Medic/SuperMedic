@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'package:super_medic/pages/selectAuth.dart';
 
 class LinkedHealthData extends StatefulWidget {
   const LinkedHealthData({Key? key}) : super(key: key);
@@ -24,10 +23,11 @@ class _LinkedHealthData extends State<LinkedHealthData> {
     return Column(
       children: [
         Container(
+            padding: const EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -45,6 +45,8 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '연동 건강데이터',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(
@@ -52,16 +54,16 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                     width: double.infinity,
                     child: TextButton.icon(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const AuthPage(
-                                        healthDataType: "linked_health",
-                                      )));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) => const AuthPage(
+                          //               healthDataType: "linked_health",
+                          //             )));
                         },
                         icon: const Icon(
                           Icons.hourglass_top_rounded,
-                          size: 30,
+                          size: 23,
                           weight: 900,
                         ),
                         label: const NanumBodyText(
@@ -84,7 +86,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
             color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -106,7 +108,9 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(text: '연동 건강데이터'),
+                  NanumTitleText(                    text: '연동 건강데이터',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,

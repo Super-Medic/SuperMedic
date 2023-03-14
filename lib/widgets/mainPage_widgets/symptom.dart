@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/symptom_record_selectPage.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //폰트 설정 파일
@@ -17,6 +19,24 @@ class Symptom extends StatefulWidget {
 class _SymptomState extends State<Symptom> {
   late HomeProvider _homeProvider;
 
+  bool isCheckTodaySymptom(List<SymptomModel> symptomsValue) {
+    DateTime now = DateTime.now();
+    final dateKey = DateFormat('yyyy년MM월dd일').format(DateTime.now());
+    bool exist = false;
+
+    if (symptomsValue.isEmpty == true) {
+      return exist;
+    } else if (symptomsValue.isEmpty == false) {
+      for (int i = 0; i < symptomsValue.length; i++) {
+        if (symptomsValue[i].DateTime == dateKey) {
+          exist = true;
+          break;
+        }
+      }
+    }
+    return exist;
+  }
+
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
@@ -27,7 +47,7 @@ class _SymptomState extends State<Symptom> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: CommonColor.widgetbackgroud,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
             color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -39,98 +59,108 @@ class _SymptomState extends State<Symptom> {
       ),
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              margin: AppTheme.widgetpadding,
-              child: TextButton.icon(
-                  onPressed: () async {
-                    const storage = FlutterSecureStorage();
-                    dynamic Symptoms = await storage.read(key: "Symptoms");
-                    // print(Symptoms);
+        Container(
+          padding: const EdgeInsets.only(top: 5),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  margin: AppTheme.widgetpadding,
+                  padding: const EdgeInsets.only(left: 15, top: 8),
+                  child: InkWell(
+                    onTap: () async {
+                      const storage = FlutterSecureStorage();
+                      await storage.delete(key: "Symptoms");
+                      _homeProvider.symptomgetData();
+                      // dynamic Symptoms = await storage.read(key: "Symptoms");
+                    },
+                    child: const Row(
+                      children: [
+                        NanumTitleText(
+                          text: '증상',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        // Icon(
+                        //   Icons.chevron_right,
+                        //   weight: 900,
+                        //   color: Colors.black,
+                        // ),
+                      ],
+                    ),
+                  )),
+              Container(
+                padding: const EdgeInsets.only(right: 20),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SymptomRecordSelect()),
+                    );
                   },
-                  label: const NanumBodyText(
-                    text: '',
+                  style: TextButton.styleFrom(
+                    backgroundColor: CommonColor.buttoncolor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    padding: const EdgeInsets.symmetric(horizontal: 7),
                   ),
-                  icon: const Row(
+                  child: const Row(
+                    //spaceEvenly: 요소들을 균등하게 배치하는 속성
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      NanumTitleText(text: '증상'),
-                      // Icon(
-                      //   Icons.chevron_right,
-                      //   weight: 900,
-                      //   color: Colors.black,
-                      // ),
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      NanumTitleText(
+                        text: '오늘기록  ',
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
-                  style: TextButton.styleFrom(
-                      iconColor: Colors.green, foregroundColor: Colors.black)),
-            ),
-            Container(
-              padding: const EdgeInsets.only(right: 20),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SymptomRecordSelect()),
-                  );
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: CommonColor.buttoncolor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.symmetric(horizontal: 7),
-                ),
-                child: const Row(
-                  //spaceEvenly: 요소들을 균등하게 배치하는 속성
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                    NanumTitleText(
-                      text: '오늘기록',
-                      fontSize: 12,
-                      color: Colors.white,
-                    ),
-                  ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        _homeProvider.symptomsValue.isEmpty == false
-            ? Center(
+        isCheckTodaySymptom(_homeProvider.symptomsValue)
+            ? Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.075,
+                    vertical: screenHeight * 0.02),
                 child: Column(children: [
-                  Wrap(
-                    direction: Axis.horizontal,
-                    // alignment: WrapAlignment.start,
-                    spacing: screenWidth * 0.03,
-                    runSpacing: screenHeight * 0.01,
-
-                    alignment: WrapAlignment.start,
-                    children: List.generate(
-                      _homeProvider
-                          .symptomsValue[_homeProvider.symptomsValue.length - 1]
-                          .symptom
-                          .length,
-                      (index) {
-                        return symptomList(
-                            context,
-                            index,
-                            _homeProvider
-                                .symptomsValue[
-                                    _homeProvider.symptomsValue.length - 1]
-                                .symptom);
-                      },
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Wrap(
+                      alignment: WrapAlignment.start,
+                      direction: Axis.horizontal,
+                      // alignment: WrapAlignment.start,
+                      spacing: screenWidth * 0.03,
+                      runSpacing: screenHeight * 0.01,
+                      children: List.generate(
+                        _homeProvider
+                            .symptomsValue[
+                                _homeProvider.symptomsValue.length - 1]
+                            .symptom
+                            .length,
+                        (index) {
+                          return symptomList(
+                              context,
+                              index,
+                              _homeProvider
+                                  .symptomsValue[
+                                      _homeProvider.symptomsValue.length - 1]
+                                  .symptom);
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02)
-                ]),
-              )
+                  // SizedBox(height: screenHeight * 0.02)
+                ]))
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child:

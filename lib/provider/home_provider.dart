@@ -2,6 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/widgets/mainPage_widgets/blood_pressure.dart';
+import 'package:super_medic/widgets/mainPage_widgets/blood_sugar.dart';
+import 'package:super_medic/widgets/mainPage_widgets/medication_time.dart';
+import 'package:super_medic/widgets/mainPage_widgets/note.dart';
+import 'package:super_medic/widgets/mainPage_widgets/symptom.dart';
 
 // ChangeNotifier 상속 받이 상태 관리
 // BottomNavigation을 구동
@@ -11,6 +16,7 @@ class HomeProvider extends ChangeNotifier {
   List<BloodPressureModel> _bloodPressureValue = [];
   List<SymptomModel> _symptomsValue = [];
   List<NoteTextModel> _noteTextValue = [];
+  List<Widget> _homeItems = [];
   ScreeningModel? _screeningValue;
   MedicineModel? _medicineValue;
   DiagnosisModel? _diagnosisValue;
@@ -20,6 +26,7 @@ class HomeProvider extends ChangeNotifier {
   List<BloodSugarModel> get bloodSugarValue => _bloodSugarValue;
   List<SymptomModel> get symptomsValue => _symptomsValue;
   List<NoteTextModel> get noteTextValue => _noteTextValue;
+  List<Widget> get homeItems => _homeItems;
   ScreeningModel? get screeningValue => _screeningValue;
   MedicineModel? get medicineValue => _medicineValue;
   DiagnosisModel? get diagnosisValue => _diagnosisValue;
@@ -30,6 +37,39 @@ class HomeProvider extends ChangeNotifier {
 
   int _bloodsugarCount = -1;
   int get bloodsugarCount => _bloodsugarCount;
+
+  Future<void> homeItemsGet() async {
+    _homeItems = [];
+    try {
+      String? homeIndexKeyValue = await storage.read(key: 'HomeIndex');
+      if (homeIndexKeyValue == null) {
+        await storage.write(
+            key: 'HomeIndex',
+            value:
+                '[MedicationTime, BloodSugar, BloodPressure, Symptom, Note]');
+        homeIndexKeyValue = await storage.read(key: 'HomeIndex');
+      }
+      if (homeIndexKeyValue != null) {
+        List<String> homeIndex = homeIndexKeyValue
+            .substring(1, homeIndexKeyValue.length - 1)
+            .split(', ');
+        _homeItems = List.generate(homeIndex.length, (i) {
+          switch (homeIndex[i]) {
+            case 'MedicationTime': return const MedicationTime();
+            case 'BloodSugar': return const BloodSugar();
+            case 'BloodPressure': return const BloodPressure();
+            case 'Symptom': return const Symptom();
+            case 'Note': return const Note();
+            default: return Container();
+          }
+        });
+        _homeItems = homeItems;
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<void> bloodSugargetData() async {
     _bloodSugarValue = [];

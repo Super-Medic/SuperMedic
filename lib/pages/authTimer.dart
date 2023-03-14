@@ -4,6 +4,7 @@ import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/widgets/forAuth_widget/timer.dart';
 import 'package:super_medic/widgets/server_widgets/requestHealthData.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../provider/home_provider.dart';
 
@@ -27,6 +28,8 @@ class AuthTimer extends StatefulWidget {
 class _AuthTimer extends State<AuthTimer> {
   late HomeProvider _homeProvider;
   String tmp = "500";
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
@@ -47,101 +50,131 @@ class _AuthTimer extends State<AuthTimer> {
             ),
           )),
       // ignore: prefer_const_constructors
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25.0,
-            ),
-            NanumTitleText(
-              text: '${widget.loginOrgCd} 앱으로\n 간편인증 요청을 보냈어요.',
-              fontSize: 25.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            NanumBodyText(
-              text: '${widget.loginOrgCd} 앱을 열고 인증해주세요',
-              fontSize: 18.0,
-              color: Colors.black,
-            ),
-            const SizedBox(
-              height: 32.0,
-            ),
-            const OtpTimer(),
-            Expanded(
-              // height: (MediaQuery.of(context).size.height - 600) / 2,
-              child: Center(
-                  child: Image.asset(
-                'assets/images/naverAuth.png',
-                width: 150,
-              )),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(50),
-            ),
-            SafeArea(
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                onPressed: () async {
-                  tmp = await requestHealthData(
-                      widget.loginOrgCd, widget.healthDataType, widget.step,
-                      step_data: widget.step_data);
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 25.0,
+                ),
+                NanumTitleText(
+                  text: '${widget.loginOrgCd} 앱으로\n 간편인증 요청을 보냈어요.',
+                  fontSize: 25.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                NanumBodyText(
+                  text: '${widget.loginOrgCd} 앱을 열고 인증해주세요',
+                  fontSize: 18.0,
+                  color: Colors.black,
+                ),
+                const SizedBox(
+                  height: 32.0,
+                ),
+                const OtpTimer(),
+                Expanded(
+                  // height: (MediaQuery.of(context).size.height - 600) / 2,
+                  child: Center(
+                      child: Image.asset(
+                    'assets/images/naverAuth.png',
+                    width: 130,
+                  )),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(50),
+                ),
+                SafeArea(
+                    child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: TextButton(
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      tmp = await requestHealthData(
+                          widget.loginOrgCd, widget.healthDataType, widget.step,
+                          step_data: widget.step_data);
+                      setState(() {
+                        isLoading = false;
+                      });
+                      if (tmp != "200") {
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return const PopUp();
+                          },
+                        );
+                      } else {
+                        if (widget.healthDataType == "Screenings") {
+                          _homeProvider.screeninggetData();
+                        }
+                        if (widget.healthDataType == "Medicine") {
+                          _homeProvider.medicinegetData();
+                        }
+                        if (widget.healthDataType == "Diagnosis") {
+                          _homeProvider.diagnosisgetData();
+                        }
+                        if (mounted) {
+                          var nav = Navigator.of(context);
+                          nav.pop();
+                          nav.pop();
+                          nav.pop();
+                        }
+                      }
 
-                  if (tmp != "200") {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) {
-                        return const PopUp();
-                      },
-                    );
-                  } else {
-                    if (widget.healthDataType == "Screenings") {
-                      _homeProvider.screeninggetData();
-                    }
-                    if (widget.healthDataType == "Medicine") {
-                      _homeProvider.medicinegetData();
-                    }
-                    if (widget.healthDataType == "Diagnosis") {
-                      _homeProvider.diagnosisgetData();
-                    }
-                    if (mounted) {
-                      var nav = Navigator.of(context);
-                      nav.pop();
-                      nav.pop();
-                      nav.pop();
-                    }
-                  }
+                      // context.read<BottomNavigationProvider>().updateCurrentPage(2);
+                      // sign 호출 후 데이터 저장 및 홈으로 이동 또는 팝업창
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width - 30, 50),
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const NanumTitleText(
+                      text: '인증 완료 및 데이터 불러오기',
+                      color: Colors.white,
 
-                  // context.read<BottomNavigationProvider>().updateCurrentPage(2);
-                  // sign 호출 후 데이터 저장 및 홈으로 이동 또는 팝업창
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                      // fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                child: const NanumTitleText(
-                  text: '인증 완료 및 데이터 불러오기',
-                  color: Colors.white,
-
-                  // fontWeight: FontWeight.bold,
-                ),
-              ),
-            )),
-            const Padding(
-              padding: EdgeInsets.all(10),
-            )
-          ],
-        ),
+                )),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                )
+              ],
+            ),
+          ),
+          Stack(children: <Widget>[
+            Opacity(
+              opacity: 0.5, //0.5만큼~
+              child: isLoading
+                  ? ModalBarrier(dismissible: false, color: Colors.black)
+                  : null, //클릭 못하게~
+            ),
+            Center(
+              child: isLoading
+                  ? SpinKitSpinningCircle(
+                      itemBuilder: (context, index) {
+                        return Center(
+                            child: Image.asset(
+                          'assets/images/loading.png',
+                        ));
+                      },
+                    )
+                  : null, //무지성 돌돌이~
+            ),
+          ]),
+        ],
       ),
     );
   }
@@ -173,11 +206,11 @@ class PopUp extends StatelessWidget {
       ),
       actions: [
         Center(
-          child: ElevatedButton(
+          child: TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               minimumSize: Size(MediaQuery.of(context).size.width - 180, 40),
               backgroundColor: Colors.green,
             ),

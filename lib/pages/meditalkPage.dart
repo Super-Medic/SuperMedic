@@ -56,7 +56,7 @@ class MeditalkPage extends StatelessWidget {
               height: 30,
             ),
             const NanumTitleText(
-              text: '슈메톡 서비스가\n곧 찾아옵니다!',
+              text: '메디톡 서비스가\n곧 찾아옵니다!',
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),

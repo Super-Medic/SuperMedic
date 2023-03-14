@@ -53,6 +53,7 @@ class _MedicationTimeState extends State<MedicationTime> {
     }
     final res = await http
         .get(Uri.parse('https://mypd.kr:5000/medicine/parse?email=$userEmail'));
+
     List<List> temp = List.empty(growable: true);
     if (res.body != '[]') {
       checkNull = false;

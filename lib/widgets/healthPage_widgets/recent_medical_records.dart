@@ -28,10 +28,11 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
     return Column(
       children: [
         Container(
+            padding: EdgeInsets.only(left: 15, top: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: CommonColor.widgetbackgroud,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -49,6 +50,8 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '최근 진료내역',
+                    fontSize: 20,
+                                fontWeight: FontWeight.w500,
                   ),
                 ),
                 Center(
@@ -93,7 +96,7 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
         width: double.infinity,
         decoration: BoxDecoration(
           color: CommonColor.widgetbackgroud,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
               color: CommonColor.boxshadowcolor.withOpacity(0.02),
@@ -113,7 +116,9 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                 ),
                 icon: const Row(
                   children: [
-                    NanumTitleText(text: '최근 진료내역'),
+                    NanumTitleText(                    text: '최근 진료내역',
+                    fontSize: 20,
+                                fontWeight: FontWeight.w500,),
                   ],
                 ),
                 style: TextButton.styleFrom(

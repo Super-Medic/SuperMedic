@@ -94,7 +94,7 @@ class _AuthPage extends State<AuthPage> {
             SafeArea(
                 child: Align(
               alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
+              child: TextButton(
                 onPressed: () {
                   String data = getTrue();
                   data == ''
@@ -106,7 +106,7 @@ class _AuthPage extends State<AuthPage> {
                                   loginOrgCd: data,
                                   healthDataType: widget.healthDataType)));
                 },
-                style: ElevatedButton.styleFrom(
+                style: TextButton.styleFrom(
                   backgroundColor: getTrue() == '' ? Colors.grey : Colors.green,
                   minimumSize: Size(MediaQuery.of(context).size.width - 30, 50),
                   elevation: 0.0,

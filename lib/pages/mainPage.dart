@@ -32,13 +32,14 @@ class MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     LocalNotificationService.initialize(context);
+    //  FirebaseMessaging.instance.setAutoInitEnabled(true);
     FirebaseMessaging.instance.requestPermission(
       alert: true,
-      announcement: true,
+      announcement: false,
       badge: true,
       carPlay: true,
-      criticalAlert: true,
-      provisional: true,
+      criticalAlert: false,
+      provisional: false,
       sound: true,
     );
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -178,7 +179,10 @@ class MainPageState extends State<MainPage> {
         BottomNavigationBarItem(
             icon: Container(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: const Icon(Icons.person_outline_rounded)),
+                child: const Icon(
+                  Icons.person_outline_rounded,
+                  color: const Color.fromARGB(160, 158, 158, 158),
+                )),
             label: '마이페이지')
       ],
 

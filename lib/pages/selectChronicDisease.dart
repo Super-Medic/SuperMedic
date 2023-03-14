@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
-import 'package:super_medic/pages/mainPage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
+
+import 'package:super_medic/themes/theme.dart';
 
 class SelectChronicDisease extends StatefulWidget {
   const SelectChronicDisease({super.key});
@@ -14,12 +16,13 @@ class SelectChronicDisease extends StatefulWidget {
 
 class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
   bool selected = false;
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle style = TextButton.styleFrom(
       shape: RoundedRectangleBorder(
           //모서리를 둥글게
           borderRadius: BorderRadius.circular(0)),
@@ -32,66 +35,102 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
 
     return Scaffold(
       backgroundColor: CommonColor.background,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              height: screenHeight * 0.05,
-            ),
-            Image.asset(
-              "assets/images/main_logo.png",
-              width: screenWidth * 0.25,
-              height: screenHeight * 0.15,
-            ),
-            SizedBox(
-              height: screenHeight * 0.005,
-            ),
-            const NanumText(
-              text: "보유 질환을 선택해주세요 \n언제든 설정 메뉴에서 변경할 수 있어요",
-              fontSize: 17,
-              // fontWeight: FontWeight.bold,
-              color: CommonColor.boxshadowcolor,
-            ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              // alignment: WrapAlignment.start,
-              spacing: screenWidth * 0.03,
-              runSpacing: screenHeight * 0.005,
-
-              alignment: WrapAlignment.spaceBetween,
-              children: List.generate(
-                tag.length,
-                (index) {
-                  return buildTags(context, index);
-                },
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.005,
-            ),
-            // const TotalDisease(),
-            SizedBox(
-              height: screenHeight * 0.2,
-            ),
-            ElevatedButton(
-              style: style,
-              onPressed: selected == true
-                  ? () {
-                      saveInitChronicDisease(tag);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                      );
-                    }
-                  : null,
-              child: const NanumTitleText(text: '다음으로', color: Colors.white),
-            ),
-          ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0),
+        child: AppBar(
+          backgroundColor: CommonColor.background,
+          elevation: 0.0,
+          // leading: IconButton(
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          //   color: const Color.fromRGBO(0, 0, 0, 1.0),
+          //   icon: const Icon(Icons.arrow_back_ios_new),
+          //   iconSize: 30,
+          // ),
         ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 20),
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: AppTheme.totalpadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    NanumTitleText(
+                      text: '보유 질환을 선택해주세요',
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    // NanumTitleText(
+                    //   text: '언제든 설정 메뉴에서 변경할 수 있어요',
+                    //   fontSize: 25.0,
+                    //   color: Colors.black,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
+                    // NanumTitleText(
+                    //   text: '선택해주세요 ',
+                    //   fontSize: 25.0,
+                    //   color: Colors.black,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
+                  ],
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: screenHeight * 0.15,
+                      ),
+
+                      Wrap(
+                        direction: Axis.horizontal,
+                        // alignment: WrapAlignment.start,
+                        spacing: screenWidth * 0.03,
+                        runSpacing: screenHeight * 0.005,
+
+                        alignment: WrapAlignment.spaceBetween,
+                        children: List.generate(
+                          tag.length,
+                          (index) {
+                            return buildTags(context, index);
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.005,
+                      ),
+                      // const TotalDisease(),
+                      SizedBox(
+                        height: screenHeight * 0.2,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: ElevatedButton(
+        style: style,
+        onPressed: selected == true
+            ? () {
+                saveInitChronicDisease(tag);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainPage()),
+                );
+              }
+            : null,
+        child: const NanumTitleText(text: '다음으로', color: Colors.white),
       ),
     );
   }
