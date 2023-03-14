@@ -30,7 +30,7 @@ void main() async {
   KakaoSdk.init(nativeAppKey: dotenv.env['AppKey']);
   final prefs = await SharedPreferences.getInstance();
   if (prefs.getBool('first_run') ?? true) {
-    FlutterSecureStorage storage = FlutterSecureStorage();
+    FlutterSecureStorage storage = const FlutterSecureStorage();
     await storage.deleteAll();
     prefs.setBool('first_run', false);
   }
