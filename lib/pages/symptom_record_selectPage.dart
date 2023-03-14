@@ -118,11 +118,11 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
       // foregroundColor: Colors.greenAccent,
     );
 
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        backgroundColor: selected ? Colors.green : Colors.grey,
-        body: Scaffold(
+    return Scaffold(
+      backgroundColor: selected ? Colors.green : Colors.grey,
+      body: SafeArea(
+        top: false,
+        child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             leading: IconButton(

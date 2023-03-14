@@ -1,18 +1,17 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
 
 // ignore: must_be_immutable
 class BloodSugarGraph extends StatelessWidget {
-  BloodSugarGraph({super.key});
-  late HomeProvider _homeProvider;
+  List<BloodSugarModel> bloodsugarValue = [];
+  BloodSugarGraph({super.key, required this.bloodsugarValue});
 
   @override
   Widget build(BuildContext context) {
-    _homeProvider = context.watch<HomeProvider>();
-    print(_homeProvider.bloodSugarValue.runtimeType);
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     const style = TextStyle(
@@ -22,7 +21,7 @@ class BloodSugarGraph extends StatelessWidget {
     );
     return Stack(
       children: <Widget>[
-        _homeProvider.bloodSugarValue.isNotEmpty
+        bloodsugarValue.isNotEmpty
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
@@ -67,20 +66,19 @@ class BloodSugarGraph extends StatelessWidget {
                             bottom: 5,
                             top: 60,
                           ),
-                          width: _homeProvider.bloodSugarValue.length <= 7
-                              ? screenWidth * 0.145 * 6
-                              : _homeProvider.bloodSugarValue.length > 30
-                                  ? screenWidth * 0.145 * 29
+                          width: bloodsugarValue.length <= 7
+                              ? screenWidth * 0.138 * 6
+                              : bloodsugarValue.length > 30
+                                  ? screenWidth * 0.138 * 29
                                   : screenWidth *
-                                      0.145 *
-                                      (_homeProvider.bloodSugarValue.length -
-                                          1),
+                                      0.138 *
+                                      (bloodsugarValue.length - 1),
                           height: screenHeight * 0.33,
                           child: Consumer<HomeProvider>(
                             builder: (context, homeProvider, child) =>
                                 LineChart(
-                              mainData(homeProvider,
-                                  _homeProvider.bloodSugarValue.length - 1),
+                              mainData(
+                                  homeProvider, bloodsugarValue.length - 1),
                             ),
                           ),
                         ),
@@ -97,7 +95,7 @@ class BloodSugarGraph extends StatelessWidget {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    List<String> dateData = _getDateData(_homeProvider.bloodSugarValue);
+    List<String> dateData = _getDateData(bloodsugarValue);
     const style = TextStyle(
       color: Colors.grey,
       fontWeight: FontWeight.bold,
@@ -106,9 +104,9 @@ class BloodSugarGraph extends StatelessWidget {
     Widget? text;
     if (dateData.isNotEmpty) {
       for (int i = 0; i < dateData.length; i++) {
-        if (value.toInt() <= i) {
+        if (value.toInt() == i) {
           text = Text(dateData[i], style: style);
-        } else {
+        } else if (value.toInt() > i) {
           text = const Text('', style: style);
         }
       }
@@ -148,7 +146,7 @@ class BloodSugarGraph extends StatelessWidget {
   }
 
   LineChartData mainData(homeProvider, count) {
-    List<String> valueData = _getValueData(_homeProvider.bloodSugarValue);
+    List<String> valueData = _getValueData(bloodsugarValue);
     List<FlSpot> flspot = [];
 
     for (int i = 0; i < valueData.length; i++) {

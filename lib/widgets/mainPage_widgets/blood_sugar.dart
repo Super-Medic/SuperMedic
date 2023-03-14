@@ -106,7 +106,6 @@ class BloodSugar extends StatelessWidget {
                 ),
                 Container(
                   margin: AppTheme.widgetpadding,
-                  height: 130,
                   child: const BloodSugarTotalGraph(),
                 )
               ],
