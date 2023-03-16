@@ -3,7 +3,6 @@ import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/widgets/blood_sugar_total_graph.dart';
-import 'package:super_medic/widgets/mainPage_widgets/blood_sugar_graph.dart';
 import 'package:super_medic/provider/home_provider.dart';
 
 class BloodSugarDirction extends StatefulWidget {
@@ -30,35 +29,37 @@ class _BloodSugarDirction extends State<BloodSugarDirction> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
+              padding: const EdgeInsets.only(top: 10),
+              child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      child: Row(children: [
-                        NanumTitleText(text: '혈당 추이'),
-                      ]),
-                    ),
-                    TextButton(
-                        onPressed: () => {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const BloodSugarRecordPage()))
-                            },
-                        style: TextButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(150, 158, 158, 158),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                          padding: const EdgeInsets.symmetric(horizontal: 7),
-                        ),
-                        child: const NanumTitleText(
-                          text: '분석',
-                          fontSize: 15,
-                          color: Colors.white,
-                        )),
+                    Row(children: [
+                      NanumTitleText(
+                        text: '혈당 추이',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ]),
+                    // TextButton(
+                    //     onPressed: () => {
+                    //           // Navigator.push(
+                    //           //     context,
+                    //           //     MaterialPageRoute(
+                    //           //         builder: (context) =>
+                    //           //             const BloodSugarRecordPage()))
+                    //         },
+                    //     style: TextButton.styleFrom(
+                    //       backgroundColor:
+                    //           const Color.fromARGB(150, 158, 158, 158),
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(5)),
+                    //       padding: const EdgeInsets.symmetric(horizontal: 7),
+                    //     ),
+                    //     child: const NanumTitleText(
+                    //       text: '분석',
+                    //       fontSize: 15,
+                    //       color: Colors.white,
+                    //     )),
                   ]),
             ),
             Container(

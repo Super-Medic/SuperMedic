@@ -16,7 +16,7 @@ class HomeIndex extends StatefulWidget {
 class _HomeIndexState extends State<HomeIndex> {
   late HomeProvider _homeProvider;
   final storage = const FlutterSecureStorage();
-  List<Widget> homeItemsOder = [];
+  List<String> homeItemsOder = [];
   int init = 0;
   @override
   void initState() {
@@ -32,7 +32,9 @@ class _HomeIndexState extends State<HomeIndex> {
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
     if (init == 0) {
-      homeItemsOder = [..._homeProvider.homeItems];
+      for (int i = 0; i < _homeProvider.homeItems.length; i++) {
+        homeItemsOder.add('${_homeProvider.homeItems[i]}');
+      }
       init = 1;
     }
     var screenHeight = MediaQuery.of(context).size.height;
@@ -87,13 +89,13 @@ class _HomeIndexState extends State<HomeIndex> {
                       tileColor: const Color.fromARGB(0, 255, 255, 255),
                       minVerticalPadding: 20,
                       visualDensity: const VisualDensity(vertical: -4),
-                      title: '${homeItemsOder[index]}' == 'MedicationTime'
+                      title: homeItemsOder[index] == 'MedicationTime'
                           ? const Text('복약 관리')
-                          : '${homeItemsOder[index]}' == 'BloodPressure'
+                          : homeItemsOder[index] == 'BloodPressure'
                               ? const Text('혈압 관리')
-                              : '${homeItemsOder[index]}' == 'BloodSugar'
+                              : homeItemsOder[index] == 'BloodSugar'
                                   ? const Text('혈당 관리')
-                                  : '${homeItemsOder[index]}' == 'Symptom'
+                                  : homeItemsOder[index] == 'Symptom'
                                       ? const Text('증상 관리')
                                       : const Text('노트'),
                       trailing: ReorderableDragStartListener(
@@ -107,7 +109,7 @@ class _HomeIndexState extends State<HomeIndex> {
                   if (oldIndex < newIndex) {
                     newIndex -= 1;
                   }
-                  final Widget item = homeItemsOder.removeAt(oldIndex);
+                  final String item = homeItemsOder.removeAt(oldIndex);
                   homeItemsOder.insert(newIndex, item);
                 });
               },

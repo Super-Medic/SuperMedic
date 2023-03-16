@@ -160,7 +160,10 @@ class _SymptomsRecentMajorState extends State<SymptomsRecentMajor> {
                         ),
                         child: _homeProvider.symptomsValue.isEmpty == false
                             ? getRecentSymptoms(context, recentMajorSymptomList)
-                            : const NanumBodyText(text: "오늘의 증상을 기록해보세요!"),
+                            : const NanumBodyText(
+                                text: "오늘의 증상을 기록해보세요!",
+                                color: Colors.grey,
+                              ),
                       ),
                       // SizedBox(width: screenWidth * 0.0001),
                       Container(

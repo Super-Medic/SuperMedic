@@ -26,56 +26,64 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: CommonColor.background,
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-              //replace with our own icon data.
+    return Scaffold(
+      backgroundColor: CommonColor.background,
+      appBar: AppBar(
+        leading: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          IconButton(
+            padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
             ),
-            toolbarHeight: 48,
-            backgroundColor: Colors.white, //배경 색
-            elevation: 0.0, //
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // ignore: unrelated_type_equality_checks
-                AverageBloodSugar(averageValue: _homeProvider.bloodSugarValue),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                const BloodSugarDirction(),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                Container(
-                  padding: AppTheme.detailpadding,
-                  width: double.infinity,
-                  decoration:
-                      const BoxDecoration(color: CommonColor.widgetbackgroud),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: const NanumTitleText(text: '혈당 추이'),
-                        ),
-                      ]),
-                ),
-                BloodSugarTimeline(
-                    timeLineValue: _homeProvider.bloodSugarValue),
-              ],
+          const NanumTitleText(
+              text: '혈당', fontSize: 20, fontWeight: FontWeight.bold),
+        ]),
+        leadingWidth: 100,
+        toolbarHeight: 48,
+        backgroundColor: Colors.white, //배경 색
+        elevation: 0.0, //
+      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // ignore: unrelated_type_equality_checks
+            AverageBloodSugar(averageValue: _homeProvider.bloodSugarValue),
+            SizedBox(
+              height: screenHeight * 0.01,
             ),
-          )),
+            const BloodSugarDirction(),
+            SizedBox(
+              height: screenHeight * 0.01,
+            ),
+            Container(
+              padding: AppTheme.detailpadding,
+              width: double.infinity,
+              decoration:
+                  const BoxDecoration(color: CommonColor.widgetbackgroud),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: const NanumTitleText(
+                        text: '혈당 추이',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ]),
+            ),
+            BloodSugarTimeline(timeLineValue: _homeProvider.bloodSugarValue),
+          ],
+        ),
+      )),
     );
   }
 }

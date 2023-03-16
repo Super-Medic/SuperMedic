@@ -73,7 +73,7 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
                 ),
           _homeProvider.bloodSugarValue.isEmpty
               ? const SizedBox(
-                  height: 40,
+                  height: 30,
                   child: Center(
                       child: NanumBodyText(
                     text: '오늘의 혈당을 기록해보세요!',

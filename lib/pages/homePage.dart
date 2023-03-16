@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:super_medic/pages/homeIndex.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
@@ -154,9 +153,9 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(15)),
               ),
               child: const NanumTitleText(
-                text: '나의 건강기록 보기',
-                color: Colors.white,
-              ),
+                  text: '나의 건강기록 보기',
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: screenHeight * 0.01,
@@ -170,19 +169,20 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const HomeIndex()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(222, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(50, 158, 158, 158),
                   elevation: 0.0,
-                  side: const BorderSide(
-                    color: Color.fromARGB(128, 0, 0, 0),
-                    width: 1,
-                  ),
+                  // side: const BorderSide(
+                  //   color: Color.fromARGB(128, 0, 0, 0),
+                  //   width: 0,
+                  // ),
                   padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 child: const NanumBodyText(
                   text: '순서편집',
-                  color: Color.fromARGB(128, 0, 0, 0),
+                  color: Color.fromARGB(230, 158, 158, 158),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
