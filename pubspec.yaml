@@ -112,6 +112,12 @@ flutter:
       - asset: assets/font/NanumGothic.ttf
       - asset: assets/font/NanumGothicBold.ttf
       - asset: assets/font/NanumGothicExtraBold.ttf
+  - family: NotoSansKR
+    fonts:
+    - asset: assets/font/NotoSansKR-Regular.otf
+    - asset: assets/font/NotoSansKR-Medium.otf
+    - asset: assets/font/NotoSansKR-Bold.otf
+    - asset: assets/font/NotoSansKR-Black.otf
   # fonts:
   #   - family: Schyler
   #     fonts:

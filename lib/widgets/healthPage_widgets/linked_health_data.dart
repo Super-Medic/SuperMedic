@@ -46,7 +46,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                   child: const NanumTitleText(
                     text: '연동 건강데이터',
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(
@@ -108,9 +108,11 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(                    text: '연동 건강데이터',
+                  NanumTitleText(
+                    text: '연동 건강데이터',
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,),
+                    fontWeight: FontWeight.bold,
+                  ),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,

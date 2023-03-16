@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/symptom_record_selectPage.dart';
+import 'package:super_medic/pages/symptoms_detailPage.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/home_provider.dart';
 
@@ -70,10 +70,11 @@ class _SymptomState extends State<Symptom> {
                   padding: const EdgeInsets.only(left: 15, top: 8),
                   child: InkWell(
                     onTap: () async {
-                      const storage = FlutterSecureStorage();
-                      await storage.delete(key: "Symptoms");
-                      _homeProvider.symptomgetData();
-                      // dynamic Symptoms = await storage.read(key: "Symptoms");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SymptomsdetailPage()));
                     },
                     child: const Row(
                       children: [
@@ -82,11 +83,11 @@ class _SymptomState extends State<Symptom> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                        // Icon(
-                        //   Icons.chevron_right,
-                        //   weight: 900,
-                        //   color: Colors.black,
-                        // ),
+                        Icon(
+                          Icons.chevron_right,
+                          weight: 900,
+                          color: Colors.black,
+                        ),
                       ],
                     ),
                   )),
@@ -142,19 +143,10 @@ class _SymptomState extends State<Symptom> {
                       spacing: screenWidth * 0.03,
                       runSpacing: screenHeight * 0.01,
                       children: List.generate(
-                        _homeProvider
-                            .symptomsValue[
-                                _homeProvider.symptomsValue.length - 1]
-                            .symptom
-                            .length,
+                        _homeProvider.symptomsValue[0].symptom.length,
                         (index) {
-                          return symptomList(
-                              context,
-                              index,
-                              _homeProvider
-                                  .symptomsValue[
-                                      _homeProvider.symptomsValue.length - 1]
-                                  .symptom);
+                          return symptomList(context, index,
+                              _homeProvider.symptomsValue[0].symptom);
                         },
                       ),
                     ),
@@ -182,7 +174,10 @@ class _SymptomState extends State<Symptom> {
       child: Text(
         symptomList[index],
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+            fontFamily: "NotoSansKR",
+            color: Colors.white,
+            fontSize: 11,
+            fontWeight: FontWeight.bold),
       ),
     );
   }

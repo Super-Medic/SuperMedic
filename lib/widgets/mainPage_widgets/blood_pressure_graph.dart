@@ -16,6 +16,7 @@ class BloodPressureGraph extends StatelessWidget {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     const style = TextStyle(
+      fontFamily: "NotoSansKR",
       color: Colors.grey,
       fontWeight: FontWeight.bold,
       fontSize: 10,
@@ -108,6 +109,7 @@ class BloodPressureGraph extends StatelessWidget {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     List<String> dateData = _getDateData(_homeProvider.bloodPressureValue);
     const style = TextStyle(
+      fontFamily: "NotoSansKR",
       color: Colors.grey,
       fontWeight: FontWeight.bold,
       fontSize: 10,
@@ -149,7 +151,7 @@ class BloodPressureGraph extends StatelessWidget {
       default:
         return Container();
     }
-    return Text(text);
+    return Text(text, style:TextStyle(fontFamily: "NotoSansKR"));
   }
 
   LineChartData mainData(homeProvider, count) {

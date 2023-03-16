@@ -128,6 +128,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Align(
                 child: Text("© Copyright 2023, 슈퍼메딕(MYPD)",
                     style: TextStyle(
+                      fontFamily: 'NotoSansKR',
                       fontSize: screenWidth * (10 / 360),
                       color: const Color.fromRGBO(26, 164, 87, 0.6), // #1aa457
                       fontWeight: FontWeight.bold,
@@ -148,12 +149,12 @@ class _SplashScreenState extends State<SplashScreen> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!),
-            content: Text(message!),
+            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR',)),
+            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR',)),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인"),
+                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR')),
                   onPressed: () {
                     Navigator.pop(context);
                   })

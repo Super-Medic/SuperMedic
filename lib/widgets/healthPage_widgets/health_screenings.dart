@@ -139,7 +139,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                           NanumTitleText(
                             text: '건강검진',
                             fontSize: 20,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                           ),
                           // Icon(
                           //   Icons.chevron_right,
@@ -413,7 +413,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                   child: const NanumTitleText(
                     text: '건강검진',
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(

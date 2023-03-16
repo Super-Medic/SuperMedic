@@ -171,6 +171,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                             children: [
                               Text(bloodsugar,
                                   style: const TextStyle(
+                                    fontFamily: 'NotoSansKR',
                                       color: Colors.green, fontSize: 32)),
                               const NanumText(text: "mg/dL")
                             ],
@@ -194,6 +195,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                                 ...bloodsugarItem.map((e) => Text(
                                       e,
                                       style: const TextStyle(
+                                        fontFamily: 'NotoSansKR',
                                           color: Colors.grey, fontSize: 32),
                                     ))
                               ]),
@@ -299,6 +301,7 @@ class RadioItem extends StatelessWidget {
             child: Center(
               child: Text(_item.buttonText, //텍스트 설정
                   style: TextStyle(
+                    fontFamily: 'NotoSansKR',
                       color: _item.isSelected
                           ? Colors.green
                           : const Color.fromARGB(255, 165, 165, 165),

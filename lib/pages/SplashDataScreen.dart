@@ -52,6 +52,7 @@ class _SplashDataScreen extends State<SplashDataScreen> {
                 Align(
                   child: Text("",
                       style: TextStyle(
+                        fontFamily: 'NotoSansKR',
                         fontSize: screenWidth * (10 / 360),
                         color:
                             const Color.fromRGBO(26, 164, 87, 0.6), // #1aa457

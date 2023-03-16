@@ -140,6 +140,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                       Text(maxbloodpressure,
                                           style: const TextStyle(
                                               color: Colors.green,
+                                              fontFamily: 'NotoSansKR',
                                               fontSize: 32)),
                                       const NanumText(text: 'mmHg')
                                     ],
@@ -164,6 +165,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                         ...maxbloodpressureItem.map((e) => Text(
                                               e,
                                               style: const TextStyle(
+                                                fontFamily: 'NotoSansKR',
                                                   color: Colors.grey,
                                                   fontSize: 32),
                                             ))
@@ -200,6 +202,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                       Text(minbloodpressure,
                                           style: const TextStyle(
                                               color: Colors.green,
+                                              fontFamily: 'NotoSansKR',
                                               fontSize: 32)),
                                       const NanumText(text: 'mmHg')
                                     ],
@@ -225,6 +228,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                               e,
                                               style: const TextStyle(
                                                   color: Colors.grey,
+                                                  fontFamily: 'NotoSansKR',
                                                   fontSize: 32),
                                             ))
                                       ]),
@@ -272,6 +276,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                       Text(pulse,
                                           style: const TextStyle(
                                               color: Colors.green,
+                                              fontFamily: 'NotoSansKR',
                                               fontSize: 32)),
                                       const NanumText(text: '분/회')
                                     ],
@@ -296,6 +301,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                               e,
                                               style: const TextStyle(
                                                   color: Colors.grey,
+                                                  fontFamily: 'NotoSansKR',
                                                   fontSize: 32),
                                             ))
                                       ]),
