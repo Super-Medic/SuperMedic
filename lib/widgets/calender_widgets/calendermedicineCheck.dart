@@ -22,9 +22,6 @@ class _CalMediCheckState extends State<CalMediCheck> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.pad == 15
-          ? EdgeInsets.only(left: 15, right: 15)
-          : EdgeInsets.only(top: 15, left: 15, right: 15),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -33,9 +30,8 @@ class _CalMediCheckState extends State<CalMediCheck> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(padding: EdgeInsets.only(top: 10)),
           Container(
-            padding: const EdgeInsets.only(top: 8, left: 30),
+            padding: const EdgeInsets.only(top: 8, left: 10),
             child: NanumTitleText(
               text: widget.items[0].medicine,
               fontSize: 20,
@@ -44,7 +40,7 @@ class _CalMediCheckState extends State<CalMediCheck> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 8),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(left: widget.pad),

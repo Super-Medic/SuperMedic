@@ -32,9 +32,7 @@ class _CalCustomCheckBoxState extends State<CalCustomCheckBox> {
           dashGapLength: 3.0,
           dashRadius: 10.0,
           lineThickness: 2,
-          dashColor: widget.item.isChecked
-              ? Colors.green
-              : Colors.grey.withOpacity(0.3),
+          dashColor: widget.item.isChecked ? Colors.green : Colors.redAccent,
         ));
     return Row(
       children: [
