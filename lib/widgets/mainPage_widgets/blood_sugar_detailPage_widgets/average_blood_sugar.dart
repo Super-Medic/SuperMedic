@@ -201,31 +201,45 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ttime != null
-                                  ? Row(children: [
-                                      NanumBodyText(text: ttime),
-                                      NanumTitleText(
-                                        text: ' $aver',
-                                        fontSize: 20,
-                                      ),
-                                      const NanumBodyText(text: 'mg/dL')
-                                    ])
-                                  : selectedAverage == '공복 평균 혈당'
-                                      ? Row(children: [
-                                          const NanumBodyText(text: '공복 혈당'),
+                                  ? Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.baseline,
+                                      textBaseline: TextBaseline.alphabetic,
+                                      children: [
+                                          NanumBodyText(text: ttime),
                                           NanumTitleText(
                                             text: ' $aver',
                                             fontSize: 20,
                                           ),
                                           const NanumBodyText(text: 'mg/dL')
                                         ])
-                                      : Row(children: [
-                                          const NanumBodyText(text: '식후 혈당'),
-                                          NanumTitleText(
-                                            text: ' $aver',
-                                            fontSize: 20,
-                                          ),
-                                          const NanumBodyText(text: 'mg/dL')
-                                        ]),
+                                  : selectedAverage == '공복 평균 혈당'
+                                      ? Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.baseline,
+                                          textBaseline: TextBaseline.alphabetic,
+                                          children: [
+                                              const NanumBodyText(
+                                                  text: '공복 혈당'),
+                                              NanumTitleText(
+                                                text: ' $aver',
+                                                fontSize: 20,
+                                              ),
+                                              const NanumBodyText(text: 'mg/dL')
+                                            ])
+                                      : Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.baseline,
+                                          textBaseline: TextBaseline.alphabetic,
+                                          children: [
+                                              const NanumBodyText(
+                                                  text: '식후 혈당'),
+                                              NanumTitleText(
+                                                text: ' $aver',
+                                                fontSize: 20,
+                                              ),
+                                              const NanumBodyText(text: 'mg/dL')
+                                            ]),
                               const SizedBox(height: 10),
                               // const NanumText(
                               //   text: '혈당 수치가 높아지고 있어요 주의해주세요.',
