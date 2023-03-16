@@ -85,10 +85,13 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                       child: Row(children: [
                         DropdownButton(
                           value: selectedAverage,
+                          underline: const SizedBox.shrink(),
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e, style:TextStyle(fontFamily: "NotoSansKRr")),
+                                    child: Text(e,
+                                        style: const TextStyle(
+                                            fontFamily: "NotoSansKRr")),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -103,6 +106,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                     if (selectedAverage == '평균 혈압')
                       DropdownButton(
                         value: selectedAverageCount,
+                        underline: const SizedBox.shrink(),
                         items: _averagecount
                             .map((e) => DropdownMenuItem(
                                   value: e, // 선택 시 onChanged 를 통해 반환할 value
@@ -116,7 +120,6 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                           });
                         },
                       ),
-                    // const NanumText(text: '최근 10회'),
                   ]),
             ),
             Row(

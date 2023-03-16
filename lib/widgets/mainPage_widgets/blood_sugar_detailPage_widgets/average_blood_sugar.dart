@@ -135,10 +135,13 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                       child: Row(children: [
                         DropdownButton(
                           value: selectedAverage,
+                          underline: const SizedBox.shrink(),
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e, style:TextStyle(fontFamily: "NotoSansKRr")),
+                                    child: Text(e,
+                                        style: const TextStyle(
+                                            fontFamily: "NotoSansKRr")),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -153,6 +156,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                     if (selectedAverage == '공복 평균 혈당')
                       DropdownButton(
                         value: selectedAverageCountBefore,
+                        underline: const SizedBox.shrink(),
                         items: _averagecountBefore
                             .map((e) => DropdownMenuItem(
                                   value: e, // 선택 시 onChanged 를 통해 반환할 value
@@ -169,6 +173,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                     if (selectedAverage == '식후 평균 혈당')
                       DropdownButton(
                         value: selectedAverageCountAfter,
+                        underline: const SizedBox.shrink(),
                         items: _averagecountAfter
                             .map((e) => DropdownMenuItem(
                                   value: e, // 선택 시 onChanged 를 통해 반환할 value

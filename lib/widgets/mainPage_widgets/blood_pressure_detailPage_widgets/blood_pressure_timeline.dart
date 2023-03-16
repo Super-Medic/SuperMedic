@@ -127,7 +127,7 @@ class _InnerTimeline extends StatelessWidget {
               messages[index - 1].towidget()
             ]); //Row(children: [Text(messages[index - 1].toString())]);
           },
-          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 121.0,
+          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 140.0,
           itemCount: messages.length + 1,
         ),
       ),
