@@ -13,6 +13,8 @@ import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 import './utils.dart';
 
 class TableEventsExample extends StatefulWidget {
+  const TableEventsExample({super.key});
+
   @override
   _TableEventsExampleState createState() => _TableEventsExampleState();
 }
@@ -108,7 +110,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             lastDay: DateTime.utc(2030, 3, 14),
             focusedDay: _focusedDay,
             headerStyle: HeaderStyle(
-                headerMargin: EdgeInsets.only(left: 20, top: 5),
+                headerMargin: const EdgeInsets.only(left: 20, top: 5),
                 titleTextFormatter: (date, locale) =>
                     DateFormat('y년 M월', locale).format(date),
                 titleCentered: false,
@@ -235,7 +237,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       horizontal: 30.0,
                       // vertical: 4.0,
                     ),
-                    padding: EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 40),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50.0),
                     ),
@@ -262,9 +264,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: ListTile(
-                                onTap: () {},
-                                title: MediCheck(items: {true: value}, pad: 20),
-                                // title: Text("abcd")),
+                                onTap: () => print('${value[index]}'),
+                                title: Text('${value[index]}',style:TextStyle(fontFamily: "NotoSansKR")),
                               ),
                             );
                           },

@@ -89,9 +89,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e,
-                                        style: const TextStyle(
-                                            fontFamily: "NotoSansKRr")),
+                                    child: Text(e, style:TextStyle(fontFamily: "NotoSansKRr")),
                                   ))
                               .toList(),
                           onChanged: (value) {

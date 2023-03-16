@@ -76,7 +76,7 @@ class _NoteState extends State<Note> {
                       children: [
                         NanumTitleText(
                           text: '노트',
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                         // Icon(
