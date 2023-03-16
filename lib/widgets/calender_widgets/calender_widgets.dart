@@ -264,9 +264,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: ListTile(
-                                onTap: () {},
-                                title: MediCheck(items: {true: value}, pad: 20),
-                                // title: Text("abcd")),
+                                onTap: () => print('${value[index]}'),
+                                title: Text('${value[index]}',style:TextStyle(fontFamily: "NotoSansKR")),
                               ),
                             );
                           },
