@@ -37,6 +37,7 @@ class _HomeIndexState extends State<HomeIndex> {
       }
       init = 1;
     }
+
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     final ButtonStyle style = TextButton.styleFrom(
@@ -102,7 +103,8 @@ class _HomeIndexState extends State<HomeIndex> {
                           index: index, child: const Icon(Icons.drag_handle)),
                     ),
                     const Divider(thickness: 1),
-                  ])
+                    Text('${homeItemsOder[index]}'),
+                  ]),
               ],
               onReorder: (int oldIndex, int newIndex) async {
                 setState(() {

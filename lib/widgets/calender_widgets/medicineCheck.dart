@@ -32,7 +32,9 @@ class _MediCheckState extends State<MediCheck> {
         ? Container(
             margin: widget.pad == 15
                 ? EdgeInsets.only(left: 15, right: 15)
-                : EdgeInsets.only(top: 15, left: 15, right: 15),
+                : widget.pad == 10
+                    ? EdgeInsets.zero
+                    : EdgeInsets.only(top: 15, left: 15, right: 15),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -41,12 +43,16 @@ class _MediCheckState extends State<MediCheck> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(padding: EdgeInsets.only(top: 10)),
+                widget.pad == 10
+                    ? Container()
+                    : const Padding(padding: EdgeInsets.only(top: 10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 8, left: 30),
+                      padding: widget.pad == 10
+                          ? const EdgeInsets.only(top: 8, left: 10)
+                          : const EdgeInsets.only(top: 8, left: 30),
                       child: NanumTitleText(
                         text: widget.items[true]![0].medicine,
                         fontSize: 20,
@@ -55,7 +61,7 @@ class _MediCheckState extends State<MediCheck> {
                       ),
                     ),
                     Container(
-                        padding: const EdgeInsets.only(right: 15),
+                        padding: const EdgeInsets.only(right: 8),
                         child: PopupMenuButton(
                           offset: const Offset(10, 30),
                           constraints:
@@ -84,7 +90,10 @@ class _MediCheckState extends State<MediCheck> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(child: Text('삭제',style:TextStyle(fontFamily: 'NotoSansKR'))),
+                                child: Center(
+                                    child: Text('삭제',
+                                        style: TextStyle(
+                                            fontFamily: 'NotoSansKR'))),
                               )
                             ];
                           },
@@ -92,7 +101,9 @@ class _MediCheckState extends State<MediCheck> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
+                  padding: widget.pad == 10
+                      ? const EdgeInsets.only(top: 8)
+                      : const EdgeInsets.only(top: 15, left: 10, bottom: 10),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(left: widget.pad),
