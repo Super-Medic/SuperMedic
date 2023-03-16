@@ -13,6 +13,7 @@ class PresentTime extends StatelessWidget {
         return Text(
           DateFormat('M월 d일 E요일', 'ko').format(DateTime.now()),
           style: const TextStyle(
+            fontFamily: "NotoSansKR",
             fontSize: 17,
             fontWeight: FontWeight.w600,
           ),

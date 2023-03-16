@@ -45,6 +45,7 @@ class _JoinPageState extends State<JoinPage> {
             Text(
               label,
               style: const TextStyle(
+                fontFamily: 'NotoSansKR',
                 fontSize: 12.0,
                 // fontWeight: FontWeight.w700,
               ),
@@ -111,6 +112,7 @@ class _JoinPageState extends State<JoinPage> {
             '다음',
             style: TextStyle(
               color: Colors.white,
+              fontFamily: 'NotoSansKR',
             ),
           ),
         ));
@@ -192,6 +194,7 @@ class _JoinPageState extends State<JoinPage> {
                         '통신사',
                         style: TextStyle(
                           fontSize: 12.0,
+                          fontFamily: 'NotoSansKR',
                           // fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -220,7 +223,7 @@ class _JoinPageState extends State<JoinPage> {
                       items: telecom_items
                           .map((e) => DropdownMenuItem(
                                 value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                child: Text(e),
+                                child: Text(e,style:TextStyle(fontFamily: 'NotoSansKR',)),
                               ))
                           .toList(),
                       onChanged: (value) {

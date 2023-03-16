@@ -20,7 +20,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
   late HomeProvider _homeProvider;
 
   bool selected = false;
-  late Map<String, List<Map<String, dynamic>>> dailySymptom = {
+  Map<String, List<Map<String, dynamic>>> dailySymptom = {
     "Head": [
       {'state': '두통', 'isCheck': false},
       {'state': '편두통', 'isCheck': false},
@@ -281,7 +281,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                     ? Colors.white
                     : const Color.fromRGBO(96, 96, 96, 1),
                 fontSize: 11,
-                fontFamily: "NanumSqaureB",
+                fontFamily: "NotoSansKR",
                 fontWeight: FontWeight.bold),
           ),
         ),

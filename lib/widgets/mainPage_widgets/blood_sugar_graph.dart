@@ -17,6 +17,7 @@ class BloodSugarGraph extends StatelessWidget {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     const style = TextStyle(
+      fontFamily: "NotoSansKR",
       color: Colors.grey,
       fontWeight: FontWeight.bold,
       fontSize: 10,
@@ -99,6 +100,7 @@ class BloodSugarGraph extends StatelessWidget {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     List<String> dateData = _getDateData(bloodsugarValue);
     const style = TextStyle(
+      fontFamily: "NotoSansKR",
       color: Colors.grey,
       fontWeight: FontWeight.bold,
       fontSize: 10,

@@ -46,7 +46,7 @@ class _PickerInputState extends State<PickerInput> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(colorString,
-                    style: const TextStyle(color: Colors.green, fontSize: 32)),
+                    style: const TextStyle(fontFamily: "NotoSansKR", color: Colors.green, fontSize: 32)),
                 const NanumText(text: "mg/dL")
               ],
             ),
@@ -68,7 +68,9 @@ class _PickerInputState extends State<PickerInput> {
                   ...colorItem.map((e) => Text(
                         e,
                         style:
-                            const TextStyle(color: Colors.grey, fontSize: 32),
+                            const TextStyle(
+                              fontFamily: "NotoSansKR",
+                              color: Colors.grey, fontSize: 32),
                       ))
                 ]),
           ),

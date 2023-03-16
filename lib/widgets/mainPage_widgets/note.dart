@@ -150,7 +150,7 @@ class _NoteState extends State<Note> {
     // print(symptomList);
     return Container(
       // alignment: const Alignment(0, 0),
-      child: Text(note),
+      child: Text(note, style:TextStyle(fontFamily: "NotoSansKR")),
     );
   }
 }

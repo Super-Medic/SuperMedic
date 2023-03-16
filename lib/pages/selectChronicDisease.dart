@@ -164,6 +164,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
           child: Text(
             tag[index]['state'],
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontFamily: 'NotoSansKR',
                 color: tag[index]['isCheck'] ? Colors.white : Colors.grey,
                 fontSize: 11,
                 fontWeight: FontWeight.bold),

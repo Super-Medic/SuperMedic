@@ -84,7 +84,7 @@ class _MediCheckState extends State<MediCheck> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(child: Text('삭제')),
+                                child: Center(child: Text('삭제',style:TextStyle(fontFamily: 'NotoSansKR'))),
                               )
                             ];
                           },
