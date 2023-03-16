@@ -108,6 +108,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                       text: "혈당 기록하기",
                       fontSize: 25,
                       textAlign: TextAlign.center,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
@@ -120,6 +121,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                   const NanumTitleText(
                     text: "측정시기",
                     fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
                   SizedBox(
                     height: screenHeight * 0.01,
@@ -157,34 +159,42 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                   const NanumTitleText(
                     text: "혈당",
                     fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.alphabetic,
                             children: [
-                              Text(bloodsugar,
-                                  style: const TextStyle(
-                                      fontFamily: 'NotoSansKR',
-                                      color: Colors.green,
-                                      fontSize: 32)),
-                              const NanumText(text: "mg/dL")
+                              NanumBodyText(
+                                text: bloodsugar,
+                                color: Colors.green,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              const NanumBodyText(
+                                text: "mg/dL",
+                              )
                             ],
                           ),
                         ),
                         Container(
                           width: screenWidth * 0.8,
-                          height: screenHeight * 0.25,
+                          height: screenHeight * 0.40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.transparent),
                           child: CupertinoPicker(
+                              selectionOverlay:
+                                  const CupertinoPickerDefaultSelectionOverlay(
+                                      background:
+                                          Color.fromARGB(30, 76, 175, 79)),
                               itemExtent: 55,
                               scrollController: controller,
                               onSelectedItemChanged: (i) {
@@ -193,12 +203,11 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                                 });
                               },
                               children: [
-                                ...bloodsugarItem.map((e) => Text(
-                                      e,
-                                      style: const TextStyle(
-                                          fontFamily: 'NotoSansKR',
-                                          color: Colors.grey,
-                                          fontSize: 32),
+                                ...bloodsugarItem.map((e) => NanumBodyText(
+                                      text: e,
+                                      color: Colors.green,
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w500,
                                     ))
                               ]),
                         ),
@@ -215,7 +224,7 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
               child: const NanumTitleText(
                 text: '저장',
                 color: Colors.white,
-                fontSize: 22,
+                fontWeight: FontWeight.bold,
               ),
               onPressed: () async {
                 if (thischeckindex == 0 || int.parse(bloodsugar) == 0) {
@@ -301,14 +310,14 @@ class RadioItem extends StatelessWidget {
             width: screenWidth * 0.222, //87.0,
             // ignore: sort_child_properties_last
             child: Center(
-              child: Text(_item.buttonText, //텍스트 설정
-                  style: TextStyle(
-                      fontFamily: 'NotoSansKR',
-                      color: _item.isSelected
-                          ? Colors.green
-                          : const Color.fromARGB(255, 165, 165, 165),
-                      //fontWeight: FontWeight.bold,
-                      fontSize: 12.0)),
+              child: NanumBodyText(
+                text: _item.buttonText,
+                color: _item.isSelected
+                    ? Colors.green
+                    : const Color.fromARGB(255, 165, 165, 165),
+                fontSize: 12.0,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             decoration: BoxDecoration(
               color: _item.isSelected ? Colors.transparent : Colors.transparent,

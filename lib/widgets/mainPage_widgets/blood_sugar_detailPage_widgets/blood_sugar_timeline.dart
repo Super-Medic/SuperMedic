@@ -132,12 +132,9 @@ class _InnerTimeline extends StatelessWidget {
             if (isEdgeIndex(index)) {
               return null;
             }
-            return Column(children: [
-              messages[index - 1].towidget()
-            ]); //Row(children: [Text(messages[index - 1].toString())]);
+            return Column(children: [messages[index - 1].towidget()]);
           },
-          itemExtentBuilder: (_, index) =>
-              isEdgeIndex(index) ? 10.0 : 80.0, //아이템 유무에 따라 선 길이 설정
+          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 10.0 : 90.0,
           itemCount: messages.length + 1,
         ),
       ),
@@ -182,9 +179,6 @@ _sugardata(final timeLineValue) {
     }
     deliveryProcesses.add(const _DeliveryProcess.complete());
   }
-  //  else {
-  //   // print("여기");
-  // }
 
   return _OrderInfo(deliveryProcesses: deliveryProcesses);
 }
@@ -217,7 +211,7 @@ class _DeliveryProcess {
 class _DeliveryMessageSugar {
   const _DeliveryMessageSugar(this.timeNow, this.checkbutton, this.bloodsugar);
 
-  final String timeNow; // final DateTime createdAt;
+  final String timeNow;
   final String checkbutton;
   final String bloodsugar;
 
@@ -237,12 +231,20 @@ class _DeliveryMessageSugar {
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
-                  NanumText(text: checkbutton),
+                  NanumText(
+                    text: checkbutton,
+                    color: Colors.black,
+                  ),
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(text: bloodsugar),
+                  NanumTitleText(
+                      text: bloodsugar,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                   const NanumText(text: 'mg/dL'),
                 ],
               ),

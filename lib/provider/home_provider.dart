@@ -17,6 +17,7 @@ class HomeProvider extends ChangeNotifier {
   List<SymptomModel> _symptomsValue = [];
   List<NoteTextModel> _noteTextValue = [];
   List<Widget> _homeItems = [];
+  List<String> _homeIndex = [];
   ScreeningModel? _screeningValue;
   MedicineModel? _medicineValue;
   DiagnosisModel? _diagnosisValue;
@@ -27,6 +28,7 @@ class HomeProvider extends ChangeNotifier {
   List<SymptomModel> get symptomsValue => _symptomsValue;
   List<NoteTextModel> get noteTextValue => _noteTextValue;
   List<Widget> get homeItems => _homeItems;
+  List<String> get homeIndex => _homeIndex;
   ScreeningModel? get screeningValue => _screeningValue;
   MedicineModel? get medicineValue => _medicineValue;
   DiagnosisModel? get diagnosisValue => _diagnosisValue;
@@ -53,7 +55,7 @@ class HomeProvider extends ChangeNotifier {
         homeIndexKeyValue = await storage.read(key: 'HomeIndex');
       }
       if (homeIndexKeyValue != null) {
-        List<String> homeIndex = homeIndexKeyValue
+        _homeIndex = homeIndexKeyValue
             .substring(1, homeIndexKeyValue.length - 1)
             .split(', ');
         _homeItems = List.generate(homeIndex.length, (i) {
@@ -66,6 +68,7 @@ class HomeProvider extends ChangeNotifier {
             default: return Container();
           }
         });
+        _homeIndex = homeIndex;
         _homeItems = homeItems;
         notifyListeners();
       }

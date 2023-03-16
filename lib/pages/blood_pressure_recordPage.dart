@@ -104,6 +104,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                     text: "혈압 기록하기",
                     fontSize: 25,
                     textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
@@ -121,8 +122,9 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const NanumTitleText(
-                            text: "- 최고(mmHg)",
+                            text: "최고(mmHg)",
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -130,31 +132,36 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
+                                      const EdgeInsets.symmetric(vertical: 5),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      Text(maxbloodpressure,
-                                          style: const TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: 'NotoSansKR',
-                                              fontSize: 32)),
-                                      const NanumText(text: 'mmHg')
+                                      NanumBodyText(
+                                        text: maxbloodpressure,
+                                        color: Colors.green,
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      const NanumBodyText(text: 'mmHg')
                                     ],
                                   ),
                                 ),
                                 Container(
                                   width: screenWidth * 0.8,
-                                  height: screenHeight * 0.25,
+                                  height: screenHeight * 0.20,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: Colors.transparent),
                                   child: CupertinoPicker(
                                       itemExtent: 55,
                                       scrollController: controller1,
+                                      selectionOverlay:
+                                          const CupertinoPickerDefaultSelectionOverlay(
+                                              background: Color.fromARGB(
+                                                  30, 76, 175, 79)),
                                       onSelectedItemChanged: (i) {
                                         setState(() {
                                           maxbloodpressure =
@@ -166,8 +173,9 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                               e,
                                               style: const TextStyle(
                                                   fontFamily: 'NotoSansKR',
-                                                  color: Colors.grey,
-                                                  fontSize: 32),
+                                                  color: Colors.green,
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.w500),
                                             ))
                                       ]),
                                 ),
@@ -183,8 +191,9 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const NanumTitleText(
-                            text: "- 최저(mmHg)",
+                            text: "최저(mmHg)",
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -192,31 +201,36 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
+                                      const EdgeInsets.symmetric(vertical: 5),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      Text(minbloodpressure,
-                                          style: const TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: 'NotoSansKR',
-                                              fontSize: 32)),
-                                      const NanumText(text: 'mmHg')
+                                      NanumBodyText(
+                                        text: minbloodpressure,
+                                        color: Colors.green,
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      const NanumBodyText(text: 'mmHg')
                                     ],
                                   ),
                                 ),
                                 Container(
                                   width: screenWidth * 0.8,
-                                  height: screenHeight * 0.25,
+                                  height: screenHeight * 0.20,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: Colors.transparent),
                                   child: CupertinoPicker(
                                       itemExtent: 55,
                                       scrollController: controller2,
+                                      selectionOverlay:
+                                          const CupertinoPickerDefaultSelectionOverlay(
+                                              background: Color.fromARGB(
+                                                  30, 76, 175, 79)),
                                       onSelectedItemChanged: (i) {
                                         setState(() {
                                           minbloodpressure =
@@ -227,9 +241,10 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                         ...minbloodpressureItem.map((e) => Text(
                                               e,
                                               style: const TextStyle(
-                                                  color: Colors.grey,
+                                                  color: Colors.green,
                                                   fontFamily: 'NotoSansKR',
-                                                  fontSize: 32),
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.w500),
                                             ))
                                       ]),
                                 ),
@@ -257,8 +272,9 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const NanumTitleText(
-                            text: "- 맥박(분/회)",
+                            text: "맥박(분/회)",
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -266,31 +282,36 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
+                                      const EdgeInsets.symmetric(vertical: 5),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      Text(pulse,
-                                          style: const TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: 'NotoSansKR',
-                                              fontSize: 32)),
-                                      const NanumText(text: '분/회')
+                                      NanumBodyText(
+                                        text: pulse,
+                                        color: Colors.green,
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      const NanumBodyText(text: '분/회')
                                     ],
                                   ),
                                 ),
                                 Container(
                                   width: screenWidth * 0.8,
-                                  height: screenHeight * 0.25,
+                                  height: screenHeight * 0.2,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: Colors.transparent),
                                   child: CupertinoPicker(
                                       itemExtent: 55,
                                       scrollController: controller3,
+                                      selectionOverlay:
+                                          const CupertinoPickerDefaultSelectionOverlay(
+                                              background: Color.fromARGB(
+                                                  30, 76, 175, 79)),
                                       onSelectedItemChanged: (i) {
                                         setState(() {
                                           pulse = pulseItem[i];
@@ -300,9 +321,10 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                         ...pulseItem.map((e) => Text(
                                               e,
                                               style: const TextStyle(
-                                                  color: Colors.grey,
+                                                  color: Colors.green,
                                                   fontFamily: 'NotoSansKR',
-                                                  fontSize: 32),
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.w500),
                                             ))
                                       ]),
                                 ),
@@ -328,7 +350,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
             child: const NanumTitleText(
               text: '저장',
               color: Colors.white,
-              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
             onPressed: () async {
               if (int.parse(maxbloodpressure) == 0 ||

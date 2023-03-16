@@ -110,13 +110,6 @@ class BloodSugarGraph extends StatelessWidget {
     );
     Widget? text;
     if (dateData.isNotEmpty) {
-      // for (int i = 0; i < dateData.length; i++) {
-      //   if (value.toInt() == i) {
-      //     text = Text(dateData[i], style: style);
-      //   } else if (value.toInt() > i) {
-      //     text = const Text('', style: style);
-      //   }
-      // }
       if (value.toInt() < dateData.length) {
         text = Text(dateData[value.toInt()], style: style);
       } else {
