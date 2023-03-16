@@ -101,7 +101,10 @@ class BloodPressureGraph extends StatelessWidget {
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: const Center(
-                    child: NanumBodyText(text: '오늘의 혈압을 기록해보세요!'))),
+                    child: NanumBodyText(
+                  text: '오늘의 혈압을 기록해보세요!',
+                  color: Colors.grey,
+                ))),
       ],
     );
   }
@@ -151,7 +154,7 @@ class BloodPressureGraph extends StatelessWidget {
       default:
         return Container();
     }
-    return Text(text, style:TextStyle(fontFamily: "NotoSansKR"));
+    return Text(text, style: const TextStyle(fontFamily: "NotoSansKR"));
   }
 
   LineChartData mainData(homeProvider, count) {

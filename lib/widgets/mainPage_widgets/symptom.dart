@@ -155,8 +155,11 @@ class _SymptomState extends State<Symptom> {
                 ]))
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
-                child:
-                    const Center(child: NanumBodyText(text: '오늘의 증상을 기록해보세요!')))
+                child: const Center(
+                    child: NanumBodyText(
+                  text: '오늘의 증상을 기록해보세요!',
+                  color: Colors.grey,
+                )))
       ]),
     );
   }

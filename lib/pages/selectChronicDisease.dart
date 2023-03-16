@@ -38,16 +38,19 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0),
         child: AppBar(
-          backgroundColor: CommonColor.background,
-          elevation: 0.0,
-          // leading: IconButton(
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          //   color: const Color.fromRGBO(0, 0, 0, 1.0),
-          //   icon: const Icon(Icons.arrow_back_ios_new),
-          //   iconSize: 30,
-          // ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            //replace with our own icon data.
+          ),
+          toolbarHeight: 48,
+          backgroundColor: CommonColor.background, //배경 색
+          elevation: 0.0, //
         ),
       ),
       body: SingleChildScrollView(
@@ -130,7 +133,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
                 );
               }
             : null,
-        child: const NanumTitleText(text: '다음으로', color: Colors.white),
+        child: const NanumTitleText(text: '다음', color: Colors.white),
       ),
     );
   }
@@ -164,7 +167,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
           child: Text(
             tag[index]['state'],
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontFamily: 'NotoSansKR',
+                fontFamily: 'NotoSansKR',
                 color: tag[index]['isCheck'] ? Colors.white : Colors.grey,
                 fontSize: 11,
                 fontWeight: FontWeight.bold),
