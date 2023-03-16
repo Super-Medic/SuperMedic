@@ -23,6 +23,7 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
     List<BloodSugarModel> bloodsugarBefore = [];
     List<BloodSugarModel> bloodsugarAfter = [];
     List<Widget> tabsIndex = [];
+    List<Widget> tabsView = [];
 
     for (int i = 0; i < _homeProvider.bloodSugarValue.length; i++) {
       if (_homeProvider.bloodSugarValue[i].checkbutton == '공복') {
@@ -39,14 +40,18 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
       tabsIndex.add(const Tab(
         text: "식후혈당",
       ));
+      tabsView.add(BloodSugarGraph(bloodsugarValue: bloodsugarBefore, flag: 0));
+      tabsView.add(BloodSugarGraph(bloodsugarValue: bloodsugarAfter, flag: 1));
     } else if (bloodsugarBefore.isNotEmpty && bloodsugarAfter.isEmpty) {
       tabsIndex.add(const Tab(
         text: "식전혈당",
       ));
+      tabsView.add(BloodSugarGraph(bloodsugarValue: bloodsugarBefore, flag: 0));
     } else if (bloodsugarBefore.isEmpty && bloodsugarAfter.isNotEmpty) {
       tabsIndex.add(const Tab(
         text: "식후혈당",
       ));
+      tabsView.add(BloodSugarGraph(bloodsugarValue: bloodsugarAfter, flag: 1));
     }
     return DefaultTabController(
       length: tabsIndex.length,
@@ -74,14 +79,8 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
               : SizedBox(
                   height: 280,
                   child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: <Widget>[
-                      BloodSugarGraph(
-                          bloodsugarValue: bloodsugarBefore, flag: 0),
-                      BloodSugarGraph(
-                          bloodsugarValue: bloodsugarAfter, flag: 1),
-                    ],
-                  ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: tabsView),
                 )
         ],
       ),
