@@ -77,7 +77,7 @@ class MedicineTake extends ChangeNotifier {
       if (_checkList.isEmpty) {
         _inputHeight = 0;
       } else if (_checkList.length == 1) {
-        _inputHeight = 0.20;
+        _inputHeight = 0.225;
       } else {
         _inputHeight = 0.325;
       }
