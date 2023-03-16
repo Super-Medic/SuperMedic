@@ -42,12 +42,12 @@ class _HealthPage extends State<HealthPage> {
           ),
           leadingWidth: 150,
           actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications_none),
-              color: Colors.black,
-              iconSize: 25,
-              onPressed: () => {},
-            ),
+            // IconButton(
+            //   icon: const Icon(Icons.notifications_none),
+            //   color: Colors.black,
+            //   iconSize: 25,
+            //   onPressed: () => {},
+            // ),
             IconButton(
               icon: const Icon(Icons.menu),
               color: Colors.black,

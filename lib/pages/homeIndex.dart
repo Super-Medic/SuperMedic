@@ -86,17 +86,24 @@ class _HomeIndexState extends State<HomeIndex> {
                     ListTile(
                       key: Key('$index'),
                       tileColor: const Color.fromARGB(0, 255, 255, 255),
-                      minVerticalPadding: 20,
+                      minVerticalPadding: 15,
                       visualDensity: const VisualDensity(vertical: -4),
                       title: homeItemsOder[index] == 'MedicationTime'
-                          ? const Text('복약 관리')
+                          ? const NanumTitleText(
+                              text: '복약 관리', textAlign: TextAlign.left)
                           : homeItemsOder[index] == 'BloodPressure'
-                              ? const Text('혈압 관리')
+                              ? const NanumTitleText(
+                                  text: '혈압 관리', textAlign: TextAlign.left)
                               : homeItemsOder[index] == 'BloodSugar'
-                                  ? const Text('혈당 관리')
+                                  ? const NanumTitleText(
+                                      text: '혈당 관리', textAlign: TextAlign.left)
                                   : homeItemsOder[index] == 'Symptom'
-                                      ? const Text('증상 관리')
-                                      : const Text('노트'),
+                                      ? const NanumTitleText(
+                                          text: '증상 관리',
+                                          textAlign: TextAlign.left)
+                                      : const NanumTitleText(
+                                          text: '노트',
+                                          textAlign: TextAlign.left),
                       trailing: ReorderableDragStartListener(
                           index: index, child: const Icon(Icons.drag_handle)),
                     ),

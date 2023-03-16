@@ -64,11 +64,18 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TabBar(
-                        indicatorColor: Colors.green,
-                        labelColor: Colors.green,
+                        indicatorColor: Colors.white,
+                        labelColor: Colors.black,
                         unselectedLabelColor: Colors.black54,
                         isScrollable: true,
-                        tabs: tabsIndex),
+                        tabs: tabsIndex,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        labelPadding: const EdgeInsets.only(left: 1, right: 12),
+                        unselectedLabelStyle:
+                            const TextStyle(fontFamily: "NotoSansKR"),
+                        labelStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "NotoSansKR")),
                   ],
                 ),
           _homeProvider.bloodSugarValue.isEmpty
