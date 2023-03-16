@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //폰트 설정 파일
-import 'package:super_medic/provider/check_box_provider.dart';
 //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/provider/home_provider.dart';
@@ -56,7 +55,7 @@ class _MedicationTimeState extends State<MedicationTime> {
               children: [
                 Container(
                   margin: AppTheme.widgetpadding,
-                  padding: const EdgeInsets.only(left: 15, top: 8),
+                  padding: const EdgeInsets.only(left: 5, top: 8),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -67,12 +66,18 @@ class _MedicationTimeState extends State<MedicationTime> {
                     },
                     child: Row(
                       children: [
-                        NanumTitleText(
+                        Image.asset(
+                          'assets/images/medication.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                        const SizedBox(width: 7),
+                        const NanumTitleText(
                           text: '복약',
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.chevron_right,
                           weight: 900,
                           color: Colors.black,
@@ -81,16 +86,18 @@ class _MedicationTimeState extends State<MedicationTime> {
                     ),
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (var check in _medicineTake.checkList)
-                        MediCheck(
-                            items: check as Map<bool, List<Check>>, pad: 15),
-                      SizedBox(height: screenHeight * 0.025),
-                    ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (var check in _medicineTake.checkList)
+                          MediCheck(
+                              items: check as Map<bool, List<Check>>, pad: 15),
+                        SizedBox(height: screenHeight * 0.025),
+                      ],
+                    ),
                   ),
                 ),
               ],
