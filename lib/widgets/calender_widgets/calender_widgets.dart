@@ -8,6 +8,7 @@ import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
+import 'package:super_medic/widgets/calender_widgets/calendermedicineCheck.dart';
 import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 
 import './utils.dart';
@@ -20,7 +21,7 @@ class TableEventsExample extends StatefulWidget {
 }
 
 class _TableEventsExampleState extends State<TableEventsExample> {
-  late final ValueNotifier<List<Check>> _selectedEvents;
+  late final ValueNotifier<List<List<Check>>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -41,8 +42,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       _selectedDay = _focusedDay;
       _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
     });
-    print(_focusedDay);
-    print(_getEventsForDay(_focusedDay));
   }
 
   @override
@@ -51,11 +50,11 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     _selectedEvents.dispose();
   }
 
-  List<Check> _getEventsForDay(DateTime day) {
+  List<List<Check>> _getEventsForDay(DateTime day) {
     return calData.kevents[day] ?? [];
   }
 
-  List<Check> _getEventsForRange(DateTime start, DateTime end) {
+  List<List<Check>> _getEventsForRange(DateTime start, DateTime end) {
     // Implementation example
     final days = daysInRange(start, end);
 
@@ -104,7 +103,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       backgroundColor: CommonColor.background,
       body: Column(
         children: [
-          TableCalendar<Check>(
+          TableCalendar<List<Check>>(
             locale: 'ko_KR',
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
@@ -248,10 +247,11 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                     ),
                   ),
                   Expanded(
-                    child: ValueListenableBuilder<List<Check>>(
+                    child: ValueListenableBuilder<List<List<Check>>>(
                       valueListenable: _selectedEvents,
                       builder: (context, value, _) {
-                        // print(_selectedDay);
+                        _selectedEvents.value = _getEventsForDay(_focusedDay);
+                        final listLength = value.length;
                         return ListView.builder(
                           itemCount: value.length,
                           itemBuilder: (context, index) {
@@ -264,8 +264,16 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: ListTile(
-                                onTap: () => print('${value[index]}'),
-                                title: Text('${value[index]}',style:TextStyle(fontFamily: "NotoSansKR")),
+                                onTap: () {},
+                                title: _focusedDay ==
+                                        DateTime.utc(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            DateTime.now().day)
+                                    ? MediCheck(
+                                        items: {true: value[index]}, pad: 15)
+                                    : CalMediCheck(
+                                        items: value[index], pad: 15),
                               ),
                             );
                           },
@@ -290,16 +298,19 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   }
 }
 
-checkTake(List<Check> events) {
+checkTake(List<List<Check>> events) {
   bool isContainTrue = false;
   bool isContainFalse = false;
+
   for (var element in events) {
-    if (element.isChecked == false) {
-      isContainFalse = true;
-    } else if (element.isChecked) {
-      isContainTrue = true;
+    for (var item in element) {
+      if (item.isChecked == false) {
+        isContainFalse = true;
+      } else if (item.isChecked) {
+        isContainTrue = true;
+      }
+      if (isContainFalse && isContainTrue) break;
     }
-    if (isContainFalse && isContainTrue) break;
   }
 
   if (isContainFalse && isContainTrue) {

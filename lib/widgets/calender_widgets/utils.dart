@@ -15,9 +15,9 @@ import 'package:http/http.dart' as http;
 
 class CalendarData extends ChangeNotifier {
   // ignore: prefer_final_fields
-  LinkedHashMap<DateTime, List<Check>> _kevents =
-      LinkedHashMap<DateTime, List<Check>>();
-  LinkedHashMap<DateTime, List<Check>> get kevents => _kevents;
+  LinkedHashMap<DateTime, List<List<Check>>> _kevents =
+      LinkedHashMap<DateTime, List<List<Check>>>();
+  LinkedHashMap<DateTime, List<List<Check>>> get kevents => _kevents;
 
   Future<void> fetchPastGet() async {
     late int today;
@@ -39,14 +39,16 @@ class CalendarData extends ChangeNotifier {
     }
     final res = await http.get(
         Uri.parse('https://mypd.kr:5000/medicine/parse/past?email=$userEmail'));
-    Map<DateTime, List<Check>> checkMap = <DateTime, List<Check>>{};
+    Map<DateTime, List<List<Check>>> checkMap = <DateTime, List<List<Check>>>{};
     if (res.body != 'Empty') {
       for (var data in json.decode(res.body)) {
         final year = data['date'].substring(0, 4);
         final month = data['date'].substring(5, 7);
         final day = data['date'].substring(8, 10);
-        List<Check> checks = List.empty(growable: true);
+        List<List<Check>> medicineData = List.empty(growable: true);
+        final keys = data['takeinfo'].keys.toList();
         data['takeinfo'].forEach((key, value) {
+          List<Check> checks = List.empty(growable: true);
           for (var i = 0; i < value.length; i++) {
             checks.add(Check(
                 id: 0,
@@ -54,16 +56,19 @@ class CalendarData extends ChangeNotifier {
                 time: value[i]['time'],
                 isChecked: value[i]['check']));
           }
-          checkMap[DateTime.utc(
-                  int.parse('$year'), int.parse('$month'), int.parse('$day'))] =
-              checks;
+          medicineData.add(checks);
         });
+        checkMap[DateTime.utc(
+                int.parse('$year'), int.parse('$month'), int.parse('$day'))] =
+            medicineData;
       }
     }
     // // 오늘
     final response = await http.get(Uri.parse(
         'https://mypd.kr:5000/medicine/parse/current?email=$userEmail'));
     if (response.body != 'Empty') {
+      List<List<Check>> medicineData = List.empty(growable: true);
+
       for (var data in json.decode(response.body)) {
         if (data['days'].contains(today)) {
           List<Check> checks = List.empty(growable: true);
@@ -74,17 +79,14 @@ class CalendarData extends ChangeNotifier {
                 time: time['time'],
                 isChecked: time['check']));
           }
-          checkMap[DateTime.utc(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day)] = checks;
+          medicineData.add(checks);
         }
+        checkMap[DateTime.utc(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day)] = medicineData;
       }
     }
-    // print(DateTime.utc(
-    //     DateTime.now().year, DateTime.now().month, DateTime.now().day));
-    // print(checkMap[DateTime.utc(
-    //     DateTime.now().year, DateTime.now().month, DateTime.now().day)]);
 
-    _kevents = LinkedHashMap<DateTime, List<Check>>(
+    _kevents = LinkedHashMap<DateTime, List<List<Check>>>(
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(checkMap);
