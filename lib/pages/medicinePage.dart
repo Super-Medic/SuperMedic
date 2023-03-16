@@ -14,6 +14,7 @@ import 'package:super_medic/widgets/calender_widgets/medicineCheckForNotToday.da
 import 'package:super_medic/pages/add_medicine.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:super_medic/provider/medicine_provider.dart';
+import 'package:super_medic/widgets/calender_widgets/utils.dart';
 
 class MedicinePage extends StatefulWidget {
   const MedicinePage({super.key});
@@ -26,6 +27,7 @@ class _MedicinePageState extends State<MedicinePage> {
   String? userEmail;
   bool isLoading = false;
   MedicineTake _medicineTake = MedicineTake();
+  CalendarData calData = CalendarData();
 
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _MedicinePageState extends State<MedicinePage> {
 
   @override
   Widget build(BuildContext context) {
+    calData = context.watch<CalendarData>();
     _medicineTake = context.watch<MedicineTake>();
     return Stack(
       children: [

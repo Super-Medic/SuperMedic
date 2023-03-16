@@ -34,26 +34,32 @@ class _CalCustomCheckBoxState extends State<CalCustomCheckBox> {
           lineThickness: 2,
           dashColor: widget.item.isChecked
               ? Colors.green
-              : Color.fromARGB(255, 110, 110, 110),
+              : Colors.grey.withOpacity(0.3),
         ));
     return Row(
       children: [
         Column(
           children: [
             GFCheckbox(
-              size: 40,
+              size: GFSize.LARGE,
               value: widget.item.isChecked,
               type: GFCheckboxType.circle,
-              onChanged: null,
+              onChanged: (val) {},
               activeBgColor: Colors.green,
               activeIcon: const Icon(
                 Icons.check,
                 color: Colors.white,
               ),
-              inactiveBgColor: Colors.transparent,
-              inactiveIcon: const Icon(
-                Icons.cancel_outlined,
-                color: Colors.red,
+              activeBorderColor: Colors.green,
+              inactiveBorderColor: Colors.redAccent,
+              inactiveIcon: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.white),
+                child: Icon(
+                  Icons.close,
+                  color: Colors.red,
+                ),
               ),
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
