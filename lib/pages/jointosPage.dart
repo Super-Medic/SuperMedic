@@ -69,12 +69,21 @@ class _JointosPage extends State<JointosPage> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR',)),
-            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR',)),
+            title: Text(title!,
+                style: TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
+            content: Text(message!,
+                style: TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR',)),
+                  child: const Text("확인",
+                      style: TextStyle(
+                        fontFamily: 'NotoSansKR',
+                      )),
                   onPressed: () {
                     Navigator.pop(context);
                   })
@@ -85,102 +94,97 @@ class _JointosPage extends State<JointosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CommonColor.background,
-
-      // ignore: prefer_const_constructors
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30.0,
+    return
+        // ignore: prefer_const_constructors
+        Center(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 30.0,
+          ),
+          const NanumTitleText(
+            text: '약관 내용에 동의해주세요',
+            fontSize: 20.0,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+          CustomCheckBoxTitle(
+            item: agree,
+            func: itemChange,
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 2,
+              // shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CustomCheckBox(
+                  item: items[index],
+                  func: checkAll,
+                );
+              },
             ),
-            const NanumTitleText(
-              text: '약관 내용에 동의해주세요',
-              fontSize: 20.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            CustomCheckBoxTitle(
-              item: agree,
-              func: itemChange,
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 2,
-                // shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return CustomCheckBox(
-                    item: items[index],
-                    func: checkAll,
-                  );
-                },
-              ),
-            ),
-            SafeArea(
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: TextButton(
-                onPressed: () async {
-                  // ignore: prefer_typing_uninitialized_variables
-                  var joinresult;
-                  if (widget.paltform == 'kakao') {
-                    KakaoLogin kakaologin = KakaoLogin();
-                    joinresult = await kakaologin.get_user_join(
-                        widget.phone,
-                        widget.telecom,
-                        widget.frist_number,
-                        widget.second_number,
-                        widget.name);
-                  } else if (widget.paltform == 'apple') {
-                    AppleLogin applelogin = AppleLogin();
-                    joinresult = await applelogin.get_user_join(
-                        widget.phone,
-                        widget.telecom,
-                        widget.frist_number,
-                        widget.second_number,
-                        widget.name,
-                        widget.credential);
-                  }
-                  if (joinresult == 'true') {
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const SelectChronicDisease()));
-                  } else {
-                    // ignore: avoid_print
-                    _showAlert(title: "회원가입 실패", message: "다시 시도해주세요");
-                  }
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor:
-                      agree.isChecked == false ? Colors.grey : Colors.green,
-                  minimumSize:
-                      Size(MediaQuery.of(context).size.width * 0.9, 55),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-                child: const NanumTitleText(
-                  text: '확인',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+          ),
+          SafeArea(
+              child: Align(
+            alignment: Alignment.bottomCenter,
+            child: TextButton(
+              onPressed: () async {
+                // ignore: prefer_typing_uninitialized_variables
+                var joinresult;
+                if (widget.paltform == 'kakao') {
+                  KakaoLogin kakaologin = KakaoLogin();
+                  joinresult = await kakaologin.get_user_join(
+                      widget.phone,
+                      widget.telecom,
+                      widget.frist_number,
+                      widget.second_number,
+                      widget.name);
+                } else if (widget.paltform == 'apple') {
+                  AppleLogin applelogin = AppleLogin();
+                  joinresult = await applelogin.get_user_join(
+                      widget.phone,
+                      widget.telecom,
+                      widget.frist_number,
+                      widget.second_number,
+                      widget.name,
+                      widget.credential);
+                }
+                if (joinresult == 'true') {
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SelectChronicDisease()));
+                } else {
+                  // ignore: avoid_print
+                  _showAlert(title: "회원가입 실패", message: "다시 시도해주세요");
+                }
+              },
+              style: TextButton.styleFrom(
+                backgroundColor:
+                    agree.isChecked == false ? Colors.grey : Colors.green,
+                minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 55),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-            )),
-            const Padding(
-              padding: EdgeInsets.all(10),
-            )
-          ],
-        ),
+              child: const NanumTitleText(
+                text: '확인',
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )),
+          const Padding(
+            padding: EdgeInsets.all(10),
+          )
+        ],
       ),
     );
   }
