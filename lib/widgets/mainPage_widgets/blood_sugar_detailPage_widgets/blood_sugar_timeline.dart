@@ -99,8 +99,6 @@ class _DeliveryProcesses extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 //Timeline 사이 글작성
@@ -234,7 +232,7 @@ class _DeliveryMessageSugar {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Row(
                 children: [
                   NanumText(text: checkbutton),
