@@ -29,12 +29,12 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
   Widget build(BuildContext context) {
     final dot = Container(
         height: 20,
-        width: 70,
+        width: 52,
         // margin: const EdgeInsets.only(left: 2),
         child: DottedLine(
-          dashGapLength: 3.0,
+          dashGapLength: 2.0,
           dashRadius: 10.0,
-          lineThickness: 2,
+          lineThickness: 3,
           dashColor: widget.item.isChecked
               ? Colors.green
               : Colors.grey.withOpacity(0.3),

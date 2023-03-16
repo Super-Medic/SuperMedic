@@ -113,6 +113,7 @@ class _JoinPageState extends State<JoinPage> {
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'NotoSansKR',
+              fontSize: 22,
             ),
           ),
         ));
@@ -123,25 +124,25 @@ class _JoinPageState extends State<JoinPage> {
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.green,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50.0),
-        child: AppBar(
-          backgroundColor: CommonColor.background,
-          elevation: 0.0,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            color: const Color.fromRGBO(0, 0, 0, 1.0),
-            icon: const Icon(Icons.arrow_back_ios_new),
-            iconSize: 30,
-          ),
-        ),
-      ),
       body: SafeArea(
         top: false,
         child: Scaffold(
           backgroundColor: CommonColor.background,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50.0),
+            child: AppBar(
+              backgroundColor: CommonColor.background,
+              elevation: 0.0,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: const Color.fromRGBO(0, 0, 0, 1.0),
+                icon: const Icon(Icons.arrow_back_ios_new),
+                iconSize: 30,
+              ),
+            ),
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(top: 20),
             child: Form(
@@ -313,9 +314,9 @@ class _JoinPageState extends State<JoinPage> {
               ),
             ),
           ),
+          bottomNavigationBar: renderButton(screenHeight * 0.07),
         ),
       ),
-      bottomNavigationBar: renderButton(screenHeight * 0.07),
     );
   }
 }

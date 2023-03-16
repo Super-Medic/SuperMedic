@@ -101,6 +101,8 @@ class _HomeIndexState extends State<HomeIndex> {
                           index: index, child: const Icon(Icons.drag_handle)),
                     ),
                     const Divider(thickness: 1),
+                    Text(homeItemsOder[index]),
+                    Text('${_homeProvider.homeIndex}')
                   ]),
               ],
               onReorder: (int oldIndex, int newIndex) async {

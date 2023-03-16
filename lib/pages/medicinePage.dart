@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/pages/homePage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰
 import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
@@ -149,7 +150,7 @@ class _MedicinePageState extends State<MedicinePage> {
                         child: Container(
                           margin: const EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width,
-                          height: 120,
+                          height: 100,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               color: Colors.white,
