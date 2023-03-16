@@ -80,7 +80,7 @@ class _SymptomState extends State<Symptom> {
                       children: [
                         NanumTitleText(
                           text: '증상',
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                         Icon(

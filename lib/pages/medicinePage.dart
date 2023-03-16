@@ -84,10 +84,12 @@ class _MedicinePageState extends State<MedicinePage> {
               tabs: const [
                 NanumBodyText(
                   text: '복약등록',
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
                 NanumBodyText(
                   text: '복용기록',
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 )
               ],

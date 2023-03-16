@@ -76,7 +76,7 @@ class _NoteState extends State<Note> {
                       children: [
                         NanumTitleText(
                           text: '노트',
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                         // Icon(
@@ -150,7 +150,7 @@ class _NoteState extends State<Note> {
     // print(symptomList);
     return Container(
       // alignment: const Alignment(0, 0),
-      child: Text(note, style:TextStyle(fontFamily: "NotoSansKR")),
+      child: Text(note, style: const TextStyle(fontFamily: "NotoSansKR")),
     );
   }
 }
