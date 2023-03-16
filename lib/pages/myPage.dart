@@ -90,22 +90,39 @@ class _MyPage extends State<MyPage> {
                 height: 0.7,
                 color: Colors.grey,
               ),
-              Container(
-                  padding: AppTheme.widgetpadding,
-                  height: screenHeight * 0.1,
-                  child: Row(children: [
-                    Icon(
-                      Icons.person,
-                      size: screenWidth * 0.1,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(width: screenWidth * 0.03),
-                    NanumText(
-                      text: _homeProvider.loginValue!.name,
-                      color: Colors.black,
-                      fontSize: 16,
-                    )
-                  ])),
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      padding: AppTheme.widgetpadding,
+                      height: screenHeight * 0.1,
+                      child: Row(children: [
+                        Icon(
+                          Icons.person,
+                          size: screenWidth * 0.1,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(width: screenWidth * 0.03),
+                        NanumText(
+                          text: _homeProvider.loginValue!.name,
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        TextButton.icon(
+                            onPressed: () {
+                              print("성공");
+                            },
+                            label: const NanumBodyText(
+                              text: '',
+                            ),
+                            icon: const Icon(
+                              Icons.chevron_right,
+                              weight: 900,
+                              color: Colors.black,
+                            ),
+                            style: TextButton.styleFrom(
+                                iconColor: Colors.green,
+                                foregroundColor: Colors.black)),
+                      ]))),
               Container(
                 height: 0.7,
                 color: Colors.grey,
@@ -397,12 +414,15 @@ class _QuitPopUpState extends State<QuitPopUp> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR')),
-            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR')),
+            title:
+                Text(title!, style: const TextStyle(fontFamily: 'NotoSansKR')),
+            content: Text(message!,
+                style: const TextStyle(fontFamily: 'NotoSansKR')),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR')),
+                  child: const Text("확인",
+                      style: TextStyle(fontFamily: 'NotoSansKR')),
                   onPressed: () {
                     Navigator.pop(context);
                   })
