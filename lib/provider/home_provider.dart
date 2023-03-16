@@ -38,6 +38,9 @@ class HomeProvider extends ChangeNotifier {
   int _bloodsugarCount = -1;
   int get bloodsugarCount => _bloodsugarCount;
 
+  int _bloodsugarCountAfter = -1;
+  int get bloodsugarCountAfter => _bloodsugarCountAfter;
+
   Future<void> homeItemsGet() async {
     _homeItems = [];
     try {
@@ -55,18 +58,12 @@ class HomeProvider extends ChangeNotifier {
             .split(', ');
         _homeItems = List.generate(homeIndex.length, (i) {
           switch (homeIndex[i]) {
-            case 'MedicationTime':
-              return const MedicationTime();
-            case 'BloodSugar':
-              return const BloodSugar();
-            case 'BloodPressure':
-              return const BloodPressure();
-            case 'Symptom':
-              return const Symptom();
-            case 'Note':
-              return const Note();
-            default:
-              return Container();
+            case 'MedicationTime': return const MedicationTime();
+            case 'BloodSugar': return const BloodSugar();
+            case 'BloodPressure': return const BloodPressure();
+            case 'Symptom': return const Symptom();
+            case 'Note': return const Note();
+            default: return Container();
           }
         });
         _homeItems = homeItems;
@@ -90,6 +87,7 @@ class HomeProvider extends ChangeNotifier {
           }
         }
         _bloodsugarCount = -1;
+        _bloodsugarCountAfter = -1;
         _bloodSugarValue = bloodSugarValue;
         notifyListeners();
       }
@@ -215,6 +213,11 @@ class HomeProvider extends ChangeNotifier {
 
   updateCurrentSugarValue(int index) {
     _bloodsugarCount = index;
+    notifyListeners();
+  }
+
+  updateCurrentSugarAfterValue(int index) {
+    _bloodsugarCountAfter = index;
     notifyListeners();
   }
 }

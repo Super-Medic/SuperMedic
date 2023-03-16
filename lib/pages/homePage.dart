@@ -136,31 +136,6 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: screenHeight * 0.01,
             ),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeIndex()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(222, 255, 255, 255),
-                  elevation: 0.0,
-                  side: const BorderSide(
-                    color: Colors.black,
-                    width: 1.5,
-                  ),
-                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                ),
-                child: const NanumBodyText(text: '순서편집'),
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
             ElevatedButton(
               onPressed: () {
                 context.read<BottomNavigationProvider>().updateCurrentPage(2);
@@ -175,6 +150,34 @@ class _HomePageState extends State<HomePage> {
               child: const NanumTitleText(
                 text: '나의 건강기록 보기',
                 color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * 0.01,
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeIndex()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(222, 255, 255, 255),
+                  elevation: 0.0,
+                  side: const BorderSide(
+                    color: Color.fromARGB(128, 0, 0, 0),
+                    width: 1,
+                  ),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+                child: const NanumBodyText(
+                  text: '순서편집',
+                  color: Color.fromARGB(128, 0, 0, 0),
+                ),
               ),
             ),
             SizedBox(

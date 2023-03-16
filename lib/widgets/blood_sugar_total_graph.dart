@@ -15,20 +15,7 @@ class BloodSugarTotalGraph extends StatefulWidget {
 
 class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
     with TickerProviderStateMixin {
-  late TabController _nestedTabController;
   late HomeProvider _homeProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    _nestedTabController = TabController(length: 0, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _nestedTabController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,40 +48,43 @@ class _BloodSugarTotalGraphState extends State<BloodSugarTotalGraph>
         text: "식후혈당",
       ));
     }
-    _nestedTabController = TabController(length: tabsIndex.length, vsync: this);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        tabsIndex.isEmpty
-            ? const SizedBox.shrink()
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TabBar(
-                      controller: _nestedTabController,
-                      indicatorColor: Colors.green,
-                      labelColor: Colors.green,
-                      unselectedLabelColor: Colors.black54,
-                      isScrollable: true,
-                      tabs: tabsIndex),
-                ],
-              ),
-        _homeProvider.bloodSugarValue.isEmpty
-            ? const SizedBox(
-                height: 40,
-                child: Center(child: NanumBodyText(text: '오늘의 혈당을 기록해보세요!')),
-              )
-            : SizedBox(
-                height: 280,
-                child: TabBarView(
-                  controller: _nestedTabController,
-                  children: <Widget>[
-                    BloodSugarGraph(bloodsugarValue: bloodsugarBefore),
-                    BloodSugarGraph(bloodsugarValue: bloodsugarAfter),
+    return DefaultTabController(
+      length: tabsIndex.length,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          tabsIndex.isEmpty
+              ? const SizedBox.shrink()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TabBar(
+                        indicatorColor: Colors.green,
+                        labelColor: Colors.green,
+                        unselectedLabelColor: Colors.black54,
+                        isScrollable: true,
+                        tabs: tabsIndex),
                   ],
                 ),
-              )
-      ],
+          _homeProvider.bloodSugarValue.isEmpty
+              ? const SizedBox(
+                  height: 40,
+                  child: Center(child: NanumBodyText(text: '오늘의 혈당을 기록해보세요!')),
+                )
+              : SizedBox(
+                  height: 280,
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: <Widget>[
+                      BloodSugarGraph(
+                          bloodsugarValue: bloodsugarBefore, flag: 0),
+                      BloodSugarGraph(
+                          bloodsugarValue: bloodsugarAfter, flag: 1),
+                    ],
+                  ),
+                )
+        ],
+      ),
     );
   }
 }

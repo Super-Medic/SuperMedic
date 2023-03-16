@@ -8,7 +8,9 @@ import 'package:super_medic/themes/textstyle.dart';
 // ignore: must_be_immutable
 class BloodSugarGraph extends StatelessWidget {
   List<BloodSugarModel> bloodsugarValue = [];
-  BloodSugarGraph({super.key, required this.bloodsugarValue});
+  int flag;
+  BloodSugarGraph(
+      {super.key, required this.bloodsugarValue, required this.flag});
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +79,8 @@ class BloodSugarGraph extends StatelessWidget {
                           child: Consumer<HomeProvider>(
                             builder: (context, homeProvider, child) =>
                                 LineChart(
-                              mainData(
-                                  homeProvider, bloodsugarValue.length - 1),
+                              mainData(homeProvider, bloodsugarValue.length - 1,
+                                  flag),
                             ),
                           ),
                         ),
@@ -103,19 +105,24 @@ class BloodSugarGraph extends StatelessWidget {
     );
     Widget? text;
     if (dateData.isNotEmpty) {
-      for (int i = 0; i < dateData.length; i++) {
-        if (value.toInt() == i) {
-          text = Text(dateData[i], style: style);
-        } else if (value.toInt() > i) {
-          text = const Text('', style: style);
-        }
+      // for (int i = 0; i < dateData.length; i++) {
+      //   if (value.toInt() == i) {
+      //     text = Text(dateData[i], style: style);
+      //   } else if (value.toInt() > i) {
+      //     text = const Text('', style: style);
+      //   }
+      // }
+      if (value.toInt() < dateData.length) {
+        text = Text(dateData[value.toInt()], style: style);
+      } else {
+        text = const Text('', style: style);
       }
     } else {
       text = const Text('', style: style);
     }
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: text!,
+      child: text,
     );
   }
 
@@ -145,19 +152,30 @@ class BloodSugarGraph extends StatelessWidget {
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 
-  LineChartData mainData(homeProvider, count) {
+  LineChartData mainData(homeProvider, count, flag) {
     List<String> valueData = _getValueData(bloodsugarValue);
     List<FlSpot> flspot = [];
+    int indexValue;
 
     for (int i = 0; i < valueData.length; i++) {
       flspot.add(FlSpot(
           double.parse(i.toString()), double.parse(valueData[i].toString())));
     }
-    int indexValue = homeProvider.bloodsugarCount == -1
-        ? count > 29
-            ? 29
-            : count
-        : homeProvider.bloodsugarCount;
+
+    if (flag == 0) {
+      indexValue = homeProvider.bloodsugarCount == -1
+          ? count > 29
+              ? 29
+              : count
+          : homeProvider.bloodsugarCount;
+    } else {
+      indexValue = homeProvider.bloodsugarCountAfter == -1
+          ? count > 29
+              ? 29
+              : count
+          : homeProvider.bloodsugarCountAfter;
+    }
+
     final lineBarData = [
       LineChartBarData(
         showingIndicators: [indexValue],
@@ -187,7 +205,6 @@ class BloodSugarGraph extends StatelessWidget {
         ),
       ),
     ];
-
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -264,9 +281,16 @@ class BloodSugarGraph extends StatelessWidget {
           return 180;
         },
         touchCallback: (FlTouchEvent event, LineTouchResponse? lineTouch) {
-          if (lineTouch != null && lineTouch.lineBarSpots != null) {
+          if (lineTouch != null &&
+              lineTouch.lineBarSpots != null &&
+              flag == 0) {
             homeProvider
                 .updateCurrentSugarValue(lineTouch.lineBarSpots![0].spotIndex);
+          } else if (lineTouch != null &&
+              lineTouch.lineBarSpots != null &&
+              flag == 1) {
+            homeProvider.updateCurrentSugarAfterValue(
+                lineTouch.lineBarSpots![0].spotIndex);
           }
         },
         touchTooltipData: LineTouchTooltipData(
