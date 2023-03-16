@@ -228,12 +228,14 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                                 backgroundColor: Colors.transparent,
                                 builder: (BuildContext context) {
                                   return Container(
-                                      height: 250,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.3,
                                       decoration: const BoxDecoration(
                                         color: Colors.white, // 모달 배경색
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
+                                          topLeft: Radius.circular(25),
+                                          topRight: Radius.circular(25),
                                         ),
                                       ),
                                       child: TimePickerPage());

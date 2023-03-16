@@ -172,7 +172,8 @@ class _HealthScreenings extends State<HealthScreenings> {
                                   .screeningList![
                                       screenings.screeningList!.length - 1]
                                   .result as String,
-                              color: Colors.red),
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold)
                         ],
                       )),
                 ],

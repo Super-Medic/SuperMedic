@@ -21,34 +21,32 @@ class _TimePickerPageState extends State<TimePickerPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextButton(
-                onPressed: () {
-                  final value = DateFormat.jm().format(dateTime);
-                  Navigator.pop(context, value);
-                },
-                child: Container(
-                  padding: EdgeInsets.only(right: 5),
-                  child: const NanumBodyText(
-                    text: '저장',
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () {
+                final value = DateFormat.jm().format(dateTime);
+                Navigator.pop(context, value);
+              },
+              child: Container(
+                padding: EdgeInsets.only(right: 5),
+                child: const NanumBodyText(
+                  text: '저장',
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              buildTimePicker(),
-            ],
-          ),
+            ),
+            buildTimePicker(),
+          ],
         ),
       );
 
   Widget buildTimePicker() => SizedBox(
-        height: 180,
+        height: 130,
         child: CupertinoDatePicker(
           initialDateTime: DateTime.now().add(
             const Duration(minutes: 0),

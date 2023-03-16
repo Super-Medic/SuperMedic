@@ -139,98 +139,108 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
             backgroundColor: Colors.white, //배경 색
             elevation: 0.0, //
           ),
-          body: Container(
-            padding: AppTheme.totalpadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                SizedBox(
-                  height: screenHeight * 0.01,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              const Center(
+                child: NanumTitleText(
+                  text: '증상 기록하기',
+                  fontSize: 25,
+                  textAlign: TextAlign.center,
+                  fontWeight: FontWeight.bold,
                 ),
-                const Center(
-                  child: NanumTitleText(
-                    text: '증상 기록하기',
-                    fontSize: 25,
-                    textAlign: TextAlign.center,
-                    fontWeight: FontWeight.bold,
+              ),
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: AppTheme.totalpadding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const PresentTime(),
+                        SizedBox(
+                          height: screenHeight * 0.02,
+                        ),
+                        const NanumTitleText(
+                          text: "머리",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        SymptomButton(context, "Head"),
+                        SizedBox(
+                          height: screenHeight * 0.02,
+                        ),
+                        const NanumTitleText(
+                          text: "몸 상태",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        SymptomButton(context, "Body"),
+                        SizedBox(
+                          height: screenHeight * 0.02,
+                        ),
+                        const NanumTitleText(
+                          text: "피부",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        SymptomButton(context, "Skin"),
+                        SizedBox(
+                          height: screenHeight * 0.02,
+                        ),
+                        const NanumTitleText(
+                          text: "복부",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        SymptomButton(context, "Stomach")
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: screenHeight * 0.03,
-                ),
-                const PresentTime(),
-                SizedBox(
-                  height: screenHeight * 0.02,
-                ),
-                const NanumTitleText(
-                  text: "머리",
-                  fontSize: 15,
+              ),
+              SizedBox(
+                height: screenHeight * 0.02,
+              ),
+              TextButton(
+                style: style,
+                onPressed: selected == true
+                    ? () async {
+                        await saveSymptoms(dailySymptom, context);
+                        // _homeProvider.symptomgetData();
+                        Provider.of<HomeProvider>(context, listen: false)
+                            .symptomgetData();
+                        var nav = Navigator.of(context);
+                        nav.pop();
+                        // Navigator.pop(context);
+                      }
+                    : null,
+                child: const NanumTitleText(
+                  text: '저장',
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                SymptomButton(context, "Head"),
-                SizedBox(
-                  height: screenHeight * 0.02,
-                ),
-                const NanumTitleText(
-                  text: "몸 상태",
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                SymptomButton(context, "Body"),
-                SizedBox(
-                  height: screenHeight * 0.02,
-                ),
-                const NanumTitleText(
-                  text: "피부",
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                SymptomButton(context, "Skin"),
-                SizedBox(
-                  height: screenHeight * 0.02,
-                ),
-                const NanumTitleText(
-                  text: "복부",
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                SymptomButton(context, "Stomach")
-              ],
-            ),
-          ),
-          bottomSheet: TextButton(
-            // style: style,
-            style: style,
-            onPressed: selected == true
-                ? () async {
-                    await saveSymptoms(dailySymptom, context);
-                    // _homeProvider.symptomgetData();
-                    Provider.of<HomeProvider>(context, listen: false)
-                        .symptomgetData();
-                    var nav = Navigator.of(context);
-                    nav.pop();
-                    // Navigator.pop(context);
-                  }
-                : null,
-
-            child: const NanumTitleText(
-              text: '저장',
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -274,7 +284,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
         label: Container(
           alignment: const Alignment(0, 0),
           width: screenWidth * 0.17,
-          height: screenHeight * 0.02,
+          height: screenHeight * 0.03,
           child: Text(
             dailySymptom[bodyPart]![index]['state'],
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
