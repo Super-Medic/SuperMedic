@@ -54,7 +54,7 @@ class BloodPressure extends StatelessWidget {
                             children: [
                               NanumTitleText(
                                 text: '혈압',
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                               ),
                               Icon(
