@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -28,7 +29,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
   Widget build(BuildContext context) {
     final dot = Container(
         height: 20,
-        width: 81,
+        width: 70,
         // margin: const EdgeInsets.only(left: 2),
         child: DottedLine(
           dashGapLength: 3.0,
@@ -36,7 +37,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           lineThickness: 2,
           dashColor: widget.item.isChecked
               ? Colors.green
-              : Colors.grey.withOpacity(0.7),
+              : Colors.grey.withOpacity(0.3),
         ));
     return Row(
       children: [
@@ -58,11 +59,14 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                 color: Colors.white,
               ),
               activeBorderColor: Colors.green,
-              inactiveBorderColor: Colors.grey.withOpacity(0.7),
+              inactiveBorderColor: Colors.grey.withOpacity(0.3),
               inactiveIcon: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Colors.grey.withOpacity(0.7)),
+                    borderRadius: BorderRadius.circular(50),
+                    // border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                    color: Colors.grey.withOpacity(0.3)),
+                child: Icon(
+                  Icons.check,
                   color: Colors.white,
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:super_medic/pages/homeIndex.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
@@ -11,6 +12,7 @@ import 'package:super_medic/themes/common_color.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/widgets/mainPage_widgets/present_time.dart';
+import 'package:super_medic/provider/medicine_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomeProvider _homeProvider;
+  MedicineTake _medicineTake = MedicineTake();
   final storage = const FlutterSecureStorage();
   @override
   void initState() {
@@ -56,12 +59,15 @@ class _HomePageState extends State<HomePage> {
       if (_homeProvider.loginValue == null) {
         Provider.of<HomeProvider>(context, listen: false).logingetData();
       }
+      Provider.of<MedicineTake>(context, listen: false).fetchGet();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
+    _medicineTake = context.watch<MedicineTake>();
+
     var screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(

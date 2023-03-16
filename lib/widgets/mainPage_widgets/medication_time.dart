@@ -4,14 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:super_medic/provider/check_box_provider.dart';
 //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'dart:convert';
+import 'package:super_medic/provider/home_provider.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:super_medic/function/model.dart';
 import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+import 'package:super_medic/provider/medicine_provider.dart';
 
 class MedicationTime extends StatefulWidget {
   const MedicationTime({
@@ -23,82 +20,23 @@ class MedicationTime extends StatefulWidget {
 }
 
 class _MedicationTimeState extends State<MedicationTime> {
-  DateTime now = DateTime.now();
-  List<Map> checkList = List.empty(growable: true);
-  String? userEmail;
-  bool checkNull = true;
-  double inputHeight = 0;
-  late int today;
-  Map dayToint = {
-    "일": 0,
-    "월": 1,
-    "화": 2,
-    "수": 3,
-    "목": 4,
-    "금": 5,
-    "토": 6,
-  };
+  MedicineTake _medicineTake = MedicineTake();
+
+  final HomeProvider provider = HomeProvider();
   @override
   void initState() {
     super.initState();
-    today = dayToint[DateFormat.E('ko_KR').format(now)];
-    fetchGet();
-  }
-
-  Future<void> fetchGet() async {
-    const storage = FlutterSecureStorage();
-    String? userEmail;
-    String? val = await storage.read(key: 'LoginUser');
-    if (val != null) {
-      userEmail = LoginModel.fromJson(jsonDecode(val)).email;
-    }
-    final res = await http.get(Uri.parse(
-        'https://mypd.kr:5000/medicine/parse/current?email=$userEmail'));
-
-    List<Map> temp = List.empty(growable: true);
-    if (res.body != 'Empty') {
-      checkNull = false;
-      for (var data in json.decode(res.body)) {
-        if (data['days'].contains(today)) {
-          Map<bool, List<Check>> checkMap = <bool, List<Check>>{};
-          List<Check> checks = List.empty(growable: true);
-          for (var time in data['times']) {
-            checks.add(Check(
-                id: data['id'],
-                medicine: data['medicine_name'],
-                time: time['time'],
-                isChecked: time['check']));
-          }
-          checkMap[true] = checks;
-          temp.add(checkMap);
-        }
-      }
-      double newHeight;
-
-      if (temp.isEmpty) {
-        newHeight = 0;
-      } else if (temp.length == 1) {
-        newHeight = 0.160;
-      } else {
-        newHeight = 0.325;
-      }
-
-      setState(() {
-        checkList = temp;
-        inputHeight = newHeight;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    late CheckBoxProvider checkBoxProvider = context.watch<CheckBoxProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
+    _medicineTake = context.watch<MedicineTake>();
     return Column(
       children: [
         Container(
           width: double.infinity,
-          height: checkNull == true ? 0 : screenHeight * inputHeight,
+          height: screenHeight * _medicineTake.inputHeight,
           decoration: BoxDecoration(
             color: CommonColor.widgetbackgroud,
             borderRadius: BorderRadius.circular(15),
@@ -120,9 +58,8 @@ class _MedicationTimeState extends State<MedicationTime> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (checkNull != true)
-                  for (var check in checkList)
-                    MediCheck(items: check as Map<bool, List<Check>>, pad: 20),
+                for (var check in _medicineTake.checkList)
+                  MediCheck(items: check as Map<bool, List<Check>>, pad: 15),
                 SizedBox(height: screenHeight * 0.025),
               ],
             ),

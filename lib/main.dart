@@ -12,6 +12,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:super_medic/pages/medicinePage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:super_medic/widgets/calender_widgets/utils.dart';
+import 'package:super_medic/provider/medicine_provider.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print('백 그라운드');
@@ -46,7 +48,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
+        ChangeNotifierProvider(create: (_) => CalendarData()),
         ChangeNotifierProvider(create: (_) => CheckBoxProvider()),
+        ChangeNotifierProvider(create: (_) => MedicineTake()),
       ],
       child: GestureDetector(
         // 사용자 탭 감지

@@ -360,13 +360,15 @@ class _AddMedicinePage extends State<AddMedicinePage> {
               }
             },
             style: TextButton.styleFrom(
+              foregroundColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0)),
               minimumSize: Size(screenWidth, screenHeight * 0.07),
               backgroundColor: checkValidate() ? Colors.green : Colors.grey,
             ),
             child: const NanumTitleText(
-              text: '다음',
+              text: '등록',
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

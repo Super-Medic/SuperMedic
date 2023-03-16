@@ -25,9 +25,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
   Widget build(BuildContext context) {
     return widget.items.containsKey(true) == true
         ? Container(
-            margin: widget.pad == 20
-                ? null
-                : EdgeInsets.only(top: 15, left: 15, right: 15),
+            margin: EdgeInsets.only(top: 15, left: 15, right: 15),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
