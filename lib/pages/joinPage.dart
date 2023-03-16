@@ -122,7 +122,7 @@ class _JoinPageState extends State<JoinPage> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: CommonColor.background,
+      backgroundColor: Colors.green,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50.0),
         child: AppBar(
@@ -138,170 +138,179 @@ class _JoinPageState extends State<JoinPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 20),
-        child: Form(
-          key: formKey,
-          child: Padding(
-            padding: AppTheme.totalpadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const NanumTitleText(
-                  text: '슈퍼메딕에 오신 것을',
-                  fontSize: 25.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-                const NanumTitleText(
-                  text: '환영해요!',
-                  fontSize: 25.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(
-                  height: screenHeight * 0.05,
-                ),
-                renderTextFormField(
-                  label: '휴대폰 번호',
-                  onSaved: (val) {
-                    setState(() {
-                      phone = val;
-                    });
-                  },
-                  validator: (val) {
-                    if (val.length < 1) {
-                      return '휴대폰 번호는 필수 입력사항입니다.';
-                    }
-
-                    if (val.length == 12) {
-                      return '올바른 휴대폰 번호를 입력해주세요.';
-                    }
-
-                    if (!RegExp('[0-9]').hasMatch(val)) {
-                      return '숫자만 입력하여 주세요.';
-                    }
-
-                    return null;
-                  },
-                  maxLength: 11,
-                  height: screenHeight * 0.025,
-                ),
-                Column(children: [
-                  const Row(
-                    children: [
-                      Text(
-                        '통신사',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontFamily: 'NotoSansKR',
-                          // fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: screenHeight * 0.07,
-                    child: DropdownButtonFormField(
-                      value: telecom,
-                      icon: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(Icons.arrow_drop_down),
-                      ),
-                      iconSize: 35,
-                      decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1.6,
-                                color: Color.fromARGB(40, 158, 158, 158))),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.green, width: 1.6),
-                        ),
-                      ),
-                      items: telecom_items
-                          .map((e) => DropdownMenuItem(
-                                value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                child: Text(e,style:TextStyle(fontFamily: 'NotoSansKR',)),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        // items 의 DropdownMenuItem 의 value 반환
+      body: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: CommonColor.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 20),
+            child: Form(
+              key: formKey,
+              child: Padding(
+                padding: AppTheme.totalpadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const NanumTitleText(
+                      text: '슈퍼메딕에 오신 것을',
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const NanumTitleText(
+                      text: '환영해요!',
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.05,
+                    ),
+                    renderTextFormField(
+                      label: '휴대폰 번호',
+                      onSaved: (val) {
                         setState(() {
-                          telecom = value!;
+                          phone = val;
                         });
                       },
+                      validator: (val) {
+                        if (val.length < 1) {
+                          return '휴대폰 번호는 필수 입력사항입니다.';
+                        }
+
+                        if (val.length == 12) {
+                          return '올바른 휴대폰 번호를 입력해주세요.';
+                        }
+
+                        if (!RegExp('[0-9]').hasMatch(val)) {
+                          return '숫자만 입력하여 주세요.';
+                        }
+
+                        return null;
+                      },
+                      maxLength: 11,
+                      height: screenHeight * 0.025,
                     ),
-                  ),
-                ]),
-                SizedBox(height: screenHeight * 0.025),
-                Row(children: <Widget>[
-                  Expanded(
-                      flex: 4,
-                      child: renderTextFormField(
-                        label: '주민등록번호',
-                        onSaved: (val) {
-                          setState(() {
-                            frist_number = val;
-                          });
-                        },
-                        validator: (val) {
-                          if (val.length < 1) {
-                            return '주민번호는 필수 사항입니다.';
-                          }
-                          if (!RegExp('[0-9]').hasMatch(val)) {
-                            return '숫자만 입력하여 주세요.';
-                          }
-                          return null;
-                        },
-                        maxLength: 6,
-                        height: screenHeight * 0.025,
-                      )),
-                  const Expanded(flex: 1, child: Icon(Icons.remove)),
-                  Expanded(
-                      flex: 1,
-                      child: renderTextFormField(
-                        label: '',
-                        onSaved: (val) {
-                          setState(() {
-                            second_number = val;
-                          });
-                        },
-                        validator: (val) {
-                          if (val.length < 1) {
-                            return '';
-                          }
-                          if (!RegExp('[1-4]').hasMatch(val)) {
-                            return '';
-                          }
-                          return null;
-                        },
-                        maxLength: 1,
-                        height: screenHeight * 0.025,
-                      )),
-                  const Expanded(
-                    flex: 3,
-                    child: Text(""),
-                  )
-                ]),
-                renderTextFormField(
-                  label: '이름',
-                  onSaved: (val) {
-                    setState(() {
-                      name = val;
-                    });
-                  },
-                  validator: (val) {
-                    if (val.length < 1) {
-                      return '이름은 필수사항입니다.';
-                    }
-                    return null;
-                  },
-                  maxLength: 10,
-                  height: screenHeight * 0.025,
+                    Column(children: [
+                      const Row(
+                        children: [
+                          Text(
+                            '통신사',
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontFamily: 'NotoSansKR',
+                              // fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: screenHeight * 0.07,
+                        child: DropdownButtonFormField(
+                          value: telecom,
+                          icon: const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(Icons.arrow_drop_down),
+                          ),
+                          iconSize: 35,
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1.6,
+                                    color: Color.fromARGB(40, 158, 158, 158))),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.green, width: 1.6),
+                            ),
+                          ),
+                          items: telecom_items
+                              .map((e) => DropdownMenuItem(
+                                    value: e, // 선택 시 onChanged 를 통해 반환할 value
+                                    child: Text(e,
+                                        style: TextStyle(
+                                          fontFamily: 'NotoSansKR',
+                                        )),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            // items 의 DropdownMenuItem 의 value 반환
+                            setState(() {
+                              telecom = value!;
+                            });
+                          },
+                        ),
+                      ),
+                    ]),
+                    SizedBox(height: screenHeight * 0.025),
+                    Row(children: <Widget>[
+                      Expanded(
+                          flex: 4,
+                          child: renderTextFormField(
+                            label: '주민등록번호',
+                            onSaved: (val) {
+                              setState(() {
+                                frist_number = val;
+                              });
+                            },
+                            validator: (val) {
+                              if (val.length < 1) {
+                                return '주민번호는 필수 사항입니다.';
+                              }
+                              if (!RegExp('[0-9]').hasMatch(val)) {
+                                return '숫자만 입력하여 주세요.';
+                              }
+                              return null;
+                            },
+                            maxLength: 6,
+                            height: screenHeight * 0.025,
+                          )),
+                      const Expanded(flex: 1, child: Icon(Icons.remove)),
+                      Expanded(
+                          flex: 1,
+                          child: renderTextFormField(
+                            label: '',
+                            onSaved: (val) {
+                              setState(() {
+                                second_number = val;
+                              });
+                            },
+                            validator: (val) {
+                              if (val.length < 1) {
+                                return '';
+                              }
+                              if (!RegExp('[1-4]').hasMatch(val)) {
+                                return '';
+                              }
+                              return null;
+                            },
+                            maxLength: 1,
+                            height: screenHeight * 0.025,
+                          )),
+                      const Expanded(
+                        flex: 3,
+                        child: Text(""),
+                      )
+                    ]),
+                    renderTextFormField(
+                      label: '이름',
+                      onSaved: (val) {
+                        setState(() {
+                          name = val;
+                        });
+                      },
+                      validator: (val) {
+                        if (val.length < 1) {
+                          return '이름은 필수사항입니다.';
+                        }
+                        return null;
+                      },
+                      maxLength: 10,
+                      height: screenHeight * 0.025,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

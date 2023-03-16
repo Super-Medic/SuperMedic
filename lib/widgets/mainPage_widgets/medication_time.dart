@@ -5,10 +5,13 @@ import 'package:super_medic/provider/check_box_provider.dart';
 //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/provider/home_provider.dart';
+import 'package:super_medic/themes/textstyle.dart';
+import 'package:super_medic/themes/theme.dart';
 
 import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:super_medic/provider/medicine_provider.dart';
+import 'package:super_medic/pages/medicinePage.dart';
 
 class MedicationTime extends StatefulWidget {
   const MedicationTime({
@@ -35,37 +38,69 @@ class _MedicationTimeState extends State<MedicationTime> {
     return Column(
       children: [
         Container(
-          width: double.infinity,
-          height: screenHeight * _medicineTake.inputHeight,
-          decoration: BoxDecoration(
-            color: CommonColor.widgetbackgroud,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: CommonColor.boxshadowcolor.withOpacity(0.02),
-                spreadRadius: 3,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child:
-              // Scrollbar(
-              //   thumbVisibility: true,
-              //   child:
-              SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var check in _medicineTake.checkList)
-                  MediCheck(items: check as Map<bool, List<Check>>, pad: 15),
-                SizedBox(height: screenHeight * 0.025),
+            width: double.infinity,
+            height: screenHeight * _medicineTake.inputHeight,
+            decoration: BoxDecoration(
+              color: CommonColor.widgetbackgroud,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: CommonColor.boxshadowcolor.withOpacity(0.02),
+                  spreadRadius: 3,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
               ],
             ),
-          ),
-          // ),
-        ),
+            child: Column(
+              children: [
+                Container(
+                  margin: AppTheme.widgetpadding,
+                  padding: const EdgeInsets.only(left: 15, top: 8),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MedicinePage()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        NanumTitleText(
+                          text: '복약',
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          weight: 900,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (var check in _medicineTake.checkList)
+                        MediCheck(
+                            items: check as Map<bool, List<Check>>, pad: 15),
+                      SizedBox(height: screenHeight * 0.025),
+                    ],
+                  ),
+                ),
+              ],
+            )
+            // Scrollbar(
+            //   thumbVisibility: true,
+            //   child:
+
+            // ),
+            ),
       ],
     );
   }

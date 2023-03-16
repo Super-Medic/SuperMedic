@@ -160,11 +160,11 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
         label: Container(
           alignment: const Alignment(0, 0),
           width: screenWidth * 0.17,
-          height: screenHeight * 0.02,
+          height: screenHeight * 0.03,
           child: Text(
             tag[index]['state'],
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontFamily: 'NotoSansKR',
+                fontFamily: 'NotoSansKR',
                 color: tag[index]['isCheck'] ? Colors.white : Colors.grey,
                 fontSize: 11,
                 fontWeight: FontWeight.bold),
