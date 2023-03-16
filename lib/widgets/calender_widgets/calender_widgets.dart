@@ -271,9 +271,9 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                             DateTime.now().month,
                                             DateTime.now().day)
                                     ? MediCheck(
-                                        items: {true: value[index]}, pad: 15)
+                                        items: {true: value[index]}, pad: 10)
                                     : CalMediCheck(
-                                        items: value[index], pad: 15),
+                                        items: value[index], pad: 10),
                               ),
                             );
                           },
