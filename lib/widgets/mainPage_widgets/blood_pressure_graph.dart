@@ -92,10 +92,14 @@ class BloodPressureGraph extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Image.asset(
-                      'assets/images/test.png',
-                      width: 70,
+                      'assets/images/highlow.png',
+                      width: 80,
                     ),
+                    const SizedBox(width: 10)
                   ],
+                ),
+                const SizedBox(
+                  height: 10,
                 )
               ])
             : Container(
@@ -119,12 +123,10 @@ class BloodPressureGraph extends StatelessWidget {
     );
     Widget? text;
     if (dateData.isNotEmpty) {
-      for (int i = 0; i < dateData.length; i++) {
-        if (value.toInt() == i) {
-          text = Text(dateData[i], style: style);
-        } else if (value.toInt() > i) {
-          text = const Text('', style: style);
-        }
+      if (value.toInt() < dateData.length) {
+        text = Text(dateData[value.toInt()], style: style);
+      } else {
+        text = const Text('', style: style);
       }
     } else {
       text = const Text('', style: style);
@@ -132,7 +134,7 @@ class BloodPressureGraph extends StatelessWidget {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: text!,
+      child: text,
     );
   }
 

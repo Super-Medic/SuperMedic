@@ -65,7 +65,8 @@ class _NoteState extends State<Note> {
           Container(
             padding: const EdgeInsets.only(top: 5),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
@@ -104,20 +105,25 @@ class _NoteState extends State<Note> {
                       );
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: CommonColor.buttoncolor,
+                      backgroundColor: const Color.fromARGB(30, 76, 175, 79),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(13)),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 7, horizontal: 15),
+                          vertical: 7, horizontal: 7),
                     ),
                     child: const Row(
                       //spaceEvenly: 요소들을 균등하게 배치하는 속성
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.green,
+                          size: 20,
+                        ),
                         NanumTitleText(
-                          text: '오늘기록',
+                          text: '오늘기록  ',
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Colors.green,
                           fontWeight: FontWeight.bold,
                         ),
                       ],

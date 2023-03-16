@@ -73,7 +73,7 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
                     Container(
                       padding: const EdgeInsets.only(top: 10),
                       child: const NanumTitleText(
-                        text: '혈압 추이',
+                        text: '혈압 기록',
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),

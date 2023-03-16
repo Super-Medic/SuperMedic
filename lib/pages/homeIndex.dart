@@ -22,7 +22,7 @@ class _HomeIndexState extends State<HomeIndex> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      if (_homeProvider.homeItems.isEmpty) {
+      if (_homeProvider.homeIndex.isEmpty) {
         Provider.of<HomeProvider>(context, listen: false).homeItemsGet();
       }
     });
@@ -32,9 +32,7 @@ class _HomeIndexState extends State<HomeIndex> {
   Widget build(BuildContext context) {
     _homeProvider = context.watch<HomeProvider>();
     if (init == 0) {
-      for (int i = 0; i < _homeProvider.homeItems.length; i++) {
-        homeItemsOder.add('${_homeProvider.homeItems[i]}');
-      }
+      homeItemsOder = [..._homeProvider.homeIndex];
       init = 1;
     }
 
@@ -82,7 +80,7 @@ class _HomeIndexState extends State<HomeIndex> {
             body: ReorderableListView(
               children: [
                 for (int index = 0;
-                    index < _homeProvider.homeItems.length;
+                    index < _homeProvider.homeIndex.length;
                     index++)
                   Column(key: Key('$index'), children: [
                     ListTile(

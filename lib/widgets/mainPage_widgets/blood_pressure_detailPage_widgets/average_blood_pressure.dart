@@ -71,7 +71,8 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
     }
 
     return Container(
-        padding: const EdgeInsets.all(25), // AppTheme.detailpadding,
+        padding: const EdgeInsets.fromLTRB(
+            25, 10, 25, 25), // AppTheme.detailpadding,
         width: double.infinity,
         decoration: const BoxDecoration(color: CommonColor.widgetbackgroud),
         child: Column(
@@ -136,24 +137,39 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                               crossAxisAlignment: CrossAxisAlignment.baseline,
                               textBaseline: TextBaseline.alphabetic,
                               children: [
-                                const NanumBodyText(text: '최고'),
+                                const NanumBodyText(
+                                    text: '최고', color: Colors.green),
                                 NanumTitleText(
                                   text: ' $maxBlood',
-                                  fontSize: 20,
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const NanumBodyText(text: 'mmHg')
+                                const NanumText(
+                                  text: ' ',
+                                ),
+                                const NanumBodyText(
+                                  text: 'mmHg',
+                                  fontSize: 18,
+                                )
                               ]),
-                          const SizedBox(height: 10),
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.baseline,
                               textBaseline: TextBaseline.alphabetic,
                               children: [
-                                const NanumBodyText(text: '최저'),
+                                const NanumBodyText(
+                                    text: '최저', color: Colors.orange),
                                 NanumTitleText(
                                   text: ' $minBlood',
-                                  fontSize: 20,
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const NanumBodyText(text: 'mmHg')
+                                const NanumText(
+                                  text: ' ',
+                                ),
+                                const NanumBodyText(
+                                  text: 'mmHg',
+                                  fontSize: 18,
+                                )
                               ]),
                           const SizedBox(height: 10),
                           // const NanumText(
@@ -169,26 +185,33 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                         ),
                       ),
                 Center(
-                  child: TextButton(
-                      onPressed: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BloodPressureRecordPage()))
-                          },
-                      style: TextButton.styleFrom(
-                        backgroundColor: CommonColor.buttoncolor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                      ),
-                      child: const NanumTitleText(
-                        text: '기록하기',
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.015),
+                      TextButton(
+                          onPressed: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BloodPressureRecordPage()))
+                              },
+                          style: TextButton.styleFrom(
+                            backgroundColor: CommonColor.buttoncolor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 22),
+                          ),
+                          child: const NanumTitleText(
+                            text: '기록하기',
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
                 )
               ],
             )

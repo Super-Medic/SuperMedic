@@ -130,7 +130,7 @@ class _InnerTimeline extends StatelessWidget {
               messages[index - 1].towidget()
             ]); //Row(children: [Text(messages[index - 1].toString())]);
           },
-          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 140.0,
+          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 145.0,
           itemCount: messages.length + 1,
         ),
       ),
@@ -237,12 +237,20 @@ class _DeliveryMessagePressure {
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
-                  const NanumText(text: '최고'),
+                  const NanumText(
+                    text: '최고',
+                    color: Colors.green,
+                  ),
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(text: maxbloodPressure),
+                  NanumTitleText(
+                      text: maxbloodPressure,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                   const NanumText(text: 'mmHg'),
                 ],
               ),
@@ -250,12 +258,17 @@ class _DeliveryMessagePressure {
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
-                  const NanumText(text: '최저'),
+                  const NanumText(text: '최저', color: Colors.orange),
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(text: minbloodPressure),
+                  NanumTitleText(
+                      text: minbloodPressure,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                   const NanumText(text: 'mmHg'),
                 ],
               ),
@@ -263,12 +276,18 @@ class _DeliveryMessagePressure {
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
-                  const NanumText(text: '맥박'),
+                  const NanumText(
+                    text: '맥박',
+                    color: Colors.black,
+                  ),
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(text: pulse),
+                  NanumTitleText(
+                      text: pulse, fontWeight: FontWeight.bold, fontSize: 20),
                   const NanumText(text: '(분/회)'),
                 ],
               ),

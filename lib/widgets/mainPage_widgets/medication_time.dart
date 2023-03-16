@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:super_medic/provider/bottom_navigation_provider.dart';
 //폰트 설정 파일
 //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
@@ -10,7 +11,6 @@ import 'package:super_medic/themes/theme.dart';
 import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
 import 'package:super_medic/provider/medicine_provider.dart';
-import 'package:super_medic/pages/medicinePage.dart';
 
 class MedicationTime extends StatefulWidget {
   const MedicationTime({
@@ -58,11 +58,9 @@ class _MedicationTimeState extends State<MedicationTime> {
                   padding: const EdgeInsets.only(left: 5, top: 8),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MedicinePage()),
-                      );
+                      context
+                          .read<BottomNavigationProvider>()
+                          .updateCurrentPage(1);
                     },
                     child: Row(
                       children: [

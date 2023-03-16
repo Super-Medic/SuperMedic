@@ -107,7 +107,8 @@ class NoteRecodePage extends StatelessWidget {
                   }
                 : null,
 
-            child: const NanumTitleText(text: '저장', color: Colors.white),
+            child: const NanumTitleText(
+                text: '저장', color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
