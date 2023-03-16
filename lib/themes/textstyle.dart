@@ -24,7 +24,7 @@ class NanumTitleText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         color: color,
-        fontFamily: 'NanumSquareEB',
+        fontFamily: 'NotoSansKR',
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),
@@ -54,7 +54,7 @@ class NanumBodyText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         color: color,
-        fontFamily: 'NanumSquare_acB',
+        fontFamily: 'NotoSansKR',
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),
@@ -84,7 +84,7 @@ class NanumText extends StatelessWidget {
       text,
       style: TextStyle(
         color: color,
-        fontFamily: 'NanumSquareB',
+        fontFamily: 'NotoSansKR',
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),

@@ -147,6 +147,7 @@ class HomeProvider extends ChangeNotifier {
         _symptomsValue.add(SymptomModel(symptomsDateKeyValue[i], symptomTmp));
       }
     }
+    _symptomsValue = _symptomsValue.reversed.toList();
 
     notifyListeners();
     // } catch (e) {

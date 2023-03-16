@@ -397,12 +397,12 @@ class _QuitPopUpState extends State<QuitPopUp> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!),
-            content: Text(message!),
+            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR')),
+            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR')),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인"),
+                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR')),
                   onPressed: () {
                     Navigator.pop(context);
                   })

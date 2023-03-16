@@ -73,7 +73,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(child: Text('삭제')),
+                                child: Center(child: Text('삭제', style:TextStyle(fontFamily: "NotoSansKR"))),
                               )
                             ];
                           },

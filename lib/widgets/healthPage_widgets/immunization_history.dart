@@ -100,7 +100,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                   child: const NanumTitleText(
                     text: '예방접종 내역',
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Center(
@@ -167,9 +167,9 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               icon: const Row(
                 children: [
                   NanumTitleText(
-                                 text: '예방접종 내역',
+text: '예방접종 내역',
                     fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                   Icon(
                     Icons.chevron_right,
