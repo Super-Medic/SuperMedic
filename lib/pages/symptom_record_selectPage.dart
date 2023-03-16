@@ -276,6 +276,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
     var screenWidth = MediaQuery.of(context).size.width;
 
     return ChoiceChip(
+
         // backgroundColor: const Color.fromRGBO(244, 244, 244, 0.9),
         backgroundColor: const Color.fromARGB(200, 244, 244, 244),
         labelPadding: const EdgeInsets.all(0.0),

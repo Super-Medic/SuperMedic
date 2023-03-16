@@ -22,10 +22,17 @@ class _BloodPressureDirction extends State<BloodPressureDirction> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 10, bottom: 20),
-              child: const NanumTitleText(text: '혈압 추이'),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: const NanumTitleText(
+                text: '혈압 추이',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            BloodPressureGraph(),
+            Container(
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              child: BloodPressureGraph(),
+            )
           ],
         ));
   }

@@ -19,7 +19,10 @@ class BloodSugarTimeline extends StatelessWidget {
         child: timeLineValue.isEmpty
             ? Container(
                 padding: const EdgeInsets.only(bottom: 20),
-                child: const NanumBodyText(text: '오늘의 혈당을 기록해보세요!'))
+                child: const NanumBodyText(
+                  text: '오늘의 혈당을 기록해보세요!',
+                  color: Colors.grey,
+                ))
             : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -99,8 +102,6 @@ class _DeliveryProcesses extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 //Timeline 사이 글작성

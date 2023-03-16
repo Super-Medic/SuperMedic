@@ -89,7 +89,11 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e, style:TextStyle(fontFamily: "NotoSansKRr")),
+                                    child: NanumTitleText(
+                                      text: e,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -128,23 +132,29 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                         child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [
-                            const NanumBodyText(text: '최고'),
-                            NanumTitleText(
-                              text: ' $maxBlood',
-                              fontSize: 20,
-                            ),
-                            const NanumBodyText(text: 'mmHg')
-                          ]),
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                const NanumBodyText(text: '최고'),
+                                NanumTitleText(
+                                  text: ' $maxBlood',
+                                  fontSize: 20,
+                                ),
+                                const NanumBodyText(text: 'mmHg')
+                              ]),
                           const SizedBox(height: 10),
-                          Row(children: [
-                            const NanumBodyText(text: '최저'),
-                            NanumTitleText(
-                              text: ' $minBlood',
-                              fontSize: 20,
-                            ),
-                            const NanumBodyText(text: 'mmHg')
-                          ]),
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                const NanumBodyText(text: '최저'),
+                                NanumTitleText(
+                                  text: ' $minBlood',
+                                  fontSize: 20,
+                                ),
+                                const NanumBodyText(text: 'mmHg')
+                              ]),
                           const SizedBox(height: 10),
                           // const NanumText(
                           //   text: '최근 혈압이 높아지고 있어요 고혈압이 의심돼요.',
@@ -153,7 +163,10 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                         ],
                       ))
                     : const SizedBox(
-                        child: NanumTitleText(text: '데이터가 존재하지 않아요.'),
+                        child: NanumBodyText(
+                          text: '데이터가 존재하지 않아요.',
+                          color: Colors.grey,
+                        ),
                       ),
                 Center(
                   child: TextButton(
@@ -167,13 +180,14 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                       style: TextButton.styleFrom(
                         backgroundColor: CommonColor.buttoncolor,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                       ),
                       child: const NanumTitleText(
                         text: '기록하기',
                         fontSize: 15,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       )),
                 )
               ],

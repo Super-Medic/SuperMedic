@@ -67,7 +67,7 @@ class _SymptomState extends State<Symptom> {
             children: [
               Container(
                   margin: AppTheme.widgetpadding,
-                  padding: const EdgeInsets.only(left: 15, top: 8),
+                  padding: const EdgeInsets.only(left: 5, top: 8),
                   child: InkWell(
                     onTap: () async {
                       Navigator.push(
@@ -76,14 +76,21 @@ class _SymptomState extends State<Symptom> {
                               builder: (context) =>
                                   const SymptomsdetailPage()));
                     },
-                    child: const Row(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        NanumTitleText(
+                        Image.asset(
+                          'assets/images/symptom.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                        const SizedBox(width: 7),
+                        const NanumTitleText(
                           text: '증상',
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.chevron_right,
                           weight: 900,
                           color: Colors.black,
@@ -104,22 +111,19 @@ class _SymptomState extends State<Symptom> {
                   style: TextButton.styleFrom(
                     backgroundColor: CommonColor.buttoncolor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    padding: const EdgeInsets.symmetric(horizontal: 7),
+                        borderRadius: BorderRadius.circular(13)),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
                   ),
                   child: const Row(
                     //spaceEvenly: 요소들을 균등하게 배치하는 속성
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 18,
-                      ),
                       NanumTitleText(
-                        text: '오늘기록  ',
+                        text: '오늘기록',
                         fontSize: 12,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
@@ -155,8 +159,11 @@ class _SymptomState extends State<Symptom> {
                 ]))
             : Container(
                 padding: const EdgeInsets.only(bottom: 15),
-                child:
-                    const Center(child: NanumBodyText(text: '오늘의 증상을 기록해보세요!')))
+                child: const Center(
+                    child: NanumBodyText(
+                  text: '오늘의 증상을 기록해보세요!',
+                  color: Colors.grey,
+                )))
       ]),
     );
   }
@@ -170,12 +177,13 @@ class _SymptomState extends State<Symptom> {
       width: screenWidth * 0.17,
       height: screenHeight * 0.035,
       decoration: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(550)),
+          color: const Color.fromARGB(200, 244, 244, 244),
+          borderRadius: BorderRadius.circular(550)),
       child: Text(
         symptomList[index],
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: "NotoSansKR",
-            color: Colors.white,
+            color: const Color.fromRGBO(96, 96, 96, 1),
             fontSize: 11,
             fontWeight: FontWeight.bold),
       ),

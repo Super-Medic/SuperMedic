@@ -40,7 +40,7 @@ class BloodSugar extends StatelessWidget {
                     children: [
                       Container(
                         margin: AppTheme.widgetpadding,
-                        padding: const EdgeInsets.only(left: 15, top: 8),
+                        padding: const EdgeInsets.only(left: 5, top: 8),
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
@@ -50,14 +50,21 @@ class BloodSugar extends StatelessWidget {
                                       const BloodSugardetailPage()),
                             );
                           },
-                          child: const Row(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              NanumTitleText(
+                              Image.asset(
+                                'assets/images/BloodSugar.png',
+                                width: 30,
+                                height: 30,
+                              ),
+                              const SizedBox(width: 7),
+                              const NanumTitleText(
                                 text: '혈당',
-                                fontSize: 22,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.chevron_right,
                                 weight: 900,
                                 color: Colors.black,
@@ -80,22 +87,19 @@ class BloodSugar extends StatelessWidget {
                           style: TextButton.styleFrom(
                             backgroundColor: CommonColor.buttoncolor,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                            padding: const EdgeInsets.symmetric(horizontal: 7),
+                                borderRadius: BorderRadius.circular(13)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 7, horizontal: 15),
                           ),
                           child: const Row(
                             //spaceEvenly: 요소들을 균등하게 배치하는 속성
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 18,
-                              ),
                               NanumTitleText(
-                                text: '오늘기록  ',
+                                text: '오늘기록',
                                 fontSize: 12,
                                 color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
                             ],
                           ),

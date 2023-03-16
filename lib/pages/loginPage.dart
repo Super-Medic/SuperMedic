@@ -4,9 +4,7 @@ import 'package:super_medic/function/kakao_login.dart';
 import 'package:super_medic/function/apple_login.dart';
 import 'package:super_medic/pages/joinPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
@@ -39,12 +37,21 @@ class LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) {
             return CupertinoAlertDialog(
-              title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR',)),
-              content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR',)),
+              title: Text(title!,
+                  style: const TextStyle(
+                    fontFamily: 'NotoSansKR',
+                  )),
+              content: Text(message!,
+                  style: const TextStyle(
+                    fontFamily: 'NotoSansKR',
+                  )),
               actions: [
                 CupertinoDialogAction(
                     isDefaultAction: true,
-                    child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR',)),
+                    child: const Text("확인",
+                        style: TextStyle(
+                          fontFamily: 'NotoSansKR',
+                        )),
                     onPressed: () {
                       Navigator.pop(context);
                     })
@@ -67,14 +74,15 @@ class LoginPageState extends State<LoginPage> {
               height: screenHeight * 0.2,
             ),
             const Expanded(flex: 3, child: SizedBox()),
-            Expanded(
-                flex: 1,
+            SizedBox(
+                height: 35,
+                width: 35,
                 child: isLoading
                     ? const CircularProgressIndicator(
                         color: Colors.green,
                       )
                     : const SizedBox()),
-            const Expanded(flex: 4, child: SizedBox()),
+            const Expanded(flex: 3, child: SizedBox()),
             InkWell(
               child: Image.asset(
                 imagekakaoLoginName,

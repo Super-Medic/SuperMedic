@@ -139,7 +139,11 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: Text(e, style:TextStyle(fontFamily: "NotoSansKRr")),
+                                    child: NanumTitleText(
+                                      text: e,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -193,37 +197,54 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                 averageValue.length != 0
                     ? aver == null
                         ? const SizedBox(
-                            child: NanumTitleText(text: '데이터가 존재하지 않아요.'))
+                            child: NanumBodyText(
+                            text: '데이터가 존재하지 않아요.',
+                            color: Colors.grey,
+                          ))
                         : SizedBox(
                             child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ttime != null
-                                  ? Row(children: [
-                                      NanumBodyText(text: ttime),
-                                      NanumTitleText(
-                                        text: ' $aver',
-                                        fontSize: 20,
-                                      ),
-                                      const NanumBodyText(text: 'mg/dL')
-                                    ])
-                                  : selectedAverage == '공복 평균 혈당'
-                                      ? Row(children: [
-                                          const NanumBodyText(text: '공복 혈당'),
+                                  ? Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.baseline,
+                                      textBaseline: TextBaseline.alphabetic,
+                                      children: [
+                                          NanumBodyText(text: ttime),
                                           NanumTitleText(
                                             text: ' $aver',
                                             fontSize: 20,
                                           ),
                                           const NanumBodyText(text: 'mg/dL')
                                         ])
-                                      : Row(children: [
-                                          const NanumBodyText(text: '식후 혈당'),
-                                          NanumTitleText(
-                                            text: ' $aver',
-                                            fontSize: 20,
-                                          ),
-                                          const NanumBodyText(text: 'mg/dL')
-                                        ]),
+                                  : selectedAverage == '공복 평균 혈당'
+                                      ? Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.baseline,
+                                          textBaseline: TextBaseline.alphabetic,
+                                          children: [
+                                              const NanumBodyText(
+                                                  text: '공복 혈당'),
+                                              NanumTitleText(
+                                                text: ' $aver',
+                                                fontSize: 20,
+                                              ),
+                                              const NanumBodyText(text: 'mg/dL')
+                                            ])
+                                      : Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.baseline,
+                                          textBaseline: TextBaseline.alphabetic,
+                                          children: [
+                                              const NanumBodyText(
+                                                  text: '식후 혈당'),
+                                              NanumTitleText(
+                                                text: ' $aver',
+                                                fontSize: 20,
+                                              ),
+                                              const NanumBodyText(text: 'mg/dL')
+                                            ]),
                               const SizedBox(height: 10),
                               // const NanumText(
                               //   text: '혈당 수치가 높아지고 있어요 주의해주세요.',
@@ -232,7 +253,8 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                             ],
                           ))
                     : const SizedBox(
-                        child: NanumTitleText(text: '데이터가 존재하지 않아요.'),
+                        child: NanumBodyText(
+                            text: '데이터가 존재하지 않아요.', color: Colors.grey),
                       ),
                 Center(
                   child: TextButton(
@@ -246,13 +268,14 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                       style: TextButton.styleFrom(
                         backgroundColor: CommonColor.buttoncolor,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                       ),
                       child: const NanumTitleText(
                         text: '기록하기',
                         fontSize: 15,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       )),
                 )
               ],

@@ -165,7 +165,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                                         ...maxbloodpressureItem.map((e) => Text(
                                               e,
                                               style: const TextStyle(
-                                                fontFamily: 'NotoSansKR',
+                                                  fontFamily: 'NotoSansKR',
                                                   color: Colors.grey,
                                                   fontSize: 32),
                                             ))
