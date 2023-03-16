@@ -93,7 +93,7 @@ class _MedicationTimeState extends State<MedicationTime> {
                         for (var check in _medicineTake.checkList)
                           MediCheck(
                               items: check as Map<bool, List<Check>>, pad: 15),
-                        SizedBox(height: screenHeight * 0.025),
+                        SizedBox(height: screenHeight * 0.05),
                       ],
                     ),
                   ),

@@ -227,48 +227,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                 },
               ),
               const SizedBox(height: 8.0),
-              // GestureDetector(
-              //   onVerticalDragStart: (details) {
-              //     print(1);
-              //     if (formator[_calendarFormat] > 0) {
-              //       setState(() {
-              //         _calendarFormat =
-              //             formatorRev[formator[_calendarFormat] - 1];
-              //       });
-              //     }
-              //   },
-              //   // onVerticalDragDown: (details) {
-              //   //   print(2);
-              //   //   if (formator[_calendarFormat] < 2) {
-              //   //     setState(() {
-              //   //       _calendarFormat =
-              //   //           formatorRev[formator[_calendarFormat] + 1];
-              //   //     });
-              //   //   }
-              //   // },
-              //   // behavior: HitTestBehavior.deferToChild,
-              //   // onVerticalDragUpdate: (details) {
-              //   //   if (details.delta.dy > 0) {
-              //   //     print("1");
-              //   //   }
-              //   //   if (details.delta.dy < 0) {
-              //   //     print("2");
-              //   //     if (formator[_calendarFormat] > 0) {
-              //   //       setState(() {
-              //   //         _calendarFormat =
-              //   //             formatorRev[formator[_calendarFormat] - 1];
-              //   //       });
-              //   //     }
-              //   //   }
-              //   // },
-              //   behavior: HitTestBehavior.opaque,
-              //   child: Divider(
-              //     thickness: 3,
-              //     indent: MediaQuery.of(context).size.width * 0.4,
-              //     endIndent: MediaQuery.of(context).size.width * 0.4,
-              //     color: Colors.grey[400],
-              //   ),
-              // ),
               Divider(
                 thickness: 3,
                 indent: MediaQuery.of(context).size.width * 0.4,
@@ -276,78 +234,101 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                 color: Colors.grey[400],
               ),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
+                child: GestureDetector(
+                  onPanUpdate: (details) {
+                    if (details.delta.dy > 0) {
+                      print("1");
+                      if (formator[_calendarFormat] > 0) {
+                        setState(() {
+                          _calendarFormat =
+                              formatorRev[formator[_calendarFormat] - 1];
+                        });
+                      }
+                    }
+                    if (details.delta.dy < 0) {
+                      print("2");
+                      if (formator[_calendarFormat] < 2) {
+                        setState(() {
+                          _calendarFormat =
+                              formatorRev[formator[_calendarFormat] + 1];
+                        });
+                      }
+                    }
+                  },
+                  behavior: HitTestBehavior.translucent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.7),
+                          blurRadius: 20.0,
+                          spreadRadius: 0.0,
+                          offset: const Offset(0, 7),
+                        )
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.7),
-                        blurRadius: 20.0,
-                        spreadRadius: 0.0,
-                        offset: const Offset(0, 7),
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 30.0,
-                          // vertical: 4.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 30.0,
+                            // vertical: 4.0,
+                          ),
+                          padding: const EdgeInsets.only(top: 40),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: NanumTitleText(
+                            text: DateFormat('M월 d일 EEEE', 'ko_KR')
+                                .format(_focusedDay),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        padding: const EdgeInsets.only(top: 40),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        child: NanumTitleText(
-                          text: DateFormat('M월 d일 EEEE', 'ko_KR')
-                              .format(_focusedDay),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Expanded(
-                        child: ValueListenableBuilder<List<List<Check>>>(
-                          valueListenable: _selectedEvents,
-                          builder: (context, value, _) {
-                            _selectedEvents.value =
-                                _getEventsForDay(_focusedDay);
+                        Expanded(
+                          child: ValueListenableBuilder<List<List<Check>>>(
+                            valueListenable: _selectedEvents,
+                            builder: (context, value, _) {
+                              _selectedEvents.value =
+                                  _getEventsForDay(_focusedDay);
 
-                            return ListView.builder(
-                              itemCount: value.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 12.0,
-                                    vertical: 4.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                  child: ListTile(
-                                    onTap: () {},
-                                    title: _focusedDay ==
-                                            DateTime.utc(
-                                                DateTime.now().year,
-                                                DateTime.now().month,
-                                                DateTime.now().day)
-                                        ? MediCheck(
-                                            items: {true: value[index]},
-                                            pad: 10)
-                                        : CalMediCheck(
-                                            items: value[index], pad: 10),
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                              return ListView.builder(
+                                itemCount: value.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 12.0,
+                                      vertical: 4.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                    child: ListTile(
+                                      onTap: () {},
+                                      title: _focusedDay ==
+                                              DateTime.utc(
+                                                  DateTime.now().year,
+                                                  DateTime.now().month,
+                                                  DateTime.now().day)
+                                          ? MediCheck(
+                                              items: {true: value[index]},
+                                              pad: 10)
+                                          : CalMediCheck(
+                                              items: value[index], pad: 10),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

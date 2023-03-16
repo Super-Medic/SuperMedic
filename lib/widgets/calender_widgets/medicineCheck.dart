@@ -196,9 +196,6 @@ class _MediCheckState extends State<MediCheck> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.pad == 10
-                    ? Container()
-                    : const Padding(padding: EdgeInsets.only(top: 10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
