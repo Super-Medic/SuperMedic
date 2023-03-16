@@ -17,12 +17,16 @@ class BloodPressureTimeline extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(color: CommonColor.widgetbackgroud),
       child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DeliveryProcesses(processes: data.deliveryProcesses),
-          ],
-        ),
+        child: timeLineValue.isEmpty
+            ? Container(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: const NanumBodyText(text: '오늘의 혈압을 기록해보세요!'))
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _DeliveryProcesses(processes: data.deliveryProcesses),
+                ],
+              ),
       ),
     );
   }
@@ -123,7 +127,7 @@ class _InnerTimeline extends StatelessWidget {
               messages[index - 1].towidget()
             ]); //Row(children: [Text(messages[index - 1].toString())]);
           },
-          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 121.0,
+          itemExtentBuilder: (_, index) => isEdgeIndex(index) ? 5.0 : 140.0,
           itemCount: messages.length + 1,
         ),
       ),

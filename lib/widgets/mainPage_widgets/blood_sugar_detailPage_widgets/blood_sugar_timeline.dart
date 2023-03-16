@@ -16,12 +16,16 @@ class BloodSugarTimeline extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(color: CommonColor.widgetbackgroud),
       child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DeliveryProcesses(processes: data.deliveryProcesses),
-          ],
-        ),
+        child: timeLineValue.isEmpty
+            ? Container(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: const NanumBodyText(text: '오늘의 혈당을 기록해보세요!'))
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _DeliveryProcesses(processes: data.deliveryProcesses),
+                ],
+              ),
       ),
     );
   }
@@ -95,8 +99,6 @@ class _DeliveryProcesses extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 //Timeline 사이 글작성
@@ -230,7 +232,7 @@ class _DeliveryMessageSugar {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Row(
                 children: [
                   NanumText(text: checkbutton),
