@@ -127,9 +127,23 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                         child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          NanumTitleText(text: '최고 ${maxBlood}mmHg'),
+                          Row(children: [
+                            const NanumBodyText(text: '최고'),
+                            NanumTitleText(
+                              text: ' $maxBlood',
+                              fontSize: 20,
+                            ),
+                            const NanumBodyText(text: 'mmHg')
+                          ]),
                           const SizedBox(height: 10),
-                          NanumTitleText(text: '최저 ${minBlood}mmHg'),
+                          Row(children: [
+                            const NanumBodyText(text: '최저'),
+                            NanumTitleText(
+                              text: ' $minBlood',
+                              fontSize: 20,
+                            ),
+                            const NanumBodyText(text: 'mmHg')
+                          ]),
                           const SizedBox(height: 10),
                           // const NanumText(
                           //   text: '최근 혈압이 높아지고 있어요 고혈압이 의심돼요.',
