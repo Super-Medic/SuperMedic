@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/pages/lockPage.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -113,20 +114,71 @@ class _MyPage extends State<MyPage> {
                           )
                         ],
                       ),
-                      // IconButton(
-                      //     iconSize: screenWidth * 0.1,
-                      //     onPressed: () {},
-                      //     icon: const Icon(Icons.chevron_right),
-                      //     color: Colors.black),
+                      IconButton(
+                          iconSize: screenWidth * 0.1,
+                          onPressed: () {},
+                          icon: const Icon(Icons.chevron_right),
+                          color: Colors.black),
                     ],
                   ),
                 ),
               ),
-
+              // Container(
+              //   height: 0.7,
+              //   color: Colors.grey,
+              // ),
               Container(
-                height: screenHeight * 0.06,
-                // color: Colors.grey,
+                padding: AppTheme.widgetpadding,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: CommonColor.widgetbackgroud,
+                  // borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: CommonColor.boxshadowcolor.withOpacity(0.02),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ApplicationLock()));
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(color: Colors.white),
+                        padding: AppTheme.widgetpadding,
+                        height: screenHeight * 0.07,
+                        child: Row(children: [
+                          Icon(
+                            Icons.lock_outline,
+                            size: screenWidth * 0.06,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: screenWidth * 0.03),
+                          const NanumText(
+                            text: "비밀번호 잠금",
+                            color: Colors.black,
+                            fontSize: 13,
+                          )
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+
+              // Container(
+              //   height: screenHeight * 0.06,
+              //   // color: Colors.grey,
+              // ),
               Container(
                 height: 0.7,
                 color: Colors.grey,
