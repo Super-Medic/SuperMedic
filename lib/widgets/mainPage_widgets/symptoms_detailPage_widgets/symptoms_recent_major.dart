@@ -199,24 +199,24 @@ class _SymptomsRecentMajorState extends State<SymptomsRecentMajor> {
                         ),
                       ),
                     ])),
-            Container(
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.01, 0, 0, 0),
-              child: Center(
-                child: TextButton(
-                    onPressed: () => {removeSymptom(_homeProvider)},
-                    style: TextButton.styleFrom(
-                      backgroundColor: CommonColor.buttoncolor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                    ),
-                    child: const NanumTitleText(
-                      text: '삭제하기',
-                      fontSize: 13,
-                      color: Colors.white,
-                    )),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.fromLTRB(screenWidth * 0.01, 0, 0, 0),
+            //   child: Center(
+            //     child: TextButton(
+            //         onPressed: () => {removeSymptom(_homeProvider)},
+            //         style: TextButton.styleFrom(
+            //           backgroundColor: CommonColor.buttoncolor,
+            //           shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(5)),
+            //           padding: const EdgeInsets.symmetric(horizontal: 15),
+            //         ),
+            //         child: const NanumTitleText(
+            //           text: '삭제하기',
+            //           fontSize: 13,
+            //           color: Colors.white,
+            //         )),
+            //   ),
+            // ),
             SizedBox(height: screenHeight * 0.01),
           ],
         ));

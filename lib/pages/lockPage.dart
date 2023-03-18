@@ -116,7 +116,7 @@ class _ApplicationLock extends State<ApplicationLock> {
         style: style,
         onPressed: _homeProvider.applockValue!.inputPwLength == 4
             ? () async {
-                print(_homeProvider.applockValue!.applockpw);
+                
                 // Navigator.pop(context);
               }
             : null,
