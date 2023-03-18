@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/model.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_pressure.dart';
@@ -22,6 +23,7 @@ class HomeProvider extends ChangeNotifier {
   MedicineModel? _medicineValue;
   DiagnosisModel? _diagnosisValue;
   LoginModel? _loginValue;
+  final AppLockModel _applockValue = AppLockModel();
 
   List<BloodPressureModel> get bloodPressureValue => _bloodPressureValue;
   List<BloodSugarModel> get bloodSugarValue => _bloodSugarValue;
@@ -33,6 +35,7 @@ class HomeProvider extends ChangeNotifier {
   MedicineModel? get medicineValue => _medicineValue;
   DiagnosisModel? get diagnosisValue => _diagnosisValue;
   LoginModel? get loginValue => _loginValue;
+  AppLockModel? get applockValue => _applockValue;
 
   int _bloodpressureCount = -1;
   int get bloodpressureCount => _bloodpressureCount;
@@ -222,6 +225,19 @@ class HomeProvider extends ChangeNotifier {
 
   updateCurrentSugarAfterValue(int index) {
     _bloodsugarCountAfter = index;
+    notifyListeners();
+  }
+
+  Future<void> updateApplockValue(String type, String value) async {
+    switch (type) {
+      case "input":
+        _applockValue.inputPw(value);
+        break;
+
+      case "remove":
+        _applockValue.removePw();
+        break;
+    }
     notifyListeners();
   }
 }
