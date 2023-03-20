@@ -77,142 +77,129 @@ class _ApplicationLock extends State<ApplicationLock> {
               toolbarHeight: 60,
               backgroundColor: Colors.white,
               elevation: 0.0),
-          body: Container(
-            height: screenHeight,
-            // width: screenWidth,
-            decoration: const BoxDecoration(color: Colors.white),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    // height: screenHeight / 1.5,
-                    // decoration: const BoxDecoration(color: Colors.pink),
-                    child: Column(
-                      children: [
-                        Image.asset("assets/images/main_logo.png",
-                            height: screenHeight * 0.3,
-                            width: screenWidth * 0.4),
-                        NanumTitleText(
-                          text: _applockValue.firstInput == false
-                              ? "비밀번호 입력"
-                              : "비밀번호 확인",
-                          fontSize: 20,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        NanumTitleText(
-                          text: _applockValue.firstInput == false
-                              ? "비밀번호를 입력해주세요"
-                              : "비밀번호 확인을 위해 재입력 해주세요",
-                          color: Colors.grey,
-                          fontSize: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            _applockValue.tmpapplockpw.length,
-                            (index) {
-                              return passwdUI(index);
-                            },
-                          ),
-                        ),
-                      ],
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 5,
+                child: Column(
+                  children: [
+                    Image.asset("assets/images/main_logo.png",
+                        height: screenHeight * 0.3, width: screenWidth * 0.4),
+                    NanumTitleText(
+                      text: _applockValue.firstInput == false
+                          ? "비밀번호 입력"
+                          : "비밀번호 확인",
+                      fontSize: 20,
                     ),
-                  ),
+                    SizedBox(height: screenHeight * 0.01),
+                    NanumTitleText(
+                      text: _applockValue.firstInput == false
+                          ? "비밀번호를 입력해주세요"
+                          : "비밀번호 확인을 위해 재입력 해주세요",
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        _applockValue.tmpapplockpw.length,
+                        (index) {
+                          return passwdUI(index);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                // SizedBox(height: screenHeight * 0.1),
-                // numpad('1')
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    // height: (screenHeight / 2),
-                    // decoration: const BoxDecoration(color: Colors.blue),
-                    child: Column(children: [
-                      Expanded(
-                        flex: 1,
-                        child: Row(children: [
-                          numpad("input", "1"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "2"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "3")
-                        ]),
-                      ),
-                      numpadSeperateList("horizon"),
-                      Expanded(
-                        flex: 1,
-                        child: Row(children: [
-                          numpad("input", "4"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "5"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "6")
-                        ]),
-                      ),
-                      numpadSeperateList("horizon"),
-                      Expanded(
-                        flex: 1,
-                        child: Row(children: [
-                          numpad("input", "7"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "8"),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "9")
-                        ]),
-                      ),
-                      numpadSeperateList("horizon"),
-                      Expanded(
-                        flex: 1,
-                        child: Row(children: [
-                          numpad("nothing", " "),
-                          numpadSeperateList("vertical"),
-                          numpad("input", "0"),
-                          numpadSeperateList("vertical"),
-                          numpad("remove", "지우기")
-                        ]),
-                      ),
+              ),
+              // SizedBox(height: screenHeight * 0.1),
+              // numpad('1')
+              Expanded(
+                flex: 4,
+                child: Column(children: [
+                  Expanded(
+                    flex: 1,
+                    child: Row(children: [
+                      numpad("input", "1"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "2"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "3")
                     ]),
                   ),
-                ),
-              ],
-            ),
+                  numpadSeperateList("horizon"),
+                  Expanded(
+                    flex: 1,
+                    child: Row(children: [
+                      numpad("input", "4"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "5"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "6")
+                    ]),
+                  ),
+                  numpadSeperateList("horizon"),
+                  Expanded(
+                    flex: 1,
+                    child: Row(children: [
+                      numpad("input", "7"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "8"),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "9")
+                    ]),
+                  ),
+                  numpadSeperateList("horizon"),
+                  Expanded(
+                    flex: 1,
+                    child: Row(children: [
+                      numpad("nothing", " "),
+                      numpadSeperateList("vertical"),
+                      numpad("input", "0"),
+                      numpadSeperateList("vertical"),
+                      numpad("remove", "지우기")
+                    ]),
+                  ),
+                ]),
+              ),
+              TextButton(
+                  style: style,
+                  onPressed: _applockValue.inputPwLength == 4
+                      ? () {
+                          _applockValue.firstInput == false
+                              // 비밀번호 1차만 입력될 경우
+                              ? setState(() {
+                                  updateApplockValue("firstpwcompl", "");
+                                })
+                              // 비밀번호 2차까지 입력될 경우
+                              : setState(() {
+                                  updateApplockValue("pwcmp", "");
+                                  // 1차, 2차 비밀번호가 다를 경우
+                                  if (_applockValue.verifyCompl == false) {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (context) {
+                                        return const PopUp();
+                                      },
+                                    );
+                                    updateApplockValue("init", "");
+                                  }
+                                  // 비밀번호 설정이 완료된 경우
+                                  else {
+                                    Navigator.of(context).pop();
+                                  }
+                                });
+                        }
+                      : null,
+                  child: NanumTitleText(
+                    text: _applockValue.firstInput == false ? '다음' : "저장",
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ],
           ),
-          bottomSheet: TextButton(
-              style: style,
-              onPressed: _applockValue.inputPwLength == 4
-                  ? () {
-                      _applockValue.firstInput == false
-                          // 비밀번호 1차만 입력될 경우
-                          ? setState(() {
-                              updateApplockValue("firstpwcompl", "");
-                            })
-                          // 비밀번호 2차까지 입력될 경우
-                          : setState(() {
-                              updateApplockValue("pwcmp", "");
-                              // 1차, 2차 비밀번호가 다를 경우
-                              if (_applockValue.verifyCompl == false) {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) {
-                                    return const PopUp();
-                                  },
-                                );
-                                updateApplockValue("init", "");
-                              }
-                              // 비밀번호 설정이 완료된 경우
-                              else {
-                                Navigator.of(context).pop();
-                              }
-                            });
-                    }
-                  : null,
-              child: NanumTitleText(
-                text: _applockValue.firstInput == false ? '다음' : "저장",
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              )),
+          // bottomSheet:
         ),
       ),
     );
