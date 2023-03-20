@@ -13,7 +13,7 @@ class NanumTitleText extends StatelessWidget {
     this.fontSize = 17,
     this.textAlign = TextAlign.center,
     this.color = Colors.black,
-    this.fontWeight = FontWeight.normal,
+    this.fontWeight = FontWeight.bold,
     this.maxLine = 1,
   }) : super(key: key);
 

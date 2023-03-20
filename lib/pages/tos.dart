@@ -67,12 +67,7 @@ class _TOSPage extends State<TOSPage> {
                 const SizedBox(
                   height: 25.0,
                 ),
-                const NanumTitleText(
-                  text: '약관 내용에 동의해주세요',
-                  fontSize: 25.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+                const NanumTitleText(text: '약관 내용에 동의해주세요', fontSize: 25.0),
                 const SizedBox(
                   height: 60.0,
                 ),
@@ -138,11 +133,8 @@ class _TOSPage extends State<TOSPage> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    child: const NanumTitleText(
-                      text: '다음',
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    child:
+                        const NanumTitleText(text: '다음', color: Colors.white),
                   ),
                 )),
                 const Padding(
@@ -155,7 +147,7 @@ class _TOSPage extends State<TOSPage> {
             Opacity(
               opacity: 0.5, //0.5만큼~
               child: isLoading
-                  ? ModalBarrier(dismissible: false, color: Colors.black)
+                  ? const ModalBarrier(dismissible: false, color: Colors.black)
                   : null, //클릭 못하게~
             ),
             Center(

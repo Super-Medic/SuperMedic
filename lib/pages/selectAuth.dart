@@ -56,12 +56,7 @@ class _AuthPage extends State<AuthPage> {
             const SizedBox(
               height: 25.0,
             ),
-            const NanumTitleText(
-              text: '인증서를 선택해주세요',
-              fontSize: 25.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+            const NanumTitleText(text: '인증서를 선택해주세요', fontSize: 25.0),
             const SizedBox(
               height: 32.0,
             ),
@@ -114,11 +109,8 @@ class _AuthPage extends State<AuthPage> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: const NanumTitleText(
-                  text: '기록 가져오기',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                child:
+                    const NanumTitleText(text: '기록 가져오기', color: Colors.white),
               ),
             )),
             const Padding(

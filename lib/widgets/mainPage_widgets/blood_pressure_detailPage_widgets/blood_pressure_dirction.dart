@@ -23,11 +23,7 @@ class _BloodPressureDirction extends State<BloodPressureDirction> {
           children: [
             Container(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: const NanumTitleText(
-                text: '혈압 추이',
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+              child: const NanumTitleText(text: '혈압 추이', fontSize: 15),
             ),
             Container(
               padding: const EdgeInsets.only(left: 5, right: 5),

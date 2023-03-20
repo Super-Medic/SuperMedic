@@ -92,13 +92,8 @@ class PopUp extends StatelessWidget {
         height: 50,
         child: Column(
           children: [
-            NanumTitleText(
-              text: '인증 요청이 종료 되었습니다',
-              fontWeight: FontWeight.bold,
-            ),
-            NanumBodyText(
-              text: '다시 시도해주세요',
-            ),
+            NanumTitleText(text: '인증 요청이 종료 되었습니다'),
+            NanumBodyText(text: '다시 시도해주세요'),
           ],
         ),
       ),

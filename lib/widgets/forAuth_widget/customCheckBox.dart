@@ -82,10 +82,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                         backgroundColor: CommonColor.background,
                         elevation: 0.0,
                         title: NanumTitleText(
-                          text: widget.item.data,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            text: widget.item.data, fontSize: 15),
                         leading: IconButton(
                           onPressed: () {
                             Navigator.pop(context);

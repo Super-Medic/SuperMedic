@@ -33,11 +33,9 @@ class _CalMediCheckState extends State<CalMediCheck> {
           Container(
             padding: const EdgeInsets.only(top: 8, left: 10),
             child: NanumTitleText(
-              text: widget.items[0].medicine,
-              fontSize: 20,
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
+                text: widget.items[0].medicine,
+                fontSize: 20,
+                color: Colors.green),
           ),
           Container(
             padding: const EdgeInsets.only(top: 8),

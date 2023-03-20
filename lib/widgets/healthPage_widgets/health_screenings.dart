@@ -138,8 +138,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           NanumTitleText(
                             text: '건강검진',
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20
                           ),
                           // Icon(
                           //   Icons.chevron_right,
@@ -172,8 +171,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                                   .screeningList![
                                       screenings.screeningList!.length - 1]
                                   .result as String,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold)
+                              color: Colors.red)
                         ],
                       )),
                 ],
@@ -413,8 +411,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                   margin: AppTheme.totalpadding,
                   child: const NanumTitleText(
                     text: '건강검진',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20
                   ),
                 ),
                 Center(

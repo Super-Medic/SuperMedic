@@ -60,11 +60,7 @@ class BloodPressure extends StatelessWidget {
                                 height: 30,
                               ),
                               const SizedBox(width: 7),
-                              const NanumTitleText(
-                                text: '혈압',
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              const NanumTitleText(text: '혈압', fontSize: 20),
                               const Icon(
                                 Icons.chevron_right,
                                 weight: 900,
@@ -103,11 +99,9 @@ class BloodPressure extends StatelessWidget {
                                 size: 20,
                               ),
                               NanumTitleText(
-                                text: '오늘기록  ',
-                                fontSize: 12,
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  text: '오늘기록  ',
+                                  fontSize: 12,
+                                  color: Colors.green),
                             ],
                           ),
                         ),
