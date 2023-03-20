@@ -107,6 +107,8 @@ class _JointosPage extends State<JointosPage> {
             const NanumTitleText(
               text: '약관 내용에 동의해주세요',
               fontSize: 20.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
             const SizedBox(
               height: 30.0,
@@ -176,7 +178,11 @@ class _JointosPage extends State<JointosPage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                child: const NanumTitleText(text: '확인', color: Colors.white),
+                child: const NanumTitleText(
+                  text: '확인',
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )),
             const Padding(

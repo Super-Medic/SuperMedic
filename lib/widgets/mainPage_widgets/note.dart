@@ -82,11 +82,11 @@ class _NoteState extends State<Note> {
                       ),
                       const SizedBox(width: 7),
                       const NanumTitleText(text: '노트', fontSize: 20),
-                      const Icon(
-                        Icons.chevron_right,
-                        weight: 900,
-                        color: Colors.black,
-                      ),
+                      // const Icon(
+                      //   Icons.chevron_right,
+                      //   weight: 900,
+                      //   color: Colors.black,
+                      // ),
                     ],
                   ),
                 ),

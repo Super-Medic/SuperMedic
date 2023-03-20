@@ -72,7 +72,7 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
                     Container(
                       padding: const EdgeInsets.only(top: 10),
                       child: const NanumTitleText(
-                        text: '혈당 추이',
+                        text: '혈당 기록',
                         fontSize: 15,
                       ),
                     ),

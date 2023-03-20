@@ -34,35 +34,27 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
     );
 
     return Scaffold(
-      backgroundColor: CommonColor.background,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50.0),
-        child: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+      backgroundColor: Colors.green,
+      body: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: CommonColor.background,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50.0),
+            child: AppBar(
+              leading: null,
+              toolbarHeight: 48,
+              backgroundColor: CommonColor.background, //배경 색
+              elevation: 0.0, //
             ),
-            //replace with our own icon data.
           ),
-          toolbarHeight: 48,
-          backgroundColor: CommonColor.background, //배경 색
-          elevation: 0.0, //
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 20),
-        child: Form(
-          key: formKey,
-          child: Padding(
-            padding: AppTheme.totalpadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Column(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 20),
+            child: Form(
+              key: formKey,
+              child: Padding(
+                padding: AppTheme.totalpadding,
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     NanumTitleText(text: '보유 질환을 선택해주세요', fontSize: 25.0),
@@ -80,56 +72,27 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
                     // ),
                   ],
                 ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: screenHeight * 0.15,
-                      ),
-
-                      Wrap(
-                        direction: Axis.horizontal,
-                        // alignment: WrapAlignment.start,
-                        spacing: screenWidth * 0.03,
-                        runSpacing: screenHeight * 0.005,
-
-                        alignment: WrapAlignment.spaceBetween,
-                        children: List.generate(
-                          tag.length,
-                          (index) {
-                            return buildTags(context, index);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: screenHeight * 0.005,
-                      ),
-                      // const TotalDisease(),
-                      SizedBox(
-                        height: screenHeight * 0.2,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: ElevatedButton(
+            style: style,
+            onPressed: selected == true
+                ? () {
+                    saveInitChronicDisease(tag);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MainPage()),
+                    );
+                  }
+                : null,
+            child: const NanumTitleText(
+              text: '다음',
+              color: Colors.white,
+              fontSize: 22,
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: ElevatedButton(
-        style: style,
-        onPressed: selected == true
-            ? () {
-                saveInitChronicDisease(tag);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainPage()),
-                );
-              }
-            : null,
-        child: const NanumTitleText(
-            text: '다음', color: Colors.white, fontWeight: FontWeight.normal),
       ),
     );
   }

@@ -14,6 +14,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:super_medic/widgets/calender_widgets/utils.dart';
 import 'package:super_medic/provider/medicine_provider.dart';
+import 'package:flutter/services.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print('백 그라운드');
@@ -24,6 +25,7 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 
 // ignore: prefer_const_constructors
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   await dotenv.load(fileName: "assets/config/.env");
@@ -36,6 +38,13 @@ void main() async {
     await storage.deleteAll();
     prefs.setBool('first_run', false);
   }
+
+  // 세로모드 고정
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const RestartWidget(child: MyApp()));
 }
 

@@ -25,50 +25,53 @@ class _SymptomsdetailPage extends State<SymptomsdetailPage> {
     _homeProvider = context.watch<HomeProvider>();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: CommonColor.background,
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-              //replace with our own icon data.
-            ),
-            toolbarHeight: 48,
-            backgroundColor: Colors.white, //배경 색
-            elevation: 0.0, //
+    return Scaffold(
+      backgroundColor: CommonColor.background,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const SymptomsRecentMajor(),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                Container(
-                  padding: AppTheme.detailpadding,
-                  width: double.infinity,
-                  decoration:
-                      const BoxDecoration(color: CommonColor.widgetbackgroud),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: const NanumTitleText(text: '증상 기록'),
-                        ),
-                        const SymptomsTimeline()
-                      ]),
-                ),
-              ],
+          //replace with our own icon data.
+        ),
+        toolbarHeight: 48,
+        backgroundColor: Colors.white, //배경 색
+        elevation: 0.0, //
+      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SymptomsRecentMajor(),
+            SizedBox(
+              height: screenHeight * 0.01,
             ),
-          )),
+            Container(
+              padding: AppTheme.detailpadding,
+              width: double.infinity,
+              decoration:
+                  const BoxDecoration(color: CommonColor.widgetbackgroud),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: const NanumTitleText(
+                        text: '증상 기록',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SymptomsTimeline()
+                  ]),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }
