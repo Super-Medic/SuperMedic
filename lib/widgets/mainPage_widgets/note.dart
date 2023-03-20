@@ -86,11 +86,11 @@ class _NoteState extends State<Note> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
-                      const Icon(
-                        Icons.chevron_right,
-                        weight: 900,
-                        color: Colors.black,
-                      ),
+                      // const Icon(
+                      //   Icons.chevron_right,
+                      //   weight: 900,
+                      //   color: Colors.black,
+                      // ),
                     ],
                   ),
                 ),

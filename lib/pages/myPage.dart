@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
-import 'package:super_medic/provider/bottom_navigation_provider.dart';
+import 'package:super_medic/pages/lockPage.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -45,88 +45,145 @@ class _MyPage extends State<MyPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 60,
-          backgroundColor: CommonColor.background, //배경 색
+          backgroundColor: Colors.white, //배경 색
           elevation: 0.0, //그림자 효과 해제
-          leading: Container(
-            padding: const EdgeInsets.only(left: 10),
-            child: Image.asset(
-              'assets/images/home_logo.png',
-              color: Colors.green,
-            ),
-          ),
-          leadingWidth: 150,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications_none),
-              color: Colors.black,
-              iconSize: 25,
-              onPressed: () => {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.menu),
-              color: Colors.black,
-              iconSize: 25,
-              onPressed: () => {
-                context.read<BottomNavigationProvider>().updateCurrentPage(4)
-              },
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-          ],
+          // leading: Container(
+          //   padding: const EdgeInsets.only(left: 10),
+          //   child: Image.asset(
+          //     'assets/images/home_logo.png',
+          //     color: Colors.green,
+          //   ),
+          // ),
+          // leadingWidth: 150,
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.notifications_none),
+          //     color: Colors.black,
+          //     iconSize: 25,
+          //     onPressed: () => {},
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.menu),
+          //     color: Colors.black,
+          //     iconSize: 25,
+          //     onPressed: () => {
+          //       context.read<BottomNavigationProvider>().updateCurrentPage(4)
+          //     },
+          //   ),
+          //   const SizedBox(
+          //     width: 10,
+          //   ),
+          // ],
         ),
         body: SingleChildScrollView(
-            child: Container(
-          // padding: AppTheme.totalpadding,
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // SizedBox(
-              //   height: screenHeight * 0.01,
-              // ),
               // ignore: unrelated_type_equality_checks
               // First(context),
+              // Container(
+              //   height: 0.7,
+              //   color: Colors.grey,
+              // ),
+
+              Center(
+                child: Container(
+                  width: screenWidth * 0.7,
+                  height: screenHeight * 0.12,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey[200]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: screenWidth * 0.05),
+                          Icon(
+                            Icons.person,
+                            size: screenWidth * 0.1,
+                            color: Colors.black,
+                          ),
+                          SizedBox(width: screenWidth * 0.03),
+                          NanumText(
+                            text: _homeProvider.loginValue!.name,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20,
+                          )
+                        ],
+                      ),
+                      IconButton(
+                          iconSize: screenWidth * 0.1,
+                          onPressed: () {},
+                          icon: const Icon(Icons.chevron_right),
+                          color: Colors.black),
+                    ],
+                  ),
+                ),
+              ),
+              // Container(
+              //   height: 0.7,
+              //   color: Colors.grey,
+              // ),
+              Container(
+                padding: AppTheme.widgetpadding,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: CommonColor.widgetbackgroud,
+                  // borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: CommonColor.boxshadowcolor.withOpacity(0.02),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ApplicationLock()));
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(color: Colors.white),
+                        padding: AppTheme.widgetpadding,
+                        height: screenHeight * 0.07,
+                        child: Row(children: [
+                          Icon(
+                            Icons.lock_outline,
+                            size: screenWidth * 0.06,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: screenWidth * 0.03),
+                          const NanumText(
+                            text: "비밀번호 잠금",
+                            color: Colors.black,
+                            fontSize: 13,
+                          )
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Container(
+              //   height: screenHeight * 0.06,
+              //   // color: Colors.grey,
+              // ),
               Container(
                 height: 0.7,
                 color: Colors.grey,
               ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                      padding: AppTheme.widgetpadding,
-                      height: screenHeight * 0.1,
-                      child: Row(children: [
-                        Icon(
-                          Icons.person,
-                          size: screenWidth * 0.1,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(width: screenWidth * 0.03),
-                        NanumText(
-                          text: _homeProvider.loginValue!.name,
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                        TextButton.icon(
-                            onPressed: () {
-                              print("성공");
-                            },
-                            label: const NanumBodyText(
-                              text: '',
-                            ),
-                            icon: const Icon(
-                              Icons.chevron_right,
-                              weight: 900,
-                              color: Colors.black,
-                            ),
-                            style: TextButton.styleFrom(
-                                iconColor: Colors.green,
-                                foregroundColor: Colors.black)),
-                      ]))),
-              Container(
-                height: 0.7,
-                color: Colors.grey,
-              ),
+              // SizedBox(width: screenWidth * 0.03),
               Container(
                 padding: AppTheme.widgetpadding,
                 width: double.infinity,
@@ -169,10 +226,10 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    Container(
-                      height: 0.4,
-                      color: Colors.grey,
-                    ),
+                    // Container(
+                    //   height: 0.4,
+                    //   color: Colors.grey,
+                    // ),
                     GestureDetector(
                       onTap: () {
                         webView("개인정보(민감정보) 수집 및 이용 동의",
@@ -197,10 +254,10 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    Container(
-                      height: 0.4,
-                      color: Colors.grey,
-                    ),
+                    // Container(
+                    //   height: 0.4,
+                    //   color: Colors.grey,
+                    // ),
                     GestureDetector(
                       onTap: () {
                         webView("서비스 이용약관",
@@ -225,10 +282,10 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    Container(
-                      height: 0.4,
-                      color: Colors.grey,
-                    ),
+                    // Container(
+                    //   height: screenHeight * 0.005,
+                    //   color: Colors.grey,
+                    // ),
                     GestureDetector(
                       onTap: () {
                         showDialog(
@@ -285,7 +342,7 @@ class _MyPage extends State<MyPage> {
               ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }
