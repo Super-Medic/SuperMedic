@@ -25,7 +25,6 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 
 // ignore: prefer_const_constructors
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   await dotenv.load(fileName: "assets/config/.env");

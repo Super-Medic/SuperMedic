@@ -81,23 +81,24 @@ class MainPageState extends State<MainPage> {
       badge: true,
       sound: true,
     );
-    FirebaseMessaging.instance.getToken().then((token) async {
-      const storage = FlutterSecureStorage();
-      String? val = await storage.read(key: 'LoginUser');
-      if (val != null) {
-        userEmail = LoginModel.fromJson(jsonDecode(val)).email;
-      }
-      http.Response response = await http.post(
-        Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: {'email': userEmail, 'token': token},
-      );
-    });
+    // FirebaseMessaging.instance.getToken().then((token) async {
+    //   const storage = FlutterSecureStorage();
+    //   String? val = await storage.read(key: 'LoginUser');
+    //   if (val != null) {
+    //     userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+    //   }
+    //   print(token);
+    //   http.Response response = await http.post(
+    //     Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //     },
+    //     body: {'email': userEmail, 'token': token},
+    //   );
+    // });
 
     FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
-      print(APNStoken);
+      // print(APNStoken);
     });
 
     ///gives you the message on which user taps
@@ -131,11 +132,16 @@ class MainPageState extends State<MainPage> {
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0: return const HomePage();
-      case 1: return const MedicinePage();
-      case 2: return const HealthPage();
-      case 3: return const MeditalkPage();
-      case 4: return const MyPage();
+      case 0:
+        return const HomePage();
+      case 1:
+        return const MedicinePage();
+      case 2:
+        return const HealthPage();
+      case 3:
+        return const MeditalkPage();
+      case 4:
+        return const MyPage();
     }
     return Container();
   }

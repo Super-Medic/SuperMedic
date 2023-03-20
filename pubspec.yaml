@@ -55,7 +55,6 @@ dependencies:
   container_tab_indicator: ^0.3.0
   dotted_line: ^3.1.0
   nepali_date_picker: ^5.3.1
-  table_calendar: ^3.0.8
   getwidget: ^3.0.1
   flutter_dotenv: ^5.0.2
   image_picker: ^0.8.6+3
@@ -66,6 +65,7 @@ dependencies:
   sign_in_with_apple: ^4.3.0
   flutter_spinkit: ^5.1.0
   flutter_app_lock: ^3.0.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

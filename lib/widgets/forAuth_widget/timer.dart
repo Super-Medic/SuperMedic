@@ -58,7 +58,7 @@ class _OtpTimerState extends State<OtpTimer> {
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               const Icon(
                 Icons.access_alarms,
                 color: Colors.grey,
@@ -66,12 +66,14 @@ class _OtpTimerState extends State<OtpTimer> {
               const SizedBox(
                 width: 5,
               ),
-              NanumBodyText(
-                text: timerText,
-                color: Colors.grey,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
+              Text(timerText,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NotoSansKR',
+                  ),
+                  textScaleFactor: MediaQuery.textScaleFactorOf(context)),
             ],
           ),
         ));
