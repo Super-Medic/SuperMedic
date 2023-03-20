@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'dart:io' show Platform;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/healthPage.dart';
 import 'package:super_medic/pages/HomePage.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +12,6 @@ import 'package:super_medic/pages/meditalkPage.dart';
 import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/widgets/notification/firebase_message.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
 Future<bool> requestPermission(BuildContext context) async {
@@ -81,22 +77,6 @@ class MainPageState extends State<MainPage> {
       badge: true,
       sound: true,
     );
-    // FirebaseMessaging.instance.getToken().then((token) async {
-    //   const storage = FlutterSecureStorage();
-    //   String? val = await storage.read(key: 'LoginUser');
-    //   if (val != null) {
-    //     userEmail = LoginModel.fromJson(jsonDecode(val)).email;
-    //   }
-    //   print(token);
-    //   http.Response response = await http.post(
-    //     Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded',
-    //     },
-    //     body: {'email': userEmail, 'token': token},
-    //   );
-    // });
-
     FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
       // print(APNStoken);
     });
