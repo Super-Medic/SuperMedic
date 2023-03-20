@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:io' show Platform;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -235,8 +235,9 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     _bottomNavigationProvider = context.watch<BottomNavigationProvider>();
-
-    requestPermission(context);
+    if (Platform.isAndroid) {
+      requestPermission(context);
+    }
 
     //뒤로 가기 두 번 클릭 시 어플 종료
     Future<bool> onWillPop() async {
