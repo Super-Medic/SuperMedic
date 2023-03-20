@@ -140,11 +140,8 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: NanumTitleText(
-                                      text: e,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    child:
+                                        NanumTitleText(text: e, fontSize: 15),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -216,10 +213,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                                             text: ttime,
                                           ),
                                           NanumTitleText(
-                                            text: ' $aver',
-                                            fontSize: 34,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                              text: ' $aver', fontSize: 34),
                                           const NanumText(
                                             text: ' ',
                                           ),
@@ -236,10 +230,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                                           children: [
                                               const NanumBodyText(text: '공복'),
                                               NanumTitleText(
-                                                text: ' $aver',
-                                                fontSize: 34,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                                  text: ' $aver', fontSize: 34),
                                               const NanumText(
                                                 text: ' ',
                                               ),
@@ -255,10 +246,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                                           children: [
                                               const NanumBodyText(text: '식후'),
                                               NanumTitleText(
-                                                text: ' $aver',
-                                                fontSize: 34,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                                  text: ' $aver', fontSize: 34),
                                               const NanumText(
                                                 text: ' ',
                                               ),
@@ -295,11 +283,7 @@ class AverageBloodSugarState extends State<AverageBloodSugar> {
                             vertical: 10, horizontal: 22),
                       ),
                       child: const NanumTitleText(
-                        text: '기록하기',
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      )),
+                          text: '기록하기', fontSize: 15, color: Colors.white)),
                 )
               ],
             )

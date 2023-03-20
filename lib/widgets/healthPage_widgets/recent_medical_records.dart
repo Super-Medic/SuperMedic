@@ -48,11 +48,7 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                 Container(
                   padding: const EdgeInsets.only(top: 15),
                   margin: AppTheme.totalpadding,
-                  child: const NanumTitleText(
-                    text: '최근 진료내역',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  child: const NanumTitleText(text: '최근 진료내역', fontSize: 20),
                 ),
                 Center(
                   child: SizedBox(
@@ -116,11 +112,7 @@ class _RecentMedicalRecords extends State<RecentMedicalRecords> {
                 ),
                 icon: const Row(
                   children: [
-                    NanumTitleText(
-                      text: '최근 진료내역',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    NanumTitleText(text: '최근 진료내역', fontSize: 20),
                   ],
                 ),
                 style: TextButton.styleFrom(
@@ -221,11 +213,10 @@ class _DeliveryProcesses extends StatelessWidget {
                           // width: 170,
                           child: Row(children: [
                             NanumTitleText(
-                              text: processes[index].name.split("[")[0],
-                              //style: DefaultTextStyle.of(context).style.copyWith(
-                              fontSize: 12.0,
-                              color: Colors.black,
-                            ),
+                                text: processes[index].name.split("[")[0],
+                                //style: DefaultTextStyle.of(context).style.copyWith(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.normal),
                             NanumBodyText(
                               text: processes[index].type,
                               //style: DefaultTextStyle.of(context).style.copyWith(

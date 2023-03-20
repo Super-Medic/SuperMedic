@@ -27,11 +27,7 @@ class _CustomCheckBoxTitleState extends State<CustomCheckBoxTitle> {
       child: SizedBox(
         width: MediaQuery.of(context).size.width - 30,
         child: GFCheckboxListTile(
-          title: NanumTitleText(
-            text: widget.item.data,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          title: NanumTitleText(text: widget.item.data, color: Colors.white),
           position: GFPosition.start,
           size: 25,
           type: GFCheckboxType.circle,

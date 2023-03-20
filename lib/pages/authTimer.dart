@@ -62,7 +62,6 @@ class _AuthTimer extends State<AuthTimer> {
                   text: '${widget.loginOrgCd} 앱으로\n 간편인증 요청을 보냈어요.',
                   fontSize: 25.0,
                   color: Colors.black,
-                  fontWeight: FontWeight.bold,
                 ),
                 const SizedBox(
                   height: 10,
@@ -143,6 +142,7 @@ class _AuthTimer extends State<AuthTimer> {
                     child: const NanumTitleText(
                       text: '인증 완료 및 데이터 불러오기',
                       color: Colors.white,
+                      fontWeight: FontWeight.normal,
 
                       // fontWeight: FontWeight.bold,
                     ),
@@ -158,7 +158,7 @@ class _AuthTimer extends State<AuthTimer> {
             Opacity(
               opacity: 0.5, //0.5만큼~
               child: isLoading
-                  ? ModalBarrier(dismissible: false, color: Colors.black)
+                  ? const ModalBarrier(dismissible: false, color: Colors.black)
                   : null, //클릭 못하게~
             ),
             Center(
@@ -196,7 +196,6 @@ class PopUp extends StatelessWidget {
           children: [
             NanumTitleText(
               text: '인증이 완료되지 않았어요',
-              fontWeight: FontWeight.bold,
             ),
             NanumBodyText(
               text: '인증이 완료된 후 다시 시도해주세요',

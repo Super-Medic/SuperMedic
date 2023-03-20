@@ -102,8 +102,7 @@ class BloodPressureGraph extends StatelessWidget {
                   height: 10,
                 )
               ])
-            :
-             Container(
+            : Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: const Center(
                     child: NanumBodyText(

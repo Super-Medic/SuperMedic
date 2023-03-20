@@ -25,7 +25,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
   Widget build(BuildContext context) {
     return widget.items.containsKey(true) == true
         ? Container(
-            margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+            margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -40,11 +40,9 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                     Container(
                       padding: const EdgeInsets.only(top: 25, left: 30),
                       child: NanumTitleText(
-                        text: widget.items[true]![0].medicine,
-                        fontSize: 20,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          text: widget.items[true]![0].medicine,
+                          fontSize: 20,
+                          color: Colors.green),
                     ),
                     Container(
                         padding: const EdgeInsets.only(right: 15),
@@ -73,7 +71,10 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(child: Text('삭제', style:TextStyle(fontFamily: "NotoSansKR"))),
+                                child: const Center(
+                                    child: Text('삭제',
+                                        style: TextStyle(
+                                            fontFamily: "NotoSansKR"))),
                               )
                             ];
                           },

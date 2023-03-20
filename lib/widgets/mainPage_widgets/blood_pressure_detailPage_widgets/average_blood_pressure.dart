@@ -90,11 +90,8 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                           items: _average
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
-                                    child: NanumTitleText(
-                                      text: e,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    child:
+                                        NanumTitleText(text: e, fontSize: 15),
                                   ))
                               .toList(),
                           onChanged: (value) {
@@ -140,10 +137,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                                 const NanumBodyText(
                                     text: '최고', color: Colors.green),
                                 NanumTitleText(
-                                  text: ' $maxBlood',
-                                  fontSize: 34,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    text: ' $maxBlood', fontSize: 34),
                                 const NanumText(
                                   text: ' ',
                                 ),
@@ -159,10 +153,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                                 const NanumBodyText(
                                     text: '최저', color: Colors.orange),
                                 NanumTitleText(
-                                  text: ' $minBlood',
-                                  fontSize: 34,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    text: ' $minBlood', fontSize: 34),
                                 const NanumText(
                                   text: ' ',
                                 ),
@@ -205,11 +196,7 @@ class AverageBloodPressureState extends State<AverageBloodPressure> {
                                 vertical: 10, horizontal: 22),
                           ),
                           child: const NanumTitleText(
-                            text: '기록하기',
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          )),
+                              text: '기록하기', fontSize: 15, color: Colors.white)),
                     ],
                   ),
                 )

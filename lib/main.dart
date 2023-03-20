@@ -73,6 +73,12 @@ class MyApp extends StatelessWidget {
             splashColor: Colors.transparent, //버튼 클릭 시 물결 없애기
             highlightColor: Colors.transparent, //버튼 클릭 시 물결 없애기
           ),
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+              child: child!,
+            );
+          },
           localizationsDelegates: const [
             //요일 구하기
             GlobalMaterialLocalizations.delegate,

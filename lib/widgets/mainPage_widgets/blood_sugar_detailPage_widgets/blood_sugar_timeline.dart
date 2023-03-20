@@ -241,10 +241,7 @@ class _DeliveryMessageSugar {
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(
-                      text: bloodsugar,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                  NanumTitleText(text: bloodsugar, fontSize: 20),
                   const NanumText(text: 'mg/dL'),
                 ],
               ),

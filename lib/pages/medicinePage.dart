@@ -68,11 +68,7 @@ class _MedicinePageState extends State<MedicinePage> {
             toolbarHeight: 65,
             backgroundColor: CommonColor.background,
             elevation: 0.0,
-            title: const NanumTitleText(
-              text: "복용약",
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            title: const NanumTitleText(text: "복용약", fontSize: 20),
           ),
           body: SafeArea(
             child: ContainedTabBarView(
@@ -165,7 +161,7 @@ class _MedicinePageState extends State<MedicinePage> {
                     ],
                   ),
                 ),
-                TableEventsExample()
+                const TableEventsExample()
               ],
             ),
           ),
