@@ -108,7 +108,6 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                       text: "혈당 기록하기",
                       fontSize: 25,
                       textAlign: TextAlign.center,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
@@ -121,7 +120,6 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                   const NanumTitleText(
                     text: "측정시기",
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
                   ),
                   SizedBox(
                     height: screenHeight * 0.01,
@@ -159,7 +157,6 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
                   const NanumTitleText(
                     text: "혈당",
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -224,7 +221,6 @@ class BloodSugarRecordPageState extends State<BloodSugarRecordPage> {
               child: const NanumTitleText(
                 text: '저장',
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
               ),
               onPressed: () async {
                 if (thischeckindex == 0 || int.parse(bloodsugar) == 0) {

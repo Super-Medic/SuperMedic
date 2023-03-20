@@ -152,10 +152,8 @@ class _HomePageState extends State<HomePage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
               ),
-              child: const NanumTitleText(
-                  text: '나의 건강기록 보기',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              child:
+                  const NanumTitleText(text: '나의 건강기록 보기', color: Colors.white),
             ),
             SizedBox(
               height: screenHeight * 0.01,

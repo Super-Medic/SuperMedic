@@ -241,10 +241,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: NanumTitleText(
-                      text:
-                          DateFormat('M월 d일 EEEE', 'ko_KR').format(_focusedDay),
-                      fontWeight: FontWeight.bold,
-                    ),
+                        text: DateFormat('M월 d일 EEEE', 'ko_KR')
+                            .format(_focusedDay)),
                   ),
                   Expanded(
                     child: ValueListenableBuilder<List<List<Check>>>(

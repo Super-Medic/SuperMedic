@@ -69,12 +69,21 @@ class _JointosPage extends State<JointosPage> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR',)),
-            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR',)),
+            title: Text(title!,
+                style: const TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
+            content: Text(message!,
+                style: const TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR',)),
+                  child: const Text("확인",
+                      style: TextStyle(
+                        fontFamily: 'NotoSansKR',
+                      )),
                   onPressed: () {
                     Navigator.pop(context);
                   })
@@ -98,8 +107,6 @@ class _JointosPage extends State<JointosPage> {
             const NanumTitleText(
               text: '약관 내용에 동의해주세요',
               fontSize: 20.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
             ),
             const SizedBox(
               height: 30.0,
@@ -169,11 +176,7 @@ class _JointosPage extends State<JointosPage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                child: const NanumTitleText(
-                  text: '확인',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                child: const NanumTitleText(text: '확인', color: Colors.white),
               ),
             )),
             const Padding(

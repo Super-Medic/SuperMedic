@@ -81,11 +81,7 @@ class _NoteState extends State<Note> {
                         height: 30,
                       ),
                       const SizedBox(width: 7),
-                      const NanumTitleText(
-                        text: '노트',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      const NanumTitleText(text: '노트', fontSize: 20),
                       const Icon(
                         Icons.chevron_right,
                         weight: 900,
@@ -121,11 +117,7 @@ class _NoteState extends State<Note> {
                           size: 20,
                         ),
                         NanumTitleText(
-                          text: '오늘기록  ',
-                          fontSize: 12,
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            text: '오늘기록  ', fontSize: 12, color: Colors.green),
                       ],
                     ),
                   ),

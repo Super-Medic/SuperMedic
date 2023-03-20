@@ -247,10 +247,7 @@ class _DeliveryMessagePressure {
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(
-                      text: maxbloodPressure,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                  NanumTitleText(text: maxbloodPressure, fontSize: 20),
                   const NanumText(text: 'mmHg'),
                 ],
               ),
@@ -265,10 +262,7 @@ class _DeliveryMessagePressure {
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(
-                      text: minbloodPressure,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                  NanumTitleText(text: minbloodPressure, fontSize: 20),
                   const NanumText(text: 'mmHg'),
                 ],
               ),
@@ -286,8 +280,7 @@ class _DeliveryMessagePressure {
                   const NanumText(
                     text: "  ",
                   ),
-                  NanumTitleText(
-                      text: pulse, fontWeight: FontWeight.bold, fontSize: 20),
+                  NanumTitleText(text: pulse, fontSize: 20),
                   const NanumText(text: '(분/회)'),
                 ],
               ),

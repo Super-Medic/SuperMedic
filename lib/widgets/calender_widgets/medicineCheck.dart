@@ -31,10 +31,10 @@ class _MediCheckState extends State<MediCheck> {
     return widget.items.containsKey(true) == true
         ? Container(
             margin: widget.pad == 15
-                ? EdgeInsets.only(left: 15, right: 15)
+                ? const EdgeInsets.only(left: 15, right: 15)
                 : widget.pad == 10
                     ? EdgeInsets.zero
-                    : EdgeInsets.only(top: 15, left: 15, right: 15),
+                    : const EdgeInsets.only(top: 15, left: 15, right: 15),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -54,11 +54,9 @@ class _MediCheckState extends State<MediCheck> {
                           ? const EdgeInsets.only(top: 8, left: 10)
                           : const EdgeInsets.only(top: 8, left: 30),
                       child: NanumTitleText(
-                        text: widget.items[true]![0].medicine,
-                        fontSize: 20,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          text: widget.items[true]![0].medicine,
+                          fontSize: 20,
+                          color: Colors.green),
                     ),
                     Container(
                         padding: const EdgeInsets.only(right: 8),
@@ -90,7 +88,7 @@ class _MediCheckState extends State<MediCheck> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(
+                                child: const Center(
                                     child: Text('삭제',
                                         style: TextStyle(
                                             fontFamily: 'NotoSansKR'))),

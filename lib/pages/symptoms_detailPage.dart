@@ -61,14 +61,9 @@ class _SymptomsdetailPage extends State<SymptomsdetailPage> {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 10),
-                          child: const NanumTitleText(
-                            text: '증상 기록',
-                            fontWeight: FontWeight.bold,
-                          ),
+                          child: const NanumTitleText(text: '증상 기록'),
                         ),
-                        
-                            const SymptomsTimeline()
-                            
+                        const SymptomsTimeline()
                       ]),
                 ),
               ],

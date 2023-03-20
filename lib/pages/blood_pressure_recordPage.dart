@@ -104,7 +104,6 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                     text: "혈압 기록하기",
                     fontSize: 25,
                     textAlign: TextAlign.center,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
@@ -124,7 +123,6 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                           const NanumTitleText(
                             text: "최고(mmHg)",
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -193,7 +191,6 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                           const NanumTitleText(
                             text: "최저(mmHg)",
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -274,7 +271,6 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
                           const NanumTitleText(
                             text: "맥박(분/회)",
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -350,7 +346,6 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
             child: const NanumTitleText(
               text: '저장',
               color: Colors.white,
-              fontWeight: FontWeight.bold,
             ),
             onPressed: () async {
               if (int.parse(maxbloodpressure) == 0 ||

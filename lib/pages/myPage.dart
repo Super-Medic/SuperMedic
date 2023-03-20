@@ -301,11 +301,7 @@ class _MyPage extends State<MyPage> {
               child: AppBar(
                 backgroundColor: CommonColor.background,
                 elevation: 0.0,
-                title: NanumTitleText(
-                  text: title,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+                title: NanumTitleText(text: title, fontSize: 15),
                 leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -354,10 +350,7 @@ class _QuitPopUpState extends State<QuitPopUp> {
         height: 60,
         child: Column(
           children: [
-            NanumTitleText(
-              text: '회원탈퇴',
-              fontWeight: FontWeight.bold,
-            ),
+            NanumTitleText(text: '회원탈퇴'),
             NanumBodyText(
               text: '회원탈퇴 시 모든 정보 및 기록이 소멸됩니다.',
               fontSize: 12,
@@ -465,10 +458,7 @@ class LogoutPopUp extends StatelessWidget {
         height: 50,
         child: Column(
           children: [
-            NanumTitleText(
-              text: '로그아웃',
-              fontWeight: FontWeight.bold,
-            ),
+            NanumTitleText(text: '로그아웃'),
             NanumBodyText(
               text: '로그아웃 하시겠습니까?',
             ),
@@ -590,10 +580,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                         backgroundColor: CommonColor.background,
                         elevation: 0.0,
                         title: NanumTitleText(
-                          text: widget.item.data,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            text: widget.item.data, fontSize: 15),
                         leading: IconButton(
                           onPressed: () {
                             Navigator.pop(context);

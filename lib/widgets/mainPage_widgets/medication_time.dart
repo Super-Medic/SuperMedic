@@ -70,11 +70,7 @@ class _MedicationTimeState extends State<MedicationTime> {
                           height: 30,
                         ),
                         const SizedBox(width: 7),
-                        const NanumTitleText(
-                          text: '복약',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        const NanumTitleText(text: '복약', fontSize: 20),
                         const Icon(
                           Icons.chevron_right,
                           weight: 900,

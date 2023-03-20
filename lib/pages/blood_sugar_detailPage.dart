@@ -40,8 +40,7 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
               color: Colors.black,
             ),
           ),
-          const NanumTitleText(
-              text: '혈당', fontSize: 20, fontWeight: FontWeight.bold),
+          const NanumTitleText(text: '혈당', fontSize: 20),
         ]),
         leadingWidth: 100,
         toolbarHeight: 48,
@@ -75,7 +74,6 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
                       child: const NanumTitleText(
                         text: '혈당 추이',
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ]),

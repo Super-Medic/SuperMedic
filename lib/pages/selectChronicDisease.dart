@@ -65,12 +65,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NanumTitleText(
-                      text: '보유 질환을 선택해주세요',
-                      fontSize: 25.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    NanumTitleText(text: '보유 질환을 선택해주세요', fontSize: 25.0),
                     // NanumTitleText(
                     //   text: '언제든 설정 메뉴에서 변경할 수 있어요',
                     //   fontSize: 25.0,
@@ -133,7 +128,8 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
                 );
               }
             : null,
-        child: const NanumTitleText(text: '다음', color: Colors.white),
+        child: const NanumTitleText(
+            text: '다음', color: Colors.white, fontWeight: FontWeight.normal),
       ),
     );
   }

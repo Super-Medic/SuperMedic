@@ -151,18 +151,8 @@ class _JoinPageState extends State<JoinPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const NanumTitleText(
-                      text: '슈퍼메딕에 오신 것을',
-                      fontSize: 25.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const NanumTitleText(
-                      text: '환영해요!',
-                      fontSize: 25.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    const NanumTitleText(text: '슈퍼메딕에 오신 것을', fontSize: 25.0),
+                    const NanumTitleText(text: '환영해요!', fontSize: 25.0),
                     SizedBox(
                       height: screenHeight * 0.05,
                     ),
@@ -228,7 +218,7 @@ class _JoinPageState extends State<JoinPage> {
                               .map((e) => DropdownMenuItem(
                                     value: e, // 선택 시 onChanged 를 통해 반환할 value
                                     child: Text(e,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: 'NotoSansKR',
                                         )),
                                   ))

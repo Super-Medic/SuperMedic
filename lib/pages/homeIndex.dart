@@ -118,7 +118,6 @@ class _HomeIndexState extends State<HomeIndex> {
               child: const NanumTitleText(
                 text: '적용하기',
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
               onPressed: () async {
