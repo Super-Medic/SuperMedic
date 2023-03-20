@@ -302,6 +302,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                               _selectedEvents.value =
                                   _getEventsForDay(_focusedDay);
 
+                              print(value.length);
                               return ListView.builder(
                                 itemCount: value.length,
                                 itemBuilder: (context, index) {
@@ -315,15 +316,24 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                     ),
                                     child: ListTile(
                                       onTap: () {},
-                                      title: _focusedDay ==
-                                              DateTime.utc(
-                                                  DateTime.now().year,
-                                                  DateTime.now().month,
-                                                  DateTime.now().day)
-                                          ? MediCheck(
-                                              items: {true: value[index]},
-                                              pad: 10,
-                                            )
+                                      title: (_focusedDay ==
+                                                  DateTime.utc(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day)) ||
+                                              (_rangeEnd ==
+                                                  DateTime.utc(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day))
+                                          ? index >=
+                                                  value.length - calData.toDay
+                                              ? MediCheck(
+                                                  items: {true: value[index]},
+                                                  pad: 10,
+                                                )
+                                              : CalMediCheck(
+                                                  items: value[index], pad: 10)
                                           : CalMediCheck(
                                               items: value[index], pad: 10),
                                     ),

@@ -136,6 +136,7 @@ class _MedicinePageState extends State<MedicinePage> {
                               });
                             }
                             await _medicineTake.fetchGet();
+                            await calData.fetchPastGet();
                             if (mounted) {
                               setState(() {
                                 isLoading = false;
