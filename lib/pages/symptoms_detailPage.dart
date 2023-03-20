@@ -28,20 +28,20 @@ class _SymptomsdetailPage extends State<SymptomsdetailPage> {
     return Scaffold(
       backgroundColor: CommonColor.background,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            //replace with our own icon data.
           ),
-          //replace with our own icon data.
-        ),
-        toolbarHeight: 48,
-        backgroundColor: Colors.white, //배경 색
-        elevation: 0.0, //
-      ),
+          toolbarHeight: 60,
+          backgroundColor: Colors.white, //배경 색
+          elevation: 0.0, //
+          title: const NanumTitleText(text: "증상")),
       body: SafeArea(
         top: false,
         child: Scaffold(
