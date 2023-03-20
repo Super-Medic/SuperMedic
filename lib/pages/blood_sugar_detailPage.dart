@@ -43,7 +43,7 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
           const NanumTitleText(text: '혈당', fontSize: 20),
         ]),
         leadingWidth: 100,
-        toolbarHeight: 48,
+        toolbarHeight: 60,
         backgroundColor: Colors.white, //배경 색
         elevation: 0.0, //
       ),

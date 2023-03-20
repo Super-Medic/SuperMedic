@@ -86,7 +86,7 @@ class BloodPressureRecordPageState extends State<BloodPressureRecordPage> {
               ),
               //replace with our own icon data.
             ),
-            toolbarHeight: 48,
+            toolbarHeight: 60,
             backgroundColor: Colors.white, //배경 색
             elevation: 0.0, //
           ),
