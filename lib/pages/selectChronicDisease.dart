@@ -1,10 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:super_medic/themes/theme.dart';
 
 class SelectChronicDisease extends StatefulWidget {
@@ -15,6 +17,27 @@ class SelectChronicDisease extends StatefulWidget {
 }
 
 class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
+  String? userEmail;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getToken().then((token) async {
+      const storage = FlutterSecureStorage();
+      String? val = await storage.read(key: 'LoginUser');
+      if (val != null) {
+        userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+      }
+      print(token);
+      http.Response response = await http.post(
+        Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {'email': userEmail, 'token': token},
+      );
+    });
+  }
+
   bool selected = false;
   final formKey = GlobalKey<FormState>();
   @override

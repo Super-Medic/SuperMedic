@@ -59,7 +59,13 @@ class _AuthTimer extends State<AuthTimer> {
                   height: 25.0,
                 ),
                 NanumTitleText(
-                  text: '${widget.loginOrgCd} 앱으로\n 간편인증 요청을 보냈어요.',
+                  text: '${widget.loginOrgCd} 앱으로',
+                  fontSize: 25.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                const NanumTitleText(
+                  text: '간편인증 요청을 보냈어요',
                   fontSize: 25.0,
                   color: Colors.black,
                 ),

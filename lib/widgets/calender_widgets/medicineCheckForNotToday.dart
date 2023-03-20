@@ -38,7 +38,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, left: 30),
+                      padding: const EdgeInsets.only(top: 8, left: 30),
                       child: NanumTitleText(
                           text: widget.items[true]![0].medicine,
                           fontSize: 20,
@@ -82,7 +82,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
+                  padding: const EdgeInsets.only(top: 20, left: 10, bottom: 10),
                   child: const Center(
                     child: NanumBodyText(
                       text: "오늘은 복용요일이 아닙니다",

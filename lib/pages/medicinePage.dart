@@ -5,7 +5,6 @@ import "package:flutter/material.dart";
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/function/model.dart';
-import 'package:super_medic/pages/homePage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰
 import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
@@ -39,6 +38,7 @@ class _MedicinePageState extends State<MedicinePage> {
     });
     Future.microtask(() {
       Provider.of<MedicineTake>(context, listen: false).fetchGet();
+      Provider.of<CalendarData>(context, listen: false).fetchPastGet();
     }).then((value) {
       setState(() {
         isLoading = false;
