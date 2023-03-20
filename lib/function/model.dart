@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../themes/textstyle.dart';
@@ -468,24 +469,3 @@ class LoginBeingModel {
         gender = json['gender'];
 }
 
-class AppLockModel {
-  final List<String> applockpw = ["_", "_", "_", "_"];
-  int inputPwLength = 0;
-
-  inputPw(String inputpw) {
-    if (inputPwLength <= 3) {
-      applockpw[inputPwLength] = inputpw;
-      inputPwLength += 1;
-    }
-    print("inputPwLength $inputPwLength $applockpw");
-  }
-
-  removePw() {
-    if (inputPwLength != 0) {
-      inputPwLength -= 1;
-      applockpw[inputPwLength] = "_";
-    }
-    print("inputPwLength $inputPwLength $applockpw");
-  }
-  
-}

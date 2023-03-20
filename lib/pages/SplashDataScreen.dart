@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:super_medic/pages/healthPage.dart';
-import 'package:super_medic/pages/selectChronicDisease.dart';
 import 'dart:async';
 
 class SplashDataScreen extends StatefulWidget {

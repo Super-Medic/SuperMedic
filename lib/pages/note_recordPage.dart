@@ -50,7 +50,7 @@ class NoteRecodePage extends StatelessWidget {
               ),
               //replace with our own icon data.
             ),
-            toolbarHeight: 48,
+            toolbarHeight: 60,
             backgroundColor: Colors.white, //배경 색
             elevation: 0.0, //
           ),
@@ -65,10 +65,10 @@ class NoteRecodePage extends StatelessWidget {
                 ),
                 const Center(
                   child: NanumTitleText(
-                    text: '노트 기록하기',
-                    fontSize: 25,
-                    textAlign: TextAlign.center,
-                  ),
+                      text: '노트 기록하기',
+                      fontSize: 25,
+                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal),
                 ),
                 SizedBox(
                   height: screenHeight * 0.03,
@@ -107,8 +107,7 @@ class NoteRecodePage extends StatelessWidget {
                   }
                 : null,
 
-            child: const NanumTitleText(
-                text: '저장', color: Colors.white, fontWeight: FontWeight.bold),
+            child: const NanumTitleText(text: '저장', color: Colors.white),
           ),
         ),
       ),

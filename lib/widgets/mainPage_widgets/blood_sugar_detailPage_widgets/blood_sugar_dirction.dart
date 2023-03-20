@@ -34,11 +34,7 @@ class _BloodSugarDirction extends State<BloodSugarDirction> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(children: [
-                      NanumTitleText(
-                        text: '혈당 추이',
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      NanumTitleText(text: '혈당 추이', fontSize: 15),
                     ]),
                     // TextButton(
                     //     onPressed: () => {

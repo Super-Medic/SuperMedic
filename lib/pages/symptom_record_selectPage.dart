@@ -135,7 +135,8 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               ),
               //replace with our own icon data.
             ),
-            toolbarHeight: 48,
+
+            toolbarHeight: 60,
             backgroundColor: Colors.white, //배경 색
             elevation: 0.0, //
           ),
@@ -148,11 +149,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
               ),
               const Center(
                 child: NanumTitleText(
-                  text: '증상 기록하기',
-                  fontSize: 25,
-                  textAlign: TextAlign.center,
-                  fontWeight: FontWeight.bold,
-                ),
+                    text: '증상 기록하기', fontSize: 25, textAlign: TextAlign.center),
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -168,11 +165,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
-                        const NanumTitleText(
-                          text: "머리",
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        const NanumTitleText(text: "머리", fontSize: 15),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
@@ -180,11 +173,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
-                        const NanumTitleText(
-                          text: "몸 상태",
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        const NanumTitleText(text: "몸 상태", fontSize: 15),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
@@ -192,11 +181,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
-                        const NanumTitleText(
-                          text: "피부",
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        const NanumTitleText(text: "피부", fontSize: 15),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
@@ -204,11 +189,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
-                        const NanumTitleText(
-                          text: "복부",
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        const NanumTitleText(text: "복부", fontSize: 15),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
@@ -234,11 +215,7 @@ class _SymptomRecordSelectState extends State<SymptomRecordSelect> {
                         // Navigator.pop(context);
                       }
                     : null,
-                child: const NanumTitleText(
-                  text: '저장',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                child: const NanumTitleText(text: '저장', color: Colors.white),
               ),
             ],
           ),

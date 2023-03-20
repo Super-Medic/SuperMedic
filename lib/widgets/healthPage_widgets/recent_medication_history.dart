@@ -53,7 +53,9 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             children: [
-              NanumTitleText(text: text2.split("_")[0].split("(")[0]),
+              NanumTitleText(
+                  text: text2.split("_")[0].split("(")[0],
+                  fontWeight: FontWeight.normal),
               const NanumTitleText(text: " "),
               // NanumTitleText(text: '(${text3})')
             ],
@@ -97,11 +99,7 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                 ),
                 icon: const Row(
                   children: [
-                    NanumTitleText(
-                      text: '최근 투약내역',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    NanumTitleText(text: '최근 투약내역', fontSize: 20),
                     // Icon(
                     //   Icons.chevron_right,
                     //   weight: 900,
@@ -145,11 +143,7 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
                 Container(
                   padding: const EdgeInsets.only(top: 15),
                   margin: AppTheme.totalpadding,
-                  child: const NanumTitleText(
-                    text: '최근 투약내역',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  child: const NanumTitleText(text: '최근 투약내역', fontSize: 20),
                 ),
                 Center(
                   child: SizedBox(

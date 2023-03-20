@@ -71,8 +71,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                 child: NanumTitleText(
                   text: '약 등록',
                   fontSize: 25.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
@@ -87,7 +85,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       child: const NanumTitleText(
                         text: '약 이름을 입력해주세요',
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Container(
@@ -163,7 +160,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       child: const NanumTitleText(
                         text: '복용 요일을 선택하세요',
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Container(
@@ -218,7 +214,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                           const NanumTitleText(
                             text: '복용 시간을 추가하세요',
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                           OutlinedButton(
                             onPressed: () {
@@ -372,7 +367,6 @@ class _AddMedicinePage extends State<AddMedicinePage> {
             child: const NanumTitleText(
               text: '등록',
               color: Colors.white,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -413,15 +407,15 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                 padding: const EdgeInsets.only(top: 5),
                 child: const Center(
                   child: NanumTitleText(
-                    text: '사진업로드',
-                    fontSize: 25,
-                  ),
+                      text: '사진업로드',
+                      fontSize: 25,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   TextButton(
@@ -466,7 +460,7 @@ class _AddMedicinePage extends State<AddMedicinePage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   )
                 ],

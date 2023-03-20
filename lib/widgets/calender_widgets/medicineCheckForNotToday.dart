@@ -25,7 +25,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
   Widget build(BuildContext context) {
     return widget.items.containsKey(true) == true
         ? Container(
-            margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+            margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -38,13 +38,11 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, left: 30),
+                      padding: const EdgeInsets.only(top: 8, left: 30),
                       child: NanumTitleText(
-                        text: widget.items[true]![0].medicine,
-                        fontSize: 20,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          text: widget.items[true]![0].medicine,
+                          fontSize: 20,
+                          color: Colors.green),
                     ),
                     Container(
                         padding: const EdgeInsets.only(right: 15),
@@ -73,7 +71,10 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                                 },
                                 height: 30,
                                 value: 'delete',
-                                child: Center(child: Text('삭제', style:TextStyle(fontFamily: "NotoSansKR"))),
+                                child: const Center(
+                                    child: Text('삭제',
+                                        style: TextStyle(
+                                            fontFamily: "NotoSansKR"))),
                               )
                             ];
                           },
@@ -81,7 +82,7 @@ class _MediCheckForNotTodayState extends State<MediCheckForNotToday> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
+                  padding: const EdgeInsets.only(top: 20, left: 10, bottom: 10),
                   child: const Center(
                     child: NanumBodyText(
                       text: "오늘은 복용요일이 아닙니다",

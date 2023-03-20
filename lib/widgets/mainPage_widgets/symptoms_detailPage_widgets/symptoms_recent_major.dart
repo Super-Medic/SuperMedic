@@ -134,12 +134,7 @@ class _SymptomsRecentMajorState extends State<SymptomsRecentMajor> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      child: Row(children: [
-                        NanumTitleText(
-                          text: "최근 주요 증상",
-                          fontWeight: FontWeight.bold,
-                        )
-                      ]),
+                      child: Row(children: [NanumTitleText(text: "최근 주요 증상")]),
                     ),
 
                     // const NanumText(text: '최근 10회'),
@@ -192,31 +187,28 @@ class _SymptomsRecentMajorState extends State<SymptomsRecentMajor> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                               ),
                               child: const NanumTitleText(
-                                text: '기록하기',
-                                fontSize: 13,
-                                color: Colors.white,
-                              )),
+                                  text: '기록하기', fontSize: 13)),
                         ),
                       ),
                     ])),
-            // Container(
-            //   padding: EdgeInsets.fromLTRB(screenWidth * 0.01, 0, 0, 0),
-            //   child: Center(
-            //     child: TextButton(
-            //         onPressed: () => {removeSymptom(_homeProvider)},
-            //         style: TextButton.styleFrom(
-            //           backgroundColor: CommonColor.buttoncolor,
-            //           shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(5)),
-            //           padding: const EdgeInsets.symmetric(horizontal: 15),
-            //         ),
-            //         child: const NanumTitleText(
-            //           text: '삭제하기',
-            //           fontSize: 13,
-            //           color: Colors.white,
-            //         )),
-            //   ),
-            // ),
+            Container(
+              padding: EdgeInsets.fromLTRB(screenWidth * 0.01, 0, 0, 0),
+              child: Center(
+                child: TextButton(
+                    onPressed: () => {removeSymptom(_homeProvider)},
+                    style: TextButton.styleFrom(
+                      backgroundColor: CommonColor.buttoncolor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                    ),
+                    child: const NanumTitleText(
+                        text: '삭제하기',
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal)),
+              ),
+            ),
             SizedBox(height: screenHeight * 0.01),
           ],
         ));

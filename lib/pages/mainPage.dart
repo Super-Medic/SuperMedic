@@ -1,10 +1,11 @@
 import 'dart:convert';
-
+import 'dart:io' show Platform;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/healthPage.dart';
 import 'package:super_medic/pages/HomePage.dart';
@@ -16,6 +17,39 @@ import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/widgets/notification/firebase_message.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+
+Future<bool> requestPermission(BuildContext context) async {
+  Map<Permission, PermissionStatus> statuses = await [
+    Permission.storage,
+    Permission.camera,
+    Permission.photos
+  ].request();
+
+  // 결과 확인
+  if ((!statuses[Permission.storage]!.isGranted &&
+          !statuses[Permission.photos]!.isGranted) ||
+      !statuses[Permission.camera]!.isGranted) {
+    // 허용이 안된 경우
+    // ignore: use_build_context_synchronously
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // 권한없음을 다이얼로그로 알림
+          return AlertDialog(
+            content: const Text("권한 설정을 확인해주세요!!"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    openAppSettings(); // 앱 설정으로 이동
+                  },
+                  child: const Text('설정하기')),
+            ],
+          );
+        });
+    return false;
+  }
+  return true;
+}
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -47,23 +81,24 @@ class MainPageState extends State<MainPage> {
       badge: true,
       sound: true,
     );
-    FirebaseMessaging.instance.getToken().then((token) async {
-      const storage = FlutterSecureStorage();
-      String? val = await storage.read(key: 'LoginUser');
-      if (val != null) {
-        userEmail = LoginModel.fromJson(jsonDecode(val)).email;
-      }
-      http.Response response = await http.post(
-        Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: {'email': userEmail, 'token': token},
-      );
-    });
+    // FirebaseMessaging.instance.getToken().then((token) async {
+    //   const storage = FlutterSecureStorage();
+    //   String? val = await storage.read(key: 'LoginUser');
+    //   if (val != null) {
+    //     userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+    //   }
+    //   print(token);
+    //   http.Response response = await http.post(
+    //     Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //     },
+    //     body: {'email': userEmail, 'token': token},
+    //   );
+    // });
 
     FirebaseMessaging.instance.getAPNSToken().then((APNStoken) {
-      print(APNStoken);
+      // print(APNStoken);
     });
 
     ///gives you the message on which user taps
@@ -97,11 +132,16 @@ class MainPageState extends State<MainPage> {
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0: return const HomePage();
-      case 1: return const MedicinePage();
-      case 2: return const HealthPage();
-      case 3: return const MeditalkPage();
-      case 4: return const MyPage();
+      case 0:
+        return const HomePage();
+      case 1:
+        return const MedicinePage();
+      case 2:
+        return const HealthPage();
+      case 3:
+        return const MeditalkPage();
+      case 4:
+        return const MyPage();
     }
     return Container();
   }
@@ -201,6 +241,9 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     _bottomNavigationProvider = context.watch<BottomNavigationProvider>();
+    if (Platform.isAndroid) {
+      requestPermission(context);
+    }
 
     //뒤로 가기 두 번 클릭 시 어플 종료
     Future<bool> onWillPop() async {

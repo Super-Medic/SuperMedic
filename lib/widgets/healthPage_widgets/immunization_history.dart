@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-import 'package:super_medic/pages/selectAuth.dart';
 
 class ImmunizationHistory extends StatefulWidget {
   const ImmunizationHistory({Key? key}) : super(key: key);
@@ -63,8 +62,10 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           for (int i = 0; i < text2.split("(")[0].split(",").length; i++)
             NanumTitleText(
-                text: text2.split("(")[0].split(",")[i].split(" ")[
-                    text2.split("(")[0].split(",")[i].split(" ").length - 1]),
+              text: text2.split("(")[0].split(",")[i].split(
+                  " ")[text2.split("(")[0].split(",")[i].split(" ").length - 1],
+              fontWeight: FontWeight.normal,
+            ),
           SizedBox(
             height: screenHeight * 0.01,
           )
@@ -97,11 +98,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
                 Container(
                   padding: const EdgeInsets.only(left: 15, top: 23),
                   margin: AppTheme.totalpadding,
-                  child: const NanumTitleText(
-                    text: '예방접종 내역',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  child: const NanumTitleText(text: '예방접종 내역', fontSize: 20),
                 ),
                 Center(
                   child: SizedBox(
@@ -166,11 +163,7 @@ class _ImmunizationHistory extends State<ImmunizationHistory> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(
-text: '예방접종 내역',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  NanumTitleText(text: '예방접종 내역', fontSize: 20),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,

@@ -128,7 +128,8 @@ class LoginPageState extends State<LoginPage> {
               },
             ),
             Container(
-              padding: EdgeInsets.only(bottom: screenWidth * 0.01),
+              padding: EdgeInsets.only(
+                  bottom: screenWidth * 0.01, top: screenWidth * 0.01),
               child: InkWell(
                   child: Image.asset(
                     imagenaverLoginName,

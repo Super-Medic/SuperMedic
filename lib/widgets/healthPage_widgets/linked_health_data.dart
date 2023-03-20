@@ -43,11 +43,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
                 Container(
                   padding: const EdgeInsets.only(top: 15),
                   margin: AppTheme.totalpadding,
-                  child: const NanumTitleText(
-                    text: '연동 건강데이터',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  child: const NanumTitleText(text: '연동 건강데이터', fontSize: 20),
                 ),
                 Center(
                   child: SizedBox(
@@ -108,11 +104,7 @@ class _LinkedHealthData extends State<LinkedHealthData> {
               ),
               icon: const Row(
                 children: [
-                  NanumTitleText(
-                    text: '연동 건강데이터',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  NanumTitleText(text: '연동 건강데이터', fontSize: 20),
                   Icon(
                     Icons.chevron_right,
                     weight: 900,

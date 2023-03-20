@@ -39,11 +39,10 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
               color: Colors.black,
             ),
           ),
-          const NanumTitleText(
-              text: '혈압', fontSize: 20, fontWeight: FontWeight.bold),
+          const NanumTitleText(text: '혈압', fontSize: 20),
         ]),
         leadingWidth: 100,
-        toolbarHeight: 48,
+        toolbarHeight: 60,
         backgroundColor: Colors.white, //배경 색
         elevation: 0.0, //
       ),
@@ -75,7 +74,6 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
                       child: const NanumTitleText(
                         text: '혈압 기록',
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ]),
