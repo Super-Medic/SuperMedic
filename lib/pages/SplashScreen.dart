@@ -37,12 +37,12 @@ class _SplashScreenState extends State<SplashScreen> {
             // ignore: unrelated_type_equality_checks
             await loadDiseaseSecureStorage() == true
                 // ignore: use_build_context_synchronously
-                ? Navigator.push(
+                ? Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const MainPage()),
                   )
                 // ignore: use_build_context_synchronously
-                : Navigator.push(
+                : Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SelectChronicDisease()));
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
             storageBeing = true;
             //있는데 로그인
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               // MaterialPageRoute(builder: (context) => MainPage()),
               MaterialPageRoute(
@@ -64,12 +64,12 @@ class _SplashScreenState extends State<SplashScreen> {
           if (loginValidation == 0) {
             await loadDiseaseSecureStorage() == true
                 // ignore: use_build_context_synchronously
-                ? Navigator.push(
+                ? Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const MainPage()),
                   )
                 // ignore: use_build_context_synchronously
-                : Navigator.push(
+                : Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SelectChronicDisease()));
@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
             storageBeing = false;
             //없는데 로그인
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               // MaterialPageRoute(builder: (context) => MainPage()),
               MaterialPageRoute(
@@ -92,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
         storageBeing = false;
         //없는데 로그인
         // ignore: use_build_context_synchronously
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           // MaterialPageRoute(builder: (context) => MainPage()),
           MaterialPageRoute(
@@ -149,12 +149,19 @@ class _SplashScreenState extends State<SplashScreen> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text(title!,style:TextStyle(fontFamily: 'NotoSansKR',)),
-            content: Text(message!,style:TextStyle(fontFamily: 'NotoSansKR',)),
+            title: Text(title!,
+                style: const TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
+            content: Text(message!,
+                style: const TextStyle(
+                  fontFamily: 'NotoSansKR',
+                )),
             actions: [
               CupertinoDialogAction(
                   isDefaultAction: true,
-                  child: const Text("확인",style:TextStyle(fontFamily: 'NotoSansKR')),
+                  child: const Text("확인",
+                      style: TextStyle(fontFamily: 'NotoSansKR')),
                   onPressed: () {
                     Navigator.pop(context);
                   })

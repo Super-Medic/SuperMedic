@@ -74,7 +74,7 @@ class _JoinPageState extends State<JoinPage> {
 
   renderButton(height) {
     return SizedBox(
-        height: height,
+        height: height * 0.07,
         child: TextButton(
           style: TextButton.styleFrom(backgroundColor: Colors.green),
           onPressed: () {
@@ -86,7 +86,7 @@ class _JoinPageState extends State<JoinPage> {
                 backgroundColor: Colors.transparent,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 400,
+                    height: height * 0.43,
                     decoration: const BoxDecoration(
                       color: Colors.white, // 모달 배경색
                       borderRadius: BorderRadius.only(
@@ -304,7 +304,7 @@ class _JoinPageState extends State<JoinPage> {
               ),
             ),
           ),
-          bottomNavigationBar: renderButton(screenHeight * 0.07),
+          bottomNavigationBar: renderButton(screenHeight),
         ),
       ),
     );

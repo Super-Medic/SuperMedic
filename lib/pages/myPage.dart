@@ -40,42 +40,46 @@ class _MyPage extends State<MyPage> {
 
     _homeProvider = context.watch<HomeProvider>();
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          toolbarHeight: 60,
-          backgroundColor: Colors.white, //배경 색
-          elevation: 0.0, //그림자 효과 해제
-          // leading: Container(
-          //   padding: const EdgeInsets.only(left: 10),
-          //   child: Image.asset(
-          //     'assets/images/home_logo.png',
-          //     color: Colors.green,
-          //   ),
-          // ),
-          // leadingWidth: 150,
-          // actions: [
-          //   IconButton(
-          //     icon: const Icon(Icons.notifications_none),
-          //     color: Colors.black,
-          //     iconSize: 25,
-          //     onPressed: () => {},
-          //   ),
-          //   IconButton(
-          //     icon: const Icon(Icons.menu),
-          //     color: Colors.black,
-          //     iconSize: 25,
-          //     onPressed: () => {
-          //       context.read<BottomNavigationProvider>().updateCurrentPage(4)
-          //     },
-          //   ),
-          //   const SizedBox(
-          //     width: 10,
-          //   ),
-          // ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        toolbarHeight: 60,
+        backgroundColor: Colors.white, //배경 색
+        elevation: 0.0, //그림자 효과 해제
+        leading: Container(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
         ),
-        body: SingleChildScrollView(
+        title: const NanumTitleText(text: '전체'),
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.notifications_none),
+        //     color: Colors.black,
+        //     iconSize: 25,
+        //     onPressed: () => {},
+        //   ),
+        //   IconButton(
+        //     icon: const Icon(Icons.menu),
+        //     color: Colors.black,
+        //     iconSize: 25,
+        //     onPressed: () => {},
+        //   ),
+        //   const SizedBox(
+        //     width: 10,
+        //   ),
+        // ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.center,
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +93,13 @@ class _MyPage extends State<MyPage> {
 
               Center(
                 child: Container(
-                  width: screenWidth * 0.7,
-                  height: screenHeight * 0.12,
+                  margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  // width: screenWidth * 0.7,
+                  // height: screenHeight * 0.12,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.grey[200]),
+                      borderRadius: BorderRadius.circular(30),
+                      color: const Color.fromARGB(20, 158, 158, 158)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

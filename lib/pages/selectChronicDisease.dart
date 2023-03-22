@@ -1,10 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:super_medic/function/model.dart';
 import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:super_medic/themes/theme.dart';
 
 class SelectChronicDisease extends StatefulWidget {
@@ -15,6 +17,27 @@ class SelectChronicDisease extends StatefulWidget {
 }
 
 class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
+  String? userEmail;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getToken().then((token) async {
+      const storage = FlutterSecureStorage();
+      String? val = await storage.read(key: 'LoginUser');
+      if (val != null) {
+        userEmail = LoginModel.fromJson(jsonDecode(val)).email;
+      }
+      print(token);
+      http.Response response = await http.post(
+        Uri.parse('https://mypd.kr:5000/notification/uploadToken'),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {'email': userEmail, 'token': token},
+      );
+    });
+  }
+
   bool selected = false;
   final formKey = GlobalKey<FormState>();
   @override
@@ -42,7 +65,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50.0),
             child: AppBar(
-              leading: null,
+              leading: Container(),
               toolbarHeight: 48,
               backgroundColor: CommonColor.background, //배경 색
               elevation: 0.0, //
@@ -53,26 +76,62 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
             child: Form(
               key: formKey,
               child: Padding(
-                padding: AppTheme.totalpadding,
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    NanumTitleText(text: '보유 질환을 선택해주세요', fontSize: 25.0),
-                    // NanumTitleText(
-                    //   text: '언제든 설정 메뉴에서 변경할 수 있어요',
-                    //   fontSize: 25.0,
-                    //   color: Colors.black,
-                    //   fontWeight: FontWeight.bold,
-                    // ),
-                    // NanumTitleText(
-                    //   text: '선택해주세요 ',
-                    //   fontSize: 25.0,
-                    //   color: Colors.black,
-                    //   fontWeight: FontWeight.bold,
-                    // ),
-                  ],
-                ),
-              ),
+                  padding: AppTheme.totalpadding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          NanumTitleText(text: '보유 질환을 선택해주세요', fontSize: 25.0),
+                          // NanumTitleText(
+                          //   text: '언제든 설정 메뉴에서 변경할 수 있어요',
+                          //   fontSize: 25.0,
+                          //   color: Colors.black,
+                          //   fontWeight: FontWeight.bold,
+                          // ),
+                          // NanumTitleText(
+                          //   text: '선택해주세요 ',
+                          //   fontSize: 25.0,
+                          //   color: Colors.black,
+                          //   fontWeight: FontWeight.bold,
+                          // ),
+                        ],
+                      ),
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: screenHeight * 0.15,
+                            ),
+
+                            Wrap(
+                              direction: Axis.horizontal,
+                              // alignment: WrapAlignment.start,
+                              spacing: screenWidth * 0.03,
+                              runSpacing: screenHeight * 0.005,
+
+                              alignment: WrapAlignment.spaceBetween,
+                              children: List.generate(
+                                tag.length,
+                                (index) {
+                                  return buildTags(context, index);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.005,
+                            ),
+                            // const TotalDisease(),
+                            SizedBox(
+                              height: screenHeight * 0.2,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
             ),
           ),
           bottomNavigationBar: ElevatedButton(
@@ -80,7 +139,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
             onPressed: selected == true
                 ? () {
                     saveInitChronicDisease(tag);
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const MainPage()),
                     );

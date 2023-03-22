@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/provider/home_provider.dart';
-import 'package:super_medic/themes/textstyle.dart';
-import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
+import 'package:super_medic/themes/textstyle.dart';
+import 'package:super_medic/themes/theme.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_sugar_detailPage_widgets/average_blood_sugar.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_sugar_detailPage_widgets/blood_sugar_dirction.dart';
 import 'package:super_medic/widgets/mainPage_widgets/blood_sugar_detailPage_widgets/blood_sugar_timeline.dart';
@@ -17,9 +17,21 @@ class BloodSugardetailPage extends StatefulWidget {
 }
 
 class _BloodSugardetailPage extends State<BloodSugardetailPage> {
-// class HealthPage extends StatelessWidget {
-//   HealthPage({Key? key}) : super(key: key);
+  // 스크롤 제어를 위한 컨트롤러를 선언합니다.
+  final ScrollController _scrollController = ScrollController();
   late HomeProvider _homeProvider;
+
+  void _scrollToTop() {
+    setState(() {
+      _scrollController.jumpTo(0);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   var i = 0;
   @override
@@ -49,6 +61,7 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -82,6 +95,16 @@ class _BloodSugardetailPage extends State<BloodSugardetailPage> {
           ],
         ),
       )),
+      floatingActionButton: FloatingActionButton.small(
+        backgroundColor: Colors.green,
+        onPressed: () {
+          // 스크롤 위치 맨위로 이동
+          _scrollToTop();
+        },
+        child: const Icon(
+          Icons.expand_less,
+        ),
+      ),
     );
   }
 }

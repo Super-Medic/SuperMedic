@@ -5,7 +5,6 @@ import "package:flutter/material.dart";
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/function/model.dart';
-import 'package:super_medic/pages/homePage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰
 import 'package:super_medic/widgets/calender_widgets/calender_widgets.dart';
@@ -64,7 +63,8 @@ class _MedicinePageState extends State<MedicinePage> {
           resizeToAvoidBottomInset: false,
           backgroundColor: CommonColor.background,
           appBar: AppBar(
-            leading: Container(),
+            leading: const SizedBox.shrink(),
+            leadingWidth: 0,
             toolbarHeight: 65,
             backgroundColor: CommonColor.background,
             elevation: 0.0,

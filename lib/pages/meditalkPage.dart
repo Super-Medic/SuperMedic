@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:super_medic/provider/bottom_navigation_provider.dart';
+import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 
@@ -36,7 +35,8 @@ class MeditalkPage extends StatelessWidget {
               color: Colors.black,
               iconSize: 25,
               onPressed: () => {
-                context.read<BottomNavigationProvider>().updateCurrentPage(4)
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const MyPage())),
               },
             ),
             const SizedBox(
