@@ -38,6 +38,7 @@ class _MedicinePageState extends State<MedicinePage> {
     });
     Future.microtask(() {
       Provider.of<MedicineTake>(context, listen: false).fetchGet();
+      Provider.of<CalendarData>(context, listen: false).fetchPastGet();
     }).then((value) {
       setState(() {
         isLoading = false;
@@ -136,6 +137,7 @@ class _MedicinePageState extends State<MedicinePage> {
                               });
                             }
                             await _medicineTake.fetchGet();
+                            await calData.fetchPastGet();
                             if (mounted) {
                               setState(() {
                                 isLoading = false;

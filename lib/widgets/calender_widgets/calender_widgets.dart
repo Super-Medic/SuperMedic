@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:super_medic/provider/medicine_provider.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
-import 'package:table_calendar/table_calendar.dart';
+// import 'package:table_calendar/table_calendar.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
-import 'package:super_medic/widgets/calender_widgets/calendermedicineCheck.dart';
-import 'package:super_medic/widgets/calender_widgets/medicineCheck.dart';
+import 'package:super_medic/widgets/table_calendar/src/customization/calendar_builders.dart';
+import 'package:super_medic/widgets/table_calendar/src/customization/calendar_style.dart';
+import 'package:super_medic/widgets/table_calendar/src/customization/days_of_week_style.dart';
+import 'package:super_medic/widgets/table_calendar/src/customization/header_style.dart';
+import 'package:super_medic/widgets/table_calendar/src/shared/utils.dart';
+import 'package:super_medic/widgets/table_calendar/src/table_calendar.dart';
 
 import './utils.dart';
 
@@ -32,6 +37,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
   CalendarData calData = CalendarData();
+  MedicineTake _medicineTake = MedicineTake();
   bool isLoading = false;
   Map formator = {
     CalendarFormat.month: 0,
@@ -51,6 +57,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     });
     Future.microtask(() {
       Provider.of<CalendarData>(context, listen: false).fetchPastGet();
+      Provider.of<MedicineTake>(context, listen: false).fetchGet();
     }).then((value) => isLoading = false);
     setState(() {
       _selectedDay = _focusedDay;
@@ -113,6 +120,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   @override
   Widget build(BuildContext context) {
     calData = context.watch<CalendarData>();
+    _medicineTake = context.watch<MedicineTake>();
     return Stack(
       children: [
         Scaffold(
@@ -227,17 +235,10 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                 },
               ),
               const SizedBox(height: 8.0),
-              Divider(
-                thickness: 3,
-                indent: MediaQuery.of(context).size.width * 0.4,
-                endIndent: MediaQuery.of(context).size.width * 0.4,
-                color: Colors.grey[400],
-              ),
               Expanded(
                 child: GestureDetector(
                   onPanUpdate: (details) {
                     if (details.delta.dy > 0) {
-                      print("1");
                       if (formator[_calendarFormat] > 0) {
                         setState(() {
                           _calendarFormat =
@@ -246,7 +247,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       }
                     }
                     if (details.delta.dy < 0) {
-                      print("2");
                       if (formator[_calendarFormat] < 2) {
                         setState(() {
                           _calendarFormat =
@@ -272,63 +272,9 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                         )
                       ],
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 30.0,
-                            // vertical: 4.0,
-                          ),
-                          padding: const EdgeInsets.only(top: 40),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: NanumTitleText(
-                            text: DateFormat('M월 d일 EEEE', 'ko_KR')
-                                .format(_focusedDay),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Expanded(
-                          child: ValueListenableBuilder<List<List<Check>>>(
-                            valueListenable: _selectedEvents,
-                            builder: (context, value, _) {
-                              _selectedEvents.value =
-                                  _getEventsForDay(_focusedDay);
-
-                              return ListView.builder(
-                                itemCount: value.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      horizontal: 12.0,
-                                      vertical: 4.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                    ),
-                                    child: ListTile(
-                                      onTap: () {},
-                                      title: _focusedDay ==
-                                              DateTime.utc(
-                                                  DateTime.now().year,
-                                                  DateTime.now().month,
-                                                  DateTime.now().day)
-                                          ? MediCheck(
-                                              items: {true: value[index]},
-                                              pad: 10)
-                                          : CalMediCheck(
-                                              items: value[index], pad: 10),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: NanumTitleText(
+                        text: DateFormat('M월 d일 EEEE', 'ko_KR')
+                            .format(_focusedDay)),
                   ),
                 ),
               ),

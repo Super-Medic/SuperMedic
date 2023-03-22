@@ -17,8 +17,9 @@ class CalendarData extends ChangeNotifier {
   // ignore: prefer_final_fields
   LinkedHashMap<DateTime, List<List<Check>>> _kevents =
       LinkedHashMap<DateTime, List<List<Check>>>();
+  int _toDay = 0;
   LinkedHashMap<DateTime, List<List<Check>>> get kevents => _kevents;
-
+  int get toDay => _toDay;
   Future<void> fetchPastGet() async {
     late int today;
     Map dayToint = {
@@ -81,6 +82,7 @@ class CalendarData extends ChangeNotifier {
           }
           medicineData.add(checks);
         }
+        _toDay = medicineData.length;
         checkMap[DateTime.utc(DateTime.now().year, DateTime.now().month,
             DateTime.now().day)] = medicineData;
       }

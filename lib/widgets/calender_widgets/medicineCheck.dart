@@ -202,56 +202,57 @@ class _MediCheckState extends State<MediCheck> {
                     Container(
                       padding: widget.pad == 10
                           ? const EdgeInsets.only(top: 8, left: 10)
-                          : const EdgeInsets.only(top: 8, left: 30),
+                          : const EdgeInsets.only(top: 8, left: 15),
                       child: NanumTitleText(
                           text: widget.items[true]![0].medicine,
                           fontSize: 20,
                           color: Colors.green),
                     ),
-                    Container(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: PopupMenuButton(
-                          offset: const Offset(10, 30),
-                          constraints:
-                              const BoxConstraints(minWidth: 30, maxWidth: 70),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          elevation: 0.0,
-                          icon: const Icon(
-                            Icons.more_horiz,
-                            color: Colors.grey,
-                          ),
-                          color: CommonColor.background,
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                onTap: () async {
-                                  await deleteMedicine(
-                                          widget.items[true]![0].id)
-                                      .then((val) {
-                                    _medicineTake.fetchGet();
-                                  });
-                                  setState(() {
-                                    widget.items.remove(true);
-                                  });
-                                },
-                                height: 30,
-                                value: 'delete',
-                                child: const Center(
-                                    child: Text('삭제',
-                                        style: TextStyle(
-                                            fontFamily: 'NotoSansKR'))),
-                              )
-                            ];
-                          },
-                        )),
+                    if (widget.pad == 20)
+                      Container(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: PopupMenuButton(
+                            offset: const Offset(10, 30),
+                            constraints: const BoxConstraints(
+                                minWidth: 30, maxWidth: 70),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            elevation: 0.0,
+                            icon: const Icon(
+                              Icons.more_horiz,
+                              color: Colors.grey,
+                            ),
+                            color: CommonColor.background,
+                            itemBuilder: (context) {
+                              return [
+                                PopupMenuItem(
+                                  onTap: () async {
+                                    await deleteMedicine(
+                                            widget.items[true]![0].id)
+                                        .then((val) {
+                                      _medicineTake.fetchGet();
+                                    });
+                                    setState(() {
+                                      widget.items.remove(true);
+                                    });
+                                  },
+                                  height: 30,
+                                  value: 'delete',
+                                  child: const Center(
+                                      child: Text('삭제',
+                                          style: TextStyle(
+                                              fontFamily: 'NotoSansKR'))),
+                                )
+                              ];
+                            },
+                          )),
                   ],
                 ),
                 Container(
                   padding: widget.pad == 10
                       ? const EdgeInsets.only(top: 8)
-                      : const EdgeInsets.only(top: 15, left: 10, bottom: 10),
+                      : const EdgeInsets.only(top: 8, left: 10, bottom: 10),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(left: widget.pad),

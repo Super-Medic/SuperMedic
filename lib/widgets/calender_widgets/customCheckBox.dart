@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:provider/provider.dart';
 import 'package:super_medic/themes/common_color.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/widgets/calender_widgets/itemClass.dart';
@@ -9,6 +10,8 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/provider/medicine_provider.dart';
+import 'package:super_medic/widgets/calender_widgets/utils.dart';
 
 class CustomCheckBox extends StatefulWidget {
   final Check item;
@@ -25,8 +28,13 @@ class CustomCheckBox extends StatefulWidget {
 
 class _CustomCheckBoxState extends State<CustomCheckBox> {
   String? userEmail;
+  MedicineTake _medicineTake = MedicineTake();
+  CalendarData calData = CalendarData();
+
   @override
   Widget build(BuildContext context) {
+    calData = context.watch<CalendarData>();
+    _medicineTake = context.watch<MedicineTake>();
     final dot = Container(
         height: 20,
         width: 52,
@@ -51,7 +59,11 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                 setState(() {
                   widget.item.isChecked = value;
                 });
-                await postRequest(widget.item.id, widget.item.time, value);
+                await postRequest(widget.item.id, widget.item.time, value)
+                    .then((val) {
+                  _medicineTake.fetchGet();
+                  calData.fetchPastGet();
+                });
               },
               activeBgColor: Colors.green,
               activeIcon: const Icon(
