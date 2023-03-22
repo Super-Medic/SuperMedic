@@ -69,36 +69,75 @@ class _HealthScreenings extends State<HealthScreenings> {
     );
   }
 
-  Widget Get_health_Grade(String type, double value) {
-    double score = double.parse(value as String);
+  dynamic Get_health_Grade(String type, dynamic screenings) {
+    // double score = double.parse(value as String);
+
     switch (type) {
       case "BMI":
-        if (score >= 30) {
-          State_danger();
-        } else if (score >= 25 && score <= 29.8) {
-          State_caution();
-        } else if (score >= 18.5 && score <= 24.9) {
-          State_normal();
+        var bmi = double.parse(screenings.BMI as String);
+        if (bmi >= 30) {
+          return State_danger();
+        } else if (bmi >= 25 && bmi <= 29.8) {
+          return State_caution();
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+          return State_normal();
         }
         break;
       case "FBG":
-        if (score >= 126) {
-          State_danger();
-        } else if (score >= 100 && score <= 125) {
-          State_caution();
-        } else if (score < 100) {
-          State_normal();
+        var fbg = double.parse(screenings.FBG as String);
+        if (fbg >= 126) {
+          return State_danger();
+        } else if (fbg >= 100 && fbg <= 125) {
+          return State_caution();
+        } else if (fbg < 100) {
+          return State_normal();
         }
         break;
       case "GFR":
-        if (score < 60) {
-          State_caution();
-        } else if (score >= 60) {
-          State_normal();
+        var gfr = double.parse(screenings.GFR as String);
+        if (gfr < 60) {
+          return State_caution();
+        } else if (gfr >= 60) {
+          return State_normal();
+        }
+        break;
+      case "hemoglobin":
+        var hemoglobin = double.parse(screenings.hemoglobin as String);
+        if (hemoglobin < 12) {
+          return State_danger();
+        } else if (hemoglobin >= 12 && hemoglobin <= 12.9) {
+          return State_caution();
+        } else if (hemoglobin >= 13) {
+          return State_normal();
+        }
+        break;
+
+      case "SGOT":
+        var sgot = double.parse(screenings.SGOT as String);
+        if (sgot >= 51) {
+          return State_danger();
+        } else if (sgot >= 41 && sgot <= 50) {
+          return State_caution();
+        } else if (sgot <= 40) {
+          return State_normal();
+        }
+        break;
+      case "bloodPressure":
+        var bloodpressureMin =
+            double.parse(screenings.bloodPressure.split("/")[0] as String);
+        var bloodpressureMax =
+            double.parse(screenings.bloodPressure.split("/")[1] as String);
+
+        if (bloodpressureMin >= 140 || bloodpressureMax >= 90) {
+          return State_danger();
+        } else if ((bloodpressureMin >= 120 && bloodpressureMin < 140) ||
+            (bloodpressureMax >= 80 && bloodpressureMax < 90)) {
+          return State_caution();
+        } else if (bloodpressureMin < 120 && bloodpressureMax < 80) {
+          return State_normal();
         }
         break;
     }
-    return State_danger();
   }
 
   // ignore: non_constant_identifier_names
@@ -136,10 +175,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                       ),
                       icon: const Row(
                         children: [
-                          NanumTitleText(
-                            text: '건강검진',
-                            fontSize: 20
-                          ),
+                          NanumTitleText(text: '건강검진', fontSize: 20),
                           // Icon(
                           //   Icons.chevron_right,
                           //   weight: 900,
@@ -185,34 +221,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           const NanumBodyText(text: '비만'),
                           const NanumBodyText(text: '   '),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .BMI as String) >=
-                              30)
-                            State_danger(),
-                          if (double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .BMI as String) >=
-                                  25 &&
-                              double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .BMI as String) <=
-                                  29.8)
-                            State_caution(),
-                          if (double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .BMI as String) >=
-                                  18.5 &&
-                              double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .BMI as String) <=
-                                  24.9)
-                            State_normal(),
+                          Get_health_Grade(
+                              "BMI",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                   Container(
@@ -221,29 +233,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           const NanumBodyText(text: '당뇨'),
                           const NanumBodyText(text: '   '),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .FBG as String) >=
-                              126)
-                            State_danger(),
-                          if (double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .FBG as String) >=
-                                  100 &&
-                              double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .FBG as String) <=
-                                  125)
-                            State_caution(),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .FBG as String) <
-                              100)
-                            State_normal(),
+                          Get_health_Grade(
+                              "FBG",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                   Container(
@@ -252,18 +245,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           const NanumBodyText(text: '신장'),
                           const NanumBodyText(text: '   '),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .GFR as String) <
-                              60)
-                            State_caution(),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .GFR as String) >=
-                              60)
-                            State_normal(),
+                          Get_health_Grade(
+                              "GFR",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                 ],
@@ -279,39 +264,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                             text: '혈압',
                           ),
                           const NanumBodyText(text: '   '),
-                          if (double.parse(screenings
-                                      .screeningList?[0].bloodPressure
-                                      ?.split("/")[0] as String) >=
-                                  140 ||
-                              double.parse(screenings
-                                      .screeningList?[0].bloodPressure
-                                      ?.split("/")[1] as String) >=
-                                  90)
-                            State_danger(),
-                          if ((double.parse(screenings
-                                          .screeningList![screenings.screeningList!.length -
-                                              1]
-                                          .bloodPressure
-                                          ?.split("/")[0] as String) >=
-                                      120 &&
-                                  double.parse(screenings.screeningList?[0].bloodPressure?.split("/")[0] as String) <
-                                      140) ||
-                              (double.parse(screenings.screeningList![screenings.screeningList!.length - 1].bloodPressure?.split("/")[1] as String) >= 80 &&
-                                  double.parse(screenings
-                                          .screeningList![screenings.screeningList!.length - 1]
-                                          .bloodPressure
-                                          ?.split("/")[1] as String) <
-                                      90))
-                            State_caution(),
-                          if (double.parse(screenings
-                                      .screeningList?[0].bloodPressure
-                                      ?.split("/")[0] as String) <
-                                  120 &&
-                              double.parse(screenings
-                                      .screeningList?[0].bloodPressure
-                                      ?.split("/")[1] as String) <
-                                  80)
-                            State_normal(),
+                          Get_health_Grade(
+                              "bloodPressure",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                   Container(
@@ -320,29 +276,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           const NanumBodyText(text: '빈혈'),
                           const NanumBodyText(text: '   '),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .hemoglobin as String) <
-                              12)
-                            State_danger(),
-                          if (double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .hemoglobin as String) >=
-                                  12 &&
-                              double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .hemoglobin as String) <=
-                                  12.9)
-                            State_caution(),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .hemoglobin as String) >=
-                              13)
-                            State_normal(),
+                          Get_health_Grade(
+                              "hemoglobin",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                   Container(
@@ -351,29 +288,10 @@ class _HealthScreenings extends State<HealthScreenings> {
                         children: [
                           const NanumBodyText(text: '간'),
                           const NanumBodyText(text: '     '),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .SGOT as String) >=
-                              51)
-                            State_danger(),
-                          if (double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .SGOT as String) >=
-                                  41 &&
-                              double.parse(screenings
-                                      .screeningList![
-                                          screenings.screeningList!.length - 1]
-                                      .SGOT as String) <=
-                                  50)
-                            State_caution(),
-                          if (double.parse(screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .SGOT as String) <=
-                              40)
-                            State_normal(),
+                          Get_health_Grade(
+                              "SGOT",
+                              screenings.screeningList![
+                                  screenings.screeningList!.length - 1])
                         ],
                       )),
                 ],
@@ -409,10 +327,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                 Container(
                   padding: const EdgeInsets.only(top: 15),
                   margin: AppTheme.totalpadding,
-                  child: const NanumTitleText(
-                    text: '건강검진',
-                    fontSize: 20
-                  ),
+                  child: const NanumTitleText(text: '건강검진', fontSize: 20),
                 ),
                 Center(
                   child: SizedBox(

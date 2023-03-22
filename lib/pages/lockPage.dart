@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
+import 'package:super_medic/widgets/server_widgets/requestHealthData.dart';
 
 // ignore: must_be_immutable
 class ApplicationLock extends StatefulWidget {
@@ -180,13 +183,31 @@ class _ApplicationLock extends State<ApplicationLock> {
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (context) {
-                                        return const PopUp();
+                                        return PopUp(
+                                            title: '비밀번호 설정 확인 오류',
+                                            body: '이전 입력하신 비밀번호와 다릅니다.');
                                       },
                                     );
                                     updateApplockValue("init", "");
                                   }
                                   // 비밀번호 설정이 완료된 경우
                                   else {
+                                    print("11111111111111111111");
+                                    saveSecureStorage(
+                                        "AppLockPw",
+                                        jsonEncode(
+                                            _applockValue.applockpwcheck));
+                                    print("22222222222222222222");
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (context) {
+                                        return PopUp(
+                                            title: '비밀번호 설정 완료',
+                                            body: '비밀번호 설정이 완료 되었습니다.');
+                                      },
+                                    );
+                                    print("3333333333333333333333333");
                                     Navigator.of(context).pop();
                                   }
                                 });
@@ -358,25 +379,29 @@ class AppLockModel {
 }
 
 class PopUp extends StatelessWidget {
-  const PopUp({super.key});
+  PopUp({required this.title, required this.body, super.key});
+  String title;
+  String body;
 
   @override
   Widget build(BuildContext context) {
+    print(title);
+    print(body);
     return AlertDialog(
       icon: const Icon(
         Icons.error_outline,
         size: 35,
       ),
-      content: const SizedBox(
+      content: SizedBox(
         height: 50,
         child: Column(
           children: [
             NanumTitleText(
-              text: '비밀번호 설정 확인 오류',
+              text: title,
               fontWeight: FontWeight.bold,
             ),
             NanumBodyText(
-              text: '이전 입력하신 비밀번호와 다릅니다.',
+              text: body,
             ),
           ],
         ),
