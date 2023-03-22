@@ -79,7 +79,7 @@ class _FamilyLinkPageState extends State<FamilyLinkPage> {
                         isScrollControlled: true,
                         builder: (BuildContext context) {
                           return Container(
-                            height: MediaQuery.of(context).size.height * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.37,
                             decoration: const BoxDecoration(
                               color: Colors.white, // 모달 배경색
                               borderRadius: BorderRadius.only(

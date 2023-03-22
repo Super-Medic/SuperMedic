@@ -20,8 +20,8 @@ class _AddLinkPage extends State<AddLinkPage> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 25.0,
+              SizedBox(
+                height: screenHeight * 0.025,
               ),
               const Center(
                 child: NanumTitleText(
@@ -29,8 +29,8 @@ class _AddLinkPage extends State<AddLinkPage> {
                   fontSize: 25.0,
                 ),
               ),
-              const SizedBox(
-                height: 20.0,
+              SizedBox(
+                height: screenHeight * 0.02,
               ),
               Expanded(
                 child: Column(
@@ -50,21 +50,57 @@ class _AddLinkPage extends State<AddLinkPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: const Column(
-                      children: [],
+                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 30),
+                    child: Column(
+                      children: [
+                        FloatingActionButton.large(
+                          backgroundColor: Colors.green,
+                          onPressed: () {
+                            // 스크롤 위치 맨위로 이동
+                          },
+                          child: const Icon(
+                            Icons.expand_less,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        const NanumTitleText(text: '메시지')
+                      ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: const Column(
-                      children: [],
+                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 30),
+                    child: Column(
+                      children: [
+                        FloatingActionButton.large(
+                          backgroundColor: Colors.green,
+                          onPressed: () {
+                            // 스크롤 위치 맨위로 이동
+                          },
+                          child: const Icon(
+                            Icons.expand_less,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        const NanumTitleText(text: '카카오톡')
+                      ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: const Column(
-                      children: [],
+                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 30),
+                    child: Column(
+                      children: [
+                        FloatingActionButton.large(
+                          backgroundColor: Colors.green,
+                          onPressed: () {
+                            // 스크롤 위치 맨위로 이동
+                          },
+                          child: const Icon(
+                            Icons.expand_less,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        const NanumTitleText(text: '링크복사')
+                      ],
                     ),
                   ),
                 ],
