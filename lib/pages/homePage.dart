@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/pages/homeIndex.dart';
+import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart';
@@ -94,8 +95,10 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.menu),
             color: Colors.black,
             iconSize: 25,
-            onPressed: () =>
-                {context.read<BottomNavigationProvider>().updateCurrentPage(4)},
+            onPressed: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyPage())),
+            },
           ),
           const SizedBox(
             width: 10,

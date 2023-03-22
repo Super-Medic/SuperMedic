@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:super_medic/themes/textstyle.dart'; //폰트 설정 파일
 import 'package:super_medic/themes/theme.dart'; //스타일 파일
 import 'package:super_medic/themes/common_color.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'dart:convert';
 import 'package:timelines/timelines.dart';
 import 'package:super_medic/pages/selectAuth.dart';
 import 'package:super_medic/function/model.dart';
@@ -91,9 +89,7 @@ class _RecentMedicationHistory extends State<RecentMedicationHistory> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextButton.icon(
-                onPressed: () {
-                  print("성공");
-                },
+                onPressed: () {},
                 label: const NanumBodyText(
                   text: '',
                 ),

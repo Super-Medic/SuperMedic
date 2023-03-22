@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:super_medic/pages/healthPage.dart';
-import 'package:super_medic/pages/HomePage.dart';
 import 'package:provider/provider.dart';
+import 'package:super_medic/pages/family_linkPage.dart';
+import 'package:super_medic/pages/healthPage.dart';
+import 'package:super_medic/pages/homePage.dart';
 import 'package:super_medic/pages/medicinePage.dart';
 import 'package:super_medic/pages/meditalkPage.dart';
-import 'package:super_medic/pages/myPage.dart';
 import 'package:super_medic/provider/bottom_navigation_provider.dart';
 import 'package:super_medic/widgets/notification/firebase_message.dart';
 import 'package:flutter/foundation.dart';
@@ -112,16 +112,11 @@ class MainPageState extends State<MainPage> {
   // 네비게이션바 UI Widget
   Widget _navigationBody() {
     switch (_bottomNavigationProvider.currentPage) {
-      case 0:
-        return const HomePage();
-      case 1:
-        return const MedicinePage();
-      case 2:
-        return const HealthPage();
-      case 3:
-        return const MeditalkPage();
-      case 4:
-        return const MyPage();
+      case 0: return const HomePage();
+      case 1: return const MedicinePage();
+      case 2: return const HealthPage();
+      case 3: return const MeditalkPage();
+      case 4: return const FamilyLinkPage();
     }
     return Container();
   }
@@ -136,43 +131,46 @@ class MainPageState extends State<MainPage> {
             icon: Container(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Image.asset(
-                  'assets/images/home_icon1.png',
+                  'assets/images/Home.png',
                   width: 22.5,
                   height: 22.5,
-                  color: const Color.fromARGB(160, 158, 158, 158),
                 )),
             activeIcon: Container(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: Image.asset('assets/images/home_icon1.png',
-                    width: 22.5, height: 22.5)),
+                child: Image.asset(
+                  'assets/images/HomeSelect.png',
+                  width: 22.5,
+                  height: 22.5,
+                )),
             label: '홈'),
         BottomNavigationBarItem(
           icon: Container(
               padding: const EdgeInsets.only(bottom: 5),
               child: Image.asset(
-                'assets/images/home_icon2.png',
+                'assets/images/Medicine.png',
                 width: 22.5,
                 height: 22.5,
-                color: const Color.fromARGB(160, 158, 158, 158),
               )),
           activeIcon: Container(
               padding: const EdgeInsets.only(bottom: 5),
-              child: Image.asset('assets/images/home_icon2.png',
-                  width: 22.5, height: 22.5)),
+              child: Image.asset(
+                'assets/images/MedicineSelect.png',
+                width: 22.5,
+                height: 22.5,
+              )),
           label: '복약관리',
         ),
         BottomNavigationBarItem(
           icon: Container(
               padding: const EdgeInsets.only(bottom: 5),
               child: Image.asset(
-                'assets/images/home_icon3.png',
+                'assets/images/record.png',
                 width: 22.5,
                 height: 22.5,
-                color: const Color.fromARGB(160, 158, 158, 158),
               )),
           activeIcon: Container(
               padding: const EdgeInsets.only(bottom: 5),
-              child: Image.asset('assets/images/home_icon3.png',
+              child: Image.asset('assets/images/recordSelect.png',
                   width: 22.5, height: 22.5)),
           label: '마이데이터',
         ),
@@ -183,7 +181,6 @@ class MainPageState extends State<MainPage> {
                 'assets/images/home_icon4.png',
                 width: 22.5,
                 height: 22.5,
-                color: const Color.fromARGB(160, 158, 158, 158),
               )),
           activeIcon: Container(
               padding: const EdgeInsets.only(bottom: 5),
@@ -194,11 +191,19 @@ class MainPageState extends State<MainPage> {
         BottomNavigationBarItem(
             icon: Container(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: const Icon(
-                  Icons.person_outline_rounded,
-                  color: Color.fromARGB(160, 158, 158, 158),
+                child: Image.asset(
+                  'assets/images/link.png',
+                  width: 22.5,
+                  height: 22.5,
                 )),
-            label: '마이페이지')
+            activeIcon: Container(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Image.asset(
+                  'assets/images/linkSelect.png',
+                  width: 22.5,
+                  height: 22.5,
+                )),
+            label: '가족연동')
       ],
 
       // 현재 페이지 : _bottomNavigationProvider의 currentPage
@@ -207,10 +212,14 @@ class MainPageState extends State<MainPage> {
       unselectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 9,
+        fontFamily: 'NotoSansKR',
         color: Color.fromARGB(160, 158, 158, 158),
       ),
-      selectedLabelStyle:
-          const TextStyle(fontWeight: FontWeight.bold, fontSize: 9),
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 9,
+        fontFamily: 'NotoSansKR',
+      ),
       // _bottomNavigationProvider에 updateCurrentPage를 통해 index를 전달
       onTap: (index) {
         _bottomNavigationProvider.updateCurrentPage(index);

@@ -64,7 +64,8 @@ class _MedicinePageState extends State<MedicinePage> {
           resizeToAvoidBottomInset: false,
           backgroundColor: CommonColor.background,
           appBar: AppBar(
-            leading: Container(),
+            leading: const SizedBox.shrink(),
+            leadingWidth: 0,
             toolbarHeight: 65,
             backgroundColor: CommonColor.background,
             elevation: 0.0,

@@ -139,7 +139,7 @@ class _SelectChronicDiseaseState extends State<SelectChronicDisease> {
             onPressed: selected == true
                 ? () {
                     saveInitChronicDisease(tag);
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const MainPage()),
                     );

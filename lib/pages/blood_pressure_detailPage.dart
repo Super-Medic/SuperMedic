@@ -20,6 +20,20 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
 // class HealthPage extends StatelessWidget {
 //   HealthPage({Key? key}) : super(key: key);
   late HomeProvider _homeProvider;
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollToTop() {
+    setState(() {
+      _scrollController.jumpTo(0);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   var i = 0;
   @override
   Widget build(BuildContext context) {
@@ -48,6 +62,7 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -83,6 +98,16 @@ class _BloodPressuredetailPage extends State<BloodPressuredetailPage> {
           ],
         ),
       )),
+      floatingActionButton: FloatingActionButton.small(
+        backgroundColor: Colors.green,
+        onPressed: () {
+          // 스크롤 위치 맨위로 이동
+          _scrollToTop();
+        },
+        child: const Icon(
+          Icons.expand_less,
+        ),
+      ),
     );
   }
 }
