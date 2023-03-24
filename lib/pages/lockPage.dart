@@ -233,10 +233,13 @@ class _ApplicationLock extends State<ApplicationLock> {
                                   //         body: '비밀번호 설정이 완료 되었습니다.');
                                   //   },
                                   // );
-                                  print("good");
+
                                   saveSecureStorage("AppLockPw",
                                       jsonEncode(_applockValue.applockpwcheck));
-                                  print("good");
+
+                                  Provider.of<HomeProvider>(context,
+                                          listen: false)
+                                      .checkAppLockState();
                                   Navigator.of(context).pop();
                                 }
                               });

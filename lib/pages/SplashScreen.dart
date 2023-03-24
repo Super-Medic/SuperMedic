@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (await kakaologin.KakaoTokenVerifiy(val)) {
             // ignore: unrelated_type_equality_checks
             await loadDiseaseSecureStorage() == true
-            //비밀번호가 설정된 경ㅇ
+                //비밀번호가 설정된 경ㅇ
                 ? await loadPwSecureStorage() == true
                     ?
                     // ignore: use_build_context_synchronously
