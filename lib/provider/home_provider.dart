@@ -22,8 +22,6 @@ class HomeProvider extends ChangeNotifier {
   MedicineModel? _medicineValue;
   DiagnosisModel? _diagnosisValue;
   LoginModel? _loginValue;
-  
-  
 
   List<BloodPressureModel> get bloodPressureValue => _bloodPressureValue;
   List<BloodSugarModel> get bloodSugarValue => _bloodSugarValue;
@@ -35,7 +33,6 @@ class HomeProvider extends ChangeNotifier {
   MedicineModel? get medicineValue => _medicineValue;
   DiagnosisModel? get diagnosisValue => _diagnosisValue;
   LoginModel? get loginValue => _loginValue;
-  
 
   int _bloodpressureCount = -1;
   int get bloodpressureCount => _bloodpressureCount;
@@ -45,6 +42,9 @@ class HomeProvider extends ChangeNotifier {
 
   int _bloodsugarCountAfter = -1;
   int get bloodsugarCountAfter => _bloodsugarCountAfter;
+
+  bool _applockState = false;
+  bool get applockState => _applockState;
 
   Future<void> homeItemsGet() async {
     _homeItems = [];
@@ -225,6 +225,17 @@ class HomeProvider extends ChangeNotifier {
 
   updateCurrentSugarAfterValue(int index) {
     _bloodsugarCountAfter = index;
+    notifyListeners();
+  }
+
+  checkAppLockState() async {
+    dynamic existPw = await storage.read(key: 'AppLockPw');
+    if (existPw != null) {
+      _applockState = true;
+    }
+    else{
+      _applockState = false;
+    }
     notifyListeners();
   }
 }

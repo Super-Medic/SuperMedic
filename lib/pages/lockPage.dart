@@ -3,15 +3,18 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:super_medic/pages/mainPage.dart';
 //스타일
 import 'package:super_medic/provider/home_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:super_medic/themes/textstyle.dart';
-import 'package:super_medic/widgets/server_widgets/requestHealthData.dart';
 
 // ignore: must_be_immutable
 class ApplicationLock extends StatefulWidget {
-  const ApplicationLock({Key? key}) : super(key: key);
+  String type;
+  ApplicationLock(String type, {Key? key})
+      : type = type,
+        super(key: key);
 
   @override
   State<ApplicationLock> createState() => _ApplicationLock();
@@ -28,6 +31,7 @@ class _ApplicationLock extends State<ApplicationLock> {
     // TODO: implement initState
     super.initState();
     _applockValue = AppLockModel(["_", "_", "_", "_"]);
+    print(widget.type);
   }
 
   @override
@@ -39,10 +43,6 @@ class _ApplicationLock extends State<ApplicationLock> {
         MediaQuery.of(context).padding.top;
 
     var screenWidth = MediaQuery.of(context).size.width;
-    print(MediaQuery.of(context).padding.top);
-    print(MediaQuery.of(context).padding.bottom);
-    print(MediaQuery.of(context).viewInsets.bottom);
-    print(MediaQuery.of(context).viewPadding.bottom);
 
     _homeProvider = context.watch<HomeProvider>();
 
@@ -66,17 +66,20 @@ class _ApplicationLock extends State<ApplicationLock> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
-                //replace with our own icon data.
-              ),
-              title: const NanumTitleText(text: "비밀번호 설정"),
+              leading: widget.type == "init"
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ),
+                      //replace with our own icon data.
+                    )
+                  : null,
+              title:
+                  NanumTitleText(text: widget.type == "init" ? "비밀번호 설정" : ""),
               toolbarHeight: 60,
               backgroundColor: Colors.white,
               elevation: 0.0),
@@ -167,54 +170,86 @@ class _ApplicationLock extends State<ApplicationLock> {
               ),
               TextButton(
                   style: style,
+                  // 입력한 비밀번호가 4자리일 경우
                   onPressed: _applockValue.inputPwLength == 4
-                      ? () {
-                          _applockValue.firstInput == false
-                              // 비밀번호 1차만 입력될 경우
-                              ? setState(() {
-                                  updateApplockValue("firstpwcompl", "");
-                                })
-                              // 비밀번호 2차까지 입력될 경우
-                              : setState(() {
-                                  updateApplockValue("pwcmp", "");
-                                  // 1차, 2차 비밀번호가 다를 경우
-                                  if (_applockValue.verifyCompl == false) {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (context) {
-                                        return PopUp(
-                                            title: '비밀번호 설정 확인 오류',
-                                            body: '이전 입력하신 비밀번호와 다릅니다.');
-                                      },
-                                    );
-                                    updateApplockValue("init", "");
-                                  }
-                                  // 비밀번호 설정이 완료된 경우
-                                  else {
-                                    print("11111111111111111111");
-                                    saveSecureStorage(
-                                        "AppLockPw",
-                                        jsonEncode(
-                                            _applockValue.applockpwcheck));
-                                    print("22222222222222222222");
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (context) {
-                                        return PopUp(
-                                            title: '비밀번호 설정 완료',
-                                            body: '비밀번호 설정이 완료 되었습니다.');
-                                      },
-                                    );
-                                    print("3333333333333333333333333");
-                                    Navigator.of(context).pop();
-                                  }
-                                });
+                      ? () async {
+                          // 비밀번호 검증인 경우
+                          if (widget.type == "verify") {
+                            if (await _applockValue.verifyPw() == true) {
+                              if (!mounted) return;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainPage()),
+                              );
+                            } else {
+                              if (!mounted) return;
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (context) {
+                                    return PopUp(
+                                        title: '비밀번호 확인 오류',
+                                        body: '등록된 비밀번호가 아닙니다.');
+                                  });
+                              setState(() {
+                                updateApplockValue("init", "");
+                              });
+                            }
+                          }
+                          // 비밀번호 초기화인 경우
+                          else if (widget.type == "init") {
+                            // 비밀번호 1차만 입력될 경우
+                            if (_applockValue.firstInput == false) {
+                              setState(() {
+                                updateApplockValue("firstpwcompl", "");
+                              });
+                            }
+                            // 비밀번호 2차까지 입력될 경우
+                            else {
+                              setState(() {
+                                updateApplockValue("pwcmp", "");
+                                // 1차, 2차 비밀번호가 다를 경우
+                                if (_applockValue.verifyCompl == false) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) {
+                                      return PopUp(
+                                          title: '비밀번호 설정 확인 오류',
+                                          body: '이전 입력하신 비밀번호와 다릅니다.');
+                                    },
+                                  );
+                                  updateApplockValue("init", "");
+                                }
+                                // 비밀번호 설정이 완료된 경우
+                                else {
+                                  // showDialog(
+                                  //   context: context,
+                                  //   barrierDismissible: false,
+                                  //   builder: (context) {
+                                  //     return PopUp(
+                                  //         title: '비밀번호 설정 완료',
+                                  //         body: '비밀번호 설정이 완료 되었습니다.');
+                                  //   },
+                                  // );
+                                  print("good");
+                                  saveSecureStorage("AppLockPw",
+                                      jsonEncode(_applockValue.applockpwcheck));
+                                  print("good");
+                                  Navigator.of(context).pop();
+                                }
+                              });
+                            }
+                          }
                         }
                       : null,
                   child: NanumTitleText(
-                    text: _applockValue.firstInput == false ? '다음' : "저장",
+                    text: _applockValue.firstInput == false
+                        ? widget.type == "verify"
+                            ? "확인"
+                            : "다음"
+                        : "저장",
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   )),
@@ -251,7 +286,6 @@ class _ApplicationLock extends State<ApplicationLock> {
         width: (screenWidth - screenWidth * 0.002) / 3,
         child: ElevatedButton(
           onPressed: () {
-            // print(num);
             updateApplockValue(type, num);
             setState(() {});
           },
@@ -376,6 +410,20 @@ class AppLockModel {
     }
     return verifyCompl;
   }
+
+  Future<bool> verifyPw() async {
+    const storage = FlutterSecureStorage();
+    var savedPw = jsonDecode(await storage.read(key: "AppLockPw") as String)
+        .cast<String>();
+
+    if (listEquals(savedPw, tmpapplockpw)) {
+      return true;
+    } else {
+      return false;
+    }
+
+// }
+  }
 }
 
 class PopUp extends StatelessWidget {
@@ -385,8 +433,6 @@ class PopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(title);
-    print(body);
     return AlertDialog(
       icon: const Icon(
         Icons.error_outline,
@@ -426,4 +472,9 @@ class PopUp extends StatelessWidget {
       ],
     );
   }
+}
+
+saveSecureStorage(String key, String data) async {
+  const storage = FlutterSecureStorage();
+  await storage.write(key: key, value: data);
 }

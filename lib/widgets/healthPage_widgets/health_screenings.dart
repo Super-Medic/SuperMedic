@@ -203,10 +203,7 @@ class _HealthScreenings extends State<HealthScreenings> {
                           const NanumBodyText(text: '종합판정'),
                           const NanumBodyText(text: '   '),
                           NanumTitleText(
-                              text: screenings
-                                  .screeningList![
-                                      screenings.screeningList!.length - 1]
-                                  .result as String,
+                              text: screenings.screeningList![screenings.screeningList!.length - 1].result as String,
                               color: Colors.red)
                         ],
                       )),
