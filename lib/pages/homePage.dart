@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
       if (_homeProvider.loginValue == null) {
         Provider.of<HomeProvider>(context, listen: false).logingetData();
       }
+      Provider.of<HomeProvider>(context, listen: false).checkAppLockState();
       Provider.of<MedicineTake>(context, listen: false).fetchGet();
     });
   }

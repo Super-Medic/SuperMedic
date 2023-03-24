@@ -6,6 +6,7 @@ import 'package:super_medic/function/kakao_login.dart';
 import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/model.dart';
+import 'package:super_medic/pages/lockPage.dart';
 import 'package:super_medic/pages/loginPage.dart';
 import 'package:super_medic/pages/mainPage.dart';
 import 'package:super_medic/pages/selectChronicDisease.dart';
@@ -36,11 +37,22 @@ class _SplashScreenState extends State<SplashScreen> {
           if (await kakaologin.KakaoTokenVerifiy(val)) {
             // ignore: unrelated_type_equality_checks
             await loadDiseaseSecureStorage() == true
-                // ignore: use_build_context_synchronously
-                ? Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MainPage()),
-                  )
+            //비밀번호가 설정된 경ㅇ
+                ? await loadPwSecureStorage() == true
+                    ?
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ApplicationLock("verify")),
+                      )
+                    :
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MainPage()),
+                      )
                 // ignore: use_build_context_synchronously
                 : Navigator.pushReplacement(
                     context,
@@ -203,4 +215,14 @@ dynamic _loadLoginSecureStorage() async {
     return LoginModel.fromJson(jsonDecode(val));
   }
   return false;
+}
+
+Future<bool> loadPwSecureStorage() async {
+  const storage = FlutterSecureStorage();
+  var val = await storage.read(key: "AppLockPw");
+  if (val == null) {
+    return false;
+  } else {
+    return true;
+  }
 }

@@ -31,75 +31,72 @@ class _MyPage extends State<MyPage> {
   final storage = const FlutterSecureStorage();
   String? userName;
 
+  var existPw = false;
+
+  checkExistPw() async {
+    existPw = await loadPwSecureStorage();
+    setState(() {});
+    print("====================");
+    print(existPw);
+    print("====================");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkExistPw();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    // getUserName();
-
     _homeProvider = context.watch<HomeProvider>();
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        toolbarHeight: 60,
-        backgroundColor: Colors.white, //배경 색
-        elevation: 0.0, //그림자 효과 해제
-        leading: Container(
-          padding: const EdgeInsets.only(left: 10),
-          child: IconButton(
-            padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-          ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          toolbarHeight: 60,
+          backgroundColor: Colors.white, //배경 색
+          elevation: 0.0, //그림자 효과 해제
         ),
-        title: const NanumTitleText(text: '전체'),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.notifications_none),
-        //     color: Colors.black,
-        //     iconSize: 25,
-        //     onPressed: () => {},
-        //   ),
-        //   IconButton(
-        //     icon: const Icon(Icons.menu),
-        //     color: Colors.black,
-        //     iconSize: 25,
-        //     onPressed: () => {},
-        //   ),
-        //   const SizedBox(
-        //     width: 10,
-        //   ),
-        // ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // ignore: unrelated_type_equality_checks
-              // First(context),
-              // Container(
-              //   height: 0.7,
-              //   color: Colors.grey,
-              // ),
+              GestureDetector(
+                onTap: () {
+                  unsetAppLock();
+                },
+                child: Container(
+                  decoration: const BoxDecoration(color: Colors.white),
+                  padding: AppTheme.widgetpadding,
+                  height: screenHeight * 0.07,
+                  child: Row(children: [
+                    Icon(
+                      Icons.assignment_outlined,
+                      size: screenWidth * 0.06,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: screenWidth * 0.03),
+                    const NanumText(
+                      text: "잠금해제",
+                      color: Colors.black,
+                      fontSize: 13,
+                    )
+                  ]),
+                ),
+              ),
 
               Center(
                 child: Container(
-                  margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  // width: screenWidth * 0.7,
-                  // height: screenHeight * 0.12,
+                  width: screenWidth * 0.7,
+                  height: screenHeight * 0.12,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: const Color.fromARGB(20, 158, 158, 158)),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey[200]),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -129,10 +126,7 @@ class _MyPage extends State<MyPage> {
                   ),
                 ),
               ),
-              // Container(
-              //   height: 0.7,
-              //   color: Colors.grey,
-              // ),
+
               Container(
                 padding: AppTheme.widgetpadding,
                 width: double.infinity,
@@ -149,47 +143,85 @@ class _MyPage extends State<MyPage> {
                   ],
                 ),
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ApplicationLock()));
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        padding: AppTheme.widgetpadding,
-                        height: screenHeight * 0.07,
-                        child: Row(children: [
-                          Icon(
-                            Icons.lock_outline,
-                            size: screenWidth * 0.06,
-                            color: Colors.grey,
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
+                            padding: AppTheme.widgetpadding,
+                            height: screenHeight * 0.07,
+                            child: Row(children: [
+                              Icon(
+                                Icons.lock_outline,
+                                size: screenWidth * 0.06,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(width: screenWidth * 0.03),
+                              const NanumText(
+                                text: "비밀번호 잠금",
+                                color: Colors.black,
+                                fontSize: 13,
+                              )
+                            ]),
                           ),
-                          SizedBox(width: screenWidth * 0.03),
-                          const NanumText(
-                            text: "비밀번호 잠금",
-                            color: Colors.black,
-                            fontSize: 13,
-                          )
+                          Switch(
+                              // thumb color (round icon)
+                              activeColor: Colors.amber,
+                              activeTrackColor: Colors.cyan,
+                              inactiveThumbColor: Colors.blueGrey.shade600,
+                              inactiveTrackColor: Colors.grey.shade400,
+                              splashRadius: 50.0,
+                              // boolean variable value
+                              value:
+                                  // existPw,
+                                  _homeProvider.applockState,
+                              // changes the state of the switch
+                              onChanged: (value) {
+                                // 비밀번호가 설정되어 있는 경우
+                                print(existPw);
+                                print(value);
+
+                                if (!value) {
+                                  showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                        return const LockUnsetPopUp();
+                                      });
+
+                                  Provider.of<HomeProvider>(context,
+                                          listen: false)
+                                      .checkAppLockState();
+                                  setState(() {});
+                                }
+                                // 비밀번호가 해제되어 있는 경우
+                                else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ApplicationLock("init")),
+                                  );
+
+                                  Provider.of<HomeProvider>(context,
+                                          listen: false)
+                                      .checkAppLockState();
+                                  setState(() {});
+                                }
+                                print("switch!");
+                              }),
                         ]),
-                      ),
-                    ),
                   ],
                 ),
               ),
 
-              // Container(
-              //   height: screenHeight * 0.06,
-              //   // color: Colors.grey,
-              // ),
               Container(
                 height: 0.7,
                 color: Colors.grey,
               ),
-              // SizedBox(width: screenWidth * 0.03),
+
               Container(
                 padding: AppTheme.widgetpadding,
                 width: double.infinity,
@@ -206,7 +238,6 @@ class _MyPage extends State<MyPage> {
                   ],
                 ),
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -232,10 +263,6 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    // Container(
-                    //   height: 0.4,
-                    //   color: Colors.grey,
-                    // ),
                     GestureDetector(
                       onTap: () {
                         webView("개인정보(민감정보) 수집 및 이용 동의",
@@ -260,10 +287,6 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    // Container(
-                    //   height: 0.4,
-                    //   color: Colors.grey,
-                    // ),
                     GestureDetector(
                       onTap: () {
                         webView("서비스 이용약관",
@@ -288,10 +311,6 @@ class _MyPage extends State<MyPage> {
                         ]),
                       ),
                     ),
-                    // Container(
-                    //   height: screenHeight * 0.005,
-                    //   color: Colors.grey,
-                    // ),
                     GestureDetector(
                       onTap: () {
                         showDialog(
@@ -389,11 +408,6 @@ class _MyPage extends State<MyPage> {
 class QuitPopUp extends StatefulWidget {
   const QuitPopUp({super.key});
 
-  // late HomeProvider _homeProvider;
-  // const QuitPopUp({
-  //   Key? key,
-  //   required this.homeProvider,
-  // }) : super(key: key);
   @override
   State<QuitPopUp> createState() => _QuitPopUpState();
 }
@@ -669,4 +683,121 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
       ],
     );
   }
+}
+
+Future<bool> loadPwSecureStorage() async {
+  const storage = FlutterSecureStorage();
+  var val = await storage.read(key: "AppLockPw");
+  print("-=-=-=-=-=-=-=-=-=");
+  print(val);
+  print("-=-=-=-=-=-=-=-=-=");
+  if (val == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+class LockUnsetPopUp extends StatefulWidget {
+  const LockUnsetPopUp({super.key});
+
+  @override
+  State<LockUnsetPopUp> createState() => _LockUnsetPopUpState();
+}
+
+class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
+  @override
+  Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
+    return AlertDialog(
+      icon: const Icon(
+        Icons.error_outline,
+        size: 35,
+      ),
+      content: const SizedBox(
+        height: 60,
+        child: Column(
+          children: [
+            NanumTitleText(text: '잠금 설정 해제'),
+            NanumBodyText(
+              text: '어플리케이션 잠금을 해제 하시겠습니까?',
+              fontSize: 12,
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        Center(
+            child: Row(children: [
+          TextButton(
+            onPressed: () async {
+              await unsetAppLock();
+              print("어플잠금 해제 완료");
+              Navigator.of(context).pop();
+            },
+            style: TextButton.styleFrom(
+              minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
+              backgroundColor: Colors.green,
+            ),
+            child: const NanumBodyText(
+              text: '네',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(width: screenWidth * 0.01),
+          TextButton(
+            onPressed: () async {
+              await unsetAppLock();
+              Navigator.of(context).pop();
+            },
+            style: TextButton.styleFrom(
+              minimumSize: Size(screenWidth * 0.35, screenHeight * 0.04),
+              backgroundColor: Colors.green,
+            ),
+            child: const NanumBodyText(
+              text: '아니오',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ]))
+      ],
+    );
+  }
+
+  void _showAlert({String? title, String? message}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title:
+                Text(title!, style: const TextStyle(fontFamily: 'NotoSansKR')),
+            content: Text(message!,
+                style: const TextStyle(fontFamily: 'NotoSansKR')),
+            actions: [
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: const Text("확인",
+                      style: TextStyle(fontFamily: 'NotoSansKR')),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
+  unsetAppLock() async {
+    const storage = FlutterSecureStorage();
+    await storage.delete(key: "AppLockPw");
+  }
+}
+
+unsetAppLock() async {
+  const storage = FlutterSecureStorage();
+  var tmp1 = await storage.read(key: "AppLockPw");
+  print(tmp1);
 }

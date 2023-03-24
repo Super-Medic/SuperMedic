@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../themes/textstyle.dart';
 
@@ -469,3 +472,76 @@ class LoginBeingModel {
         gender = json['gender'];
 }
 
+class AppLockStateModel {
+  late List<String> tmpapplockpw = ['_', '_', '_', '_'];
+  late List<String> applockpwcheck;
+
+  final bool lockstate = false;
+
+  bool firstInput = false;
+  bool verifyCompl = false;
+  int inputPwLength = 0;
+
+  AppLockModel(_tmpapplockpw) {
+    tmpapplockpw = _tmpapplockpw;
+  }
+  initPw() {
+    print("initPw");
+    tmpapplockpw = ['_', '_', '_', '_'];
+    firstInput = false;
+    verifyCompl = false;
+    inputPwLength = 0;
+  }
+
+  inputPw(String inputpw) {
+    print("inputPw");
+    if (inputPwLength <= 3) {
+      tmpapplockpw[inputPwLength] = inputpw;
+      inputPwLength += 1;
+    }
+    print("inputPwLength $inputPwLength $tmpapplockpw");
+  }
+
+  removePw() {
+    print("removePw");
+    if (inputPwLength != 0) {
+      inputPwLength -= 1;
+      tmpapplockpw[inputPwLength] = "_";
+    }
+    print("inputPwLength $inputPwLength $tmpapplockpw");
+  }
+
+  firstInputPwCompl() {
+    print("firstInputPwCompl");
+    firstInput = true;
+    applockpwcheck = [...tmpapplockpw];
+    tmpapplockpw = ["_", "_", "_", "_"];
+    inputPwLength = 0;
+
+    print("엥");
+  }
+
+  bool pwCmp() {
+    print("pwCmp");
+    if (listEquals(applockpwcheck, tmpapplockpw)) {
+      verifyCompl = true;
+    } else {
+      verifyCompl = false;
+    }
+    return verifyCompl;
+  }
+
+  Future<bool> verifyPw() async {
+    const storage = FlutterSecureStorage();
+    var savedPw = jsonDecode(await storage.read(key: "AppLockPw") as String)
+        .cast<String>();
+
+    if (listEquals(savedPw, tmpapplockpw)) {
+      return true;
+    } else {
+      return false;
+    }
+
+// }
+  }
+}
