@@ -191,9 +191,9 @@ class _MyPage extends State<MyPage> {
                                         return const LockUnsetPopUp();
                                       });
 
-                                  Provider.of<HomeProvider>(context,
-                                          listen: false)
-                                      .checkAppLockState();
+                                  // Provider.of<HomeProvider>(context,
+                                  //         listen: false)
+                                  //     .checkAppLockState();
                                   setState(() {});
                                 }
                                 // 비밀번호가 해제되어 있는 경우
@@ -734,6 +734,8 @@ class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
           TextButton(
             onPressed: () async {
               await unsetAppLock();
+              Provider.of<HomeProvider>(context, listen: false)
+                  .checkAppLockState();
               print("어플잠금 해제 완료");
               Navigator.of(context).pop();
             },
@@ -750,7 +752,6 @@ class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
           SizedBox(width: screenWidth * 0.01),
           TextButton(
             onPressed: () async {
-              await unsetAppLock();
               Navigator.of(context).pop();
             },
             style: TextButton.styleFrom(
