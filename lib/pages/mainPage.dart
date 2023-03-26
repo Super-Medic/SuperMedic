@@ -93,9 +93,7 @@ class MainPageState extends State<MainPage> {
     ///forground work
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
-        if (defaultTargetPlatform == TargetPlatform.android) {
-          LocalNotificationService.display(message);
-        }
+        LocalNotificationService.display(message);
       }
     });
 
