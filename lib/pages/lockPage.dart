@@ -31,13 +31,10 @@ class _ApplicationLock extends State<ApplicationLock> {
     // TODO: implement initState
     super.initState();
     _applockValue = AppLockModel(["_", "_", "_", "_"]);
-    print(widget.type);
   }
 
   @override
   Widget build(BuildContext context) {
-    // print("good");
-    print(MediaQuery.of(context).size.height);
     var screenHeight = MediaQuery.of(context).size.height * 0.93 -
         kBottomNavigationBarHeight -
         MediaQuery.of(context).padding.top;
@@ -168,94 +165,89 @@ class _ApplicationLock extends State<ApplicationLock> {
                   ),
                 ]),
               ),
-              TextButton(
-                  style: style,
-                  // 입력한 비밀번호가 4자리일 경우
-                  onPressed: _applockValue.inputPwLength == 4
-                      ? () async {
-                          // 비밀번호 검증인 경우
-                          if (widget.type == "verify") {
-                            if (await _applockValue.verifyPw() == true) {
-                              if (!mounted) return;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainPage()),
-                              );
-                            } else {
-                              if (!mounted) return;
-                              showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) {
-                                    return PopUp(
-                                        title: '비밀번호 확인 오류',
-                                        body: '등록된 비밀번호가 아닙니다.');
+              widget.type == "init"
+                  ? TextButton(
+                      style: style,
+                      // 입력한 비밀번호가 4자리일 경우
+                      onPressed: _applockValue.inputPwLength == 4
+                          ? () async {
+                              // 비밀번호 검증인 경우
+                              // if (widget.type == "verify") {
+                              //   if (await _applockValue.verifyPw() == true) {
+                              //     if (!mounted) return;
+                              //     Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) => const MainPage()),
+                              //     );
+                              //   } else {
+                              //     if (!mounted) return;
+                              //     showDialog(
+                              //         context: context,
+                              //         barrierDismissible: false,
+                              //         builder: (context) {
+                              //           return PopUp(
+                              //               title: '비밀번호 확인 오류',
+                              //               body: '등록된 비밀번호가 아닙니다.');
+                              //         });
+                              //     setState(() {
+                              //       updateApplockValue("init", "");
+                              //     });
+                              //   }
+                              // }
+                              // 비밀번호 초기화인 경우
+                              // else
+                              if (widget.type == "init") {
+                                // 비밀번호 1차만 입력될 경우
+                                if (_applockValue.firstInput == false) {
+                                  setState(() {
+                                    updateApplockValue("firstpwcompl", "");
                                   });
-                              setState(() {
-                                updateApplockValue("init", "");
-                              });
-                            }
-                          }
-                          // 비밀번호 초기화인 경우
-                          else if (widget.type == "init") {
-                            // 비밀번호 1차만 입력될 경우
-                            if (_applockValue.firstInput == false) {
-                              setState(() {
-                                updateApplockValue("firstpwcompl", "");
-                              });
-                            }
-                            // 비밀번호 2차까지 입력될 경우
-                            else {
-                              setState(() {
-                                updateApplockValue("pwcmp", "");
-                                // 1차, 2차 비밀번호가 다를 경우
-                                if (_applockValue.verifyCompl == false) {
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (context) {
-                                      return PopUp(
-                                          title: '비밀번호 설정 확인 오류',
-                                          body: '이전 입력하신 비밀번호와 다릅니다.');
-                                    },
-                                  );
-                                  updateApplockValue("init", "");
                                 }
-                                // 비밀번호 설정이 완료된 경우
+                                // 비밀번호 2차까지 입력될 경우
                                 else {
-                                  // showDialog(
-                                  //   context: context,
-                                  //   barrierDismissible: false,
-                                  //   builder: (context) {
-                                  //     return PopUp(
-                                  //         title: '비밀번호 설정 완료',
-                                  //         body: '비밀번호 설정이 완료 되었습니다.');
-                                  //   },
-                                  // );
+                                  setState(() {
+                                    updateApplockValue("pwcmp", "");
+                                    // 1차, 2차 비밀번호가 다를 경우
+                                    if (_applockValue.verifyCompl == false) {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) {
+                                          return PopUp(
+                                              title: '비밀번호 설정 확인 오류',
+                                              body: '이전 입력하신 비밀번호와 다릅니다.');
+                                        },
+                                      );
+                                      updateApplockValue("init", "");
+                                    }
+                                    // 비밀번호 설정이 완료된 경우
+                                    else {
+                                      saveSecureStorage(
+                                          "AppLockPw",
+                                          jsonEncode(
+                                              _applockValue.applockpwcheck));
 
-                                  saveSecureStorage("AppLockPw",
-                                      jsonEncode(_applockValue.applockpwcheck));
-
-                                  Provider.of<HomeProvider>(context,
-                                          listen: false)
-                                      .checkAppLockState();
-                                  Navigator.of(context).pop();
+                                      Provider.of<HomeProvider>(context,
+                                              listen: false)
+                                          .checkAppLockState();
+                                      Navigator.of(context).pop();
+                                    }
+                                  });
                                 }
-                              });
+                              }
                             }
-                          }
-                        }
-                      : null,
-                  child: NanumTitleText(
-                    text: _applockValue.firstInput == false
-                        ? widget.type == "verify"
-                            ? "확인"
-                            : "다음"
-                        : "저장",
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  )),
+                          : null,
+                      child: NanumTitleText(
+                        text: _applockValue.firstInput == false
+                            ? widget.type == "verify"
+                                ? "확인"
+                                : "다음"
+                            : "저장",
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ))
+                  : const SizedBox(),
             ],
           ),
           // bottomSheet:
@@ -288,9 +280,31 @@ class _ApplicationLock extends State<ApplicationLock> {
         // width: double.maxFinite,
         width: (screenWidth - screenWidth * 0.002) / 3,
         child: ElevatedButton(
-          onPressed: () {
-            updateApplockValue(type, num);
+          onPressed: () async {
+            await updateApplockValue(type, num);
             setState(() {});
+
+            if (widget.type == "verify" && _applockValue.inputPwLength == 4) {
+              if (await _applockValue.verifyPw() == true) {
+                if (!mounted) return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainPage()),
+                );
+              } else {
+                if (!mounted) return;
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return PopUp(
+                          title: '비밀번호 확인 오류', body: '등록된 비밀번호가 아닙니다.');
+                    });
+                setState(() {
+                  updateApplockValue("init", "");
+                });
+              }
+            }
           },
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.green,
@@ -369,7 +383,6 @@ class AppLockModel {
     tmpapplockpw = _tmpapplockpw;
   }
   initPw() {
-    print("initPw");
     tmpapplockpw = ['_', '_', '_', '_'];
     firstInput = false;
     verifyCompl = false;
@@ -377,35 +390,27 @@ class AppLockModel {
   }
 
   inputPw(String inputpw) {
-    print("inputPw");
     if (inputPwLength <= 3) {
       tmpapplockpw[inputPwLength] = inputpw;
       inputPwLength += 1;
     }
-    print("inputPwLength $inputPwLength $tmpapplockpw");
   }
 
   removePw() {
-    print("removePw");
     if (inputPwLength != 0) {
       inputPwLength -= 1;
       tmpapplockpw[inputPwLength] = "_";
     }
-    print("inputPwLength $inputPwLength $tmpapplockpw");
   }
 
   firstInputPwCompl() {
-    print("firstInputPwCompl");
     firstInput = true;
     applockpwcheck = [...tmpapplockpw];
     tmpapplockpw = ["_", "_", "_", "_"];
     inputPwLength = 0;
-
-    print("엥");
   }
 
   bool pwCmp() {
-    print("pwCmp");
     if (listEquals(applockpwcheck, tmpapplockpw)) {
       verifyCompl = true;
     } else {
