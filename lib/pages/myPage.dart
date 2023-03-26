@@ -36,9 +36,6 @@ class _MyPage extends State<MyPage> {
   checkExistPw() async {
     existPw = await loadPwSecureStorage();
     setState(() {});
-    print("====================");
-    print(existPw);
-    print("====================");
   }
 
   @override
@@ -59,37 +56,15 @@ class _MyPage extends State<MyPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          leadingWidth: 0,
           toolbarHeight: 60,
           backgroundColor: Colors.white, //배경 색
           elevation: 0.0, //그림자 효과 해제
+          title: const NanumTitleText(text: "마이페이지", fontSize: 20),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  unsetAppLock();
-                },
-                child: Container(
-                  decoration: const BoxDecoration(color: Colors.white),
-                  padding: AppTheme.widgetpadding,
-                  height: screenHeight * 0.07,
-                  child: Row(children: [
-                    Icon(
-                      Icons.assignment_outlined,
-                      size: screenWidth * 0.06,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(width: screenWidth * 0.03),
-                    const NanumText(
-                      text: "잠금해제",
-                      color: Colors.black,
-                      fontSize: 13,
-                    )
-                  ]),
-                ),
-              ),
-
               Center(
                 child: Container(
                   width: screenWidth * 0.7,
@@ -119,7 +94,9 @@ class _MyPage extends State<MyPage> {
                       ),
                       IconButton(
                           iconSize: screenWidth * 0.1,
-                          onPressed: () {},
+                          onPressed: () {
+                            print("회원정보 수정");
+                          },
                           icon: const Icon(Icons.chevron_right),
                           color: Colors.black),
                     ],
@@ -168,8 +145,8 @@ class _MyPage extends State<MyPage> {
                           ),
                           Switch(
                               // thumb color (round icon)
-                              activeColor: Colors.amber,
-                              activeTrackColor: Colors.cyan,
+                              activeColor: Colors.green,
+                              activeTrackColor: Colors.green[100],
                               inactiveThumbColor: Colors.blueGrey.shade600,
                               inactiveTrackColor: Colors.grey.shade400,
                               splashRadius: 50.0,
@@ -180,8 +157,6 @@ class _MyPage extends State<MyPage> {
                               // changes the state of the switch
                               onChanged: (value) {
                                 // 비밀번호가 설정되어 있는 경우
-                                print(existPw);
-                                print(value);
 
                                 if (!value) {
                                   showDialog(
@@ -210,7 +185,6 @@ class _MyPage extends State<MyPage> {
                                       .checkAppLockState();
                                   setState(() {});
                                 }
-                                print("switch!");
                               }),
                         ]),
                   ],
@@ -688,9 +662,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
 Future<bool> loadPwSecureStorage() async {
   const storage = FlutterSecureStorage();
   var val = await storage.read(key: "AppLockPw");
-  print("-=-=-=-=-=-=-=-=-=");
-  print(val);
-  print("-=-=-=-=-=-=-=-=-=");
+
   if (val == null) {
     return false;
   } else {
@@ -736,7 +708,7 @@ class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
               await unsetAppLock();
               Provider.of<HomeProvider>(context, listen: false)
                   .checkAppLockState();
-              print("어플잠금 해제 완료");
+
               Navigator.of(context).pop();
             },
             style: TextButton.styleFrom(
@@ -800,5 +772,4 @@ class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
 unsetAppLock() async {
   const storage = FlutterSecureStorage();
   var tmp1 = await storage.read(key: "AppLockPw");
-  print(tmp1);
 }
