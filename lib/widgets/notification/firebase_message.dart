@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -5,16 +7,22 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
-
-  static void initialize(BuildContext context) {
+  static const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    "1:585309393841:android:2940a96afa932465df6390",
+    "슈퍼메딕",
+    description: "SuperMedic channel", // description
+    importance: Importance.max,
+  );
+  static void initialize(BuildContext context) async {
     const InitializationSettings initializationSettings =
         InitializationSettings(
             android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-            iOS: DarwinInitializationSettings(
-              requestSoundPermission: true,
-              requestBadgePermission: true,
-              requestAlertPermission: true,
-            ));
+            iOS: DarwinInitializationSettings());
+
+    await _notificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
 
     _notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: (route) async {
@@ -24,26 +32,25 @@ class LocalNotificationService {
 
   static void display(RemoteMessage message) async {
     try {
-      final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-
-      const NotificationDetails notificationDetails = NotificationDetails(
+      NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-          "1:585309393841:android:2940a96afa932465df6390",
-          "슈퍼메딕",
-          channelDescription: "this is our channel",
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
           importance: Importance.max,
-          priority: Priority.max,
+          priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(),
       );
-
-      await _notificationsPlugin.show(
-        id,
-        message.notification!.title,
-        message.notification!.body,
-        notificationDetails,
-        payload: message.data["route"],
-      );
+      if (message.notification != null && Platform.isAndroid) {
+        await _notificationsPlugin.show(
+          message.notification.hashCode,
+          message.notification?.title,
+          message.notification?.body,
+          notificationDetails,
+          payload: message.data["route"],
+        );
+      }
     } on Exception catch (e) {
       print(e);
     }

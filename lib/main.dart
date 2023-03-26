@@ -15,20 +15,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:super_medic/widgets/calender_widgets/utils.dart';
 import 'package:super_medic/provider/medicine_provider.dart';
 import 'package:flutter/services.dart';
+import 'package:super_medic/widgets/notification/firebase_options.dart';
 
-Future<void> backgroundHandler(RemoteMessage message) async {
-  print('백 그라운드');
-  print(message.data.toString());
-  print(message.notification!.title);
-  print('================================================================');
-}
+Future<void> backgroundHandler(RemoteMessage message) async {}
 
 // ignore: prefer_const_constructors
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   await dotenv.load(fileName: "assets/config/.env");
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   KakaoSdk.init(nativeAppKey: dotenv.env['AppKey']);
   final prefs = await SharedPreferences.getInstance();
@@ -66,7 +64,7 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus(); // 키보드 닫기 이벤트
         },
         child: MaterialApp(
-          title: 'Super_medict',
+          title: 'Super_medic',
           debugShowCheckedModeBanner: false, //AppBar DEBUG 리본 없애기
           theme: ThemeData(
             splashColor: Colors.transparent, //버튼 클릭 시 물결 없애기
