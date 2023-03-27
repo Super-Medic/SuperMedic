@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Super_medic',
           debugShowCheckedModeBanner: false, //AppBar DEBUG 리본 없애기
+
           theme: ThemeData(
             splashColor: Colors.transparent, //버튼 클릭 시 물결 없애기
             highlightColor: Colors.transparent, //버튼 클릭 시 물결 없애기
