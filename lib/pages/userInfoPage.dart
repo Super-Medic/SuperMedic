@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
-import 'package:super_medic/pages/lockPage.dart';
-import 'package:super_medic/pages/userInfoPage.dart';
 import 'package:super_medic/themes/textstyle.dart';
 import 'package:super_medic/themes/theme.dart'; //스타일
 import 'package:super_medic/themes/common_color.dart';
@@ -20,30 +18,22 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:super_medic/main.dart';
 
 // ignore: must_be_immutable
-class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+class UserInfoPage extends StatefulWidget {
+  const UserInfoPage({Key? key}) : super(key: key);
 
   @override
-  State<MyPage> createState() => _MyPage();
+  State<UserInfoPage> createState() => _UserInfoPage();
 }
 
-class _MyPage extends State<MyPage> {
+class _UserInfoPage extends State<UserInfoPage> {
   late HomeProvider _homeProvider;
   final storage = const FlutterSecureStorage();
   String? userName;
-
-  var existPw = false;
-
-  checkExistPw() async {
-    existPw = await loadPwSecureStorage();
-    setState(() {});
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkExistPw();
   }
 
   @override
@@ -57,11 +47,18 @@ class _MyPage extends State<MyPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leadingWidth: 0,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            color: Colors.black,
+            icon: const Icon(Icons.chevron_left, size: 40),
+          ),
+          leadingWidth: 30,
           toolbarHeight: 60,
           backgroundColor: Colors.white, //배경 색
           elevation: 0.0, //그림자 효과 해제
-          title: const NanumTitleText(text: "더보기", fontSize: 20),
+          title: const NanumTitleText(text: "마이페이지", fontSize: 20),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -73,38 +70,9 @@ class _MyPage extends State<MyPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       color: Colors.grey[200]),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(width: screenWidth * 0.05),
-                          Icon(
-                            Icons.person,
-                            size: screenWidth * 0.1,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: screenWidth * 0.03),
-                          NanumText(
-                            text: _homeProvider.loginValue!.name,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 20,
-                          )
-                        ],
-                      ),
-                      IconButton(
-                          iconSize: screenWidth * 0.1,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const UserInfoPage()),
-                            );
-                          },
-                          icon: const Icon(Icons.chevron_right),
-                          color: Colors.black),
-                    ],
+                    children: [],
                   ),
                 ),
               ),
@@ -149,95 +117,90 @@ class _MyPage extends State<MyPage> {
                     //     ]),
                     //   ),
                     // ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                            padding: AppTheme.widgetpadding,
-                            height: screenHeight * 0.07,
-                            child: Row(children: [
-                              Icon(
-                                Icons.lock_outline,
-                                size: screenWidth * 0.06,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(width: screenWidth * 0.03),
-                              const NanumText(
-                                text: "비밀번호 잠금",
-                                color: Colors.black,
-                                fontSize: 13,
-                              )
-                            ]),
-                          ),
-                          Switch(
-                              // thumb color (round icon)
-                              activeColor: Colors.green,
-                              activeTrackColor: Colors.green[100],
-                              inactiveThumbColor: Colors.blueGrey.shade600,
-                              inactiveTrackColor: Colors.grey.shade400,
-                              splashRadius: 50.0,
-                              // boolean variable value
-                              value:
-                                  // existPw,
-                                  _homeProvider.applockState,
-                              // changes the state of the switch
-                              onChanged: (value) {
-                                // 비밀번호가 설정되어 있는 경우
 
-                                if (!value) {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                        return const LockUnsetPopUp();
-                                      });
+                    Container(
+                      decoration: const BoxDecoration(color: Colors.white),
+                      padding: AppTheme.detailpadding,
+                      height: screenHeight * 0.07,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const NanumText(
+                              text: "이름",
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            NanumText(
+                              text: _homeProvider.loginValue!.name,
+                              color: Colors.black,
+                              fontSize: 17,
+                            )
+                          ]),
+                    ),
 
-                                  // Provider.of<HomeProvider>(context,
-                                  //         listen: false)
-                                  //     .checkAppLockState();
-                                  setState(() {});
-                                }
-                                // 비밀번호가 해제되어 있는 경우
-                                else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ApplicationLock("init")),
-                                  );
-
-                                  Provider.of<HomeProvider>(context,
-                                          listen: false)
-                                      .checkAppLockState();
-                                  setState(() {});
-                                }
-                              }),
-                        ]),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     print("화면 설정");
-                    //   },
-                    //   child: Container(
-                    //     decoration: const BoxDecoration(color: Colors.white),
-                    //     padding: AppTheme.widgetpadding,
-                    //     height: screenHeight * 0.07,
-                    //     child: Row(children: [
-                    //       Icon(
-                    //         Icons.settings_display,
-                    //         size: screenWidth * 0.06,
-                    //         color: Colors.grey,
-                    //       ),
-                    //       SizedBox(width: screenWidth * 0.03),
-                    //       const NanumText(
-                    //         text: "화면 설정",
-                    //         color: Colors.black,
-                    //         fontSize: 13,
-                    //       )
-                    //     ]),
-                    //   ),
-                    // ),
+                    Container(
+                      decoration: const BoxDecoration(color: Colors.white),
+                      padding: AppTheme.detailpadding,
+                      height: screenHeight * 0.07,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const NanumText(
+                              text: "생년월일",
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            NanumText(
+                              text: _homeProvider.loginValue!.birthday,
+                              color: Colors.black,
+                              fontSize: 17,
+                            )
+                          ]),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(color: Colors.white),
+                      padding: AppTheme.detailpadding,
+                      height: screenHeight * 0.07,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const NanumText(
+                              text: "성별",
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            NanumText(
+                              text: _homeProvider.loginValue!.gender == "1"
+                                  ? "남"
+                                  : "여",
+                              color: Colors.black,
+                              fontSize: 17,
+                            )
+                          ]),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(color: Colors.white),
+                      padding: AppTheme.detailpadding,
+                      height: screenHeight * 0.07,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const NanumText(
+                              text: "이메일 주소",
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            NanumText(
+                              text: _homeProvider.loginValue!.email,
+                              color: Colors.black,
+                              fontSize: 17,
+                            )
+                          ]),
+                    ),
                   ],
                 ),
               ),
@@ -247,126 +210,6 @@ class _MyPage extends State<MyPage> {
                 color: Colors.grey,
               ),
 
-              Container(
-                padding: AppTheme.widgetpadding,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: CommonColor.widgetbackgroud,
-                  // borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: CommonColor.boxshadowcolor.withOpacity(0.02),
-                      spreadRadius: 3,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        webView("개인정보처리방침",
-                            "https://ringed-rutabaga-f09.notion.site/bee487fc6fdb418292d2a5f352f32469");
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        padding: AppTheme.widgetpadding,
-                        height: screenHeight * 0.07,
-                        child: Row(children: [
-                          Icon(
-                            Icons.assignment_outlined,
-                            size: screenWidth * 0.06,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: screenWidth * 0.03),
-                          const NanumText(
-                            text: "개인정보처리방침",
-                            color: Colors.black,
-                            fontSize: 13,
-                          )
-                        ]),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        webView("개인정보(민감정보) 수집 및 이용 동의",
-                            "https://ringed-rutabaga-f09.notion.site/4f6734367bf14be98688c6acccfdd6df");
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        padding: AppTheme.widgetpadding,
-                        height: screenHeight * 0.07,
-                        child: Row(children: [
-                          Icon(
-                            Icons.assignment_outlined,
-                            size: screenWidth * 0.06,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: screenWidth * 0.03),
-                          const NanumText(
-                            text: "개인정보(민감정보) 수집 및 이용 동의",
-                            color: Colors.black,
-                            fontSize: 13,
-                          )
-                        ]),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        webView("서비스 이용약관",
-                            "https://ringed-rutabaga-f09.notion.site/55ed2ee6c3914158a2f0b89434d1add9");
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        padding: AppTheme.widgetpadding,
-                        height: screenHeight * 0.07,
-                        child: Row(children: [
-                          Icon(
-                            Icons.assignment_outlined,
-                            size: screenWidth * 0.06,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: screenWidth * 0.03),
-                          const NanumText(
-                            text: "서비스 이용약관",
-                            color: Colors.black,
-                            fontSize: 13,
-                          )
-                        ]),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return const QuitPopUp();
-                            });
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white),
-                        padding: AppTheme.widgetpadding,
-                        height: screenHeight * 0.07,
-                        child: Row(children: [
-                          Icon(
-                            Icons.close,
-                            size: screenWidth * 0.06,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: screenWidth * 0.03),
-                          const NanumText(
-                            text: "회원탈퇴",
-                            color: Colors.black,
-                            fontSize: 13,
-                          )
-                        ]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(
                 height: screenHeight * 0.01,
               ),
