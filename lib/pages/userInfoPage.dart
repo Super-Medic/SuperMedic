@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:super_medic/function/LoginVerify.dart';
 import 'package:super_medic/function/model.dart';
 import 'package:super_medic/themes/textstyle.dart';
@@ -63,19 +64,19 @@ class _UserInfoPage extends State<UserInfoPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Center(
-                child: Container(
-                  width: screenWidth * 0.7,
-                  height: screenHeight * 0.12,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.grey[200]),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [],
-                  ),
-                ),
-              ),
+              // Center(
+              //   child: Container(
+              //     width: screenWidth * 0.7,
+              //     height: screenHeight * 0.12,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(25),
+              //         color: Colors.grey[200]),
+              //     child: const Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [],
+              //     ),
+              //   ),
+              // ),
 
               Container(
                 padding: AppTheme.widgetpadding,
@@ -153,7 +154,8 @@ class _UserInfoPage extends State<UserInfoPage> {
                               fontWeight: FontWeight.bold,
                             ),
                             NanumText(
-                              text: _homeProvider.loginValue!.birthday,
+                              text: birthdayForm(
+                                  _homeProvider.loginValue!.birthday),
                               color: Colors.black,
                               fontSize: 17,
                             )
@@ -270,6 +272,23 @@ class _UserInfoPage extends State<UserInfoPage> {
             ),
           ),
         ));
+  }
+
+  String birthdayForm(String birthday) {
+    String birthYear = birthday.substring(0, 2);
+    final nowYear = DateFormat('yy').format(DateTime.now());
+
+    birthYear = int.parse(birthYear) > int.parse(nowYear)
+        ? "19$birthYear"
+        : "20$birthYear";
+
+    String month = birthday.substring(2, 4);
+    month = int.parse(month).toString();
+
+    String day = birthday.substring(4, 6);
+    day = int.parse(day).toString();
+
+    return "$birthYear년 $month월 $day일";
   }
 }
 
@@ -646,12 +665,13 @@ class _LockUnsetPopUpState extends State<LockUnsetPopUp> {
                 style: const TextStyle(fontFamily: 'NotoSansKR')),
             actions: [
               CupertinoDialogAction(
-                  isDefaultAction: true,
-                  child: const Text("확인",
-                      style: TextStyle(fontFamily: 'NotoSansKR')),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  })
+                isDefaultAction: true,
+                child: const Text("확인",
+                    style: TextStyle(fontFamily: 'NotoSansKR')),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
             ],
           );
         });
